@@ -1,0 +1,15 @@
+\begin{feynman}
+    \vertex at ( 0  , 0.75) (a);
+    \vertex at ( 0  ,-0.75) (b);
+    \vertex at (-1.5, 0.75) (q) {\(q\)};
+    \vertex at (-1.5,-0.75) (qbar) {\(\bar{q}\)};
+    \vertex at ( 1.5, 0.75) (chii) {\(\nino[i]\)};
+    \vertex at ( 1.5,-0.75) (chij) {\(\nino[j]\)};
+    \diagram*{
+    (q) -- [fermion] (a)
+        -- [charged scalar, edge label'=\(\tilde{q}\)] (b)
+        -- [fermion] (qbar),
+    (a) -- [fermion] (chii),
+    (chij) -- [fermion] (b)
+    };
+\end{feynman}

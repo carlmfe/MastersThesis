@@ -1,0 +1,56 @@
+\documentclass[english,notitlepage]{article}
+
+\usepackage{overhead}
+
+
+\title{Leading Order Neutralino Calculation}
+\author{Carl Martin Fevang}
+
+\begin{document}
+    \maketitle
+
+
+    \begin{figure} [ht!]
+        \centering
+        \inputtikz{s_channel}
+        \inputtikz{t_channel}
+        \inputtikz{u_channel}
+    \end{figure}
+
+    \begin{subequations}
+        \begin{align}
+            s &= \pclosed{p_1 + p_2}^2 = \pclosed{k_1 + k_2}^2 \\
+            t &= \pclosed{p_1-k_1}^2 = \pclosed{p_2-k_2}^2 \\
+            u &= \pclosed{p_1-k_2}^2 = \pclosed{p_2-k_1}^2 \\
+            s + t + u &= m_i^2 + m_j^2
+        \end{align}
+    \end{subequations}
+
+    \begin{subequations}
+        \begin{align}
+            &(p_1 \cdot p_2) = \frac{s}{2} & &(k_1 \cdot k_2) = \frac{s-m_i^2-m_j^2}{2} \\
+            &(p_1 \cdot k_1) = \frac{m_i^2 - t}{2} & &(p_2 \cdot k_2) = \frac{m_j^2-t}{2} \\
+            &(p_1 \cdot k_2) = \frac{m_j^2 - u}{2} & &(p_2 \cdot k_1) = \frac{m_i^2-u}{2}
+        \end{align}
+    \end{subequations}
+    \begin{subequations}
+        \begin{align} \nonumber
+            \M_s = -\frac{g^2}{2c_W^2} D_Z(s) &\bclosed{ \wbar{u}_i\gamma^\mu\pclosed{O^{''L}_{ij}P_L + O^{''R}_{ij}P_R} v_j } \\
+            &\times \bclosed{ \wbar{v}_2 \gamma_\mu \pclosed{C^L_{Zqq}P_L + C^R_{Zqq}P_R} u_1 } \\ \nonumber
+            \M_t = -2g^2 D_{\wtilde{q}}(t) &\bclosed{ \wbar{u}_i \pclosed{C_{i}^{L*}P_L + C_{i}^{R*} P_R} u_1 } \\
+            &\times \bclosed{ \wbar{v}_2 \pclosed{C^R_{j}P_L + C^L_{j}P_R} v_j } \\ \nonumber
+            \M_u = -2g^2 D_{\wtilde{q}}(u) &\bclosed{ \wbar{u}_j \pclosed{C_{j}^{L*}P_L + C_{j}^{R*} P_R} u_1 } \\
+            &\times \bclosed{ \wbar{v}_2 \pclosed{C^R_{i}P_L + C^L_{i}P_R} v_i }
+        \end{align}
+    \end{subequations}
+
+
+    \begin{subequations}
+        \begin{align} \nonumber
+            I_{ss} = \sum_\text{spins} \abs{\M_s}^2 = \frac{g^4}{c_W^2} \abs{D_Z(s)}^2 \pclosed{{(C_Z^L)}^2+{(C_Z^R)}^2} &\bigg\{ \abs{O_{ij}^L}^2 \bclosed{ {(m_i^2-t)}^2 + {(m_j^2-t)}^2 } \\
+            &- 2\Re\cclosed{\pclosed{O_{ij}^L}^2} m_i m_j s \bigg\}
+        \end{align}
+    \end{subequations}
+
+
+\end{document}

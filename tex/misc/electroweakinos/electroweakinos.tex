@@ -1,0 +1,61 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage{../../style}
+\usepackage{../../commands}
+
+\author{Carl Martin Fevang}
+
+\title{Electroweakinos}
+
+\begin{document}
+\maketitle
+
+\section{Background}
+
+
+\section{Mixing Matrices}
+    \subsection{Neutralino Mixing}
+        Neutralinos are generally comprised of the three Standard Model neutrinos and the neutral component of the fermion partners to the U(1) and SU(2) gauge fields $B^0, W^0$ and the neutral fermion partners to the Higgs fields $H_d, H_u$. Neglecting the neutrino mixing into these states, we can summarise the mass terms from the superpotential, putting the fermion fields into a vector $\psi_0^T = (\tilde{B}^0, \tilde{W}^0, \tilde{H}^0_d, \tilde{H}^0_u)$,
+        \begin{align}
+            \mathcal{L}_{\nino\mathrm{-mass}} = -\frac{1}{2} \psi_0^T M_{\nino} \psi_0 + \cc,
+        \end{align}
+        where
+        \begin{subequations}
+            \begin{align}
+                &M_{\nino} = \begin{bmatrix}
+                    M_1 & 0 & -\frac{1}{\sqrt{2}} g' v_d & \frac{1}{\sqrt{2}} g' v_u \\
+                    0 & M_2 & \frac{1}{\sqrt{2}} g v_d & -\frac{1}{\sqrt{2}} g v_u \\
+                    -\frac{1}{\sqrt{2}} g' v_d & \frac{1}{\sqrt{2}} g v_d & 0 & -\mu \\
+                    \frac{1}{\sqrt{2}} g' v_u & -\frac{1}{\sqrt{2}} g v_u & -\mu & 0
+                \end{bmatrix} \\
+                &= \begin{bmatrix}
+                    M_1 & 0 & -c_\beta s_W m_Z & s_\beta s_W m_Z \\
+                    0 & M_2 & c_\beta c_W m_Z & -s_\beta c_W m_Z \\
+                    -c_\beta s_W m_Z & c_\beta c_W m_Z & 0 & -\mu \\
+                    s_\beta s_W m_Z & -s_\beta c_W m_Z & -\mu & 0
+                \end{bmatrix}.
+            \end{align}
+        \end{subequations}
+
+        \begin{subequations}
+            \begin{align}
+                &M_{\chino} = \begin{bmatrix}
+                    0 & 0 & M_2 & g v_d \\
+                    0 & 0 & g v_u & \mu \\
+                    M_2 & gv_u & 0 & 0 \\
+                    gv_d & \mu & 0 & 0
+                \end{bmatrix} \\
+                &= \begin{bmatrix}
+                    0 & 0 & M_2 & \sqrt{2} c_\beta c_W m_Z \\
+                    0 & 0 & \sqrt{2} s_\beta c_W m_W & \mu \\
+                    M_2 & \sqrt{2} s_\beta c_W m_W & 0 & 0 \\
+                    \sqrt{2} c_\beta c_W m_Z & \mu & 0 & 0
+                \end{bmatrix}
+            \end{align}
+        \end{subequations}
+
+        \begin{align}
+            m_{\chino[1,2]} = \frac{1}{2} \pclosed{ |M_2|^2 + |\mu|^2 + 2m_W^2 \mp \sqrt{\pclosed{|M_2|^2 + |\mu|^2 + 2m_W^2}^2 - 4|\mu M_2 - m_W^2 s_\beta^2|^2} }
+        \end{align}
+
+\end{document}

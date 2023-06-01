@@ -1,0 +1,15 @@
+\begin{feynman}
+    \vertex at (-0.75, 0  ) (a);
+    \vertex at ( 0.75,-0  ) (b);
+    \vertex at (-1.5 , 1  ) (q) {\(q\)};
+    \vertex at (-1.5 ,-1  ) (qbar) {\(\bar{q}\)};
+    \vertex at ( 1.5 , 1  ) (chii) {\(\nino[i]\)};
+    \vertex at ( 1.5 ,-1  ) (chij) {\(\nino[j]\)};
+    \diagram*{
+    (q) -- [fermion] (a)
+        -- [fermion] (qbar),
+    (a) -- [boson, edge label=\(Z\)] (b),
+    (chij) -- [fermion] (b)
+        -- [fermion] (chii)
+    };
+\end{feynman}
