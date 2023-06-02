@@ -1,6 +1,7 @@
 % Directories to ignore
 sources/
 project_desciption/
+.vscode/
 
 % File extensions to ignore
 *.zip

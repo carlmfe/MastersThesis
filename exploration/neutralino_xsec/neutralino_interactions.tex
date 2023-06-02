@@ -2,269 +2,292 @@
 
 \usepackage{overhead}
 
-
 \title{Neutralino Interactions in the MSSM}
 \author{Carl Martin Fevang}
 
-
 \begin{document}
-    \maketitle
+\maketitle
 
-    \section{Superfields}
-        A left-handed scalar superfield $\Phi$ can be written out in terms of component fields as\footnote{Parentheses are used to clarify Weyl spinor contraction.}
+\section{Superfields}
+    A left-handed scalar superfield $\Phi$ can be written out in terms of component
+    fields as\footnote{Parentheses are used to clarify Weyl spinor contraction.}
+    \begin{align}
+        \Phi = A + i(\theta\sigma^\mu\wbar\theta) \partial_\mu A - \frac{1}{4} (\theta\theta)(\wbar\theta\wbar\theta) \dA A +
+        \sqrt{2} (\theta\psi) - \frac{i}{\sqrt{2}} (\theta\theta) (\partial_\mu \psi \sigma^\mu \wbar\theta) + (\theta\theta) F,
+    \end{align}
+    where $A, F$ are complex scalar fields and $\psi$ is a left-handed Weyl spinor. $\Psi$ has a right-handed scalar superfield compliment found by conjugating it:
+    \begin{align}
+        \Phi^\dag = A^* - i(\theta\sigma^\mu\wbar\theta) \partial_\mu A^* - \frac{1}{4} (\theta\theta)(\wbar\theta\wbar\theta) \dA A^* +
+        \sqrt{2} (\wbar\theta\wbar\psi) + \frac{i}{\sqrt{2}} (\wbar\theta\wbar\theta)
+        (\theta \sigma^\mu \partial_\mu \wbar\psi) + (\wbar\theta\wbar\theta) F^*,
+    \end{align}
+    where $\wbar\psi$ is the right-handed compliment of $\psi$ such that $\wbar\psi^{\dot A} = \delta^{\dot A A} {(\psi_A)}^*$.
+
+    A vector superfield $V$ can be written in Wess-Zumino gauge as
+    \begin{align}
+        \msub{V}{WZ} = (\theta\sigma^\mu\wbar\theta) \bclosed{V_\mu + i\partial_\mu (A - A^*)} + (\theta\theta) (\wbar\theta\wbar\lambda) +
+        (\wbar\theta\wbar\theta)(\theta\lambda) + \frac{1}{2}
+        (\theta\theta)(\wbar\theta\wbar\theta) D,
+    \end{align}
+    where $V_\mu$ is a real vector field, $\lambda$ is a left-handed Weyl spinor and $D$ is a (auxiliary) complex scalar field. The $\partial_\mu (A-A^*)$-term represents the gauge freedom remaining in the choice of
+    supergauge after choosing Wess-Zumino gauge, and can be ignored when working
+    out the interaction terms.
+
+\section{MSSM Superfields}
+    For completeness, I list here the relevant superfields containing the
+    neutralinos and fields that couple to them. These include the $SU(2)_L$
+    superfield doublets $H_u = \begin{pmatrix} H_u^+ \\ H_u^0 \end{pmatrix}$, $H_d = \begin{pmatrix} H_d^0 \\ H_d^- \end{pmatrix}$, $L_i = \begin{pmatrix} l_i \\ \nu_i \end{pmatrix}$ and $Q_i = \begin{pmatrix} u_i \\ d_i \end{pmatrix}$, and $SU(2)_L$ singlet superfields $E_i$, $U_i$ and $D_i$. There are also the vector superfields $B^0$ for the $U(1)_Y$ gauge group, and $W^0$ and $W^\pm$ for the $SU(2)_L$ gauge group.
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|l|ccc|} \hline
+            Superfield      & Boson field         & Fermion field            & Auxiliary field \\ \hline
+            $H_{u/d}^0$     & $H_{u/d}^0$         & $\wtilde{H}_{u/d}^0$     & $F_{H_{u/d}}$   \\
+            $H_{u/d}^{\pm}$ & $H_{u/d}^{\pm}$     & $\wtilde{H}_{u/d}^{\pm}$ & $F_{H_{u/d}}$   \\ \hline
+            $l_i$           & $\wtilde{l}_{iL}$   & $l_{iL}$                 & $F_{l_{iL}}$    \\
+            $E_i$           & $\wtilde{l}_{iR}^*$ & $l_{iR}$                 & $F_{l_{iR}}^*$  \\
+            $\nu_i$         & $\wtilde{\nu}_{iL}$ & $\nu_{iL}$               & $F_{\nu_{iL}}$  \\ \hline
+            $u_i$           & $\wtilde{u}_{iL}$   & $u_{iL}$                 & $F_{u_{iL}}$    \\
+            $U_i$           & $\wtilde{u}_{iR}^*$ & $u_{iR}$                 & $F_{u_{iR}}^*$  \\
+            $d_i$           & $\wtilde{d}_{iL}$   & $d_{iL}$                 & $F_{d_{iL}}$    \\
+            $D_i$           & $\wtilde{d}_{iR}^*$ & $d_{iR}$                 & $F_{d_{iR}}^*$  \\ \hline
+            $B^0$           & $B^0_\mu$           & $\bino$                  & $D_{B^0}$       \\
+            $W^0$           & $W^0_\mu$           & $\wino$                  & $D_{W^0}$       \\
+            $W^\pm$         & $W^\pm_\mu$         & $\wtilde{W}^\pm$         & $D_{W^\pm}$     \\ \hline
+        \end{tabular}
+        \label[tab]{tab:MSSM-fields}
+        \caption{Table of the MSSM superfields and their component field names. Not that all fermion fields are left-handed Weyl spinors, in spite of any \(L\) or \(R\) in the subscript. The conjugate superfields changes these to right-handed Weyl spinors.}
+    \end{table}
+
+    \subsection{Neutralino Fields}
+        Letting $\Psi_{\nino} = \pclosed{\bino, \wino, \hinou, \hinod}$ denote a
+        vector\footnote{I use row vector notation here for convenience. In equations
+            this is understood to be a column vector.} of the fermion field superpartners
+        to the $B$ and $W$ vector fields and the $H_{u/d}$ scalar fields --- the
+        neutralinos are given by
         \begin{align}
-            \Phi = A + i(\theta\sigma^\mu\wbar\theta) \partial_\mu A - \frac{1}{4} (\theta\theta)(\wbar\theta\wbar\theta) \dA A + \sqrt{2} (\theta\psi) - \frac{i}{\sqrt{2}} (\theta\theta) (\partial_\mu \psi \sigma^\mu \wbar\theta) + (\theta\theta) F,
+            \nino = \begin{pmatrix}
+                        \nino[1] \\ \nino[2] \\ \nino[3] \\ \nino[4]
+                    \end{pmatrix} = N \Psi_{\nino},
         \end{align}
-        where $A, F$ are complex scalar fields and $\psi$ is a left-handed Weyl spinor. $\Psi$ has a right-handed scalar superfield compliment found by conjugating it:
+        where $N$ is a unitary matrix diagonalising the neutralino mass matrix $M_{\nino\text{-mass}}$. Thus, the neutralino interactions are found in terms in the superlagrangian that include the vector superfields $B$ and $W^0$, and the scalar superfields $H_u^0$ and $H_d^0$. Translating from the $\Psi_{\nino}$-basis to the $\nino$-basis, we have that
         \begin{align}
-            \Phi^\dag = A^* - i(\theta\sigma^\mu\wbar\theta) \partial_\mu A^* - \frac{1}{4} (\theta\theta)(\wbar\theta\wbar\theta) \dA A^* + \sqrt{2} (\wbar\theta\wbar\psi) + \frac{i}{\sqrt{2}} (\wbar\theta\wbar\theta) (\theta \sigma^\mu \partial_\mu \wbar\psi) + (\wbar\theta\wbar\theta) F^*,
+            \bino = N_{i1}^* \nino[i],\quad \wino = N_{i2}^* \nino[i],\quad \hinod = N_{i3}^* \nino[i],\quad \hinou = N_{i4}^* \nino[i],
         \end{align}
-        where $\wbar\psi$ is the right-handed compliment of $\psi$ such that $\wbar\psi^{\dot A} = \delta^{\dot A A} {(\psi_A)}^*$.
+        where a sum over $i$ is implied.
 
-        A vector superfield $V$ can be written in Wess-Zumino gauge as
-        \begin{align}
-            \msub{V}{WZ} = (\theta\sigma^\mu\wbar\theta) \bclosed{V_\mu + i\partial_\mu (A - A^*)} + (\theta\theta) (\wbar\theta\wbar\lambda) + (\wbar\theta\wbar\theta)(\theta\lambda) + \frac{1}{2} (\theta\theta)(\wbar\theta\wbar\theta) D,
-        \end{align}
-        where $V_\mu$ is a real vector field, $\lambda$ is a left-handed Weyl spinor and $D$ is a (auxiliary) complex scalar field. The $\partial_\mu (A-A^*)$-term represents the gauge freedom remaining in the choice of supergauge after choosing Wess-Zumino gauge, and can be ignored when working out the interaction terms.
+\section{MSSM Superlagrangian}
 
+    \subsection{Neutralino interactions}
+        The neutralino interactions appear in the kinetic terms of all the superfields
+        that couple to the $U(1)_Y$ and $SU(2)_L$ gauge groups, and the Yukawa terms
+        that include the Higgs fields in the superpotential.
 
-    \section{MSSM Superfields}
-        For completeness, I list here the relevant superfields containing the neutralinos and fields that couple to them. These include the $SU(2)_L$ superfield doublets $H_u = \begin{pmatrix} H_u^+ \\ H_u^0 \end{pmatrix}$, $H_d = \begin{pmatrix} H_d^0 \\ H_d^- \end{pmatrix}$, $L_i = \begin{pmatrix} l_i \\ \nu_i \end{pmatrix}$ and $Q_i = \begin{pmatrix} u_i \\ d_i \end{pmatrix}$, and $SU(2)_L$ singlet superfields $E_i$, $U_i$ and $D_i$. There are also the vector superfields $B^0$ for the $U(1)_Y$ gauge group, and $W^0$ and $W^\pm$ for the $SU(2)_L$ gauge group.
-        \begin{table}[h!]
-            \centering
-            \begin{tabular}{|l|ccc|} \hline
-                Superfield & Boson field & Fermion field & Auxiliary field \\ \hline
-                $H_{u/d}^0$ & $H_{u/d}^0$ & $\wtilde{H}_{u/d}^0$ & $F_{H_{u/d}}$ \\
-                $H_{u/d}^{\pm}$ & $H_{u/d}^{\pm}$ & $\wtilde{H}_{u/d}^{\pm}$ & $F_{H_{u/d}}$ \\ \hline
-                $l_i$ & $\wtilde{l}_{iL}$ & $l_{iL}$ & $F_{l_{iL}}$ \\
-                $E_i$ & $\wtilde{l}_{iR}^*$ & $l_{iR}$ & $F_{l_{iR}}^*$ \\
-                $\nu_i$ & $\wtilde{\nu}_{iL}$ & $\nu_{iL}$ & $F_{\nu_{iL}}$ \\ \hline
-                $u_i$ & $\wtilde{u}_{iL}$ & $u_{iL}$ & $F_{u_{iL}}$ \\
-                $U_i$ & $\wtilde{u}_{iR}^*$ & $u_{iR}$ & $F_{u_{iR}}^*$ \\
-                $d_i$ & $\wtilde{d}_{iL}$ & $d_{iL}$ & $F_{d_{iL}}$ \\
-                $D_i$ & $\wtilde{d}_{iR}^*$ & $d_{iR}$ & $F_{d_{iR}}^*$ \\ \hline
-                $B^0$ & $B^0_\mu$ & $\bino$ & $D_{B^0}$ \\
-                $W^0$ & $W^0_\mu$ & $\wino$ & $D_{W^0}$ \\
-                $W^\pm$ & $W^\pm_\mu$ & $\wtilde{W}^\pm$ & $D_{W^\pm}$ \\ \hline
-            \end{tabular}
-            \label[tab]{tab:MSSM-fields}
-            \caption{Table of the MSSM superfields and their component field names.}
-        \end{table}
+\section{Interaction Lagrangian}
+    The ordinary interaction Lagrangian is found from integrating over the
+    Grassmann variables of the superlagrangian. Only terms containing all four
+    Grassmann variables survive this, so we only need to look for the
+    superlagrangian terms that include all of
+    $(\theta\theta)(\wbar\theta\wbar\theta)$.\footnote{Terms with an insufficient
+        amount of $\theta$s are ignored in the following.} Looking first at a general
+    kinetic term of a superfield coupled to a $U(1)$ vector field, it has the form
+    \begin{align}
+        \msub{\L}{kin} = \Phi^\dag \exp{qV} \Phi.
+    \end{align}
+    To find interaction that include the $\lambda$-fields of the vector superfield, we find
+    \begin{align} \label[eq]{eq:lambda-terms} \nonumber
+        \msub{\L}{kin} & \stackrel{\lambda, \wbar\lambda}{\supset} q\cclosed{ A^* (\wbar\theta\wbar\theta)(\theta\lambda) \sqrt{2} (\theta\psi) + \sqrt{2} (\wbar\theta\wbar\psi) (\theta\theta)(\wbar\theta\wbar\lambda) A } \\
+                       & \stackrel{\text{\cref{app:eq:weyl1}}}{=} -\frac{q}{\sqrt{2}} (\theta\theta)(\wbar\theta\wbar\theta) \cclosed{ (\lambda\psi)A^* + \cc }.
+    \end{align}
 
+    Ignoring ordinary kinetic terms, the interactions that include the
+    $\psi$-fields of the scalar superfields include
+    \begin{align} \label[eq]{eq:psi-terms} \nonumber
+        \msub{\L}{kin} & \stackrel{\psi, \wbar\psi}{\supset} q \cclosed{ A^* (\wbar\theta\wbar\theta) (\theta\lambda) \sqrt{2} (\theta\psi) + \sqrt{2} (\wbar\theta\wbar\psi) (\theta\sigma^\mu\wbar\theta) V_\mu \sqrt{2} (\theta\psi) + \sqrt{2} (\wbar\theta\wbar\psi) (\theta\theta) (\wbar\theta\wbar\lambda) A } \\
+                       & \stackrel{\text{\cref{app:eq:weyl1,app:eq:weyl2}}}{=} q(\theta\theta)(\wbar\theta\wbar\theta) \cclosed{ -\frac{1}{\sqrt{2}} (\lambda\psi) A^* + \frac{1}{2} (\psi\sigma^\mu\wbar\psi)V_\mu - \frac{1}{\sqrt{2}} (\wbar\psi\wbar\lambda)A },
+    \end{align}
+    where we notice that the $\lambda\psi$-interactions are the same as the ones we found in \cref{eq:lambda-terms}.
+    With a Yukawa superpotential on the form
+    \begin{align}
+        W = y_{ij} \Phi_i \Phi \Phi_j,
+    \end{align}
+    the superlagrangian looks like
+    \begin{align}
+        \msub{\L}{Yukawa} = y_{ij} (\wbar\theta\wbar\theta) \Phi_i \Phi \Phi_j + \cc
+    \end{align}
+    Extracting the $\psi$ fermion interactions from the $\Phi$ superfield, we have
+    \begin{align} \label[eq]{psi-yukawa-terms} \nonumber
+        \msub{\L}{Yukawa} & \stackrel{\psi, \wbar\psi}{\supset} y_{ij} (\wbar\theta\wbar\theta) \sqrt{2} (\theta\psi) \cclosed{ A_i \sqrt{2}(\theta\psi_i) + \sqrt{2}(\theta\psi_j)A_j } + \cc \\
+                          & \stackrel{\text{\cref{app:eq:weyl1}}}{=} -y_{ij} (\theta\theta)(\wbar\theta\wbar\theta) \cclosed{ A_i(\psi\psi_j) + (\psi_i\psi)A_j + \cc }
+    \end{align}
 
-        \subsection{Neutralino Fields}
-            Letting $\Psi_{\nino} = \pclosed{\bino, \wino, \hinou, \hinod}$ denote a vector\footnote{I use row vector notation here for convenience. In equations this is understood to be a column vector.} of the fermion field superpartners to the $B$ and $W$ vector fields and the $H_{u/d}$ scalar fields --- the neutralinos are given by
+    \subsection{Neutralino interaction terms}
+        \subsubsection{Gaugino parts}
+            First, I will look at the bino and wino interactions. From electroweak
+            unification, we have that the coupling $g$ and $g'$ of the $W^a$ and $B^0$
+            superfields respectively are related by
             \begin{align}
-                \nino = \begin{pmatrix}
-                    \nino[1] \\ \nino[2] \\ \nino[3] \\ \nino[4]
-                \end{pmatrix} = N \Psi_{\nino},
+                g' = g t_W,
             \end{align}
-            where $N$ is a unitary matrix diagonalising the neutralino mass matrix $M_{\nino\text{-mass}}$. Thus, the neutralino interactions are found in terms in the superlagrangian that include the vector superfields $B$ and $W^0$, and the scalar superfields $H_u^0$ and $H_d^0$. Translating from the $\Psi_{\nino}$-basis to the $\nino$-basis, we have that
+            where $t_W = s_W/c_W \equiv \sin\theta_W/\cos\theta_W$ where $\theta_W$ is the Weinberg mixing angle.
+            Rewriting using $\sigma_\pm = \sigma_2 \pm i\sigma_2$, and defining $W^\pm = W^1 \mp iW^2$ and $W^0 \equiv W^3$, we have
             \begin{align}
-                \bino = N_{i1}^* \nino[i],\quad \wino = N_{i2}^* \nino[i],\quad \hinod = N_{i3}^* \nino[i],\quad \hinou = N_{i4}^* \nino[i],
+                Yg'B^0 + \frac{1}{2}g\sigma^a W^a = g\cclosed{ Yt_W B^0 + \frac{1}{2}\sigma_3 W^0 + \frac{1}{2}\sigma_+ W^+ + \frac{1}{2}\sigma_- W^- }
             \end{align}
-            where a sum over $i$ is implied.
+            So an MSSM superfield doublet $\Phi = \begin{pmatrix} \Phi^+ \\ \Phi^- \end{pmatrix}$ charged under ${U(1)}_Y$ with charge $Y$ and ${SU(2)}_L$ will have a kinetic term
+            \begin{align}
+                \L_{\Phi\text{-kin}} = \Phi^\dag \exp{g\bclosed{ Yt_W B^0 + \frac{1}{2}\sigma_3 W^0 + \frac{1}{2}\sigma_+ W^+ + \frac{1}{2}\sigma_- W^- }} \Phi.
+            \end{align}
+            We can extract the fermion interactions from the vector superfields $B^0$ and $W^0$ using \cref{eq:lambda-terms} to be
+            \begin{align} \nonumber
+                \L_{\Phi\text{-kin}} \stackrel{\bino, \wino}{\supset} -\frac{g}{\sqrt{2}} (\theta\theta)(\wbar\theta\wbar\theta) & \Big\{ Yt_W (\bino \psi^+) {A^+}^* + I^3_+ (\wino \psi^+) {A^+}^*       \\
+                                                                                                                                 & + Yt_W (\bino\psi^-){A^-}^* + I^3_- (\wino \psi^-){A^-}^* + \cc \Big\},
+            \end{align}
+            where we recognise $I^3_\pm = \pm \frac{1}{2}$ as the eigenvalues of $\frac{1}{2}\sigma_3$.
 
-    \section{MSSM Superlagrangian}
+            In the MSSM, the Dirac fermions are made up from two scalar superfields,
+            supplying the left- and right-handed components separately. Both superfields
+            couple to the ${U(1)}_Y$ gauge group with charge $Q-I^3$,\footnote{The field
+                supplying the right-handed part has the opposite sign charge such that
+                $\Phi^\dag_R$ and $\Phi_L$ have the same sign.} where $Q$ is the electric
+            charge of the fermion, and $I^3$ is the weak isospin; either $\pm \frac{1}{2}$
+            for the superfields supplying left-handed fermions and 0 for the superfields
+            supplying the right-handed ones. Only the left-handed field couples to the
+            ${SU(2)}_L$ gauge group. Thus, the bino and wino interaction with a pair of
+            MSSM fermions formed from a superfield doublet $F = \begin{pmatrix} f_L^+ \\ f_L^- \end{pmatrix}$ and the superfields $f_R^\pm$ are
+            \begin{align}  \label[eq]{F-nino-terms} \nonumber
+                \L_{\text{EW-kin}} \stackrel{\bino, \wino}{\supset} -\frac{g}{\sqrt{2}} (\theta\theta)(\wbar\theta\wbar\theta) & \Big\{ \pclosed{Q_+-\frac{1}{2}}t_W (\bino f_L^+) \wtilde{f}_L^{+*} + \frac{1}{2} (\wino f_L^+) \wtilde{f}_L^{+*}                     \\ \nonumber
+                                                                                                                               & + \pclosed{Q_-+\frac{1}{2}}t_W (\bino f_L^-)\wtilde{f}_L^{-*} - \frac{1}{2} (\wino f_L^-)\wtilde{f}_L^{-*}                            \\
+                                                                                                                               & - Q_+t_W (\wbar{\wtilde{B}}^0\wbar{f}_R^+)\wtilde{f}_R^{+*} - Q_-t_W (\wbar{\wtilde{B}}^0\wbar{f}_R^-)\wtilde{f}_R^{-*} + \cc \Big\}.
+            \end{align}
 
-        \subsection{Neutralino interactions}
-            The neutralino interactions appear in the kinetic terms of all the superfields that couple to the $U(1)_Y$ and $SU(2)_L$ gauge groups, and the Yukawa terms that include the Higgs fields in the superpotential.
-
-
-
-    \section{Interaction Lagrangian}
-        The ordinary interaction Lagrangian is found from integrating over the Grassmann variables of the superlagrangian. Only terms containing all four Grassmann variables survive this, so we only need to look for the superlagrangian terms that include all of $(\theta\theta)(\wbar\theta\wbar\theta)$.\footnote{Terms with an insufficient amount of $\theta$s are ignored in the following.} Looking first at a general kinetic term of a superfield coupled to a $U(1)$ vector field, it has the form
-        \begin{align}
-            \msub{\L}{kin} = \Phi^\dag \exp{qV} \Phi.
-        \end{align}
-        To find interaction that include the $\lambda$-fields of the vector superfield, we find
-        \begin{align} \nonumber
-            \msub{\L}{kin} &\stackrel{\lambda, \wbar\lambda}{\supset} q\cclosed{ A^* (\wbar\theta\wbar\theta)(\theta\lambda) \sqrt{2} (\theta\psi) + \sqrt{2} (\wbar\theta\wbar\psi) (\theta\theta)(\wbar\theta\wbar\lambda) A } \\ \label[eq]{eq:lambda-terms}
-            &\stackrel{\text{\cref{app:eq:weyl1}}}{=} -\frac{q}{\sqrt{2}} (\theta\theta)(\wbar\theta\wbar\theta) \cclosed{ (\lambda\psi)A^* + \cc }.
-        \end{align}
-
-        Ignoring ordinary kinetic terms, the interactions that include the $\psi$-fields of the scalar superfields include
-        \begin{align} \nonumber
-            \msub{\L}{kin} &\stackrel{\psi, \wbar\psi}{\supset} q \cclosed{ A^* (\wbar\theta\wbar\theta) (\theta\lambda) \sqrt{2} (\theta\psi) + \sqrt{2} (\wbar\theta\wbar\psi) (\theta\sigma^\mu\wbar\theta) V_\mu \sqrt{2} (\theta\psi) + \sqrt{2} (\wbar\theta\wbar\psi) (\theta\theta) (\wbar\theta\wbar\lambda) A } \\ \label[eq]{eq:psi-terms}
-            &\stackrel{\text{\cref{app:eq:weyl1,app:eq:weyl2}}}{=} q(\theta\theta)(\wbar\theta\wbar\theta) \cclosed{ -\frac{1}{\sqrt{2}} (\lambda\psi) A^* + \frac{1}{2} (\psi\sigma^\mu\wbar\psi)V_\mu - \frac{1}{\sqrt{2}} (\wbar\psi\wbar\lambda)A },
-        \end{align}
-        where we notice that the $\lambda\psi$-interactions are the same as the ones we found in \cref{eq:lambda-terms}.
-        With a Yukawa superpotential on the form
-        \begin{align}
-            W = y_{ij} \Phi_i \Phi \Phi_j,
-        \end{align}
-        the superlagrangian looks like
-        \begin{align}
-            \msub{\L}{Yukawa} = y_{ij} (\wbar\theta\wbar\theta) \Phi_i \Phi \Phi_j + \cc
-        \end{align}
-        Extracting the $\psi$ fermion interactions from the $\Phi$ superfield, we have
-        \begin{align} \nonumber
-            \msub{\L}{Yukawa} &\stackrel{\psi, \wbar\psi}{\supset} y_{ij} (\wbar\theta\wbar\theta) \sqrt{2} (\theta\psi) \cclosed{ A_i \sqrt{2}(\theta\psi_i) + \sqrt{2}(\theta\psi_j)A_j } + \cc \\ \label[eq]{psi-yukawa-terms}
-            &\stackrel{\text{\cref{app:eq:weyl1}}}{=} -y_{ij} (\theta\theta)(\wbar\theta\wbar\theta) \cclosed{ A_i(\psi\psi_j) + (\psi_i\psi)A_j + \cc } 
-        \end{align}
-
-        \subsection{Neutralino interaction terms}
-            \subsubsection{Gaugino parts}
-                First, I will look at the bino and wino interactions. From electroweak unification, we have that the coupling $g$ and $g'$ of the $W^a$ and $B^0$ superfields respectively are related by
-                \begin{align}
-                    g' = g t_W,
-                \end{align}
-                where $t_W = s_W/c_W \equiv \sin\theta_W/\cos\theta_W$ where $\theta_W$ is the Weinberg mixing angle.
-                Rewriting using $\sigma_\pm = \sigma_2 \pm i\sigma_2$, and defining $W^\pm = W^1 \mp iW^2$ and $W^0 \equiv W^3$, we have
-                \begin{align}
-                    Yg'B^0 + \frac{1}{2}g\sigma^a W^a = g\cclosed{ Yt_W B^0 + \frac{1}{2}\sigma_3 W^0 + \frac{1}{2}\sigma_+ W^+ + \frac{1}{2}\sigma_- W^- }
-                \end{align}
-                So an MSSM superfield doublet $\Phi = \begin{pmatrix} \Phi^+ \\ \Phi^- \end{pmatrix}$ charged under ${U(1)}_Y$ with charge $Y$ and ${SU(2)}_L$ will have a kinetic term
-                \begin{align}
-                    \L_{\Phi\text{-kin}} = \Phi^\dag \exp{g\bclosed{ Yt_W B^0 + \frac{1}{2}\sigma_3 W^0 + \frac{1}{2}\sigma_+ W^+ + \frac{1}{2}\sigma_- W^- }} \Phi.
-                \end{align}
-                We can extract the fermion interactions from the vector superfields $B^0$ and $W^0$ using \cref{eq:lambda-terms} to be
-                \begin{align} \nonumber
-                    \L_{\Phi\text{-kin}} \stackrel{\bino, \wino}{\supset} -\frac{g}{\sqrt{2}} (\theta\theta)(\wbar\theta\wbar\theta)& \Big\{ Yt_W (\bino \psi^+) {A^+}^* + I^3_+ (\wino \psi^+) {A^+}^* \\
-                    &+ Yt_W (\bino\psi^-){A^-}^* + I^3_- (\wino \psi^-){A^-}^* + \cc \Big\},
-                \end{align}
-                where we recognise $I^3_\pm = \pm \frac{1}{2}$ as the eigenvalues of $\frac{1}{2}\sigma_3$.
-
-                In the MSSM, the Dirac fermions are made up from two scalar superfields, supplying the left- and right-handed components separately. Both superfields couple to the ${U(1)}_Y$ gauge group with charge $Q-I^3$,\footnote{The field supplying the right-handed part has the opposite sign charge such that $\Phi^\dag_R$ and $\Phi_L$ have the same sign.} where $Q$ is the electric charge of the fermion, and $I^3$ is the weak isospin; either $\pm \frac{1}{2}$ for the superfields supplying left-handed fermions and 0 for the superfields supplying the right-handed ones. Only the left-handed field couples to the ${SU(2)}_L$ gauge group. Thus, the bino and wino interaction with a pair of MSSM fermions formed from a superfield doublet $F = \begin{pmatrix} f_L^+ \\ f_L^- \end{pmatrix}$ and the superfields $f_R^\pm$ are
-                \begin{align} \nonumber
-                    \L_{\text{EW-kin}} \stackrel{\bino, \wino}{\supset} -\frac{g}{\sqrt{2}} (\theta\theta)(\wbar\theta\wbar\theta) &\Big\{ \pclosed{Q_+-\frac{1}{2}}t_W (\bino f_L^+) \wtilde{f}_L^{+*} + \frac{1}{2} (\wino f_L^+) \wtilde{f}_L^{+*} \\ \nonumber
-                    &+ \pclosed{Q_-+\frac{1}{2}}t_W (\bino f_L^-)\wtilde{f}_L^{-*} - \frac{1}{2} (\wino f_L^-)\wtilde{f}_L^{-*} \\ \label[eq]{F-nino-terms}
-                    &- Q_+t_W (\wbar{\wtilde{B}}^0\wbar{f}_R^+)\wtilde{f}_R^{+*} - Q_-t_W (\wbar{\wtilde{B}}^0\wbar{f}_R^-)\wtilde{f}_R^{-*} + \cc \Big\}.
-                \end{align}
-                
-                To get the Lagrangian on a familiar form in terms of Dirac spinors, I will define the following fields, built from left- and right-handed Weyl spinors:
-                \begin{align}
-                    f = \begin{pmatrix}
+            To get the Lagrangian on a familiar form in terms of Dirac spinors, I will
+            define the following fields, built from left- and right-handed Weyl spinors:
+            \begin{align}
+                f = \begin{pmatrix}
                         f_L \\ \wbar{f}_R
                     \end{pmatrix},\quad \wtilde{B}^0_D = \begin{pmatrix}
-                        \wtilde{B}^0 \\ \wbar{\wtilde{B}}^0
-                    \end{pmatrix},\quad \wtilde{W}^0_D = \begin{pmatrix}
-                        \wtilde{W}^0 \\ \wbar{\wtilde{W}}^0
-                    \end{pmatrix},
-                \end{align}
-                with conjugates
-                \begin{align}
-                    \wbar{f} = \begin{pmatrix}
-                        f_R \\ \wbar{f}_L
-                    \end{pmatrix}^T,\quad \wbar{\wtilde{B}}^0_D = \begin{pmatrix}
-                        \wtilde{B}^0 \\ \wbar{\wtilde{B}}^0
-                    \end{pmatrix}^T,\quad \wbar{\wtilde{W}}^0_D = \begin{pmatrix}
-                        \wtilde{W}^0 \\ \wbar{\wtilde{W}}^0
-                    \end{pmatrix}^T,
-                \end{align}
-                Suppressing $\pm$ in the field names and inserting the isospin $I^3$ for the factors of $\pm\frac{1}{2}$, we have the ordinary Lagrangian term
-                \begin{align} \nonumber
-                    \L_{f\bino\wino} = -\frac{g}{\sqrt{2}} &\Big\{ \wbar{\wtilde{B}}^0_D \bclosed{ \pclosed{Q_f - I^3_f}t_W \tilde{f}_L^* P_L - Q_f t_W \tilde{f}_R^* P_R } f \\ \label[eq]{f-bino-wino-terms}
-                    &+ \wbar{\wtilde{W}}^0_D \pclosed{I^3_f \tilde{f}_L^* P_L} f + \cc \Big\},
-                \end{align}
-                after integrating over the Grassmann variables.
-                Changing to the $\nino[i]$-basis we have
-                \begin{align} \label{eq:nino-sf-f-terms}
-                    \L_{\nino[i]\wtilde{f}f} = -\frac{g}{\sqrt{2}} \sum_{i} \wbar{\wtilde{\chi}}^0_i &\Big\{ \big[ \underbrace{\pclosed{Q_f - I^3_f}t_W N_{i1}  + I^3_f N_{i2}}_{\equiv C_{\nino[i] \wtilde{f} f}^{L*}} \big] \wtilde{f}_L^* P_L \underbrace{- Q_f t_W N_{i1}}_{\equiv C_{\nino[i] \wtilde{f} f}^{R*}} \wtilde{f}_R^* P_R \Big\} f + \cc
-                \end{align}
+                                                             \wtilde{B}^0 \\ \wbar{\wtilde{B}}^0
+                                                         \end{pmatrix},\quad \wtilde{W}^0_D = \begin{pmatrix}
+                                                                                                  \wtilde{W}^0 \\ \wbar{\wtilde{W}}^0
+                                                                                              \end{pmatrix},
+            \end{align}
+            with conjugates
+            \begin{align}
+                \wbar{f} = \begin{pmatrix}
+                               f_R \\ \wbar{f}_L
+                           \end{pmatrix}^T,\quad \wbar{\wtilde{B}}^0_D = \begin{pmatrix}
+                                                                             \wtilde{B}^0 \\ \wbar{\wtilde{B}}^0
+                                                                         \end{pmatrix}^T,\quad \wbar{\wtilde{W}}^0_D = \begin{pmatrix}
+                                                                                                                           \wtilde{W}^0 \\ \wbar{\wtilde{W}}^0
+                                                                                                                       \end{pmatrix}^T,
+            \end{align}
+            Suppressing $\pm$ in the field names and inserting the isospin $I^3$ for the factors of $\pm\frac{1}{2}$, we have the ordinary Lagrangian term
+            \begin{align} \label[eq]{f-bino-wino-terms} \nonumber
+                \L_{f\bino\wino} = -\frac{g}{\sqrt{2}} & \Big\{ \wbar{\wtilde{B}}^0_D \bclosed{ \pclosed{Q_f - I^3_f}t_W \tilde{f}_L^* P_L - Q_f t_W \tilde{f}_R^* P_R } f \\
+                                                       & + \wbar{\wtilde{W}}^0_D \pclosed{I^3_f \tilde{f}_L^* P_L} f + \cc \Big\},
+            \end{align}
+            after integrating over the Grassmann variables.
+            Changing to the $\nino[i]$-basis we have
+            \begin{align} \label{eq:nino-sf-f-terms}
+                \L_{\nino[i]\wtilde{f}f} = -\frac{g}{\sqrt{2}} \sum_{i} \wbar{\wtilde{\chi}}^0_i & \Big\{ \big[ \underbrace{\pclosed{Q_f - I^3_f}t_W N_{i1}  + I^3_f N_{i2}}_{\equiv C_{\nino[i] \wtilde{f} f}^{L*}} \big] \wtilde{f}_L^* P_L \underbrace{- Q_f t_W N_{i1}}_{\equiv C_{\nino[i] \wtilde{f} f}^{R*}} \wtilde{f}_R^* P_R \Big\} f + \cc
+            \end{align}
 
-        
         \subsubsection{Higgsino parts}
             The Higgs superfield doublets $H_u = \begin{pmatrix} H_u^+ \\ H_u^0 \end{pmatrix}$ and $H_d = \begin{pmatrix} H_d^0 \\ H_d^- \end{pmatrix}$ have kinetic terms
-                \begin{align}
-                    \L_{H\text{-kin}} = H_u^\dag \exp{g\bclosed{\frac{1}{2}\sigma^a W^a + \frac{1}{2}t_W B^0}} H_u + H_d^\dag \exp{g\bclosed{\frac{1}{2}\sigma^a W^a - \frac{1}{2}t_WB^0}} H_d.
-                \end{align}
+            \begin{align}
+                \L_{H\text{-kin}} = H_u^\dag \exp{g\bclosed{\frac{1}{2}\sigma^a W^a + \frac{1}{2}t_W B^0}} H_u + H_d^\dag \exp{g\bclosed{\frac{1}{2}\sigma^a W^a - \frac{1}{2}t_WB^0}} H_d.
+            \end{align}
             These give rise to multiple neutralino interaction terms from the neutral Higgs superfields
             \begin{align}
                 \L_{H^0\text{-kin}} = {H_u^0}^\dag \exp{g\bclosed{-\frac{1}{2}W^0 + \frac{1}{2}t_W B^0}} H_u^0 + {H_d^0}^\dag \exp{g\bclosed{\frac{1}{2}W^0 - \frac{1}{2}t_W B^0}} H_d^0.
             \end{align}
             Using \cref{eq:psi-terms} we have the higgsino interaction terms (upper signs correspond to $u$, and lower signs to $d$)
             \begin{align} \nonumber
-                \L_{\tilde{H}^0...} = & \mp \frac{g}{4} (\wtilde{H}^0_{u/d} \sigma^\mu \wbar{\wtilde{H}}^0_{u/d})\pclosed{W^0_\mu - t_W B^0_\mu} \\
-                &\pm \frac{g}{2\sqrt{2}} \bclosed{(\wtilde{W}^0 \wtilde{H}^0_{u/d}) H^{0\,*}_{u/d} - t_W (\wtilde{B}^0 \wtilde{H}^0_{u/d}) H^{0\,*}_{u/d} + \cc}.
-            \end{align}
-
-
-            \begin{align} \nonumber
-                \L_{\wtilde{H}^0Z} &= -\frac{g}{4c_W} Z_\mu \bclosed{(\hinou\sigma^\mu\barhinou) - (u \leftrightarrow d)} \\ \nonumber
-                &= \frac{g}{4c_W} Z_\mu \bclosed{(\barhinou\wbar{\sigma}^\mu\hinou) - (u \leftrightarrow d)} \\ \nonumber
-                &= \frac{g}{4c_W} Z_\mu \sum_{ij} \bclosed{N_{i4}N_{j4}^* \barnino[i]\gamma^\mu P_L \nino[j] - (4 \leftrightarrow 3)} \\ \nonumber
-                &= \frac{g}{8c_W} Z_\mu \sum_{ij} \bclosed{N_{i4}N_{j4}^* \barnino[i]\gamma^\mu P_L \nino[j] - N_{i4}N_{j4}^* \barnino[j]\gamma^\mu P_R \nino[i] - (4 \leftrightarrow 3)} \\ \nonumber
-                &= \frac{g}{8c_W} Z_\mu \sum_{ij} \bclosed{N_{i4}N_{j4}^* \barnino[i]\gamma^\mu P_L \nino[j] - N_{i4}^*N_{j4} \barnino[i]\gamma^\mu P_R \nino[j] - (4 \leftrightarrow 3)} \\
-                &= \frac{g}{8c_W} Z_\mu \sum_{ij} \barnino[i] \gamma^\mu \bclosed{ (N_{i4}N_{j4}^* - N_{i3}N_{j3}^*)P_L - (N_{i4}^*N_{j4} - N_{i3}^*N_{j3})P_R } \nino[j]
+                \L_{\tilde{H}^0...} = & \mp \frac{g}{4} (\wtilde{H}^0_{u/d} \sigma^\mu \wbar{\wtilde{H}}^0_{u/d})\pclosed{W^0_\mu - t_W B^0_\mu}                                         \\
+                                      & \pm \frac{g}{2\sqrt{2}} \bclosed{(\wtilde{W}^0 \wtilde{H}^0_{u/d}) H^{0\,*}_{u/d} - t_W (\wtilde{B}^0 \wtilde{H}^0_{u/d}) H^{0\,*}_{u/d} + \cc}.
             \end{align}
 
             \begin{align} \nonumber
-                \L_{\wtilde{H}^0 \wino \bino H^0} &= \frac{g}{\sqrt{2}} \bclosed{ \pclosed{(\wino\hinou) - t_W (\bino\hinou)} {H^0_u}^* + \cc - (u \leftrightarrow d)  } \\ \nonumber
-                &= \frac{g}{2\sqrt{2}} \sum_{ij} \bclosed{ \pclosed{N_{i2} - t_W N_{i1}}N_{j4}^*(\barnino[i] P_L \nino[j]) {H^0_u}^* + \cc - (u,4 \leftrightarrow d,3)  } \\
-                &= \frac{g}{2\sqrt{2}} \sum_{ij} \bclosed{ \pclosed{N_{i2} - t_W N_{i1}}(N_{j4}^* {H^0_u}^* - N_{j3}^* {H^0_d}^* )(\barnino[i] P_L \nino[j]) + \cc  }
+                \L_{\wtilde{H}^0Z} & = -\frac{g}{4c_W} Z_\mu \bclosed{(\hinou\sigma^\mu\barhinou) - (u \leftrightarrow d)}                                                                                    \\ \nonumber
+                                   & = \frac{g}{4c_W} Z_\mu \bclosed{(\barhinou\wbar{\sigma}^\mu\hinou) - (u \leftrightarrow d)}                                                                              \\ \nonumber
+                                   & = \frac{g}{4c_W} Z_\mu \sum_{ij} \bclosed{N_{i4}N_{j4}^* \barnino[i]\gamma^\mu P_L \nino[j] - (4 \leftrightarrow 3)}                                                     \\ \nonumber
+                                   & = \frac{g}{8c_W} Z_\mu \sum_{ij} \bclosed{N_{i4}N_{j4}^* \barnino[i]\gamma^\mu P_L \nino[j] - N_{i4}N_{j4}^* \barnino[j]\gamma^\mu P_R \nino[i] - (4 \leftrightarrow 3)} \\ \nonumber
+                                   & = \frac{g}{8c_W} Z_\mu \sum_{ij} \bclosed{N_{i4}N_{j4}^* \barnino[i]\gamma^\mu P_L \nino[j] - N_{i4}^*N_{j4} \barnino[i]\gamma^\mu P_R \nino[j] - (4 \leftrightarrow 3)} \\
+                                   & = \frac{g}{8c_W} Z_\mu \sum_{ij} \barnino[i] \gamma^\mu \bclosed{ (N_{i4}N_{j4}^* - N_{i3}N_{j3}^*)P_L - (N_{i4}^*N_{j4} - N_{i3}^*N_{j3})P_R } \nino[j]
             \end{align}
 
-
-        \begin{subequations}
-            \begin{align}
-                \vcenter{\hbox{
-                    \inputtikz{qqZ_vertex}
-                }}
-                &= -\frac{ig}{c_W} \gamma^\mu \bclosed{C_{Zqq}^L P_L + C_{Zqq}^R P_R} \\
-                \vcenter{\hbox{
-                    \inputtikz{chii-chij-Z_vertex}
-                }}
-                &= \frac{ig}{c_W} \gamma^\mu \bclosed{O_{ij}^{''L} P_L + O_{ij}^{''R} P_R} \\
-                \vcenter{\hbox{
-                    \inputtikz{q-chi-sq_vertex}
-                }}
-                &= -i\sqrt{2}g C_{\nino[i] \tilde{q} q}^{L/R\,*} P_{L/R}
+            \begin{align} \nonumber
+                \L_{\wtilde{H}^0 \wino \bino H^0} & = \frac{g}{\sqrt{2}} \bclosed{ \pclosed{(\wino\hinou) - t_W (\bino\hinou)} {H^0_u}^* + \cc - (u \leftrightarrow d)  }                                    \\ \nonumber
+                                                  & = \frac{g}{2\sqrt{2}} \sum_{ij} \bclosed{ \pclosed{N_{i2} - t_W N_{i1}}N_{j4}^*(\barnino[i] P_L \nino[j]) {H^0_u}^* + \cc - (u,4 \leftrightarrow d,3)  } \\
+                                                  & = \frac{g}{2\sqrt{2}} \sum_{ij} \bclosed{ \pclosed{N_{i2} - t_W N_{i1}}(N_{j4}^* {H^0_u}^* - N_{j3}^* {H^0_d}^* )(\barnino[i] P_L \nino[j]) + \cc  }
             \end{align}
-        \end{subequations}
 
+            \begin{subequations}
+                \begin{align}
+                    \vcenter{\hbox{
+                            \inputtikz{qqZ_vertex}
+                        }}
+                     & = -\frac{ig}{c_W} \gamma^\mu \bclosed{C_{Zqq}^L P_L + C_{Zqq}^R P_R}      \\
+                    \vcenter{\hbox{
+                            \inputtikz{chii-chij-Z_vertex}
+                        }}
+                     & = \frac{ig}{c_W} \gamma^\mu \bclosed{O_{ij}^{''L} P_L + O_{ij}^{''R} P_R} \\
+                    \vcenter{\hbox{
+                            \inputtikz{q-chi-sq_vertex}
+                        }}
+                     & = -i\sqrt{2}g C_{\nino[i] \tilde{q} q}^{L/R\,*} P_{L/R}
+                \end{align}
+            \end{subequations}
 
-    \appendix
-    \section{Weyl identities}
-        \begin{align} \nonumber
-            (\theta\psi)(\theta\chi) &= (\theta_2\psi_1 - \theta_1\psi_2) (\theta_2\chi_1 - \theta_1\chi_2) = -\theta_2\psi_1\theta_1\chi_2 - \theta_1\psi_2\theta_2\chi_1 \\ \nonumber
-            &= -\theta_1\theta_2\psi_1\chi_2 + \theta_1\theta_2\psi_2\chi_1 = -\theta_1\theta_2 (\psi_1\chi_2 - \psi_2\chi_1) \\ \label[eq]{app:eq:weyl1}
-            &= -\frac{1}{2} (\theta\theta) (\psi\chi)
-        \end{align}
-        \begin{align} \label[eq]{app:eq:weyl3}
-            (\psi \sigma^\mu \wbar\chi) = -(\wbar\chi \wbar\sigma^\mu \psi)
-        \end{align}
-        \begin{align} \label[eq]{app:eq:weyl2}
-            (\wbar\theta\wbar\psi) (\theta\sigma^\mu\wbar\theta) (\theta\psi) = \frac{1}{4} (\theta\theta) (\wbar\theta\wbar\theta) (\psi\sigma^\mu\wbar\psi)
-        \end{align}
+            \appendix
+\section{Weyl identities}
+    \begin{align} \label[eq]{app:eq:weyl1} \nonumber
+        (\theta\psi)(\theta\chi) & = (\theta_2\psi_1 - \theta_1\psi_2) (\theta_2\chi_1 - \theta_1\chi_2) = -\theta_2\psi_1\theta_1\chi_2 - \theta_1\psi_2\theta_2\chi_1 \\ \nonumber
+                                 & = -\theta_1\theta_2\psi_1\chi_2 + \theta_1\theta_2\psi_2\chi_1 = -\theta_1\theta_2 (\psi_1\chi_2 - \psi_2\chi_1)                     \\
+                                 & = -\frac{1}{2} (\theta\theta) (\psi\chi)
+    \end{align}
+    \begin{align} \label[eq]{app:eq:weyl3}
+        (\psi \sigma^\mu \wbar\chi) = -(\wbar\chi \wbar\sigma^\mu \psi)
+    \end{align}
+    \begin{align} \label[eq]{app:eq:weyl2}
+        (\wbar\theta\wbar\psi) (\theta\sigma^\mu\wbar\theta) (\theta\psi) = \frac{1}{4} (\theta\theta) (\wbar\theta\wbar\theta) (\psi\sigma^\mu\wbar\psi)
+    \end{align}
 
-
-    \section{Weyl spinors to Dirac spinors}
-        We can build Dirac spinor $\Psi$ using a left-handed Weyl spinor $\psi_L$ and a right-handed Weyl spinor $\wbar{\psi}_R$ such that
+\section{Weyl spinors to Dirac spinors}
+    We can build Dirac spinor $\Psi$ using a left-handed Weyl spinor $\psi_L$ and a
+    right-handed Weyl spinor $\wbar{\psi}_R$ such that
+    \begin{align}
+        \Psi = \begin{pmatrix} \psi_L \\ \wbar{\psi}_R \end{pmatrix}.
+    \end{align}
+    The $\gamma$-matrices in the Weyl basis are defined as
+    \begin{align}
+        \gamma^\mu = \begin{pmatrix} 0 & \sigma^\mu \\ \wbar{\sigma}^\mu & 0 \end{pmatrix},
+    \end{align}
+    so we define the conjugate Dirac spinor
+    \begin{align}
+        \wbar{\Psi} \equiv \Psi^\dag \gamma^0 = \begin{pmatrix} \psi_R \\ \wbar{\psi}_L \end{pmatrix}^T.
+    \end{align}
+    A Majorana fermion be constructed from just one Weyl spinor, such that $\psi_L = \psi_R \equiv \psi$.
+    The projection operator $P_{L/R}$ project out the left-handed or right-handed Weyl spinors from the Dirac spinor. The following Weyl spinor products can then be rewritten in terms of Dirac spinors:
+    \begin{subequations}
         \begin{align}
-            \Psi = \begin{pmatrix} \psi_L \\ \wbar{\psi}_R \end{pmatrix}.
+            (\psi_{R} \phi_{L})                      & = \wbar{\Psi} P_L \Phi            \\
+            (\wbar{\psi}_L \wbar{\phi}_R)            & = \wbar{\Psi} P_R \Phi            \\
+            (\wbar{\psi}_L \wbar{\sigma}^\mu \phi_L) & = \wbar{\Psi} \gamma^\mu P_L \Phi \\
+            (\psi_R \sigma^\mu \wbar{\phi}_R)        & = \wbar{\Psi} \gamma^\mu P_R \Phi
         \end{align}
-        The $\gamma$-matrices in the Weyl basis are defined as
-        \begin{align}
-            \gamma^\mu = \begin{pmatrix} 0 & \sigma^\mu \\ \wbar{\sigma}^\mu & 0 \end{pmatrix},
-        \end{align}
-        so we define the conjugate Dirac spinor
-        \begin{align}
-            \wbar{\Psi} \equiv \Psi^\dag \gamma^0 = \begin{pmatrix} \psi_R \\ \wbar{\psi}_L \end{pmatrix}^T.
-        \end{align}
-        A Majorana fermion be constructed from just one Weyl spinor, such that $\psi_L = \psi_R \equiv \psi$.
-        The projection operator $P_{L/R}$ project out the left-handed or right-handed Weyl spinors from the Dirac spinor. The following Weyl spinor products can then be rewritten in terms of Dirac spinors:
-        \begin{subequations}
-            \begin{align}
-                (\psi_{R} \phi_{L}) &= \wbar{\Psi} P_L \Phi \\
-                (\wbar{\psi}_L \wbar{\phi}_R) &= \wbar{\Psi} P_R \Phi \\
-                (\wbar{\psi}_L \wbar{\sigma}^\mu \phi_L) &= \wbar{\Psi} \gamma^\mu P_L \Phi \\
-                (\psi_R \sigma^\mu \wbar{\phi}_R) &= \wbar{\Psi} \gamma^\mu P_R \Phi
-            \end{align}
-        \end{subequations}
-        Using equation \cref{app:eq:weyl3}, we get the Majorana Dirac spinor relation
-        \begin{align}
-            \wbar{\Psi}_M \gamma^\mu P_{L/R} \Phi_M = -\wbar{\Phi}_M \gamma^\mu P_{R/L} \Psi_M
-        \end{align}
+    \end{subequations}
+    Using equation \cref{app:eq:weyl3}, we get the Majorana Dirac spinor relation
+    \begin{align}
+        \wbar{\Psi}_M \gamma^\mu P_{L/R} \Phi_M = -\wbar{\Phi}_M \gamma^\mu P_{R/L} \Psi_M
+    \end{align}
 
-    
-    \section{Electroweak theory}
-        \begin{subequations}
-            \begin{align}
-                B^0_\mu &= c_W A^0_\mu - s_W Z^0_\mu \\
-                W^0_\mu &= s_W A^0_\mu + c_W Z^0_\mu
-            \end{align}
-        \end{subequations}
-
+\section{Electroweak theory}
+    \begin{subequations}
+        \begin{align}
+            B^0_\mu & = c_W A^0_\mu - s_W Z^0_\mu \\
+            W^0_\mu & = s_W A^0_\mu + c_W Z^0_\mu
+        \end{align}
+    \end{subequations}
 
 \end{document}
