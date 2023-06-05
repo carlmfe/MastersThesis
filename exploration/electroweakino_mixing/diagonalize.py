@@ -6,8 +6,8 @@ from sys import float_info
 EPSILON = sqrt(float_info.epsilon)
 MAX = 1 / float_info.epsilon
 
-sthetaW = sqrt(0.23120)
-cthetaW = sqrt(1 - 0.23120)
+sinW = sqrt(0.23120)  # sine of the Weinberg mixing angle
+cosW = sqrt(1 - 0.23120)  # cosine of the Weinberg mixing angle
 
 
 def isNotDuplicate(first, second, threshold=EPSILON):
@@ -81,21 +81,21 @@ if __name__ == "__main__":
     M2 = 0.
     mu = 100.
     beta = pi * (1. / 32.)
-    sbeta = sin(beta)
-    cbeta = cos(beta)
+    sinbeta = sin(beta)
+    cosbeta = cos(beta)
 
     M_neutralino = np.array([
-        [-M1, 0, -1.j*cbeta * sthetaW, 1.j*sbeta * sthetaW],
-        [0, -M2, 1.j*cbeta * cthetaW, -1.j*sbeta * cthetaW],
-        [-1.j*cbeta * sthetaW, 1.j*cbeta * cthetaW, 0, -mu],
-        [1.j*sbeta * sthetaW, -1.j*sbeta * cthetaW, -mu, 0]
+        [-M1, 0, -1.j*cosbeta * sinW, 1.j*sinbeta * sinW],
+        [0, -M2, 1.j*cosbeta * cosW, -1.j*sinbeta * cosW],
+        [-1.j*cosbeta * sinW, 1.j*cosbeta * cosW, 0, -mu],
+        [1.j*sinbeta * sinW, -1.j*sinbeta * cosW, -mu, 0]
     ])
 
     M_chargino = np.array([
-        [0, 0, -M2, 1.j*sqrt(2) * cbeta * cthetaW],
-        [0, 0, 1.j*sqrt(2) * sbeta * cthetaW, mu],
-        [-M2, 1.j*sqrt(2) * sbeta * cthetaW, 0, 0],
-        [1.j*sqrt(2) * cbeta * cthetaW, mu, 0, 0]
+        [0, 0, -M2, 1.j*sqrt(2) * cosbeta * cosW],
+        [0, 0, 1.j*sqrt(2) * sinbeta * cosW, mu],
+        [-M2, 1.j*sqrt(2) * sinbeta * cosW, 0, 0],
+        [1.j*sqrt(2) * cosbeta * cosW, mu, 0, 0]
     ])
 
     print(f"{M1=:.2}, {M2=:.2}, {mu=:.2}, {tan(beta)=:.4}")
@@ -114,4 +114,9 @@ if __name__ == "__main__":
 
     Oij = 0.5 * (np.outer(N[:, 3], N[:, 3].conj())
                  - np.outer(N[:, 2], N[:, 2].conj()))
-    print(abs(N))
+
+    N[0, :] *= 1.j
+    N[1, :] *= 1.j
+    N[:, 0] *= 1.j
+    N[:, 1] *= 1.j
+    print(N.imag)
