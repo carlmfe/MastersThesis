@@ -1,5 +1,5 @@
 from math import sqrt, sin, cos, tan, pi
-from cmath import phase
+from cmath import phase, exp
 import numpy as np
 from scipy.linalg import eig, inv
 from sys import float_info
@@ -23,10 +23,22 @@ def isNotInfinite(arg, threshold=MAX):
 
 
 def get_finite(arg, threshold_min=EPSILON, threshold_max=MAX):
-    result = np.where(isNotInfinite(arg, threshold=threshold_max),
-                      arg, np.nan)
-    result = np.where(isNotInfinitessimal(arg, threshold=threshold_min),
-                      result, 0)
+    if np.iscomplexobj(arg):
+        real_result = get_finite(arg.real,
+                                 threshold_min=threshold_min,
+                                 threshold_max=threshold_max)
+        imag_result = get_finite(arg.imag,
+                                 threshold_min=threshold_min,
+                                 threshold_max=threshold_max)
+        if not imag_result.any():
+            result = np.array(real_result, dtype=float)
+        else:
+            result = real_result + 1j * imag_result
+    else:
+        result = np.where(isNotInfinite(abs(arg), threshold=threshold_max),
+                          arg, np.nan)
+        result = np.where(isNotInfinitessimal(abs(arg), threshold=threshold_min),
+                          result, 0)
     return result
 
 
@@ -78,8 +90,8 @@ def diagonalize(mass_matrix, components=None):
 
 if __name__ == "__main__":
     M1 = 1.
-    M2 = 20.
-    mu = 100.
+    M2 = 5.
+    mu = 1000.
     mZ = 91.1876
     beta = pi * (12. / 32.)
     sinbeta = sin(beta)
@@ -121,6 +133,22 @@ if __name__ == "__main__":
     diagonalize(M_chargino, components=["W+", "H_u+", "W-", "H_d-"])
 
     masses, N = eig(M_neutralino)
+    N = np.array(N.T, dtype=complex)
+
+    for idx in range(len(masses)):
+        if phase(masses[idx]) != 0.0:
+            N[idx] = N[idx] * exp(phase(masses[idx]) * 0.5j)
+            masses[idx] = abs(masses[idx])
+
+    sorted_idcs = np.argsort(masses)
+    masses = masses[sorted_idcs]
+    N = N[sorted_idcs]
+
+    # print(N)
+    # print(M_neutralino)
+    # print(get_finite((N.T @ np.diag(masses) @ N).real))
+    print(get_finite(N @ M_neutralino @ N.T))
+
     # N = N.conj().T
     # D = N @ M_neutralino @ N.conj().T
     # # D = N @ M_neutralino @ Ninv
@@ -134,4 +162,4 @@ if __name__ == "__main__":
     # N[1, :] *= -1.j
     # N[:, 0] *= -1.j
     # N[:, 1] *= -1.j
-    print(N[:, 2]**2 * 100)
+    # print(N[:, 2]**2 * 100)
