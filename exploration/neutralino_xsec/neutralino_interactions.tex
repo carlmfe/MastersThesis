@@ -1,6 +1,17 @@
 \documentclass[english, notitlepage]{article}
 
 \usepackage{overhead}
+\usepackage[style=verbose]{biblatex}
+
+\begin{filecontents}{references.bib}
+    @book{Binetruy:2006ad,
+        author = "Binétruy, P.",
+        title = "{Supersymmetry: Theory, experiment and cosmology}",
+        year = "2006"
+    }
+\end{filecontents}
+
+\addbibresource{references.bib}
 
 \title{Neutralino Interactions in the MSSM}
 \author{Carl Martin Fevang}
@@ -80,7 +91,7 @@
     \subsection{Neutralino interactions}
         The neutralino interactions appear in the kinetic terms of all the superfields
         that couple to the $U(1)_Y$ and $SU(2)_L$ gauge groups, and the Yukawa terms
-        that include the Higgs fields in the superpotential.
+        that include the Higgs fields in the superpotential. The exception is neutralino interaction with the charginos, which is also found in the supersymmetric field strength term.
 
 \section{Interaction Lagrangian}
     The ordinary interaction Lagrangian is found from integrating over the
@@ -89,7 +100,7 @@
     superlagrangian terms that include all of
     $(\theta\theta)(\wbar\theta\wbar\theta)$.\footnote{Terms with an insufficient
         amount of $\theta$s are ignored in the following.} Looking first at a general
-    kinetic term of a superfield coupled to a $U(1)$ vector field, it has the form
+    kinetic term of a superfield coupled to a $U(1)$ vector field, it has the form\footcite{Binetruy:2006ad}
     \begin{align}
         \msub{\L}{kin} = \Phi^\dag \exp{2qV} \Phi.
     \end{align}
@@ -129,7 +140,7 @@
                 g' = g t_W,
             \end{align}
             where $t_W = s_W/c_W \equiv \sin\theta_W/\cos\theta_W$ where $\theta_W$ is the Weinberg mixing angle.
-            Rewriting using $\sigma_\pm = \sigma_2 \pm i\sigma_2$, and defining $W^\pm = W^1 \mp iW^2$ and $W^0 \equiv W^3$, we have
+            Rewriting using $\sigma_\pm = \frac{1}{2}\pclosed{\sigma_1 \pm i\sigma_2}$, and defining $W^\pm = W^1 \mp iW^2$ and $W^0 \equiv W^3$, we have
             \begin{align}
                 Yg'B^0 + \frac{1}{2}g\sigma^a W^a = g\cclosed{ Yt_W B^0 + \frac{1}{2}\sigma_3 W^0 + \frac{1}{2}\sigma_+ W^+ + \frac{1}{2}\sigma_- W^- }
             \end{align}
@@ -208,12 +219,12 @@
             \end{align}
 
             \begin{align} \nonumber
-                \L_{\wtilde{H}^0Z} & = -\frac{g}{2c_W} Z_\mu \bclosed{(\hinou\sigma^\mu\barhinou) - (u \leftrightarrow d)}                                                                                    \\ \nonumber
-                                   & = \frac{g}{2c_W} Z_\mu \bclosed{(\barhinou\wbar{\sigma}^\mu\hinou) - (u \leftrightarrow d)}                                                                              \\ \nonumber
-                                   & = \frac{g}{2c_W} Z_\mu \sum_{ij} \bclosed{N_{i4}N_{j4}^* \barnino[i]\gamma^\mu P_L \nino[j] - (4 \leftrightarrow 3)}                                                     \\ \nonumber
-                                   & = \frac{g}{4c_W} Z_\mu \sum_{ij} \bclosed{N_{i4}N_{j4}^* \barnino[i]\gamma^\mu P_L \nino[j] - N_{i4}N_{j4}^* \barnino[j]\gamma^\mu P_R \nino[i] - (4 \leftrightarrow 3)} \\ \nonumber
-                                   & = \frac{g}{4c_W} Z_\mu \sum_{ij} \bclosed{N_{i4}N_{j4}^* \barnino[i]\gamma^\mu P_L \nino[j] - N_{i4}^*N_{j4} \barnino[i]\gamma^\mu P_R \nino[j] - (4 \leftrightarrow 3)} \\
-                                   & = \frac{g}{4c_W} Z_\mu \sum_{ij} \barnino[i] \gamma^\mu \bclosed{ (N_{i4}N_{j4}^* - N_{i3}N_{j3}^*)P_L - (N_{i4}^*N_{j4} - N_{i3}^*N_{j3})P_R } \nino[j]
+                \L_{\wtilde{H}^0Z} & = -\frac{g}{2c_W} Z_\mu \bclosed{(\hinou\sigma^\mu\barhinou) - (u \leftrightarrow d)}                                                                                                                                                                                                     \\ \nonumber
+                                   & = \frac{g}{2c_W} Z_\mu \bclosed{(\barhinou\wbar{\sigma}^\mu\hinou) - (u \leftrightarrow d)}                                                                                                                                                                                               \\ \nonumber
+                                   & = \frac{g}{2c_W} Z_\mu \sum_{ij} \bclosed{N_{i4}N_{j4}^* \barnino[i]\gamma^\mu P_L \nino[j] - (4 \leftrightarrow 3)}                                                                                                                                                                      \\ \nonumber
+                                   & = \frac{g}{4c_W} Z_\mu \sum_{ij} \bclosed{N_{i4}N_{j4}^* \barnino[i]\gamma^\mu P_L \nino[j] - N_{i4}N_{j4}^* \barnino[j]\gamma^\mu P_R \nino[i] - (4 \leftrightarrow 3)}                                                                                                                  \\ \nonumber
+                                   & = \frac{g}{4c_W} Z_\mu \sum_{ij} \bclosed{N_{i4}N_{j4}^* \barnino[i]\gamma^\mu P_L \nino[j] - N_{i4}^*N_{j4} \barnino[i]\gamma^\mu P_R \nino[j] - (4 \leftrightarrow 3)}                                                                                                                  \\
+                                   & = \frac{g}{2c_W} Z_\mu \sum_{ij} \barnino[i] \gamma^\mu \Big[ \underbrace{\frac{1}{2}\pclosed{N_{i4}N_{j4}^* - N_{i3}N_{j3}^*}}_{\equiv O^{\prime\prime L}_{ij}}P_L \underbrace{-\frac{1}{2}\pclosed{N_{i4}^*N_{j4} - N_{i3}^*N_{j3}}}_{\equiv O^{\prime\prime R}_{ij}}P_R \Big] \nino[j]
             \end{align}
 
             \begin{align} \nonumber
@@ -227,11 +238,11 @@
                     \vcenter{\hbox{
                             \inputtikz{qqZ_vertex}
                         }}
-                     & = -\frac{ig}{c_W} \gamma^\mu \bclosed{C_{Zqq}^L P_L + C_{Zqq}^R P_R}      \\
+                     & = -\frac{ig}{c_W} \gamma^\mu \bclosed{C_{Zqq}^L P_L + C_{Zqq}^R P_R}                            \\
                     \vcenter{\hbox{
                             \inputtikz{chii-chij-Z_vertex}
                         }}
-                     & = \frac{ig}{c_W} \gamma^\mu \bclosed{O_{ij}^{''L} P_L + O_{ij}^{''R} P_R} \\
+                     & = \frac{ig}{c_W} \gamma^\mu \bclosed{O_{ij}^{\prime\prime L} P_L + O_{ij}^{\prime\prime R} P_R} \\
                     \vcenter{\hbox{
                             \inputtikz{q-chi-sq_vertex}
                         }}
