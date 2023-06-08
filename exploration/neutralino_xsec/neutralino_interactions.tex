@@ -3,15 +3,7 @@
 \usepackage{overhead}
 \usepackage[style=verbose]{biblatex}
 
-\begin{filecontents}{references.bib}
-    @book{Binetruy:2006ad,
-        author = "Binétruy, P.",
-        title = "{Supersymmetry: Theory, experiment and cosmology}",
-        year = "2006"
-    }
-\end{filecontents}
-
-\addbibresource{references.bib}
+\addbibresource{neutralino_interactions.bib}
 
 \title{Neutralino Interactions in the MSSM}
 \author{Carl Martin Fevang}
@@ -47,7 +39,7 @@
 \section{MSSM Superfields}
     For completeness, I list here the relevant superfields containing the
     neutralinos and fields that couple to them. These include the $SU(2)_L$
-    superfield doublets $H_u = \begin{pmatrix} H_u^+ \\ H_u^0 \end{pmatrix}$, $H_d = \begin{pmatrix} H_d^0 \\ H_d^- \end{pmatrix}$, $L_i = \begin{pmatrix} l_i \\ \nu_i \end{pmatrix}$ and $Q_i = \begin{pmatrix} u_i \\ d_i \end{pmatrix}$, and $SU(2)_L$ singlet superfields $E_i$, $U_i$ and $D_i$. There are also the vector superfields $B^0$ for the $U(1)_Y$ gauge group, and $W^0$ and $W^\pm$ for the $SU(2)_L$ gauge group.
+    superfield doublets $H_u = \begin{pmatrix} H_u^+ \\ H_u^0 \end{pmatrix}$, $H_d = \begin{pmatrix} H_d^0 \\ H_d^- \end{pmatrix}$, $L_i = \begin{pmatrix} l_i \\ \nu_i \end{pmatrix}$ and $Q_i = \begin{pmatrix} u_i \\ d_i \end{pmatrix}$, and $SU(2)_L$ singlet superfields $E_i$, $U_i$ and $D_i$, where \(i=1,2,3\) enumerates the three generations of leptons/quarks. There are also the vector superfields $B^0$ for the $U(1)_Y$ gauge group, and $W^0$ and $W^\pm$ for the $SU(2)_L$ gauge group.
     \begin{table}[h!]
         \centering
         \begin{tabular}{|l|ccc|} \hline
@@ -76,11 +68,9 @@
         to the $B$ and $W$ vector fields and the $H_{u/d}$ scalar fields --- the
         neutralinos are given by
         \begin{align}
-            \nino = \begin{pmatrix}
-                        \nino[1] \\ \nino[2] \\ \nino[3] \\ \nino[4]
-                    \end{pmatrix} = N \Psi_{\nino},
+            \nino = \pclosed{\nino[1], \nino[2], \nino[3], \nino[4]} = N \Psi_{\nino},
         \end{align}
-        where $N$ is a unitary matrix diagonalising the neutralino mass matrix $M_{\nino\text{-mass}}$. Thus, the neutralino interactions are found in terms in the superlagrangian that include the vector superfields $B$ and $W^0$, and the scalar superfields $H_u^0$ and $H_d^0$. Translating from the $\Psi_{\nino}$-basis to the $\nino$-basis, we have that
+        where $N$ is a unitary matrix diagonalising the neutralino mass matrix $M_{\nino\text{-mass}}$. Thus, the neutralino interactions are found in terms in the superlagrangian that include the vector superfields $B^0$ and $W^0$, and the scalar superfields $H_u^0$ and $H_d^0$. Translating from the $\Psi_{\nino}$-basis to the $\nino$-basis, we have that
         \begin{align}
             \bino = N_{i1}^* \nino[i],\quad \wino = N_{i2}^* \nino[i],\quad \hinod = N_{i3}^* \nino[i],\quad \hinou = N_{i4}^* \nino[i],
         \end{align}
@@ -203,6 +193,29 @@
                 \L_{\nino[i]\wtilde{f}f} = -\sqrt{2} g   \sum_{i} \wbar{\wtilde{\chi}}^0_i & \Big\{ \big[ \underbrace{\pclosed{Q_f - I^3_f}t_W N_{i1}  + I^3_f N_{i2}}_{\equiv C_{\nino[i] \wtilde{f} f}^{L*}} \big] \wtilde{f}_L^* P_L \underbrace{- Q_f t_W N_{i1}}_{\equiv C_{\nino[i] \wtilde{f} f}^{R*}} \wtilde{f}_R^* P_R \Big\} f + \cc
             \end{align}
 
+            Now we can generalise this to include squark mixing between the left- and right-handed squarks into mass eigenstates \(\wtilde{f}_{1,2}\), where
+            \begin{align}
+                \begin{pmatrix}
+                    \wtilde{f}_1 \\
+                    \wtilde{f}_2
+                \end{pmatrix}
+                =
+                \begin{bmatrix}
+                    c_{\wtilde{f}} & -s_{\wtilde{f}}^* \\
+                    s_{\wtilde{f}} & c_{\wtilde{f}}^*
+                \end{bmatrix} \begin{pmatrix}
+                                  \wtilde{f}_L \\
+                                  \wtilde{f}_R
+                              \end{pmatrix}.
+            \end{align}
+            This leaves us with the Lagrangian terms
+            \begin{align}
+                \label{eq:nino-sf1-f-terms}
+                \L_{\nino[i] \wtilde{f}_1 f} = -\sqrt{2} g \sum_{i} \wbar{\wtilde{\chi}}^0_i & \Big\{ \underbrace{c_{\wtilde{f}} C_{\nino[i] \wtilde{f} f}^{L*}}_{\equiv C_{\nino[i] \wtilde{f}_1 f}^{L*}} P_L \underbrace{- s_{\wtilde{f}}^* C_{\nino[i] \wtilde{f} f}^{R*}}_{\equiv C_{\nino[i] \wtilde{f}_1 f}^{R*}} P_R \Big\} \wtilde{f}_1^* f + \cc \\
+                \label{eq:nino-sf2-f-terms}
+                \L_{\nino[i] \wtilde{f}_2 f} = -\sqrt{2} g \sum_{i} \wbar{\wtilde{\chi}}^0_i & \Big\{ \underbrace{s_{\wtilde{f}} C_{\nino[i] \wtilde{f} f}^{L*}}_{\equiv C_{\nino[i] \wtilde{f}_2 f}^{L*}} P_L + \underbrace{c_{\wtilde{f}}^* C_{\nino[i] \wtilde{f} f}^{R*}}_{\equiv C_{\nino[i] \wtilde{f}_2 f}^{R*}} P_R \Big\} \wtilde{f}_2^* f + \cc
+            \end{align}
+
         \subsubsection{Higgsino parts}
             The Higgs superfield doublets $H_u = \begin{pmatrix} H_u^+ \\ H_u^0 \end{pmatrix}$ and $H_d = \begin{pmatrix} H_d^0 \\ H_d^- \end{pmatrix}$ have kinetic terms
             \begin{align}
@@ -238,17 +251,39 @@
                     \vcenter{\hbox{
                             \inputtikz{qqZ_vertex}
                         }}
-                     & = -\frac{ig}{c_W} \gamma^\mu \bclosed{C_{Zqq}^L P_L + C_{Zqq}^R P_R}                            \\
+                     & = -\frac{ig}{c_W} \gamma^\mu \bclosed{C_{Zqq}^L P_L + C_{Zqq}^R P_R}                                \\
                     \vcenter{\hbox{
                             \inputtikz{chii-chij-Z_vertex}
                         }}
-                     & = \frac{ig}{c_W} \gamma^\mu \bclosed{O_{ij}^{\prime\prime L} P_L + O_{ij}^{\prime\prime R} P_R} \\
+                     & = \frac{ig}{c_W} \gamma^\mu \bclosed{O_{ij}^{\prime\prime L} P_L + O_{ij}^{\prime\prime R} P_R}     \\
                     \vcenter{\hbox{
                             \inputtikz{q-chi-sq_vertex}
                         }}
-                     & = -i\sqrt{2}g C_{\nino[i] \tilde{q} q}^{L/R\,*} P_{L/R}
+                     & = -i\sqrt{2}g \bclosed{ C_{\nino[i] \tilde{q}_k q}^{L*} P_L + C_{\nino[i] \tilde{q}_k q}^{R*} P_R }
                 \end{align}
             \end{subequations}
+
+
+            {\renewcommand{\arraystretch}{2}
+            \begin{table}
+                \centering
+                \begin{tabular}{|c|c|}
+                    \hline
+                    Variable                             & Value                                                                      \\
+                    \hline
+                    \(C_{\nino[i] \wtilde{f}_1 f}^{L*}\) & \(c_{\wtilde{f}} \bclosed{\pclosed{Q_f-I^3_f} t_W N_{i1} + I^3_f N_{i2}}\) \\
+                    \(C_{\nino[i] \wtilde{f}_1 f}^{R*}\) & \(s_{\wtilde{f}}^* Q_f t_W N_{i1}\)                                        \\
+                    \hline
+                    \(C_{\nino[i] \wtilde{f}_2 f}^{L*}\) & \(s_{\wtilde{f}} \bclosed{\pclosed{Q_f-I^3_f} t_W N_{i1} + I^3_f N_{i2}}\) \\
+                    \(C_{\nino[i] \wtilde{f}_2 f}^{R*}\) & \(-c_{\wtilde{f}}^* Q_f t_W N_{i1}\)                                       \\
+                    \hline
+                    \(O^{\prime\prime L}_{ij}\)          & \(\frac{1}{2} \pclosed{N_{i4} N_{j4}^* - N_{i3} N_{N_3}^*}\)               \\
+                    \(O^{\prime\prime R}_{ij}\)          & \(-\frac{1}{2} \pclosed{N_{i4}^* N_{j4} - N_{i3}^* N_{N_3}}\)              \\
+                    \hline
+                \end{tabular}
+            \end{table}
+            }
+
 
             \appendix
 \section{Weyl identities}
@@ -272,7 +307,7 @@
     I note that the labels \(L/R\), perhaps confusingly, do not label whether the Weyl spinor is left- or right-handed, but rather what they were originally \textit{intended} to be --- \(\wbar{\psi}_L\) would still be a right-handed Weyl spinor.
     The $\gamma$-matrices in the Weyl representation are
     \begin{align}
-        \gamma^\mu = \begin{pmatrix} 0 & \sigma^\mu \\ \wbar{\sigma}^\mu & 0 \end{pmatrix},
+        \gamma^\mu = \begin{bmatrix} 0 & \sigma^\mu \\ \wbar{\sigma}^\mu & 0 \end{bmatrix},
     \end{align}
     so we define the conjugate Dirac spinor
     \begin{align}

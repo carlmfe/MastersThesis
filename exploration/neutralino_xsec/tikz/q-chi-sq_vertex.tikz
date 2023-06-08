@@ -4,7 +4,7 @@
     \vertex at (-0.6, 0.3) (a);
     \vertex at ( 0.4, 0.8) (b);
         \vertex at ( 0  , 0  ) (v);
-    \vertex at ( 1  ,-1  ) (sq) {\(\tilde{q}_\mathrm{L/R}\)};
+    \vertex at ( 1  ,-1  ) (sq) {\(\tilde{q}_\mathrm{k}\)};
     \diagram*{
         (q) -- [fermion] (v)
             -- (chii),
