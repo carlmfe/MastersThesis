@@ -7,50 +7,91 @@
 \author{Carl Martin Fevang}
 
 \begin{document}
-    \maketitle
+\maketitle
 
 
-    \begin{figure} [ht!]
-        \centering
-        \inputtikz{s_channel}
-        \inputtikz{t_channel}
-        \inputtikz{u_channel}
-    \end{figure}
+\begin{figure} [ht!]
+    \centering
+    \inputtikz{s_channel}
+    \inputtikz{t_channel}
+    \inputtikz{u_channel}
+\end{figure}
 
+\begin{subequations}
+    \begin{align}
+        s         & = \pclosed{p_1 + p_2}^2 = \pclosed{k_1 + k_2}^2 \\
+        t         & = \pclosed{p_1-k_1}^2 = \pclosed{p_2-k_2}^2     \\
+        u         & = \pclosed{p_1-k_2}^2 = \pclosed{p_2-k_1}^2     \\
+        s + t + u & = m_i^2 + m_j^2
+    \end{align}
+\end{subequations}
+
+\begin{subequations}
+    \begin{align}
+         & (p_1 \cdot p_2) = \frac{s}{2}         &  & (k_1 \cdot k_2) = \frac{s-m_i^2-m_j^2}{2} \\
+         & (p_1 \cdot k_1) = \frac{m_i^2 - t}{2} &  & (p_2 \cdot k_2) = \frac{m_j^2-t}{2}       \\
+         & (p_1 \cdot k_2) = \frac{m_j^2 - u}{2} &  & (p_2 \cdot k_1) = \frac{m_i^2-u}{2}
+    \end{align}
+\end{subequations}
+\begin{subequations}
+    \begin{align} \nonumber
+        \M_s = -\frac{g^2}{2c_W^2} D_Z(s) & \bclosed{ \wbar{u}_i\gamma^\mu\pclosed{O^{''L}_{ij}P_L + O^{''R}_{ij}P_R} v_j }    \\
+                                          & \times \bclosed{ \wbar{v}_2 \gamma_\mu \pclosed{C^L_{Zqq}P_L + C^R_{Zqq}P_R} u_1 } \\ \nonumber
+        \M_t = -2g^2 D_{\wtilde{q}}(t)    & \bclosed{ \wbar{u}_i \pclosed{C_{i}^{L*}P_L + C_{i}^{R*} P_R} u_1 }                \\
+                                          & \times \bclosed{ \wbar{v}_2 \pclosed{C^R_{j}P_L + C^L_{j}P_R} v_j }                \\ \nonumber
+        \M_u = -2g^2 D_{\wtilde{q}}(u)    & \bclosed{ \wbar{u}_j \pclosed{C_{j}^{L*}P_L + C_{j}^{R*} P_R} u_1 }                \\
+                                          & \times \bclosed{ \wbar{v}_2 \pclosed{C^R_{i}P_L + C^L_{i}P_R} v_i }
+    \end{align}
+\end{subequations}
+
+
+\begin{subequations}
+    \begin{align} \nonumber
+        I_{ss} = \sum_\text{spins} \abs{\M_s}^2 = \frac{g^4}{c_W^2} \abs{D_Z(s)}^2 \pclosed{{(C_Z^L)}^2+{(C_Z^R)}^2} & \bigg\{ \abs{O_{ij}^L}^2 \bclosed{ {(m_i^2-t)}^2 + {(m_j^2-t)}^2 } \\
+                                                                                                                     & - 2\Re\cclosed{\pclosed{O_{ij}^L}^2} m_i m_j s \bigg\}
+    \end{align}
+\end{subequations}
+
+
+\section{Fierz identities}
+    Introducing first the generalised gamma matrices \(\Gamma_I^r\) defined in the following way:
     \begin{subequations}
         \begin{align}
-            s &= \pclosed{p_1 + p_2}^2 = \pclosed{k_1 + k_2}^2 \\
-            t &= \pclosed{p_1-k_1}^2 = \pclosed{p_2-k_2}^2 \\
-            u &= \pclosed{p_1-k_2}^2 = \pclosed{p_2-k_1}^2 \\
-            s + t + u &= m_i^2 + m_j^2
+            \Gamma_S^0            & = \mathbb{1},                        \\
+            \Gamma_V^{0,\ldots,3} & = \gamma^\mu,                        \\
+            \Gamma_T^{0,\ldots,5} & = \sigma^{\mu\nu}, \quad (\mu < \nu) \\
+            \Gamma_A^{0,\ldots,3} & = \gamma^\mu \gamma^5,               \\
+            \Gamma_P^0            & = \gamma^5,
         \end{align}
     \end{subequations}
+    where \(\sigma^{\mu\nu} = \frac{i}{2} \bclosed{\gamma^\mu, \gamma^\nu}\) and \(\gamma^5 = i \gamma^0 \gamma^1 \gamma^2 \gamma^3\). The upper index \(r\) is understood to be summed over if it is repeated in an expression, while the index \(I\) is only summed over when explicitly stated. The complement \(\Gamma_{I,r}\) is found by lowering any Lorentz index in the standard way.
+    The generalised Fierz identity then tells us that for spinors \(w_{1,\ldots,4}\) that can either be positive energy spinors \(u\) or negative energy spinors \(v\), we have that
+    \begin{align}
+        \pclosed{\wbar{w}_1 \Gamma_I^r w_2} \pclosed{\wbar{w}_3 \Gamma_{J}^s w_4} & = \sum_{M,N} \tensor*[^{IJ}_{rs}]{C}{^{MN}_{tu}} \pclosed{\wbar{w}_1 \Gamma_M^t w_4} \pclosed{\wbar{w}_3 \Gamma_N^u w_2},
+    \end{align}
+    with numerical coefficients \(\tensor*[^{IJ}_{rs}]{C}{^{MN}_{tu}}\). The coefficients are found by
+    \begin{align}
+        \tensor*[^{IJ}_{rs}]{C}{^{MN}_{tu}} & = \frac{1}{16} \tr\bclosed{\Gamma_{M,t} \Gamma_I^r \Gamma_{N,u} \Gamma_J^{s}}
+    \end{align}
 
+
+\section{Factorisation}
+
+    \begin{align}
+        \nonumber
+          & \bclosed{\wbar{u}_i \pclosed{C^{L*}_i P_L + C^{R*}_i P_R} u_i} \bclosed{\wbar{v}_2 \pclosed{C^{L}_j P_L + C^R_j P_R} v_j}                       \\
+        \nonumber
+        = & C_{SS}\bclosed{\wbar{u}_i u_1} \bclosed{\wbar{v}_2 v_j} + C_{SP}\bclosed{\wbar{u}_i u_1} \bclosed{\wbar{v}_2 \gamma^5 v_j}                      \\
+          & + C_{PS}\bclosed{\wbar{u}_i \gamma^5 u_1} \bclosed{\wbar{v}_2 v_j} + C_{PP}\bclosed{\wbar{u}_i \gamma^5 u_1} \bclosed{\wbar{v}_2 \gamma^5 v_j},
+    \end{align}
+    where we have
     \begin{subequations}
         \begin{align}
-            &(p_1 \cdot p_2) = \frac{s}{2} & &(k_1 \cdot k_2) = \frac{s-m_i^2-m_j^2}{2} \\
-            &(p_1 \cdot k_1) = \frac{m_i^2 - t}{2} & &(p_2 \cdot k_2) = \frac{m_j^2-t}{2} \\
-            &(p_1 \cdot k_2) = \frac{m_j^2 - u}{2} & &(p_2 \cdot k_1) = \frac{m_i^2-u}{2}
+            C_{SS} & = \frac{1}{4} \pclosed{C^{L*}_i + C^{R*}_i}\pclosed{C^{L}_j + C^{R}_j}  \\
+            C_{SP} & = -\frac{1}{4} \pclosed{C^{L*}_i + C^{R*}_i}\pclosed{C^{L}_j - C^{R}_j} \\
+            C_{PS} & = -\frac{1}{4} \pclosed{C^{L*}_i - C^{R*}_i}\pclosed{C^{L}_j + C^{R}_j} \\
+            C_{PP} & = \frac{1}{4} \pclosed{C^{L*}_i - C^{R*}_i}\pclosed{C^{L}_j - C^{R}_j}
         \end{align}
     \end{subequations}
-    \begin{subequations}
-        \begin{align} \nonumber
-            \M_s = -\frac{g^2}{2c_W^2} D_Z(s) &\bclosed{ \wbar{u}_i\gamma^\mu\pclosed{O^{''L}_{ij}P_L + O^{''R}_{ij}P_R} v_j } \\
-            &\times \bclosed{ \wbar{v}_2 \gamma_\mu \pclosed{C^L_{Zqq}P_L + C^R_{Zqq}P_R} u_1 } \\ \nonumber
-            \M_t = -2g^2 D_{\wtilde{q}}(t) &\bclosed{ \wbar{u}_i \pclosed{C_{i}^{L*}P_L + C_{i}^{R*} P_R} u_1 } \\
-            &\times \bclosed{ \wbar{v}_2 \pclosed{C^R_{j}P_L + C^L_{j}P_R} v_j } \\ \nonumber
-            \M_u = -2g^2 D_{\wtilde{q}}(u) &\bclosed{ \wbar{u}_j \pclosed{C_{j}^{L*}P_L + C_{j}^{R*} P_R} u_1 } \\
-            &\times \bclosed{ \wbar{v}_2 \pclosed{C^R_{i}P_L + C^L_{i}P_R} v_i }
-        \end{align}
-    \end{subequations}
-
-
-    \begin{subequations}
-        \begin{align} \nonumber
-            I_{ss} = \sum_\text{spins} \abs{\M_s}^2 = \frac{g^4}{c_W^2} \abs{D_Z(s)}^2 \pclosed{{(C_Z^L)}^2+{(C_Z^R)}^2} &\bigg\{ \abs{O_{ij}^L}^2 \bclosed{ {(m_i^2-t)}^2 + {(m_j^2-t)}^2 } \\
-            &- 2\Re\cclosed{\pclosed{O_{ij}^L}^2} m_i m_j s \bigg\}
-        \end{align}
-    \end{subequations}
-
 
 \end{document}
