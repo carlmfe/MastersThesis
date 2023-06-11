@@ -1,4 +1,4 @@
-from math import sqrt, sin, cos, tan, pi
+from math import sqrt, sin, cos, tan, atan, pi
 from cmath import phase, exp
 import numpy as np
 from scipy.linalg import eig, inv
@@ -93,15 +93,17 @@ if __name__ == "__main__":
     M2 = 5.
     mu = 1000.
     mZ = 91.1876
-    beta = pi * (12. / 32.)
+    tanbeta = 1e-3
+    # beta = pi * (12. / 32.)
+    beta = atan(tanbeta)
     sinbeta = sin(beta)
     cosbeta = cos(beta)
 
     # M_neutralino = np.array([
-    #     [-M1, 0, -1.j*cosbeta * sinW, 1.j*sinbeta * sinW],
-    #     [0, -M2, 1.j*cosbeta * cosW, -1.j*sinbeta * cosW],
-    #     [-1.j*cosbeta * sinW, 1.j*cosbeta * cosW, 0, -mu],
-    #     [1.j*sinbeta * sinW, -1.j*sinbeta * cosW, -mu, 0]
+    #     [-M1, 0, -1.j*cosbeta * sinW * mZ, 1.j*sinbeta * sinW * mZ],
+    #     [0, -M2, 1.j*cosbeta * cosW * mZ, -1.j*sinbeta * cosW * mZ],
+    #     [-1.j*cosbeta * sinW * mZ, 1.j*cosbeta * cosW * mZ, 0, -mu],
+    #     [1.j*sinbeta * sinW * mZ, -1.j*sinbeta * cosW * mZ, -mu, 0]
     # ])
 
     M_neutralino = np.array([
@@ -137,16 +139,17 @@ if __name__ == "__main__":
 
     for idx in range(len(masses)):
         if phase(masses[idx]) != 0.0:
-            N[idx] = N[idx] * exp(phase(masses[idx]) * 0.5j)
+            N[idx] = N[idx] * exp(-0.5j * phase(masses[idx]))
             masses[idx] = abs(masses[idx])
 
     sorted_idcs = np.argsort(masses)
-    masses = masses[sorted_idcs]
+    masses = np.array(masses[sorted_idcs], dtype=float)
     N = N[sorted_idcs]
 
     # print(N)
     # print(M_neutralino)
     # print(get_finite((N.T @ np.diag(masses) @ N).real))
+    print(np.diag(masses))
     print(get_finite(N @ M_neutralino @ N.T))
 
     # N = N.conj().T
