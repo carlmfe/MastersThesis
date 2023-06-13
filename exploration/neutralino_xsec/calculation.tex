@@ -1,6 +1,10 @@
 \documentclass[english,notitlepage]{article}
 
 \usepackage{overhead}
+\usepackage[style=verbose]{biblatex}
+
+\addbibresource{calculation.bib}
+
 
 
 \title{Leading Order Neutralino Calculation}
@@ -93,5 +97,42 @@
             C_{PP} & = \frac{1}{4} \pclosed{C^{L*}_i - C^{R*}_i}\pclosed{C^{L}_j - C^{R}_j}
         \end{align}
     \end{subequations}
+
+    The Fierz transformation matrix \(F\) is given by\footcite{Nieves:2003in}
+    \begin{align}
+        F = \frac{1}{4}
+        \begin{bmatrix}
+            1  & 1  & \frac{1}{2}  & -1 & 1  \\
+            4  & -2 & 0    & -2 & -4 \\
+            12 & 0    & -2 & 0    & 12 \\
+            -4 & -2 & 0    & -2 & 4  \\
+            1  & -1 & \frac{1}{2}  & 1  & 1
+        \end{bmatrix}
+    \end{align}
+    in the bilinear product basis
+    \begin{subequations}
+        \begin{align}
+            q_S(1234) &= \pclosed{\wbar{w}_1 w_2} \pclosed{\wbar{w}_3 w_4} \\
+            q_V(1234) &= \pclosed{\wbar{w}_1 \gamma^\mu w_2} \pclosed{\wbar{w}_3 \gamma_\mu w_4} \\
+            q_T(1234) &= \pclosed{\wbar{w}_1 \sigma^{\mu\nu} w_2} \pclosed{\wbar{w}_3 \sigma_{\mu\nu} w_4} \\
+            q_A(1234) &= \pclosed{\wbar{w}_1 \gamma^\mu \gamma^5 w_2} \pclosed{\wbar{w}_3 \gamma_\mu \gamma^5 w_4} \\
+            q_P(1234) &= \pclosed{\wbar{w}_1 \gamma^5 w_2} \pclosed{\wbar{w}_3 \gamma^5 w_4} \\
+        \end{align}
+    \end{subequations}
+    where a vector \(\vec{q}\) is given by
+    \begin{align}
+        \vec{q}(abcd) &= \sum_{i=1}^5 n_i \vec{e}_i,
+    \end{align}
+    for some coefficients \(n_i\) and with the canonical unit vectors \(\cclosed{\vec{e}_i} = \Big\{\begin{pmatrix} 1\\0\\\vdots \end{pmatrix}, \begin{pmatrix} 0\\1\\\vdots \end{pmatrix}, \ldots \Big\}\).
+    The Dirac quadrilinear \(q\) represents is found by the inner product
+    \begin{align}
+        \vec{q} \cdot \sum_{i=1}^5 q_{B_i}(abcd) \vec{e}_i,
+    \end{align}
+    where \(B_i = S, V, T, A, P\).
+
+    The Fierz transformation of the indices can be found by
+    \begin{align}
+        \vec{q}(1234) = F \vec{q}(1432)
+    \end{align}
 
 \end{document}
