@@ -77,51 +77,30 @@
     \begin{align}
         \tensor*[^{IJ}_{rs}]{C}{^{MN}_{tu}} & = \frac{1}{16} \tr\bclosed{\Gamma_{M,t} \Gamma_I^r \Gamma_{N,u} \Gamma_J^{s}}
     \end{align}
-
-
-\section{Factorisation}
-
-    \begin{align}
-        \nonumber
-          & \bclosed{\wbar{u}_i \pclosed{C^{L*}_i P_L + C^{R*}_i P_R} u_i} \bclosed{\wbar{v}_2 \pclosed{C^{L}_j P_L + C^R_j P_R} v_j}                       \\
-        \nonumber
-        = & C_{SS}\bclosed{\wbar{u}_i u_1} \bclosed{\wbar{v}_2 v_j} + C_{SP}\bclosed{\wbar{u}_i u_1} \bclosed{\wbar{v}_2 \gamma^5 v_j}                      \\
-          & + C_{PS}\bclosed{\wbar{u}_i \gamma^5 u_1} \bclosed{\wbar{v}_2 v_j} + C_{PP}\bclosed{\wbar{u}_i \gamma^5 u_1} \bclosed{\wbar{v}_2 \gamma^5 v_j},
-    \end{align}
-    where we have
-    \begin{subequations}
-        \begin{align}
-            C_{SS} & = \frac{1}{4} \pclosed{C^{L*}_i + C^{R*}_i}\pclosed{C^{L}_j + C^{R}_j}  \\
-            C_{SP} & = -\frac{1}{4} \pclosed{C^{L*}_i + C^{R*}_i}\pclosed{C^{L}_j - C^{R}_j} \\
-            C_{PS} & = -\frac{1}{4} \pclosed{C^{L*}_i - C^{R*}_i}\pclosed{C^{L}_j + C^{R}_j} \\
-            C_{PP} & = \frac{1}{4} \pclosed{C^{L*}_i - C^{R*}_i}\pclosed{C^{L}_j - C^{R}_j}
-        \end{align}
-    \end{subequations}
-
     The Fierz transformation matrix \(F\) is given by\footcite{Nieves:2003in}
     \begin{align}
         F = \frac{1}{4}
         \begin{bmatrix}
-            1  & 1  & \frac{1}{2}  & -1 & 1  \\
-            4  & -2 & 0    & -2 & -4 \\
-            12 & 0    & -2 & 0    & 12 \\
-            -4 & -2 & 0    & -2 & 4  \\
-            1  & -1 & \frac{1}{2}  & 1  & 1
+            1  & 1  & \frac{1}{2} & -1 & 1  \\
+            4  & -2 & 0           & -2 & -4 \\
+            12 & 0  & -2          & 0  & 12 \\
+            -4 & -2 & 0           & -2 & 4  \\
+            1  & -1 & \frac{1}{2} & 1  & 1
         \end{bmatrix}
     \end{align}
     in the bilinear product basis
     \begin{subequations}
         \begin{align}
-            q_S(1234) &= \pclosed{\wbar{w}_1 w_2} \pclosed{\wbar{w}_3 w_4} \\
-            q_V(1234) &= \pclosed{\wbar{w}_1 \gamma^\mu w_2} \pclosed{\wbar{w}_3 \gamma_\mu w_4} \\
-            q_T(1234) &= \pclosed{\wbar{w}_1 \sigma^{\mu\nu} w_2} \pclosed{\wbar{w}_3 \sigma_{\mu\nu} w_4} \\
-            q_A(1234) &= \pclosed{\wbar{w}_1 \gamma^\mu \gamma^5 w_2} \pclosed{\wbar{w}_3 \gamma_\mu \gamma^5 w_4} \\
-            q_P(1234) &= \pclosed{\wbar{w}_1 \gamma^5 w_2} \pclosed{\wbar{w}_3 \gamma^5 w_4} \\
+            q_S(1234) & = \pclosed{\wbar{w}_1 w_2} \pclosed{\wbar{w}_3 w_4}                                         \\
+            q_V(1234) & = \pclosed{\wbar{w}_1 \gamma^\mu w_2} \pclosed{\wbar{w}_3 \gamma_\mu w_4}                   \\
+            q_T(1234) & = \pclosed{\wbar{w}_1 \sigma^{\mu\nu} w_2} \pclosed{\wbar{w}_3 \sigma_{\mu\nu} w_4}         \\
+            q_A(1234) & = \pclosed{\wbar{w}_1 \gamma^\mu \gamma^5 w_2} \pclosed{\wbar{w}_3 \gamma_\mu \gamma^5 w_4} \\
+            q_P(1234) & = \pclosed{\wbar{w}_1 \gamma^5 w_2} \pclosed{\wbar{w}_3 \gamma^5 w_4}                       \\
         \end{align}
     \end{subequations}
     where a vector \(\vec{q}\) is given by
     \begin{align}
-        \vec{q}(abcd) &= \sum_{i=1}^5 n_i \vec{e}_i,
+        \vec{q}(abcd) & = \sum_{i=1}^5 n_i \vec{e}_i,
     \end{align}
     for some coefficients \(n_i\) and with the canonical unit vectors \(\cclosed{\vec{e}_i} = \Big\{\begin{pmatrix} 1\\0\\\vdots \end{pmatrix}, \begin{pmatrix} 0\\1\\\vdots \end{pmatrix}, \ldots \Big\}\).
     The Dirac quadrilinear \(q\) represents is found by the inner product
@@ -130,9 +109,41 @@
     \end{align}
     where \(B_i = S, V, T, A, P\).
 
-    The Fierz transformation of the indices can be found by
+    The Fierz transformation swapping the indices \(2 \leftrightarrow 4\) can be found by
     \begin{align}
         \vec{q}(1234) = F \vec{q}(1432)
+    \end{align}
+
+\section{Factorisation}
+
+    \begin{align}
+        \nonumber
+          & \bclosed{\wbar{u}_i \pclosed{C^{L*}_i P_L + C^{R*}_i P_R} u_1} \bclosed{\wbar{v}_2 \pclosed{C^{R}_j P_L + C^{L}_j P_R} v_j}                     \\
+        \nonumber
+        = & C_{SS}\bclosed{\wbar{u}_i u_1} \bclosed{\wbar{v}_2 v_j} + C_{SP}\bclosed{\wbar{u}_i u_1} \bclosed{\wbar{v}_2 \gamma^5 v_j}                      \\
+          & + C_{PS}\bclosed{\wbar{u}_i \gamma^5 u_1} \bclosed{\wbar{v}_2 v_j} + C_{PP}\bclosed{\wbar{u}_i \gamma^5 u_1} \bclosed{\wbar{v}_2 \gamma^5 v_j},
+    \end{align}
+    where we have
+    \begin{subequations}
+        \begin{align}
+            C_{SS} & = \frac{1}{4} \pclosed{C^{L*}_i + C^{R*}_i}\pclosed{C^{L}_j + C^{R}_j}  \\
+            C_{SP} & = \frac{1}{4} \pclosed{C^{L*}_i + C^{R*}_i}\pclosed{C^{L}_j - C^{R}_j}  \\
+            C_{PS} & = -\frac{1}{4} \pclosed{C^{L*}_i - C^{R*}_i}\pclosed{C^{L}_j + C^{R}_j} \\
+            C_{PP} & = -\frac{1}{4} \pclosed{C^{L*}_i - C^{R*}_i}\pclosed{C^{L}_j - C^{R}_j}
+        \end{align}
+    \end{subequations}
+
+    \begin{align}
+        \nonumber
+          & \bclosed{\wbar{u}_i \pclosed{C^{L*}_{\nino[i]\wtilde{q}_A q} P_L + C^{R*}_{\nino[i]\wtilde{q}_A q} P_R} u_1}
+        \bclosed{\wbar{v}_2 \pclosed{C^{R}_{\nino[j]\wtilde{q}_A q} P_L + C^{L}_{\nino[j]\wtilde{q}_A q} P_R} v_j}                                                                                                                                    \\
+        \nonumber
+        = & C^{L*}_{\nino[i]\wtilde{q}_A q}C^{R}_{\nino[j]\wtilde{q}_A q} \bclosed{\frac{1}{2} \pclosed{\wbar{u}_i P_L v_j} \pclosed{\wbar{v}_2 P_L u_1} + 3\pclosed{\wbar{u}_i \sigma^{\mu\nu} v_j} \pclosed{\wbar{v}_2 \sigma_{\mu\nu} P_L u_1} }   \\
+        \nonumber
+          & + C^{L*}_{\nino[i]\wtilde{q}_A q}C^{L}_{\nino[j]\wtilde{q}_A q} \bclosed{2 \pclosed{\wbar{u}_i \gamma^\mu P_L v_j} \pclosed{\wbar{v}_2 \gamma_\mu P_R u_1}}                                                                               \\
+        \nonumber
+          & + C^{R*}_{\nino[i]\wtilde{q}_A q}C^{R}_{\nino[j]\wtilde{q}_A q} \bclosed{2 \pclosed{\wbar{u}_i \gamma^\mu P_R v_j} \pclosed{\wbar{v}_2 \gamma_\mu P_L u_1}}                                                                               \\
+          & + C^{R*}_{\nino[i]\wtilde{q}_A q}C^{L}_{\nino[j]\wtilde{q}_A q} \bclosed{\frac{1}{2} \pclosed{\wbar{u}_i P_R v_j} \pclosed{\wbar{v}_2 P_R u_1} + 3\pclosed{\wbar{u}_i \sigma^{\mu\nu} v_j} \pclosed{\wbar{v}_2 \sigma_{\mu\nu} P_R u_1} }
     \end{align}
 
 \end{document}
