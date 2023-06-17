@@ -103,9 +103,9 @@
         \vec{q}(abcd) & = \sum_{i=1}^5 n_i \vec{e}_i,
     \end{align}
     for some coefficients \(n_i\) and with the canonical unit vectors \(\cclosed{\vec{e}_i} = \Big\{\begin{pmatrix} 1\\0\\\vdots \end{pmatrix}, \begin{pmatrix} 0\\1\\\vdots \end{pmatrix}, \ldots \Big\}\).
-    The Dirac quadrilinear \(q\) represents is found by the inner product
+    The Dirac quadrilinear \(\vec{q}\) represents is found by the sum
     \begin{align}
-        \vec{q} \cdot \sum_{i=1}^5 q_{B_i}(abcd) \vec{e}_i,
+        \sum_{i=0}^{5} n_i q_{B_i}(abcd),
     \end{align}
     where \(B_i = S, V, T, A, P\).
 
@@ -138,12 +138,12 @@
           & \bclosed{\wbar{u}_i \pclosed{C^{L*}_{\nino[i]\wtilde{q}_A q} P_L + C^{R*}_{\nino[i]\wtilde{q}_A q} P_R} u_1}
         \bclosed{\wbar{v}_2 \pclosed{C^{R}_{\nino[j]\wtilde{q}_A q} P_L + C^{L}_{\nino[j]\wtilde{q}_A q} P_R} v_j}                                                                                                                                    \\
         \nonumber
-        = & C^{L*}_{\nino[i]\wtilde{q}_A q}C^{R}_{\nino[j]\wtilde{q}_A q} \bclosed{\frac{1}{2} \pclosed{\wbar{u}_i P_L v_j} \pclosed{\wbar{v}_2 P_L u_1} + 3\pclosed{\wbar{u}_i \sigma^{\mu\nu} v_j} \pclosed{\wbar{v}_2 \sigma_{\mu\nu} P_L u_1} }   \\
+        = & C^{L*}_{\nino[i]\wtilde{q}_A q}C^{R}_{\nino[j]\wtilde{q}_A q} \bclosed{\frac{1}{2}\pclosed{\wbar{u}_i P_L v_j} \pclosed{\wbar{v}_2 P_L u_1} + \frac{1}{8}\pclosed{\wbar{u}_i \sigma^{\mu\nu} v_j} \pclosed{\wbar{v}_2 \sigma_{\mu\nu} P_L u_1} }   \\
         \nonumber
-          & + C^{L*}_{\nino[i]\wtilde{q}_A q}C^{L}_{\nino[j]\wtilde{q}_A q} \bclosed{2 \pclosed{\wbar{u}_i \gamma^\mu P_L v_j} \pclosed{\wbar{v}_2 \gamma_\mu P_R u_1}}                                                                               \\
+          & + C^{L*}_{\nino[i]\wtilde{q}_A q}C^{L}_{\nino[j]\wtilde{q}_A q} \bclosed{\frac{1}{2}\pclosed{\wbar{u}_i \gamma^\mu P_R v_j} \pclosed{\wbar{v}_2 \gamma_\mu P_L u_1}}                                                                               \\
         \nonumber
-          & + C^{R*}_{\nino[i]\wtilde{q}_A q}C^{R}_{\nino[j]\wtilde{q}_A q} \bclosed{2 \pclosed{\wbar{u}_i \gamma^\mu P_R v_j} \pclosed{\wbar{v}_2 \gamma_\mu P_L u_1}}                                                                               \\
-          & + C^{R*}_{\nino[i]\wtilde{q}_A q}C^{L}_{\nino[j]\wtilde{q}_A q} \bclosed{\frac{1}{2} \pclosed{\wbar{u}_i P_R v_j} \pclosed{\wbar{v}_2 P_R u_1} + 3\pclosed{\wbar{u}_i \sigma^{\mu\nu} v_j} \pclosed{\wbar{v}_2 \sigma_{\mu\nu} P_R u_1} }
+          & + C^{R*}_{\nino[i]\wtilde{q}_A q}C^{R}_{\nino[j]\wtilde{q}_A q} \bclosed{\frac{1}{2}\pclosed{\wbar{u}_i \gamma^\mu P_L v_j} \pclosed{\wbar{v}_2 \gamma_\mu P_R u_1}}                                                                               \\
+          & + C^{R*}_{\nino[i]\wtilde{q}_A q}C^{L}_{\nino[j]\wtilde{q}_A q} \bclosed{\frac{1}{2}\pclosed{\wbar{u}_i P_R v_j} \pclosed{\wbar{v}_2 P_R u_1} + \frac{1}{8}\pclosed{\wbar{u}_i \sigma^{\mu\nu} v_j} \pclosed{\wbar{v}_2 \sigma_{\mu\nu} P_R u_1} }
     \end{align}
 
 \end{document}
