@@ -11,6 +11,11 @@
 \begin{document}
 \maketitle
 
+\begin{abstract}
+    \noindent
+    In this document, I derive how to construct the fermion interaction Lagrangian from kinetic and Yukawa terms of the superlagrangian. This is then applied to the MSSM superlagrangian to get the Feynman rules for neutralino interaction with the SM \(Z\)-boson and quark/squark pairs.
+\end{abstract}
+
 \section{Superfields}
     A left-handed scalar superfield $\Phi$ can be written out in terms of component
     fields as\footnote{Parentheses are used to clarify Weyl spinor contraction.}
@@ -34,7 +39,7 @@
     \end{align}
     where $V_\mu$ is a real vector field, $\lambda$ is a left-handed Weyl spinor and $D$ is a (auxiliary) complex scalar field. The $\partial_\mu (A-A^*)$-term represents the gauge freedom remaining in the choice of
     supergauge after choosing Wess-Zumino gauge, and can be ignored when working
-    out the interaction terms. For the remainder of this document, vector superfields will be assumed to be in Wess-Zumino gauge.
+    out the interaction terms. I note that this gauge implies that no powers of the vector superfield above 2 are non-zero because of the Grassmann content. For the remainder of this document, vector superfields will be assumed to be in Wess-Zumino gauge.
 
 \section{MSSM Superfields}
     For completeness, I list here the relevant superfields containing the
@@ -69,7 +74,7 @@
     \end{table}
 
     \subsection{Neutralino Fields}
-        Letting $\Psi_{\nino} = \pclosed{\bino, \wino, \hinou, \hinod}$ denote a
+        Letting $\Psi_{\nino} = \pclosed{\bino, \wino, \hinod, \hinou}$ denote a
         vector\footnote{I use row vector notation here for convenience. In equations
             this is understood to be a column vector.} of the fermion field superpartners
         in the $B^0$ and $W^0$ vector superfields and the $H^0_{u/d}$ scalar superfields --- the
@@ -77,7 +82,8 @@
         \begin{align}
             \nino = \pclosed{\nino[1], \nino[2], \nino[3], \nino[4]} = N \Psi_{\nino},
         \end{align}
-        where $N$ is a unitary matrix diagonalising the neutralino mass matrix $M_{\nino\text{-mass}}$. Thus, the neutralino interactions are found in terms in the superlagrangian that include the vector superfields $B^0$ and $W^0$, and the scalar superfields $H^0_{u/d}$. Translating from the $\Psi_{\nino}$-basis to the $\nino$-basis, we have that
+        where $N$ is a unitary matrix diagonalising the neutralino mass matrix $M_{\nino\text{-mass}}$. \(N\) can be chosen such that the neutralino masses are real and positive.
+        The neutralino interactions terms are then found in terms in the superlagrangian that include the vector superfields $B^0$ and $W^0$, and the scalar superfields $H^0_{u/d}$. Translating from the $\Psi_{\nino}$-basis to the $\nino$-basis, we have that
         \begin{align}
             \bino = N_{i1}^* \nino[i],\quad \wino = N_{i2}^* \nino[i],\quad \hinod = N_{i3}^* \nino[i],\quad \hinou = N_{i4}^* \nino[i],
         \end{align}
@@ -164,7 +170,7 @@
                 supplying the right-handed part has the opposite sign charge such that
                 $\Phi^\dag_R$ and $\Phi_L$ have the same sign.} where $Q$ is the electric
             charge of the fermion, and $I^3$ is the weak isospin; either $\pm \frac{1}{2}$
-            for the superfields supplying left-handed fermions and 0 for the superfields
+            for the superfields supplying left-handed fermions or 0 for the superfields
             supplying the right-handed ones. Only the left-handed field couples to the
             ${SU(2)}_L$ gauge group. Thus, the bino and wino interaction with a pair of
             MSSM fermions formed from a superfield doublet $F = \begin{pmatrix} f_L^+ \\ f_L^- \end{pmatrix}$ and the superfields $f_R^\pm$ are
@@ -177,34 +183,42 @@
             \end{align}
 
             To get the Lagrangian on a familiar form in terms of Dirac spinors, I will
-            define the following fields, built from left- and right-handed Weyl spinors:
+            define the following fields in a familiar way. For clarity, I suppress the \(\pm\) in the fields, and rather write the final Lagrangian on a form which generalises to both of them.
             \begin{align}
                 f = \begin{pmatrix}
                         f_L \\ \wbar{f}_R
-                    \end{pmatrix},\quad \wtilde{B}^0_D = \begin{pmatrix}
-                                                             \wtilde{B}^0 \\ \wbar{\wtilde{B}}^0
-                                                         \end{pmatrix},\quad \wtilde{W}^0_D = \begin{pmatrix}
-                                                                                                  \wtilde{W}^0 \\ \wbar{\wtilde{W}}^0
-                                                                                              \end{pmatrix},
+                    \end{pmatrix},
+                \quad
+                \wtilde{B}^0_D = \begin{pmatrix}
+                                     \wtilde{B}^0 \\ \wbar{\wtilde{B}}^0
+                                 \end{pmatrix},
+                \quad
+                \wtilde{W}^0_D = \begin{pmatrix}
+                                     \wtilde{W}^0 \\ \wbar{\wtilde{W}}^0
+                                 \end{pmatrix},
             \end{align}
             with conjugates
             \begin{align}
                 \wbar{f} = \begin{pmatrix}
                                f_R \\ \wbar{f}_L
-                           \end{pmatrix}^T,\quad \wbar{\wtilde{B}}^0_D = \begin{pmatrix}
-                                                                             \wtilde{B}^0 \\ \wbar{\wtilde{B}}^0
-                                                                         \end{pmatrix}^T,\quad \wbar{\wtilde{W}}^0_D = \begin{pmatrix}
-                                                                                                                           \wtilde{W}^0 \\ \wbar{\wtilde{W}}^0
-                                                                                                                       \end{pmatrix}^T,
+                           \end{pmatrix}^T,
+                \quad
+                \wbar{\wtilde{B}}^0_D = \begin{pmatrix}
+                                            \wtilde{B}^0 \\ \wbar{\wtilde{B}}^0
+                                        \end{pmatrix}^T,
+                \quad
+                \wbar{\wtilde{W}}^0_D = \begin{pmatrix}
+                                            \wtilde{W}^0 \\ \wbar{\wtilde{W}}^0
+                                        \end{pmatrix}^T.
             \end{align}
-            Suppressing $\pm$ in the field names and inserting the isospin $I^3$ for the factors of $\pm\frac{1}{2}$, we have the ordinary Lagrangian term
+            Inserting the isospin $I^3_f$ for the factors of $\pm\frac{1}{2}$, we have the ordinary Lagrangian term
             \begin{align}
                 \label[eq]{f-bino-wino-terms}
                 \nonumber
                 \L_{f\bino\wino} = -\sqrt{2} g & \Big\{ \wbar{\wtilde{B}}^0_D \bclosed{ \pclosed{Q_f - I^3_f}t_W \tilde{f}_L^* P_L - Q_f t_W \tilde{f}_R^* P_R } f \\
                                                & + \wbar{\wtilde{W}}^0_D \pclosed{I^3_f \tilde{f}_L^* P_L} f + \cc \Big\},
             \end{align}
-            after integrating over the Grassmann variables.
+            after trivially integrating over the Grassmann variables.
             Changing to the $\nino[i]$-basis we have
             \begin{align}
                 \label[eq]{nino-sf-f-terms}
@@ -294,8 +308,8 @@
                     \(C_{\nino[i] \wtilde{f}_A f}^{L*}\) & \(\pclosed{\delta^A_1 c_{\wtilde{f}} + \delta^A_2 s_{\wtilde{f}}} \bclosed{\pclosed{Q_f-I^3_f} t_W N_{i1} + I^3_f N_{i2}}\) \\
                     \(C_{\nino[i] \wtilde{f}_A f}^{R*}\) & \(\pclosed{\delta^A_1 s_{\wtilde{f}}^* - \delta^A_2 c_{\wtilde{f}}^*} Q_f t_W N_{i1}\)                                      \\
                     \hline
-                    \(O^{\prime\prime L}_{ij}\)          & \(\frac{1}{2} \pclosed{N_{i4} N_{j4}^* - N_{i3} N_{j3}^*}\)                                                                \\
-                    \(O^{\prime\prime R}_{ij}\)          & \(-\frac{1}{2} \pclosed{N_{i4}^* N_{j4} - N_{i3}^* N_{j3}}\)                                                               \\
+                    \(O^{\prime\prime L}_{ij}\)          & \(\frac{1}{2} \pclosed{N_{i4} N_{j4}^* - N_{i3} N_{j3}^*}\)                                                                 \\
+                    \(O^{\prime\prime R}_{ij}\)          & \(-\frac{1}{2} \pclosed{N_{i4}^* N_{j4} - N_{i3}^* N_{j3}}\)                                                                \\
                     \hline
                 \end{tabular}
             \end{table}
@@ -341,7 +355,7 @@
             (\psi_R \sigma^\mu \wbar{\phi}_R)        & = \wbar{\Psi} \gamma^\mu P_R \Phi
         \end{align}
     \end{subequations}
-    Using equation \cref{app:eq:weyl3}, we get the Majorana Dirac spinor relation
+    Using equation \cref{app:eq:weyl3}, we get the Dirac spinor relation between two Majorana spinors \(\Psi_M, \Phi_M\)
     \begin{align}
         \wbar{\Psi}_M \gamma^\mu P_{L/R} \Phi_M = -\wbar{\Phi}_M \gamma^\mu P_{R/L} \Psi_M
     \end{align}
