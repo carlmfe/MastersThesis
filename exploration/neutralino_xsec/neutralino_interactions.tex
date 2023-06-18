@@ -13,17 +13,22 @@
 
 \begin{abstract}
     \noindent
-    In this document, I derive how to construct the fermion interaction Lagrangian from kinetic and Yukawa terms of the superlagrangian. This is then applied to the MSSM superlagrangian to get the Feynman rules for neutralino interaction with the SM \(Z\)-boson and quark/squark pairs.
+    In this document, I derive how to construct the fermion interaction Lagrangian from kinetic and Yukawa terms of the superlagrangian.
+    This is then applied to the MSSM superlagrangian to get the Feynman rules for neutralino interaction with the SM \(Z\)-boson and quark/squark pairs.
 \end{abstract}
 
 \section{Superfields}
+    Here I list some general expansions of fields over superspace, \textit{superfield}.
+    The fields are expanded in the superspace coordinates \(\theta_{A=1,2}, \wbar{\theta}^{\dot{A}=1,2}\) that are four Grassmann coordinates imposed in a spinor structure with one left-handed Weyl spinor and a right-handed Weyl spinor.
+
     A left-handed scalar superfield $\Phi$ can be written out in terms of component
     fields as\footnote{Parentheses are used to clarify Weyl spinor contraction.}
     \begin{align}
         \Phi = A + i(\theta\sigma^\mu\wbar\theta) \partial_\mu A - \frac{1}{4} (\theta\theta)(\wbar\theta\wbar\theta) \dA A +
         \sqrt{2} (\theta\psi) - \frac{i}{\sqrt{2}} (\theta\theta) (\partial_\mu \psi \sigma^\mu \wbar\theta) + (\theta\theta) F,
     \end{align}
-    where $A, F$ are complex scalar fields and $\psi$ is a left-handed Weyl spinor. $\Psi$ has a right-handed scalar superfield compliment found by conjugating it:
+    where $A, F$ are complex scalar fields and $\psi$ is a left-handed Weyl spinor field.
+    $\Phi$ has a right-handed scalar superfield compliment found by conjugating it:
     \begin{align}
         \Phi^\dag = A^* - i(\theta\sigma^\mu\wbar\theta) \partial_\mu A^* - \frac{1}{4} (\theta\theta)(\wbar\theta\wbar\theta) \dA A^* +
         \sqrt{2} (\wbar\theta\wbar\psi) + \frac{i}{\sqrt{2}} (\wbar\theta\wbar\theta)
@@ -37,14 +42,17 @@
         (\wbar\theta\wbar\theta)(\theta\lambda) + \frac{1}{2}
         (\theta\theta)(\wbar\theta\wbar\theta) D,
     \end{align}
-    where $V_\mu$ is a real vector field, $\lambda$ is a left-handed Weyl spinor and $D$ is a (auxiliary) complex scalar field. The $\partial_\mu (A-A^*)$-term represents the gauge freedom remaining in the choice of
+    where $V_\mu$ is a real vector field, $\lambda$ is a left-handed Weyl spinor field and $D$ is a (auxiliary) complex scalar field.
+    The $\partial_\mu (A-A^*)$-term represents the gauge freedom remaining in the choice of
     supergauge after choosing Wess-Zumino gauge, and can be ignored when working
-    out the interaction terms. I note that this gauge implies that no powers of the vector superfield above 2 are non-zero because of the Grassmann content. For the remainder of this document, vector superfields will be assumed to be in Wess-Zumino gauge.
+    out the interaction terms.
+    I note that this gauge implies that no powers of the vector superfield above 2 are non-zero because of the Grassmann content.
+    For the remainder of this document, vector superfields will be assumed to be in Wess-Zumino gauge.
 
 \section{MSSM Superfields}
-    For completeness, I list here the relevant superfields containing the
-    neutralinos and fields that couple to them. These include the $SU(2)_L$
-    superfield doublets $H_u = \begin{pmatrix} H_u^+ \\ H_u^0 \end{pmatrix}$, $H_d = \begin{pmatrix} H_d^0 \\ H_d^- \end{pmatrix}$, $L_i = \begin{pmatrix} l_i \\ \nu_i \end{pmatrix}$ and $Q_i = \begin{pmatrix} u_i \\ d_i \end{pmatrix}$, and $SU(2)_L$ singlet superfields $E_i$, $U_i$ and $D_i$, where \(i=1,2,3\) enumerates the three generations of leptons/quarks. There are also the vector superfields $B^0$ for the $U(1)_Y$ gauge group, and $W^0$ and $W^\pm$ for the $SU(2)_L$ gauge group.
+    For completeness, I list here the relevant superfields containing the neutralinos and fields that couple to them.
+    These include the $SU(2)_L$ superfield doublets $H_u = \begin{pmatrix} H_u^+ \\ H_u^0 \end{pmatrix}$, $H_d = \begin{pmatrix} H_d^0 \\ H_d^- \end{pmatrix}$, $L_i = \begin{pmatrix} l_i \\ \nu_i \end{pmatrix}$ and $Q_i = \begin{pmatrix} u_i \\ d_i \end{pmatrix}$, and $SU(2)_L$ singlet superfields $E_i$, $U_i$ and $D_i$, where \(i=1,2,3\) enumerates the three generations of leptons/quarks.
+    There are also the vector superfields $B^0$ for the $U(1)_Y$ gauge group, and $W^0$ and $W^\pm$ for the $SU(2)_L$ gauge group.
     \begin{table}[h!]
         \label[tab]{tab:MSSM-fields}
         \centering
@@ -70,20 +78,21 @@
             $W^\pm$     & $W^\pm_\mu$         & $\wtilde{W}^\pm$     & $D_{W^\pm}$     \\
             \hline
         \end{tabular}
-        \caption{Table of the MSSM superfields and their component field names. Note that the fermion fields are left-handed Weyl spinors, in spite of any \(L\) or \(R\) in the subscript. The conjugate superfields changes these to right-handed Weyl spinors.}
+        \caption{Table of the MSSM superfields and their component field names.Note that the fermion fields are left-handed Weyl spinors, in spite of any \(L\) or \(R\) in the subscript.
+            The conjugate superfields changes these to right-handed Weyl spinors.}
     \end{table}
 
     \subsection{Neutralino Fields}
-        Letting $\Psi_{\nino} = \pclosed{\bino, \wino, \hinod, \hinou}$ denote a
-        vector\footnote{I use row vector notation here for convenience. In equations
-            this is understood to be a column vector.} of the fermion field superpartners
-        in the $B^0$ and $W^0$ vector superfields and the $H^0_{u/d}$ scalar superfields --- the
-        neutralino mass eigenstates are given by
+        Letting $\Psi_{\nino} = \pclosed{\bino, \wino, \hinod, \hinou}$ denote a vector\footnote{I use row vector notation here for convenience.
+            In equations this is understood to be a column vector.}
+        of the fermion field superpartners in the $B^0$ and $W^0$ vector superfields and the $H^0_{u/d}$ scalar superfields --- the neutralino mass eigenstates are given by
         \begin{align}
             \nino = \pclosed{\nino[1], \nino[2], \nino[3], \nino[4]} = N \Psi_{\nino},
         \end{align}
-        where $N$ is a unitary matrix diagonalising the neutralino mass matrix $M_{\nino\text{-mass}}$. \(N\) can be chosen such that the neutralino masses are real and positive.
-        The neutralino interactions terms are then found in terms in the superlagrangian that include the vector superfields $B^0$ and $W^0$, and the scalar superfields $H^0_{u/d}$. Translating from the $\Psi_{\nino}$-basis to the $\nino$-basis, we have that
+        where $N$ is a unitary matrix diagonalising the neutralino mass matrix $M_{\nino\text{-mass}}$.
+        \(N\) can be chosen such that the neutralino masses are real and positive.
+        The neutralino interactions terms are then found in terms in the superlagrangian that include the vector superfields $B^0$ and $W^0$, and the scalar superfields $H^0_{u/d}$.
+        Translating from the $\Psi_{\nino}$-basis to the $\nino$-basis, we have that
         \begin{align}
             \bino = N_{i1}^* \nino[i],\quad \wino = N_{i2}^* \nino[i],\quad \hinod = N_{i3}^* \nino[i],\quad \hinou = N_{i4}^* \nino[i],
         \end{align}
@@ -94,20 +103,18 @@
     \subsection{Neutralino interactions}
         The neutralino interactions appear in the kinetic terms of all the superfields
         that couple to the $U(1)_Y$ and $SU(2)_L$ gauge groups, and the Yukawa terms
-        that include the Higgs fields in the superpotential. The exception is neutralino interaction with the charginos, which is found in the supersymmetric field strength term.
+        that include the Higgs fields in the superpotential.
+        The exception is neutralino interaction with the charginos, which is found in the supersymmetric field strength term.
 
 \section{Interaction Lagrangian}
     The ordinary interaction Lagrangian is found from integrating over the
-    Grassmann variables of the superlagrangian. Only terms containing all four
-    Grassmann variables survive this, so we only need to look for the
-    superlagrangian terms that include all of
-    $(\theta\theta)(\wbar\theta\wbar\theta)$.\footnote{Terms with an insufficient
-        amount of $\theta$s are ignored in the following.} Looking first at a general
-    kinetic term of a left-handed scalar superfield \(\Phi\) coupled to a $U(1)$ vector superfield \(V\), it has the form\footcite{Binetruy:2006ad}
+    Grassmann variables of the superlagrangian.
+    Only terms containing all four Grassmann variables survive this, so we only need to look for the superlagrangian terms that include all of $(\theta\theta)(\wbar\theta\wbar\theta)$.\footnote{Terms with an insufficient amount of $\theta$s are ignored in the following.}
+    Looking first at a general kinetic term of a left-handed scalar superfield \(\Phi\) coupled to a $U(1)$ vector superfield \(V\), it has the form\footcite{Binetruy:2006ad}
     \begin{align}
         \msub{\L}{kin} = \Phi^\dag \exp{2qV} \Phi.
     \end{align}
-    The interactions that include the $\lambda$-fields of the vector superfield can be found as
+    Using Weyl identities from \cref{app:sec:weyl}, the interactions that include the $\lambda$-fields of the vector superfield can be found as
     \begin{align}
         \label[eq]{eq:lambda-terms}
         \nonumber
@@ -142,9 +149,8 @@
 
     \subsection{Neutralino interaction terms}
         \subsubsection{Gaugino parts}
-            First, I will look at the bino and wino interactions. From electroweak
-            unification, we have that the coupling $g$ and $g'$ of the $W^a$ and $B^0$
-            superfields respectively are related by
+            First, I will look at the bino and wino interactions.
+            From electroweak unification, we have that the coupling $g$ and $g'$ of the $W^a$ and $B^0$ superfields respectively are related by
             \begin{align}
                 g' = g t_W,
             \end{align}
@@ -164,16 +170,11 @@
             \end{align}
             where we recognise $I^3_\pm = \pm \frac{1}{2}$ as the eigenvalues of $\frac{1}{2}\sigma_3$.
 
-            In the MSSM, the Dirac fermions are made up from two scalar superfields,
-            supplying the left- and right-handed components separately. Both superfields
-            couple to the ${U(1)}_Y$ gauge group with charge $Q-I^3$,\footnote{The field
-                supplying the right-handed part has the opposite sign charge such that
-                $\Phi^\dag_R$ and $\Phi_L$ have the same sign.} where $Q$ is the electric
-            charge of the fermion, and $I^3$ is the weak isospin; either $\pm \frac{1}{2}$
-            for the superfields supplying left-handed fermions or 0 for the superfields
-            supplying the right-handed ones. Only the left-handed field couples to the
-            ${SU(2)}_L$ gauge group. Thus, the bino and wino interaction with a pair of
-            MSSM fermions formed from a superfield doublet $F = \begin{pmatrix} f_L^+ \\ f_L^- \end{pmatrix}$ and the superfields $f_R^\pm$ are
+            In the MSSM, the Dirac fermions are made up from two scalar superfields, supplying the left- and right-handed components separately.
+            Both superfields couple to the ${U(1)}_Y$ gauge group with charge $Q-I^3$,\footnote{The field supplying the right-handed part has the opposite sign charge such that $\Phi^\dag_R$ and $\Phi_L$ have the same sign.}
+            where $Q$ is the electric charge of the fermion, and $I^3$ is the weak isospin; either $\pm \frac{1}{2}$ for the superfields supplying left-handed fermions or 0 for the superfields supplying the right-handed ones.
+            Only the left-handed field couples to the ${SU(2)}_L$ gauge group.
+            Thus, the bino and wino interaction with a pair of MSSM fermions formed from a superfield doublet $F = \begin{pmatrix} f_L^+ \\ f_L^- \end{pmatrix}$ and the superfields $f_R^\pm$ are
             \begin{align}
                 \label[eq]{F-nino-terms}
                 \nonumber
@@ -182,8 +183,8 @@
                                                                                                                        & - Q_+t_W (\wbar{\wtilde{B}}^0\wbar{f}_R^+)\wtilde{f}_R^{+*} - Q_-t_W (\wbar{\wtilde{B}}^0\wbar{f}_R^-)\wtilde{f}_R^{-*} + \cc \Big\}.
             \end{align}
 
-            To get the Lagrangian on a familiar form in terms of Dirac spinors, I will
-            define the following fields in a familiar way. For clarity, I suppress the \(\pm\) in the fields, and rather write the final Lagrangian on a form which generalises to both of them.
+            To get the Lagrangian on a familiar form in terms of Dirac spinors, I will define the following fields in a familiar way.
+            For clarity, I suppress the \(\pm\) in the fields, and rather write the final Lagrangian on a form which generalises to both of them.
             \begin{align}
                 f = \begin{pmatrix}
                         f_L \\ \wbar{f}_R
@@ -317,7 +318,7 @@
 
 
             \appendix
-\section{Weyl identities}
+\section{Weyl identities}\label[app]{app:sec:weyl}
     \begin{align}
         \label[eq]{app:eq:weyl1}
         (\theta\psi)(\theta\chi) & = -\frac{1}{2} (\theta\theta) (\psi\chi)
@@ -331,7 +332,7 @@
         (\wbar\theta\wbar\psi) (\theta\sigma^\mu\wbar\theta) (\theta\psi) = \frac{1}{4} (\theta\theta) (\wbar\theta\wbar\theta) (\psi\sigma^\mu\wbar\psi)
     \end{align}
 
-\section{Weyl spinors to Dirac spinors}
+\section{Weyl spinors to Dirac spinors}\label[app]{app:sec:weyl2dirac}
     We can build a Dirac spinor $\Psi$ using a left-handed Weyl spinor $\psi_L$ and a right-handed Weyl spinor $\wbar{\psi}_R$ such that
     \begin{align}
         \Psi = \begin{pmatrix} \psi_L \\ \wbar{\psi}_R \end{pmatrix}.
@@ -346,7 +347,8 @@
         \wbar{\Psi} \equiv \Psi^\dag \gamma^0 = \begin{pmatrix} \psi_R \\ \wbar{\psi}_L \end{pmatrix}^T.
     \end{align}
     A Majorana fermion is constructed from just one Weyl spinor, such that $\psi_L = \psi_R \equiv \psi$.
-    The projection operators $P_{L/R}$ project out the left-handed or right-handed Weyl spinors from the Dirac spinor. The following Weyl spinor products can then be rewritten in terms of Dirac spinors:
+    The projection operators $P_{L/R}$ project out the left-handed or right-handed Weyl spinors from the Dirac spinor.
+    The following Weyl spinor products can then be rewritten in terms of Dirac spinors:
     \begin{subequations}
         \begin{align}
             (\psi_{R} \phi_{L})                      & = \wbar{\Psi} P_L \Phi            \\
