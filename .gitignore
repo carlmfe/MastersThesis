@@ -2,6 +2,7 @@
 sources/
 project_desciption/
 .vscode/
+__pycache__/
 
 % File extensions to ignore
 *.zip
