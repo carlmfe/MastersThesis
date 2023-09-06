@@ -1,13 +1,17 @@
-from sympy import expand, nsimplify, simplify, collect, pprint
+from sympy import expand, nsimplify, simplify, factor, collect, pprint
 from utils import EPSILON
 
 
-def prettyprint(expression):
+def prettyprint(expression, pretty=True, deepfactor=True, replace=None):
+    if pretty:
+        result = prettify(expression, deepfactor=deepfactor, replace=replace)
+    else:
+        result = expression
+    pprint(result)
+
+
+def prettify(expression, deepfactor=True, replace=None):
     result = expression
-    try:
-        result = expand(result)
-    except:
-        print("Could not expand output.")
     try:
         result = nsimplify(result, tolerance=EPSILON, rational=True)
     except:
@@ -16,7 +20,15 @@ def prettyprint(expression):
         result = simplify(result, tolerance=EPSILON, rational=True)
     except:
         print("Could not simplify output.")
-    pprint(result)
+    if deepfactor:
+        try:
+            result = factor(result, deep=True)
+        except:
+            print("Could not factor output.")
+    if replace is not None:
+        result = result.replace(*replace)
+        result = prettify(result, deepfactor=deepfactor)
+    return result
 
 
 def collect_quadratic(expression, symbols):
