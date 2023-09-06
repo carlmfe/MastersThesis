@@ -1,0 +1,218 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% writeLaTeX Example: A quick guide to LaTeX
+%
+% Source: Dave Richeson (divisbyzero.com), Dickinson College
+% 
+% A one-size-fits-all LaTeX cheat sheet. Kept to two pages, so it 
+% can be printed (double-sided) on one piece of paper
+% 
+% Feel free to distribute this example, but please keep the referral
+% to divisbyzero.com
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% How to use writeLaTeX: 
+%
+% You edit the source code here on the left, and the preview on the
+% right shows you the result within a few seconds.
+%
+% Bookmark this page and share the URL with your co-authors. They can
+% edit at the same time!
+%
+% You can upload figures, bibliographies, custom classes and
+% styles using the files menu.
+%
+% If you're new to LaTeX, the wikibook is a great place to start:
+% http://en.wikibooks.org/wiki/LaTeX
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper]{article}
+\usepackage{amssymb,amsmath,amsthm,amsfonts}
+\usepackage{dsfont}
+\usepackage{multicol,multirow}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage[landscape]{geometry}
+\usepackage[colorlinks=true,citecolor=blue,linkcolor=blue]{hyperref}
+
+\newcommand{\pclosed}[1]{\left(#1\right)}
+\newcommand{\bclosed}[1]{\left[#1\right]}
+\newcommand{\cclosed}[1]{\left\{#1\right\}}
+\newcommand{\eye}{\mathds{1}}
+\newcommand{\trace}[1]{\operatorname{Tr}\cclosed{#1}}
+
+
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+    { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+	{\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+	}
+
+\pagestyle{empty}
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\makeatother
+\setcounter{secnumdepth}{0}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+% -----------------------------------------------------------------------
+
+\title{Weyl to go}
+
+\begin{document}
+
+\raggedright
+\footnotesize
+
+\begin{center}
+    \Large{\textbf{Weyl to go}} \\
+\end{center}
+\begin{multicols}{3}
+    \setlength{\premulticols}{1pt}
+    \setlength{\postmulticols}{1pt}
+    \setlength{\multicolsep}{1pt}
+    \setlength{\columnsep}{2pt}
+
+    \section{Weyl spinor definitions}
+        \begin{align*}
+            \psi_A = \begin{pmatrix} \psi_1 \\ \psi_2 \end{pmatrix},\quad \bar{\psi}_A = \begin{pmatrix} \bar{\psi}_1 \\ \bar{\psi}_2 \end{pmatrix}
+        \end{align*}
+        \begin{align*}
+            \psi^A               & = \epsilon^{AB}\psi_B = \begin{pmatrix} \psi_2 \\ -\psi_1 \end{pmatrix}^T                               \\
+            \bar{\psi}^{\dot{A}} & = \epsilon^{\dot{A}\dot{B}}\bar{\psi}_B = \begin{pmatrix} \bar{\psi}_2 \\ -\bar{\psi}_1 \end{pmatrix}^T
+        \end{align*}
+        \begin{align*}
+            \epsilon_{AB} & = \epsilon_{\dot{A}\dot{B}} = \begin{pmatrix}
+                                                              0 & -1 \\ 1 & 0
+                                                          \end{pmatrix} \\
+            \epsilon^{AB} & = \epsilon^{\dot{A}\dot{B}} = \begin{pmatrix}
+                                                              0 & 1 \\ -1 & 0
+                                                          \end{pmatrix}
+        \end{align*}
+        \begin{align*}
+            \pclosed{\psi_A}^\dagger = \bar{\psi}_{\dot{A}}
+        \end{align*}
+        \begin{align*}
+            \psi \chi             & \equiv \psi^A \chi_A
+            = \psi_2\chi_1 - \psi_1\chi_2
+            = \psi^2\chi^1 - \psi^1\chi^2                                            \\
+            \bar{\psi} \bar{\chi} & \equiv \bar{\psi}_{\dot{A}} \bar{\chi}^{\dot{A}}
+            = -\bar{\psi}_2\bar{\chi}_1 + \bar{\psi}_1\bar{\chi}_2
+            = -\bar{\psi}^2\bar{\chi}^1 + \bar{\psi}^1\bar{\chi}^2
+        \end{align*}
+        \begin{align*}
+            \psi^2       & = -2\psi_1\psi_2            \\
+            \bar{\psi}^2 & = 2\bar{\psi}_1\bar{\psi}_2
+        \end{align*}
+        \begin{align*}
+            \sigma^\mu       & = \pclosed{\eye, \vec{\sigma}}                                          \\
+            \bar{\sigma}^\mu & = \pclosed{\eye, -\vec{\sigma}}                                         \\
+            \sigma^{\mu\nu}  & = \frac{i}{4}(\sigma^\mu \bar{\sigma}^\nu - \sigma^\nu\bar{\sigma}^\mu)
+        \end{align*}
+        \begin{align*}
+            \sigma_1 = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix},\quad
+            \sigma_2 = \begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix},\quad
+            \sigma_3 = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}
+        \end{align*}
+
+    \section{Weyl spinor contractions}
+        \begin{align*}
+            \eta\psi                                                    & = \psi\eta                                                                      \\
+            \bar{\eta}\bar{\psi}                                        & = \bar{\psi}\bar{\eta}                                                          \\
+            \pclosed{\eta\psi}^\dagger                                  & = \bar{\psi}\bar{\eta}                                                          \\
+            \pclosed{\eta\psi}\pclosed{\eta\phi}                        & = -\frac{1}{2} \pclosed{\eta\eta}\pclosed{\psi\phi}                             \\
+            \eta\sigma^\mu\bar{\psi}                                    & = -\bar{\psi} \bar{\sigma}^\mu \eta                                             \\
+            (\sigma^\mu \bar{\eta})_A (\eta\sigma^\nu\bar{\eta})        & = \frac{1}{2}  g^{\mu\nu} \eta_A (\bar{\eta}\bar{\eta})                         \\
+            (\eta\sigma^\mu\bar{\eta})(\eta\sigma^\nu\bar{\eta})        & = \frac{1}{2} (\eta\eta)(\bar{\eta}\bar{\eta})                                  \\
+            (\eta\sigma^\mu \partial_\mu \bar{\psi}) (\eta\psi)         & = -\frac{1}{2} (\psi\sigma^\mu \partial_\mu \bar{\psi})(\eta\eta)               \\
+            (\partial_\mu \sigma^\mu \bar{\eta}) (\bar{\eta}\bar{\psi}) & = -\frac{1}{2} (\partial_\mu \psi \sigma^\mu \bar{\psi}) (\bar{\eta}\bar{\eta}) \\
+            (\bar\eta\bar\psi) (\eta\sigma^\mu\bar\eta) (\eta\psi)      & = \frac{1}{4} (\eta\eta) (\bar\eta\bar\eta) (\psi\sigma^\mu\bar\psi)            \\
+            \eta \sigma^{\mu\nu} \psi                                   & = -\psi \sigma^{\mu\nu} \eta
+        \end{align*}
+
+    \section{Weyl-Dirac translation}
+        \begin{align*}
+            \Psi_{D} = \begin{pmatrix} \psi_L \\ \bar{\psi}_R \end{pmatrix},\quad \chi_{M} = \begin{pmatrix} \chi \\ \bar{\chi} \end{pmatrix}
+        \end{align*}
+        \begin{align*}
+            \gamma^\mu & = \begin{bmatrix} 0 & \sigma^\mu \\ \bar{\sigma}^\mu & 0 \end{bmatrix}                                                         \\
+            \gamma^5   & = i\gamma^0\gamma^1\gamma^2\gamma^3 = \frac{i}{4!} \epsilon^{\mu\nu\rho\sigma} \gamma_\mu \gamma_\nu \gamma_\rho \gamma_\sigma
+        \end{align*}
+        \begin{align*}
+            \bar{\Psi} \equiv \Psi^\dag \gamma^0 = \begin{pmatrix} \psi_R \\ \bar{\psi}_L \end{pmatrix}^T.
+        \end{align*}
+        \begin{align*}
+            \bar{\Psi}_M \gamma^\mu P_{L/R} \Phi_M = -\bar{\Phi}_M \gamma^\mu P_{R/L} \Psi_M
+        \end{align*}
+
+    \section{Chiral identities}
+        \begin{align*}
+            \Psi_{L/R} = \frac{1}{2} \pclosed{\eye \mp \gamma^5}
+        \end{align*}
+        \begin{align*}
+            (\psi_{R} \phi_{L})                    & = \bar{\Psi} P_L \Phi            \\
+            (\bar{\psi}_L \bar{\phi}_R)            & = \bar{\Psi} P_R \Phi            \\
+            (\bar{\psi}_L \bar{\sigma}^\mu \phi_L) & = \bar{\Psi} \gamma^\mu P_L \Phi \\
+            (\psi_R \sigma^\mu \bar{\phi}_R)       & = \bar{\Psi} \gamma^\mu P_R \Phi
+        \end{align*}
+
+    \section{Dirac algebra}
+            (Both in 4 and \(d = 4-\epsilon\) dimensions)
+        \begin{align*}
+            \cclosed{\gamma^\mu, \gamma^\nu} & = 2 g^{\mu\nu} \eye_{4\times 4} \\
+            \cclosed{\gamma^\mu, \gamma^5}   & = 0
+        \end{align*}
+        \begin{align*}
+            \pclosed{\gamma^\mu}^\dagger & = \gamma^0 \gamma^\mu \gamma^0 \\
+            \pclosed{\gamma^5}^\dagger   & = \gamma^5
+        \end{align*}
+        \begin{align*}
+            \gamma^{\mu\nu} = \frac{i}{2} \pclosed{\gamma^\mu \gamma^\nu - \gamma^\nu \gamma^\mu}
+        \end{align*}
+        % \begin{align*}
+        %     \gamma^\mu\gamma_\mu                                        & = d,                                                                                     \\
+        %     \gamma^\mu \gamma^\nu \gamma_\mu                            & = (2-d) \gamma^\nu,                                                                      \\
+        %     \gamma^\mu \gamma^\nu \gamma^\lambda \gamma_\mu             & = 4g^{\nu\lambda} + (d-4)\gamma^\nu \gamma^\lambda,                                      \\
+        %     \gamma^\mu \gamma^\nu \gamma^\lambda \gamma^\rho \gamma_\mu & = (4-d) \gamma^\nu \gamma^\lambda \gamma^\rho - 2 \gamma^\rho \gamma^\lambda \gamma^\nu.
+        % \end{align*}
+        \begin{align*}
+            M_n^{\mu_1\dots \mu_n}         & \equiv \gamma^\nu \gamma^{\mu_1} \dots  \gamma^{\mu_n} \gamma_\nu                                    \\
+            M_{n+1}^{\mu_1\dots \mu_{n+1}} & = 2\gamma^{\mu_{n+1}} \gamma^{\mu_1}\dots \gamma^{\mu_n} - M_n^{\mu_1\dots \mu_n} \gamma^{\mu_{n+1}} \\
+            M_0                            & = d                                                                                                  \\
+            M_1^\mu                        & = (2-d)\gamma^\mu                                                                                    \\
+            M_2^{\mu\nu}                   & = 4g^{\mu\nu} \eye_{4\times 4} + (d-4) \gamma^\mu\gamma^\nu                                          \\
+            M_3^{\mu\nu\rho}               & = (4-d) \gamma^\mu\gamma^\nu\gamma^\rho - 2\gamma^\rho\gamma^\nu\gamma^\mu
+        \end{align*}
+        \subsection{Traces}
+            (Both in 4 and \(d = 4-\epsilon\) dimensions.)
+            \begin{align*}
+                \trace{\gamma^5}      = & \trace{\text{odd \# of }\gamma\text{-matrices}} = 0           \\
+                \trace{ab}            = & 4g^{ab},                                                      \\
+                \trace{abcd}          = & 4 \pclosed{g^{ab}\,g^{cd} - g^{ac}\,g^{cd} + g^{ad}\,g^{bc}}, \\
+                \trace{\gamma^5 abcd} = & -4i \epsilon^{abcd},                                          \\
+            \end{align*}
+            \begin{align*}
+                \trace{\gamma^{\mu_1} \dots \gamma^{\mu_{2n}}} = \sum_{i=2}^{2n} (-1)^{i} g^{\mu_1 \mu_i} \trace{\gamma^{\mu_2} \dots \gamma^{\mu_{i-1}} \gamma^{\mu_{i-1}} \dots \gamma^{2n}}
+            \end{align*}
+            \begin{align*}
+                \trace{P_{\scriptstyle{L/R}} ab}   & = \frac{1}{2} \trace{ab},                        \\
+                \trace{P_{\scriptstyle{L/R}} abcd} & = \frac{1}{2}\trace{abcd} \pm 2i\epsilon^{abcd}, \\
+            \end{align*}
+
+
+\end{multicols}
+
+\end{document}
