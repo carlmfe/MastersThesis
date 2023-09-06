@@ -63,10 +63,16 @@ def dirac_trace(M):
 def tensor_product(t1, t2, num_idcs=(1, 1)):
     n_idx1, n_idx2 = num_idcs
 
-    t1idx = (":, "*n_idx1 + "np.newaxis, "*n_idx2)[:-2]
-    t2idx = ("np.newaxis, "*n_idx1 + ":, "*n_idx2)[:-2]
+    if n_idx1 > 0:
+        t1idx = "[" + (":, "*n_idx1 + "np.newaxis, "*n_idx2)[:-2] + "]"
+    else:
+        t1idx = ""
+    if n_idx2 > 0:
+        t2idx = "[" + ("np.newaxis, "*n_idx1 + ":, "*n_idx2)[:-2] + "]"
+    else:
+        t2idx = ""
 
-    result = "t1[{}] @ t2[{}]".format(t1idx, t2idx)
+    result = "t1{} @ t2{}".format(t1idx, t2idx)
 
     return eval(result)
 
@@ -75,19 +81,23 @@ def lorentz_contract(v1, v2, num_idcs=1, is_matrices=False):
     result = 0
     if num_idcs > 1:
         result += lorentz_contract(v1[0, :], v2[0, :],
-                                   num_idcs=num_idcs-1, is_matrices=is_matrices)
+                                   num_idcs=num_idcs-1,
+                                   is_matrices=is_matrices)
         result -= lorentz_contract(v1[1, :], v2[1, :],
-                                   num_idcs=num_idcs-1, is_matrices=is_matrices)
+                                   num_idcs=num_idcs-1,
+                                   is_matrices=is_matrices)
         result -= lorentz_contract(v1[2, :], v2[2, :],
-                                   num_idcs=num_idcs-1, is_matrices=is_matrices)
+                                   num_idcs=num_idcs-1,
+                                   is_matrices=is_matrices)
         result -= lorentz_contract(v1[3, :], v2[3, :],
-                                   num_idcs=num_idcs-1, is_matrices=is_matrices)
+                                   num_idcs=num_idcs-1,
+                                   is_matrices=is_matrices)
 
     else:
         if is_matrices:
-            result += v1[0]@v2[0] - v1[1]@v2[1] - v1[2]@v2[2] - v1[3]@v2[3]
+            result = result + v1[0]@v2[0] - v1[1]@v2[1] - v1[2]@v2[2] - v1[3]@v2[3]
         else:
-            result += v1[0]*v2[0] - v1[1]*v2[1] - v1[2]*v2[2] - v1[3]*v2[3]
+            result = result + v1[0]*v2[0] - v1[1]*v2[1] - v1[2]*v2[2] - v1[3]*v2[3]
 
     result = np.squeeze(result)
     if result.size == 1:
@@ -97,7 +107,8 @@ def lorentz_contract(v1, v2, num_idcs=1, is_matrices=False):
 
 
 def fourvector(E, p, theta, phi):
-    return np.array([E, p*sin(theta)*cos(phi), p*sin(theta)*sin(phi), p*cos(theta)])
+    result = [E, p*sin(theta)*cos(phi), p*sin(theta)*sin(phi), p*cos(theta)]
+    return np.array(result)
 
 
 def spinor_conjugate(spinor):
@@ -158,43 +169,84 @@ def vbar_down(E, p, theta, phi):
 
 if __name__ == "__main__":
     from sym_utils import prettyprint
+    sym.init_printing(wrap_line=True, use_latex=True)
 
-    s_, m = sym.symbols("s, m", positive=True)
-    sbar = sym.symbols("sbar", positive=True)
-    s = 4*(sbar + m**2)
-    p = sqrt(sbar)
+    def dirac_simplify(expression):
+        result = sym.trigsimp(expression)
+        result = sym.powsimp(result)
+        result = sym.factor(result)
+        result = sym.cancel(result)
+        return result
+
+    s_, mi, mj = sym.symbols("s, m_i, m_j", positive=True)
+    # Using sbar as symbol as it is minimal positive definition of s.
+    # This helps sympy to know when sqrt is real and not possibly imaginary.
+    sbar = sym.symbols("sbar", positive=True)  # sbar = s - (mi+mj)**2
+    s = sbar + (mi + mj)**2
+    p = sqrt(s) / 2
+    k = sqrt((sbar**2 + 4*sbar*mi*mj) / (4*s))
+    E = p
+    Ei = sqrt(k**2 + mi**2)
+    # Ej = sqrt(k**2 + mj**2)
+    Ej = sqrt(s) - Ei
     theta = sym.symbols("theta", real=True)
 
-    u1 = u_down(sqrt(s)/2, sqrt(s)/2, 0, 0)
+    u1 = u_down(E, p, 0, 0)
     u1bar = spinor_conjugate(u1)
-    v2 = v_up(sqrt(s)/2, sqrt(s)/2, np.pi, 0)
+    v2 = v_down(E, p, sym.pi, 0)
     v2bar = spinor_conjugate(v2)
 
-    ui = u_down(sqrt(s)/2, p, theta, 0) + u_up(sqrt(s)/2, p, theta, 0)
+    ui = u_down(Ei, k, theta, 0) + u_up(Ei, k, theta, 0)
     uibar = spinor_conjugate(ui)
-    vj = v_up(sqrt(s)/2, p, -theta, 0) + v_down(sqrt(s)/2, p, -theta, 0)
+    vj = v_up(Ej, k, theta+sym.pi, 0) + v_down(Ej, k, theta+sym.pi, 0)
     vjbar = spinor_conjugate(vj)
 
-    pi = fourvector(sqrt(s)/2, p, theta, 0)
-    pi_slash = lorentz_contract(g, pi)
+    p1 = fourvector(E, p, 0, 0)
+    p2 = fourvector(E, p, sym.pi, 0)
+    pi = fourvector(Ei, k, theta, 0)
+    pj = fourvector(Ej, k, theta+sym.pi, 0)
 
-    uiuibar = u_down(sqrt(s)/2, p, theta, 0) @ ubar_down(sqrt(s)/2, p, theta, 0) \
-        + u_up(sqrt(s)/2, p, theta, 0) @ ubar_up(sqrt(s)/2, p, theta, 0)
-    for idx1 in range(4):
-        for idx2 in range(4):
-            uiuibar[idx1, idx2] = sym.simplify(
-                sym.nsimplify(uiuibar[idx1, idx2]))
-    prettyprint(uiuibar)
-    prettyprint(pi_slash + m*eye)
+    t = lorentz_contract(p1-pi, p1-pi)
+    u = lorentz_contract(p1-pj, p1-pj)
 
-    bilinear1 = tensor_product(
-        uibar@sigmag@vj, vjbar@sigmag@ui, num_idcs=(2, 2))
-    bilinear2 = tensor_product(
-        v2bar@sigmag@u1, u1bar@sigmag@v2, num_idcs=(2, 2))
+    # prettyprint(s.replace(sbar, s_ - (mi+mj)**2))
+    # prettyprint(s, replace=(sbar, s_ - (mi+mj)**2))
+    # prettyprint(t, deepfactor=True, replace=(sbar, s_ - (mi+mj)**2))
+    prettyprint(u, deepfactor=True, replace=(sbar, s_ - (mi+mj)**2))
+    sys.exit()
 
-    quadrilinear = lorentz_contract(bilinear1, bilinear2, num_idcs=4)
+    H_TT = np.squeeze(tensor_product(
+        uibar@sigmag@vj, vjbar@sigmag@ui, num_idcs=(2, 2)
+    )) / 8
+    N_TT = np.squeeze(tensor_product(
+        v2bar@sigmag@PL@u1, u1bar@sigmag@PR@v2, num_idcs=(2, 2)
+    )) / 8
 
-    prettyprint(quadrilinear)
+    H_TS = np.squeeze(tensor_product(
+        uibar@sigmag@vj, vjbar@PR@ui, num_idcs=(2, 0)
+    )) / (2*sqrt(2))
+    N_TS = np.squeeze(tensor_product(
+        v2bar@sigmag@PL@u1, u1bar@PR@v2, num_idcs=(2, 0)
+    )) / (2*sqrt(2))
 
-    # prettyprint(lorentz_contract((uibar@sigmag@vj)[:, :, 0, 0],
-    #             (v2bar@sigmag@u1)[:, :, 0, 0], num_idcs=2, is_matrices=False))
+    H_SS = np.squeeze((uibar@PL@vj) * (vjbar@PR@ui)).item() / 2
+    N_SS = np.squeeze((v2bar@PL@u1) * (u1bar@PR@v2)).item() / 2
+
+    Q_LL = lorentz_contract(N_TT, H_TT, num_idcs=4) \
+        + lorentz_contract(N_TS, H_TS, num_idcs=2) \
+        + N_SS * H_SS
+
+    b1 = np.squeeze((uibar@PL@u1) * (u1bar@PR@ui)).item()
+    b2 = np.squeeze((v2bar@PL@vj) * (vjbar@PR@v2)).item()
+
+    # prettyprint(
+    #     sym.factor(b1.subs(sbar, s_ - (mi+mj)**2), deep=True)
+    # )
+    # prettyprint(lorentz_contract(
+    #     (uibar@sigmag@vj), (v2bar@sigmag@u1), num_idcs=2
+    # ), deepfactor=True)
+    print(sym.latex(sym.factor(dirac_simplify(lorentz_contract(
+        (uibar@sigmag@vj), (v2bar@sigmag@u1), num_idcs=2
+    )), deep=True).subs(sbar, s_ - mi**2-2*mi*mj-mj**2)))
+
+    # prettyprint((b1*b2).subs(sbar, s_ - (mi + mj)**2), deepfactor=True)
