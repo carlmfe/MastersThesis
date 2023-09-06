@@ -13,12 +13,18 @@
 \begin{document}
 \maketitle
 
+\begin{abstract}
+    \noindent
+    Here, I will outline the calculation of Neutralino pair production from proton--proton collisions at parton level to leading order.
+\end{abstract}
+
 
 \begin{figure} [ht!]
     \centering
     \inputtikz{s_channel}
     \inputtikz{t_channel}
     \inputtikz{u_channel}
+    \caption{The tree-level diagrams contributing to neutralino pair production at tree-level.}
 \end{figure}
 
 \begin{subequations}
@@ -39,21 +45,29 @@
 \end{subequations}
 \begin{subequations}
     \begin{align} \nonumber
-        \M_s = -\frac{g^2}{2c_W^2} D_Z(s) & \bclosed{ \wbar{u}_i\gamma^\mu\pclosed{O^{''L}_{ij}P_L + O^{''R}_{ij}P_R} v_j }    \\
-                                          & \times \bclosed{ \wbar{v}_2 \gamma_\mu \pclosed{C^L_{Zqq}P_L + C^R_{Zqq}P_R} u_1 } \\ \nonumber
-        \M_t = -2g^2 D_{\wtilde{q}}(t)    & \bclosed{ \wbar{u}_i \pclosed{C_{i}^{L*}P_L + C_{i}^{R*} P_R} u_1 }                \\
-                                          & \times \bclosed{ \wbar{v}_2 \pclosed{C^R_{j}P_L + C^L_{j}P_R} v_j }                \\ \nonumber
-        \M_u = -2g^2 D_{\wtilde{q}}(u)    & \bclosed{ \wbar{u}_j \pclosed{C_{j}^{L*}P_L + C_{j}^{R*} P_R} u_1 }                \\
+        \M_s = -\frac{g^2}{2c_W^2} D_Z(s) & \bclosed{ \wbar{u}_i\gamma^\mu\pclosed{O^{\prime\prime L}_{ij}P_L + O^{\prime\prime R}_{ij}P_R} v_j } \\
+                                          & \times \bclosed{ \wbar{v}_2 \gamma_\mu \pclosed{C^L_{Zqq}P_L + C^R_{Zqq}P_R} u_1 }                    \\ \nonumber
+        \M_t = -2g^2 D_{\wtilde{q}}(t)    & \bclosed{ \wbar{u}_i \pclosed{C_{i}^{L*}P_L + C_{i}^{R*} P_R} u_1 }                                   \\
+                                          & \times \bclosed{ \wbar{v}_2 \pclosed{C^R_{j}P_L + C^L_{j}P_R} v_j }                                   \\ \nonumber
+        \M_u = -2g^2 D_{\wtilde{q}}(u)    & \bclosed{ \wbar{u}_j \pclosed{C_{j}^{L*}P_L + C_{j}^{R*} P_R} u_1 }                                   \\
                                           & \times \bclosed{ \wbar{v}_2 \pclosed{C^R_{i}P_L + C^L_{i}P_R} v_i }
     \end{align}
 \end{subequations}
 
-
+Defining \(t_i = t - m_i^2\), \(u_i = u - m_i^2\), we have
 \begin{subequations}
-    \begin{align} \nonumber
-        I_{ss} = \sum_\text{spins} \abs{\M_s}^2 = \frac{g^4}{c_W^2} \abs{D_Z(s)}^2 \pclosed{{(C_Z^L)}^2+{(C_Z^R)}^2} & \bigg\{ \abs{O_{ij}^L}^2 \bclosed{ {(m_i^2-t)}^2 + {(m_j^2-t)}^2 } \\
-                                                                                                                     & - 2\Re\cclosed{\pclosed{O_{ij}^L}^2} m_i m_j s \bigg\}
+    \begin{align}
+        \nonumber
+        I_{ss} & = \frac{g^4}{c_W^4} \abs{D_Z(s)}^2 \pclosed{{(C_{Zqq}^L)}^2+{(C_{Zqq}^R)}^2} \bigg\{ \abs{O_{ij}^{\prime\prime L}}^2 \pclosed{t_it_j + u_iu_j}                                                                \\
+               & \hspace{5.7cm} - 2\Re\cclosed{\pclosed{O_{ij}^{\prime\prime L}}^2} m_i m_j s \bigg\}                                                                                                                          \\
+        \nonumber
+        I_{tt} & = \sum_{A, B} 4 g^4 D_{\tilde{q}_A}(t) D_{\tilde{q}_B}(t) \pclosed{C_{\nino[i] \tilde{q}_A q}^{L} C_{\nino[i] \tilde{q}_B q}^{L\prime} + C_{\nino[i] \tilde{q}_A q}^{R} C_{\nino[i] \tilde{q}_B q}^{R\prime}} \\
+               & \hspace{3.6cm} \times \pclosed{C_{\nino[j] \tilde{q}_A q}^{L} C_{\nino[j] \tilde{q}_B q}^{L\prime} + C_{\nino[j] \tilde{q}_A q}^{R} C_{\nino[j] \tilde{q}_B q}^{R\prime}} t_i t_j                             \\
+        \nonumber
+        I_{uu} & = \sum_{A, B} 4 g^4 D_{\tilde{q}_A}(t) D_{\tilde{q}_B}(t) \pclosed{C_{\nino[i] \tilde{q}_A q}^{L} C_{\nino[i] \tilde{q}_B q}^{L\prime} + C_{\nino[i] \tilde{q}_A q}^{R} C_{\nino[i] \tilde{q}_B q}^{R\prime}} \\
+               & \hspace{3.6cm} \times \pclosed{C_{\nino[j] \tilde{q}_A q}^{L} C_{\nino[j] \tilde{q}_B q}^{L\prime} + C_{\nino[j] \tilde{q}_A q}^{R} C_{\nino[j] \tilde{q}_B q}^{R\prime}} u_i u_j                             \\
     \end{align}
+    where \(I_{aa} = \sum_\text{spins} |\M_a|^2\) and \(I_{ab} = \sum_\text{spins} 2\Re{\M_a \M_b^\ast}\).
 \end{subequations}
 
 
@@ -135,8 +149,8 @@
 
     \begin{align}
         \nonumber
-          & \bclosed{\wbar{u}_i \pclosed{C^{L*}_{\nino[i]\wtilde{q}_A q} P_L + C^{R*}_{\nino[i]\wtilde{q}_A q} P_R} u_1}
-        \bclosed{\wbar{v}_2 \pclosed{C^{R}_{\nino[j]\wtilde{q}_A q} P_L + C^{L}_{\nino[j]\wtilde{q}_A q} P_R} v_j}                                                                                                                                    \\
+          & \bclosed{\wbar{u}_i \pclosed{C^{L}_{\nino[i]\wtilde{q}_A q} P_L + C^{R*}_{\nino[i]\wtilde{q}_A q} P_R} u_1}
+        \bclosed{\wbar{v}_2 \pclosed{C^{R}_{\nino[j]\wtilde{q}_A q} P_L + C^{L}_{\nino[j]\wtilde{q}_A q} P_R} v_j}                                                                                                                                             \\
         \nonumber
         = & C^{L*}_{\nino[i]\wtilde{q}_A q}C^{R}_{\nino[j]\wtilde{q}_A q} \bclosed{\frac{1}{2}\pclosed{\wbar{u}_i P_L v_j} \pclosed{\wbar{v}_2 P_L u_1} + \frac{1}{8}\pclosed{\wbar{u}_i \sigma^{\mu\nu} v_j} \pclosed{\wbar{v}_2 \sigma_{\mu\nu} P_L u_1} }   \\
         \nonumber
@@ -145,5 +159,11 @@
           & + C^{R*}_{\nino[i]\wtilde{q}_A q}C^{R}_{\nino[j]\wtilde{q}_A q} \bclosed{\frac{1}{2}\pclosed{\wbar{u}_i \gamma^\mu P_L v_j} \pclosed{\wbar{v}_2 \gamma_\mu P_R u_1}}                                                                               \\
           & + C^{R*}_{\nino[i]\wtilde{q}_A q}C^{L}_{\nino[j]\wtilde{q}_A q} \bclosed{\frac{1}{2}\pclosed{\wbar{u}_i P_R v_j} \pclosed{\wbar{v}_2 P_R u_1} + \frac{1}{8}\pclosed{\wbar{u}_i \sigma^{\mu\nu} v_j} \pclosed{\wbar{v}_2 \sigma_{\mu\nu} P_R u_1} }
     \end{align}
+
+
+    \begin{align*}
+         & - \frac{4}{\sqrt{- m_{i}^{2} + m_{j}^{2} + 2 m_{j} \sqrt{s} + s} \sqrt{m_{i}^{2} + 2 m_{i} \sqrt{s} - m_{j}^{2} + s}}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   \\
+         & \cdot \left(4 m_{i}^{3} m_{j} \cos{\left(\theta \right)} + 8 m_{i}^{2} m_{j}^{2} \cos{\left(\theta \right)} + 4 m_{i}^{2} m_{j} \sqrt{s} \cos{\left(\theta \right)} - m_{i}^{2} \sqrt{- m_{i}^{2} - 2 m_{i} m_{j} - m_{j}^{2} + s} \sqrt{- m_{i}^{2} + 2 m_{i} m_{j} - m_{j}^{2} + s} \sin{\left(\theta \right)} + m_{i}^{2} \left(- m_{i}^{2} - 2 m_{i} m_{j} - m_{j}^{2} + s\right) \cos{\left(\theta \right)} + 4 m_{i} m_{j}^{3} \cos{\left(\theta \right)} + 4 m_{i} m_{j}^{2} \sqrt{s} \cos{\left(\theta \right)} + 6 m_{i} m_{j} \left(- m_{i}^{2} - 2 m_{i} m_{j} - m_{j}^{2} + s\right) \cos{\left(\theta \right)} - m_{i} \sqrt{s} \sqrt{- m_{i}^{2} - 2 m_{i} m_{j} - m_{j}^{2} + s} \sqrt{- m_{i}^{2} + 2 m_{i} m_{j} - m_{j}^{2} + s} \sin{\left(\theta \right)} + m_{i} \sqrt{s} \left(- m_{i}^{2} - 2 m_{i} m_{j} - m_{j}^{2} + s\right) \cos{\left(\theta \right)} + m_{j}^{2} \sqrt{- m_{i}^{2} - 2 m_{i} m_{j} - m_{j}^{2} + s} \sqrt{- m_{i}^{2} + 2 m_{i} m_{j} - m_{j}^{2} + s} \sin{\left(\theta \right)} + m_{j}^{2} \left(- m_{i}^{2} - 2 m_{i} m_{j} - m_{j}^{2} + s\right) \cos{\left(\theta \right)} + m_{j} \sqrt{s} \sqrt{- m_{i}^{2} - 2 m_{i} m_{j} - m_{j}^{2} + s} \sqrt{- m_{i}^{2} + 2 m_{i} m_{j} - m_{j}^{2} + s} \sin{\left(\theta \right)} + m_{j} \sqrt{s} \left(- m_{i}^{2} - 2 m_{i} m_{j} - m_{j}^{2} + s\right) \cos{\left(\theta \right)} + \left(- m_{i}^{2} - 2 m_{i} m_{j} - m_{j}^{2} + s\right)^{2} \cos{\left(\theta \right)}\right)
+    \end{align*}
 
 \end{document}
