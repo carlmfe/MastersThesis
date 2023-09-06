@@ -1,0 +1,32 @@
+\documentclass[english,notitlepage]{article}
+
+\usepackage{overhead}
+\usepackage[style=verbose]{biblatex}
+
+\addbibresource{susy.bib}
+
+
+\title{Introduction to Supersymmetry}
+\author{Carl Martin Fevang}
+
+\begin{document}
+\maketitle
+
+\section{Supersymmetry}
+\textit{Introduce the notion of supersymmetry and some terms that will be necessary.}
+
+\section{The Super-Poincaré group}
+\textit{Introduce the Poincaré group and outline its supersymmetric extension algebraically.}
+
+\section{Superspace}
+In order to make fields that transform appropriately under super-Poincaré transformations, it is useful to embed them in what is called \emph{superspace}.
+This is an extension of the space-time on which the coordinate transformations of the Poincaré group work.
+The additional operators (supercharges) of the Super-Poincaré group will be analogous to these coordinate transformations, but on superspace.
+
+We extend spacetime with four \emph{Grassmann number}-valued coordinates, \(\theta_A, \bar{\theta}^{\dot{A}}\) where \(A, \dot{A} \in 1, 2\).
+Grassmann numbers are similar to ordinary numbers, but are \emph{anti}-commutative under multiplication, i.e. \(\theta_1 \theta_2 = -\theta_2 \theta_1\).
+As a consequence of this, any repeated Grassmann number is zero, since \(\theta_1\theta_1 = -\theta_1\theta_1 = 0\).\footnote{I note that 0 is itself a (trivial) Grassmann number, and it constitutes the intersection between the real number line and the Grassmann number line.}
+These numbers arise naturally in structures that have anti-commuting properties, such as fermionic spinors, and the Grassmann dimensions of superspace mirror the anti-commuting properties of the supercharges \(Q_A\).
+
+
+\end{document}
