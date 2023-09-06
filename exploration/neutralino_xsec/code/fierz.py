@@ -23,6 +23,8 @@ F = 0.25 * Matrix(
 
 X = Matrix(aeye(5))
 
+FX = F*X
+
 zero = Matrix(np.zeros(5))
 
 SS = Matrix([1, 0, 0, 0, 0])
@@ -49,6 +51,24 @@ if __name__ == "__main__":
         locals().update({arg: sym.symbols(arg)})
         symbols.append(locals()[arg])
 
+    # CiL, CiR, CjL, CjR = sym.symbols("C_i^L C_i^R C_j^L C_j^R")
+    # CSS, CSP, CPS, CPP = sym.symbols("CSS CSP CPS CPP")
+    # symbols = [CiL, CiR, CjL, CjR]
+
+    # CSS = 0.25*(CiL+CiR)*(CjL+CjR)
+    # CSP = 0.25*(CiL+CiR)*(CjL-CjR)
+    # CPS = -0.25*(CiL-CiR)*(CjL+CjR)
+    # CPP = -0.25*(CiL-CiR)*(CjL-CjR)
+
+    sym.init_printing(use_latex=True)
+
+    # LL = "0.25*(SS - SP - PS + PP)"
+    # LR = "0.25*(SS + SP - PS - PP)"
+    # RL = "0.25*(SS - SP + PS - PP)"
+    # RR = "0.25*(SS + SP + PS + PP)"
+
+    # expr = f"CiL*CjR*{LL} + CiL*CjL*{LR} + CiR*CjR*{RL} + CiR*CjL*{RR}"
+
     even_expr = expr
     odd_expr = expr
     even_expr = even_expr.replace("SS", "(F*SS)")
@@ -67,17 +87,18 @@ if __name__ == "__main__":
     odd_expr = odd_expr.replace("TT", "zero")
     odd_expr = odd_expr.replace("AA", "zero")
     odd_expr = odd_expr.replace("PP", "zero")
-    odd_expr = odd_expr.replace("SP", "((F*X)*SP)")
-    odd_expr = odd_expr.replace("VA", "((F*X)*VA)")
-    odd_expr = odd_expr.replace("Tt", "((F*X)*Tt)")
-    odd_expr = odd_expr.replace("AV", "((F*X)*AV)")
-    odd_expr = odd_expr.replace("PS", "((F*X)*PS)")
+    odd_expr = odd_expr.replace("SP", "(FX*SP)")
+    odd_expr = odd_expr.replace("VA", "(FX*VA)")
+    odd_expr = odd_expr.replace("Tt", "(FX*Tt)")
+    odd_expr = odd_expr.replace("AV", "(FX*AV)")
+    odd_expr = odd_expr.replace("PS", "(FX*PS)")
 
-    # sym.pprint(sym.simplify(sym.nsimplify(eval(even_expr))))
     result = eval(even_expr).dot(even_vector) + eval(odd_expr).dot(odd_vector)
+
     result = sym.nsimplify(result)
     result = sym.simplify(result)
     if "-q" in sys.argv:
+        result = sym.expand(result)
         for idx1 in range(len(symbols)):
             for idx2 in range(idx1+1):
                 result = sym.collect(result, symbols[idx1] * symbols[idx2])
