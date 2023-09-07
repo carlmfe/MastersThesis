@@ -143,6 +143,29 @@
             \eta \sigma^{\mu\nu} \psi                                   & = -\psi \sigma^{\mu\nu} \eta
         \end{align*}
 
+    \section{Charge conjugation}
+        \begin{align*}
+            \Gamma^r = \cclosed{\eye, \gamma^5, \gamma^\mu, \gamma^5\gamma^\mu, \gamma^{\mu\nu}}
+        \end{align*}
+        \begin{align*}
+            C^\dagger & = C^{-1} \\
+            C^T       & = -C     \\
+        \end{align*}
+        \begin{align*}
+            C^{-1} \Gamma^r C & = \eta^r {\Gamma^r}^T   \\
+            \eta^r            & = \begin{cases}
+                                      1  & 1 \leq r \leq 6  \\
+                                      -1 & 7 \leq r \leq 16
+                                  \end{cases}
+        \end{align*}
+        For \(w = u, v\) and \(w^\prime = v ,u\)
+        \begin{align*}
+            w = C{\bar{w}}^{\prime T}
+        \end{align*}
+        \begin{align*}
+            \bar{w}_1 \Gamma^r w_2 = -\eta^r \bar{w}_2^\prime \Gamma^r w_1^\prime
+        \end{align*}
+
     \section{Weyl-Dirac translation}
         \begin{align*}
             \Psi_{D} = \begin{pmatrix} \psi_L \\ \bar{\psi}_R \end{pmatrix},\quad \chi_{M} = \begin{pmatrix} \chi \\ \bar{\chi} \end{pmatrix}
@@ -199,18 +222,34 @@
         \subsection{Traces}
             (Both in 4 and \(d = 4-\epsilon\) dimensions.)
             \begin{align*}
-                \trace{\gamma^5}      = & \trace{\text{odd \# of }\gamma\text{-matrices}} = 0           \\
-                \trace{ab}            = & 4g^{ab},                                                      \\
-                \trace{abcd}          = & 4 \pclosed{g^{ab}\,g^{cd} - g^{ac}\,g^{cd} + g^{ad}\,g^{bc}}, \\
-                \trace{\gamma^5 abcd} = & -4i \epsilon^{abcd},                                          \\
+                T_n^{\mu_1\ldots\mu_n}           & = \trace{\gamma^{\mu_1} \cdots \gamma^{\mu_n}}                                                                        \\
+                T_{2n+1}^{\mu_1\ldots\mu_{2n+1}} & = 0                                                                                                                   \\
+                T_{2n}^{\mu_1\ldots\mu_{2n}}     & = \sum_{i=2}^{2n} {(-1)}^{i} g^{\mu_1 \mu_i} T_{2n-2}^{\mu_2\ldots\mu_{i-1}\mu_{i+1}\ldots\mu_{2n}}   \qquad n \geq 1 \\
+                T_0                              & = 4                                                                                                                   \\
+                T_2^{\mu\nu}                     & = 4g^{\mu\nu}                                                                                                         \\
+                T_4^{\mu\nu\rho\sigma}           & = 4\pclosed{g^{\mu\nu}g^{\rho\sigma} - g^{\mu\rho}g^{\nu\sigma} + g^{\mu\sigma}g^{\nu\rho}}                           \\
             \end{align*}
             \begin{align*}
-                \trace{\gamma^{\mu_1} \dots \gamma^{\mu_{2n}}} = \sum_{i=2}^{2n} (-1)^{i} g^{\mu_1 \mu_i} \trace{\gamma^{\mu_2} \dots \gamma^{\mu_{i-1}} \gamma^{\mu_{i-1}} \dots \gamma^{2n}}
+                \tilde{T}_n^{\mu_1\ldots\mu_n}           & = \trace{\gamma^5 \gamma^{\mu_1} \cdots \gamma^{\mu_n}}                                                                     \\
+                \tilde{T}_{2n+1}^{\mu_1\ldots\mu_{2n+1}} & = 0                                                                                                                         \\
+                \tilde{T}_{2n}^{\mu_1\ldots\mu_{2n}}     & = \sum_{i=2}^{2n} {(-1)}^{i} g^{\mu_1 \mu_i} \tilde{T}_{2n-2}^{\mu_2\ldots\mu_{i-1}\mu_{i+1}\ldots\mu_{2n}} \qquad n \geq 3 \\
+                \tilde{T}_0                              & = 0                                                                                                                         \\
+                \tilde{T}_2^{\mu\nu}                     & = 0                                                                                                                         \\
+                \tilde{T}_4^{\mu\nu\rho\sigma}           & = -i\epsilon^{\mu\nu\rho\sigma}
             \end{align*}
-            \begin{align*}
-                \trace{P_{\scriptstyle{L/R}} ab}   & = \frac{1}{2} \trace{ab},                        \\
-                \trace{P_{\scriptstyle{L/R}} abcd} & = \frac{1}{2}\trace{abcd} \pm 2i\epsilon^{abcd}, \\
-            \end{align*}
+            % \begin{align*}
+            %     \trace{\gamma^5}      = & \trace{\text{odd \# of }\gamma\text{-matrices}} = 0           \\
+            %     \trace{ab}            = & 4g^{ab},                                                      \\
+            %     \trace{abcd}          = & 4 \pclosed{g^{ab}\,g^{cd} - g^{ac}\,g^{cd} + g^{ad}\,g^{bc}}, \\
+            %     \trace{\gamma^5 abcd} = & -4i \epsilon^{abcd},                                          \\
+            % \end{align*}
+            % \begin{align*}
+            %     \trace{\gamma^{\mu_1} \dots \gamma^{\mu_{2n}}} = \sum_{i=2}^{2n} (-1)^{i} g^{\mu_1 \mu_i} \trace{\gamma^{\mu_2} \dots \gamma^{\mu_{i-1}} \gamma^{\mu_{i+1}} \dots \gamma^{2n}}
+            % \end{align*}
+            % \begin{align*}
+            %     \trace{P_{\scriptstyle{L/R}} ab}   & = \frac{1}{2} \trace{ab},                        \\
+            %     \trace{P_{\scriptstyle{L/R}} abcd} & = \frac{1}{2}\trace{abcd} \pm 2i\epsilon^{abcd}, \\
+            % \end{align*}
 
 
 \end{multicols}
