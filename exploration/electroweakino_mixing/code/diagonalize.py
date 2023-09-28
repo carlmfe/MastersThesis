@@ -1,7 +1,7 @@
 from math import sqrt, sin, cos, tan, atan, pi
 from cmath import phase, exp
 import numpy as np
-from scipy.linalg import eig, inv
+from scipy.linalg import eig, eigh, inv
 from sys import float_info
 EPSILON = sqrt(float_info.epsilon)
 MAX = 1 / float_info.epsilon
@@ -90,7 +90,7 @@ def diagonalize(mass_matrix, components=None):
 
 if __name__ == "__main__":
     M1 = 1.
-    M2 = 5.
+    M2 = 5.j
     mu = 1000.
     mZ = 91.1876
     tanbeta = 1e-3
@@ -127,42 +127,83 @@ if __name__ == "__main__":
         [sqrt(2) * cosbeta * cosW, mu, 0, 0]
     ])
 
-    print(f"{M1=:.2}, {M2=:.2}, {mu=:.2}, {tan(beta)=:.4}")
-    print("-------neutralino-------")
-    diagonalize(M_neutralino, components=["Bino", "Wino", "H_d", "H_u"])
+    # print(f"{M1=:.2}, {M2=:.2}, {mu=:.2}, {tan(beta)=:.4}")
+    # print("-------neutralino-------")
+    # diagonalize(M_neutralino, components=["Bino", "Wino", "H_d", "H_u"])
 
-    print("-------chargino-------")
-    diagonalize(M_chargino, components=["W+", "H_u+", "W-", "H_d-"])
+    # print("-------chargino-------")
+    # diagonalize(M_chargino, components=["W+", "H_u+", "W-", "H_d-"])
 
-    masses, N = eig(M_neutralino)
+    masses, N = eigh(M_neutralino)
     N = np.array(N.T, dtype=complex)
 
-    for idx in range(len(masses)):
-        if phase(masses[idx]) != 0.0:
-            N[idx] = N[idx] * exp(-0.5j * phase(masses[idx]))
-            masses[idx] = abs(masses[idx])
+    # for idx in range(len(masses)):
+    #     if phase(masses[idx]) != 0.0:
+    #         N[idx] = N[idx] * exp(-0.5j * phase(masses[idx]))
+    #         masses[idx] = abs(masses[idx])
 
-    sorted_idcs = np.argsort(masses)
-    masses = np.array(masses[sorted_idcs], dtype=float)
-    N = N[sorted_idcs]
+    # sorted_idcs = np.argsort(masses)
+    # masses = np.array(masses[sorted_idcs], dtype=float)
+    # N = N[sorted_idcs]
 
     # print(N)
     # print(M_neutralino)
     # print(get_finite((N.T @ np.diag(masses) @ N).real))
-    print(np.diag(masses))
-    print(get_finite(N @ M_neutralino @ N.T))
+    # print(np.diag(masses))
+    # print(get_finite(N @ M_neutralino @ N.T))
 
-    # N = N.conj().T
-    # D = N @ M_neutralino @ N.conj().T
-    # # D = N @ M_neutralino @ Ninv
-    # diff = np.diag(masses) - D
-    # print(np.sqrt(np.abs(diff.conj().T @ diff / (masses @ masses.conj().T))))
+    import sympy as sym
+    import sys
 
-    Oij = 0.5 * (np.outer(N[:, 3], N[:, 3].conj())
-                 - np.outer(N[:, 2], N[:, 2].conj()))
+    def round_expr(expr, num_digits):
+        return expr.xreplace({n : round(n, num_digits) for n in expr.atoms(sym.Number)})
 
-    # N[0, :] *= -1.j
-    # N[1, :] *= -1.j
-    # N[:, 0] *= -1.j
-    # N[:, 1] *= -1.j
-    # print(N[:, 2]**2 * 100)
+    sym.init_printing()
+
+    sym.pprint(round_expr(
+        sym.Matrix(get_finite(N.T.conj()@np.diag(masses)@N)),
+        num_digits=5
+    ))
+    sym.pprint(round_expr(
+        sym.Matrix(get_finite(M_neutralino)),
+        num_digits=5
+    ))
+    # sym.pprint(round_expr(
+    #     sym.Matrix(get_finite(np.diag(masses))),
+    #     num_digits=5
+    # ))
+    # sym.pprint(round_expr(
+    #     sym.Matrix(N @ M_neutralino @ N.T),
+    #     num_digits=5
+    # ))
+    sys.exit()
+
+    Qf = 2/3
+    If = 1/2
+    xW = 0.2397
+    tW = np.sqrt(xW / (1-xW))
+
+    sf, cf = sym.symbols("s_f c_f", complex=True)
+
+    N = get_finite(N)
+
+    CAL = cf * ((Qf-If)*tW*N.conj()[:, 1] + If*N.conj()[:, 2])
+    CBL = sf * ((Qf-If)*tW*N.conj()[:, 1] + If*N.conj()[:, 2])
+    CAR = sym.conjugate(sf) * Qf*tW*N.conj()[:, 1]
+    CBR = -sym.conjugate(cf) * Qf*tW*N.conj()[:, 1]
+
+    i = 0
+    for j in range(4):
+        QLLLL = sym.conjugate(CAL[i]) * CAL[j] * sym.conjugate(CBL[i]) * CBL[j]
+        QRRRR = sym.conjugate(CAR[i]) * CAR[j] * sym.conjugate(CBR[i]) * CBR[j]
+        # print(f"Re(QLLLL + QRRRR) for 0{j}:", end=" ")
+        # sym.pprint(sym.simplify(sym.re(QLLLL + QRRRR) / sym.Abs(cf*sf)**2))
+        print(f"Im(QLLLL + QRRRR)/Re for 0{j}:", end=" ")
+        sym.pprint(sym.simplify(sym.im(QLLLL + QRRRR) / sym.re(QLLLL + QRRRR)))
+
+        QRLLR = sym.conjugate(CAR[i]) * CAL[j] * sym.conjugate(CBL[i]) * CBR[j]
+        QLRRL = sym.conjugate(CAL[i]) * CAR[j] * sym.conjugate(CBR[i]) * CBL[j]
+        # print(f"Re(QLRRL + QRLLR) for 0{j}:", end=" ")
+        # sym.pprint(sym.simplify(sym.re(QLRRL + QRLLR) / sym.Abs(cf*sf)**2))
+        print(f"Im(QLRRL + QRLLR)/Re for 0{j}:", end=" ")
+        sym.pprint(sym.simplify(sym.im(QLRRL + QRLLR) / sym.re(QLRRL + QRLLR)))
