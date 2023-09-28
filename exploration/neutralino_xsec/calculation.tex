@@ -15,60 +15,128 @@
 
 \begin{abstract}
     \noindent
-    Here, I will outline the calculation of Neutralino pair production from proton--proton collisions at parton level to leading order.
+    Here, I will outline the calculation of neutralino pair production from proton--proton collisions at parton level to leading order.
 \end{abstract}
 
+\subsection{Kinematics}
+    At parton level, only quark--antiquark interactions can produce neutralinos to leading order.
+    Thereby, the only contributing process is \(q(p_1) \bar{q}(p_2) \to \nino[i](p_i) \nino[j](p_j)\).
+    With a process such as this where there are only two initial momenta and two final momenta, the entire kinematic process is confined to a plane, and the four-momenta can be parametrised as
+    \begin{subequations}
+        \begin{align}
+            p_1 = \pclosed{\frac{\sqrt{\hat{s}}}{2}, 0, 0, \frac{\sqrt{\hat{s}}}{2}} &  & p_2 = \pclosed{\frac{\sqrt{\hat{s}}}{2}, 0, 0, -\frac{\sqrt{\hat{s}}}{2}} \\
+            p_i = \pclosed{E_i, p \sin\theta, 0, p \cos\theta}                       &  & p_j = \pclosed{E_j, -p\sin\theta, 0, -p\cos\theta},
+        \end{align}
+    \end{subequations}
+    where \(p^2 = E_i^2 - m_i^2 = E_j^2 - m_j^2\) and \(E_i + E_j = \sqrt{\hat{s}}\).
+    These constraints lead to
+    \begin{subequations}
+        \begin{align}
+            E_{i, j} & = \frac{\hat{s} + m_{i, j}^2 - m_{j, i}^2}{2 \sqrt{\hat{s}}},                               \\
+            p^2      & = \frac{\hat{s}}{4} - \frac{m_i^2 + m_j^2}{2} + \frac{\pclosed{m_i^2 - m_j^2}^2}{4\hat{s}},
+        \end{align}
+    \end{subequations}
+    such that only two independent parameters define the interaction: \(\hat{s}\) and \(\theta\).
+    For convenience, I will use the Mandelstam variables\footnote{Perhaps cite this.} defined as
+    \begin{subequations}
+        \begin{align}
+            \hat{s} = \pclosed{p_1 + p_2}^2 & = \pclosed{p_i + p_j}^2, \\
+            \hat{t} = \pclosed{p_1-p_i}^2   & = \pclosed{p_2-p_j}^2,   \\
+            \hat{u} = \pclosed{p_1-p_j}^2   & = \pclosed{p_2-p_i}^2.   \\
+        \end{align}
+    \end{subequations}
+    Under the constraint \(\hat{s} + \hat{t} + \hat{u} = m_i^2 + m_j^2\), we still only have two degrees of freedom like before.
+    % \begin{subequations}
+    %     \begin{align}
+    %          & (p_1 \cdot p_2) = \frac{\hat{s}}{2}         &  & (p_i \cdot p_j) = \frac{\hat{s}-m_i^2-m_j^2}{2} \\
+    %          & (p_1 \cdot p_i) = \frac{m_i^2 - \hat{t}}{2} &  & (p_2 \cdot p_j) = \frac{m_j^2-\hat{t}}{2}       \\
+    %          & (p_1 \cdot p_j) = \frac{m_j^2 - \hat{u}}{2} &  & (p_2 \cdot p_i) = \frac{m_i^2-\hat{u}}{2}
+    %     \end{align}
+    % \end{subequations}
 
-\begin{figure} [ht!]
-    \centering
-    \inputtikz{s_channel}
-    \inputtikz{t_channel}
-    \inputtikz{u_channel}
-    \caption{The tree-level diagrams contributing to neutralino pair production at tree-level.}
-\end{figure}
+\subsection{Matrix elements}
+    The only contributing matrix elements at leading order are visualised in \cref{fig:tree_level_diagrams}.
 
-\begin{subequations}
+    \begin{figure} [ht!]
+        \centering
+        \inputtikz{s_channel}
+        \inputtikz{t_channel}
+        \inputtikz{u_channel}
+        \caption{The tree-level diagrams contributing to neutralino pair production.}
+        \label{fig:tree_level_diagrams}
+    \end{figure}
+
+    Using the Feynman rules from \comment{reference here} we get the matrix elements
+    \begin{subequations}
+        \begin{align}
+            \nonumber
+            \M_{\hat{s}} = -\frac{g^2}{2c_W^2} D_Z(\hat{s})       & \bclosed{ \wbar{u}_i\gamma^\mu\pclosed{O^{\prime\prime L}_{ij}P_L + O^{\prime\prime R}_{ij}P_R} v_j }           \\
+                                                                  & \times \bclosed{ \wbar{v}_2 \gamma_\mu \pclosed{C^L_{Zqq}P_L + C^R_{Zqq}P_R} u_1 },                             \\
+            \nonumber
+            \M_{\hat{t}} = -\sum_A 2g^2 D_{\wtilde{q}_A}(\hat{t}) & \bclosed{ \wbar{u}_i \pclosed{C_{\nino[i]\tilde{q}_Aq}^{L\ast}P_L + C_{\nino[i]\tilde{q}_Aq}^{R\ast} P_R} u_1 } \\
+                                                                  & \times \bclosed{ \wbar{v}_2 \pclosed{C^R_{\nino[j]\tilde{q}_Aq}P_L + C^L_{\nino[j]\tilde{q}_Aq}P_R} v_j },      \\
+            \nonumber
+            \M_{\hat{u}} = -\sum_B 2g^2 D_{\wtilde{q}_B}(\hat{u}) & \bclosed{ \wbar{u}_j \pclosed{C_{\nino[j]\tilde{q}_Bq}^{L\ast}P_L + C_{\nino[j]\tilde{q}_Bq}^{R\ast} P_R} u_1 } \\
+                                                                  & \times \bclosed{ \wbar{v}_2 \pclosed{C^R_{\nino[i]\tilde{q}_Bq}P_L + C^L_{\nino[i]\tilde{q}_Bq}P_R} v_i }.
+        \end{align}
+    \end{subequations}
+    Here I denote boson propagators
+    \[
+        D_b(q^2) = \frac{1}{q^2 - m_b^2 \pclosed{+ i m_b \Gamma_b}},
+    \]
+    where \(m_b\) is the mass of the boson \(b\) and \(\Gamma_b\) is its decay rate (which I will optionally include if stated).
+    Fermion spinors \(u_a, v_a\) are used as a shorthand for \(u(p_a), v(p_a)\) with \(a \in 1, 2, i, j\).
+
+\subsection{Cross-section}
+    The differential cross-section for the process \(q(p_1)\bar{q}(p_2) \to \nino[i](p_i) \nino[j](p_j)\) can be found by
+    \begin{equation}
+        \mathrm{d}\sigma = \frac{1}{4E_1E_2|\vec{v}_1 - \vec{v}_2|} \abs{\M}^2 \mathrm{d}\Pi_\text{LIPS},
+    \end{equation}
+    where \(\vec{v}_a = \vec{p}_a / E_a\) and \(\mathrm{d}\Pi_\text{LIPS}\) is the Lorentz-invariant phase space differential of the final state particles.
+    For massless initial state particles in the centre-of-mass frame, it
+    reduces to
+    \begin{equation}
+        \mathrm{d}\sigma = \frac{1}{2\hat{s}} \abs{\M}^2 \mathrm{d}\Pi_\text{LIPS}.
+    \end{equation}
+    Now, to look at the square of the matrix elements.
+    Summing over the spins and taking symmetry factors into account, we have at tree-level
     \begin{align}
-        s         & = \pclosed{p_1 + p_2}^2 = \pclosed{k_1 + k_2}^2 \\
-        t         & = \pclosed{p_1-k_1}^2 = \pclosed{p_2-k_2}^2     \\
-        u         & = \pclosed{p_1-k_2}^2 = \pclosed{p_2-k_1}^2     \\
-        s + t + u & = m_i^2 + m_j^2
+        \abs{M_0}^2 = \frac{1}{4 N_C} \pclosed{\frac{1}{2}}^{\delta_{ij}} \sum_\text{spins} \abs{\M_s + \M_t - \M_u}^2,
     \end{align}
-\end{subequations}
+    where the factor of \(\frac{1}{4N_C}\) comes from averaging over initial state spins and colours and the factor of \(\frac{1}{2}\) is a symmetry factor which is included if the final state particles are identical.
+    The Relative Sign of Interfering Feynman graphs (RSIF) is due to even or odd permutations of external spinors.
+    We can then define the differential cross-section as
+    \begin{equation}
+        \label{eq:dsigma}
+        \mathrm{d}\sigma = \frac{1}{8N_C} \pclosed{\frac{1}{2}}^{\delta_{ij}} \frac{1}{\hat{s}} \pclosed{I_{\hat{s}\hat{s}} + I_{\hat{t}\hat{t}} + I_{\hat{u}\hat{u}} + 2I_{\hat{s}\hat{t}} - 2I_{\hat{s}\hat{u}} - 2I_{\hat{t}\hat{u}}} \mathrm{d}\Pi_\text{LIPS},
+    \end{equation}
+    where \(I_{\hat{m}\hat{n}} = \sum_{\text{spins}} \Re{\M_{\hat{m}}^\ast \M_{\hat{n}}}, \quad \hat{m}, \hat{n} \in \hat{s}, \hat{t}, \hat{u}\).
 
-\begin{subequations}
-    \begin{align}
-         & (p_1 \cdot p_2) = \frac{s}{2}         &  & (k_1 \cdot k_2) = \frac{s-m_i^2-m_j^2}{2} \\
-         & (p_1 \cdot k_1) = \frac{m_i^2 - t}{2} &  & (p_2 \cdot k_2) = \frac{m_j^2-t}{2}       \\
-         & (p_1 \cdot k_2) = \frac{m_j^2 - u}{2} &  & (p_2 \cdot k_1) = \frac{m_i^2-u}{2}
-    \end{align}
-\end{subequations}
-\begin{subequations}
-    \begin{align} \nonumber
-        \M_s = -\frac{g^2}{2c_W^2} D_Z(s) & \bclosed{ \wbar{u}_i\gamma^\mu\pclosed{O^{\prime\prime L}_{ij}P_L + O^{\prime\prime R}_{ij}P_R} v_j } \\
-                                          & \times \bclosed{ \wbar{v}_2 \gamma_\mu \pclosed{C^L_{Zqq}P_L + C^R_{Zqq}P_R} u_1 }                    \\ \nonumber
-        \M_t = -2g^2 D_{\wtilde{q}}(t)    & \bclosed{ \wbar{u}_i \pclosed{C_{i}^{L*}P_L + C_{i}^{R*} P_R} u_1 }                                   \\
-                                          & \times \bclosed{ \wbar{v}_2 \pclosed{C^R_{j}P_L + C^L_{j}P_R} v_j }                                   \\ \nonumber
-        \M_u = -2g^2 D_{\wtilde{q}}(u)    & \bclosed{ \wbar{u}_j \pclosed{C_{j}^{L*}P_L + C_{j}^{R*} P_R} u_1 }                                   \\
-                                          & \times \bclosed{ \wbar{v}_2 \pclosed{C^R_{i}P_L + C^L_{i}P_R} v_i }
-    \end{align}
-\end{subequations}
 
-Defining \(t_i = t - m_i^2\), \(u_i = u - m_i^2\), we have
-\begin{subequations}
-    \begin{align}
-        \nonumber
-        I_{ss} & = \frac{g^4}{c_W^4} \abs{D_Z(s)}^2 \pclosed{{(C_{Zqq}^L)}^2+{(C_{Zqq}^R)}^2} \bigg\{ \abs{O_{ij}^{\prime\prime L}}^2 \pclosed{t_it_j + u_iu_j}                                                                \\
-               & \hspace{5.7cm} - 2\Re\cclosed{\pclosed{O_{ij}^{\prime\prime L}}^2} m_i m_j s \bigg\}                                                                                                                          \\
-        \nonumber
-        I_{tt} & = \sum_{A, B} 4 g^4 D_{\tilde{q}_A}(t) D_{\tilde{q}_B}(t) \pclosed{C_{\nino[i] \tilde{q}_A q}^{L} C_{\nino[i] \tilde{q}_B q}^{L\prime} + C_{\nino[i] \tilde{q}_A q}^{R} C_{\nino[i] \tilde{q}_B q}^{R\prime}} \\
-               & \hspace{3.6cm} \times \pclosed{C_{\nino[j] \tilde{q}_A q}^{L} C_{\nino[j] \tilde{q}_B q}^{L\prime} + C_{\nino[j] \tilde{q}_A q}^{R} C_{\nino[j] \tilde{q}_B q}^{R\prime}} t_i t_j                             \\
-        \nonumber
-        I_{uu} & = \sum_{A, B} 4 g^4 D_{\tilde{q}_A}(t) D_{\tilde{q}_B}(t) \pclosed{C_{\nino[i] \tilde{q}_A q}^{L} C_{\nino[i] \tilde{q}_B q}^{L\prime} + C_{\nino[i] \tilde{q}_A q}^{R} C_{\nino[i] \tilde{q}_B q}^{R\prime}} \\
-               & \hspace{3.6cm} \times \pclosed{C_{\nino[j] \tilde{q}_A q}^{L} C_{\nino[j] \tilde{q}_B q}^{L\prime} + C_{\nino[j] \tilde{q}_A q}^{R} C_{\nino[j] \tilde{q}_B q}^{R\prime}} u_i u_j                             \\
-    \end{align}
-    where \(I_{aa} = \sum_\text{spins} |\M_a|^2\) and \(I_{ab} = \sum_\text{spins} 2\Re{\M_a \M_b^\ast}\).
-\end{subequations}
+    Defining \(\hat{t}_{i, j} = \hat{t} - m_{i, j}^2\), \(\hat{u}_{i, j} = \hat{u} - m_{i, j}^2\), we have
+    \begin{subequations}
+        \begin{align}
+            \nonumber
+            I_{\hat{s}\hat{s}} & = \frac{g^4}{c_W^4} \abs{D_Z(\hat{s})}^2 \pclosed{{(C_{Zqq}^L)}^2+{(C_{Zqq}^R)}^2} \bigg\{ \abs{O_{ij}^{\prime\prime L}}^2 \pclosed{\hat{t}_i\hat{t}_j + \hat{u}_i\hat{u}_j}                                                    \\
+                               & \hspace{5.7cm} - 2\Re{\pclosed{O_{ij}^{\prime\prime L}}^2} m_i m_j \hat{s} \bigg\}                                                                                                                                              \\
+            \nonumber
+            I_{\hat{t}\hat{t}} & = \sum_{A, B} 4 g^4 D^\ast_{\tilde{q}_A}(\hat{t}) D_{\tilde{q}_B}(\hat{t}) \pclosed{C_{\nino[i] \tilde{q}_A q}^{L} C_{\nino[i] \tilde{q}_B q}^{L\ast} + C_{\nino[i] \tilde{q}_A q}^{R} C_{\nino[i] \tilde{q}_B q}^{R\ast}} \\
+                               & \hspace{3.3cm} \times \pclosed{C_{\nino[j] \tilde{q}_A q}^{L} C_{\nino[j] \tilde{q}_B q}^{L\ast} + C_{\nino[j] \tilde{q}_A q}^{R} C_{\nino[j] \tilde{q}_B q}^{R\ast}} \hat{t}_i \hat{t}_j                                       \\
+            \nonumber
+            I_{\hat{u}\hat{u}} & = \sum_{A, B} 4 g^4 D^\ast_{\tilde{q}_A}(\hat{u}) D_{\tilde{q}_B}(\hat{u}) \pclosed{C_{\nino[i] \tilde{q}_A q}^{L} C_{\nino[i] \tilde{q}_B q}^{L\ast} + C_{\nino[i] \tilde{q}_A q}^{R} C_{\nino[i] \tilde{q}_B q}^{R\ast}} \\
+                               & \hspace{3.4cm} \times \pclosed{C_{\nino[j] \tilde{q}_A q}^{L} C_{\nino[j] \tilde{q}_B q}^{L\ast} + C_{\nino[j] \tilde{q}_A q}^{R} C_{\nino[j] \tilde{q}_B q}^{R\ast}} \hat{u}_i \hat{u}_j                                      \\
+            \nonumber
+            I_{\hat{s}\hat{t}} & = \sum_{A} \frac{2 g^4}{c_W^2} \Re{D^\ast_{Z}(\hat{s}) D_{\tilde{q}_A}(\hat{t})} \bigg[\pclosed{Q_{\hat{s}\hat{t}}^{L^\ast L L^\ast L} + Q_{\hat{s}\hat{t}}^{R^\ast R R^\ast R}} m_im_j \hat{s}                                 \\
+                               & \hspace{4.3cm} - \pclosed{Q_{\hat{s}\hat{t}}^{L^\ast L L L} + Q_{\hat{s}\hat{t}}^{R^\ast R R R}} \hat{t}_i\hat{t}_j\bigg]                                                                                                       \\
+            \nonumber
+            I_{\hat{s}\hat{u}} & = \sum_{A} \frac{2 g^4}{c_W^2} \Re{D^\ast_{Z}(\hat{s}) D_{\tilde{q}_A}(\hat{u})} \bigg[\pclosed{Q_{\hat{s}\hat{u}}^{L L^\ast L L} + Q_{\hat{s}\hat{u}}^{R R^\ast R R}} m_im_j \hat{s}                                           \\
+                               & \hspace{4.3cm} - \pclosed{Q_{\hat{s}\hat{t}}^{L L^\ast L^\ast L} + Q_{\hat{s}\hat{t}}^{R R^\ast R^\ast R}} \hat{u}_i\hat{u}_j\bigg]                                                                                             \\
+            \nonumber
+            I_{\hat{t}\hat{u}} & = \sum_{A, B} 4 g^4 \Re{D^\ast_{\tilde{q}_A}(\hat{u}) D_{\tilde{q}_A}(\hat{t})} \bigg[\pclosed{Q_{\hat{t}\hat{u}}^{L^\ast L L^\ast L} + Q_{\hat{t}\hat{u}}^{R^\ast R R^\ast R}} m_im_j \hat{s}                                  \\
+                               & \hspace{2cm} + \pclosed{Q_{\hat{t}\hat{u}}^{R^\ast L L^\ast R} + Q_{\hat{t}\hat{u}}^{L^\ast R R^\ast L}}\pclosed{\hat{t}_i\hat{t}_j + \hat{u}_i\hat{u}_j - \hat{s}(\hat{s}-m_i^2-m_j^2)}\bigg]
+        \end{align}
+        \(Q_{\hat{t}\hat{u}}^{MNOP} = C_{\nino[i] \tilde{q}_A q}^{M} C_{\nino[j] \tilde{q}_A q}^{N} C_{\nino[i] \tilde{q}_B q}^{O} C_{\nino[j] \tilde{q}_B q}^{P}\), \(M, N, O, P \in \cclosed{L, R, L^\ast, R^\ast}\).
+    \end{subequations}
 
 
 \section{Fierz identities}
