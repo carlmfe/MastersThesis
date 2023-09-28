@@ -135,8 +135,8 @@
             \pclosed{\eta\psi}^\dagger                                  & = \bar{\psi}\bar{\eta}                                                          \\
             \pclosed{\eta\psi}\pclosed{\eta\phi}                        & = -\frac{1}{2} \pclosed{\eta\eta}\pclosed{\psi\phi}                             \\
             \eta\sigma^\mu\bar{\psi}                                    & = -\bar{\psi} \bar{\sigma}^\mu \eta                                             \\
-            (\sigma^\mu \bar{\eta})_A (\eta\sigma^\nu\bar{\eta})        & = \frac{1}{2}  g^{\mu\nu} \eta_A (\bar{\eta}\bar{\eta})                         \\
-            (\eta\sigma^\mu\bar{\eta})(\eta\sigma^\nu\bar{\eta})        & = \frac{1}{2} (\eta\eta)(\bar{\eta}\bar{\eta})                                  \\
+            (\sigma^\mu \bar{\eta})_A (\eta\sigma^\nu\bar{\eta})        & = \frac{1}{2} g^{\mu\nu} \eta_A (\bar{\eta}\bar{\eta})                          \\
+            (\eta\sigma^\mu\bar{\eta})(\eta\sigma^\nu\bar{\eta})        & = \frac{1}{2} g^{\mu\nu} (\eta\eta)(\bar{\eta}\bar{\eta})                       \\
             (\eta\sigma^\mu \partial_\mu \bar{\psi}) (\eta\psi)         & = -\frac{1}{2} (\psi\sigma^\mu \partial_\mu \bar{\psi})(\eta\eta)               \\
             (\partial_\mu \sigma^\mu \bar{\eta}) (\bar{\eta}\bar{\psi}) & = -\frac{1}{2} (\partial_\mu \psi \sigma^\mu \bar{\psi}) (\bar{\eta}\bar{\eta}) \\
             (\bar\eta\bar\psi) (\eta\sigma^\mu\bar\eta) (\eta\psi)      & = \frac{1}{4} (\eta\eta) (\bar\eta\bar\eta) (\psi\sigma^\mu\bar\psi)            \\
@@ -230,12 +230,14 @@
                 T_4^{\mu\nu\rho\sigma}           & = 4\pclosed{g^{\mu\nu}g^{\rho\sigma} - g^{\mu\rho}g^{\nu\sigma} + g^{\mu\sigma}g^{\nu\rho}}                           \\
             \end{align*}
             \begin{align*}
-                \tilde{T}_n^{\mu_1\ldots\mu_n}           & = \trace{\gamma^5 \gamma^{\mu_1} \cdots \gamma^{\mu_n}}                                                                     \\
-                \tilde{T}_{2n+1}^{\mu_1\ldots\mu_{2n+1}} & = 0                                                                                                                         \\
-                \tilde{T}_{2n}^{\mu_1\ldots\mu_{2n}}     & = \sum_{i=2}^{2n} {(-1)}^{i} g^{\mu_1 \mu_i} \tilde{T}_{2n-2}^{\mu_2\ldots\mu_{i-1}\mu_{i+1}\ldots\mu_{2n}} \qquad n \geq 3 \\
-                \tilde{T}_0                              & = 0                                                                                                                         \\
-                \tilde{T}_2^{\mu\nu}                     & = 0                                                                                                                         \\
-                \tilde{T}_4^{\mu\nu\rho\sigma}           & = -i\epsilon^{\mu\nu\rho\sigma}
+                \tilde{T}_n^{\mu_1\ldots\mu_n}           = & \trace{\gamma^5 \gamma^{\mu_1} \cdots \gamma^{\mu_n}}                                                                                   \\
+                \tilde{T}_{2n+1}^{\mu_1\ldots\mu_{2n+1}} = & 0                                                                                                                                       \\
+                \tilde{T}_{2n}^{\mu_1\ldots\mu_{2n}}     = & \sum_{i=2}^{2n} {(-1)}^{i} g^{\mu_1 \mu_i} \tilde{T}_{2n-2}^{\mu_2\ldots\mu_{i-1}\mu_{i+1}\ldots\mu_{2n}} \qquad n \geq 3               \\
+                \tilde{T}_0                              = & 0                                                                                                                                       \\
+                \tilde{T}_2^{\mu\nu}                     = & 0                                                                                                                                       \\
+                \tilde{T}_4^{\mu\nu\rho\sigma}           = & -4i\epsilon^{\mu\nu\rho\sigma}                                                                                                          \\
+                \tilde{T}_6^{\mu\nu\rho\sigma\tau\phi}   = & -4i\Big( g^{\mu\nu} \epsilon^{\rho\sigma\tau\phi} - g^{\mu\rho} \epsilon^{\nu\sigma\tau\phi} + g^{\mu\sigma} \epsilon^{\nu\rho\tau\phi} \\
+                                                           & \hspace{4mm} - g^{\mu\tau} \epsilon^{\nu\rho\sigma\phi} + g^{\mu\phi} \epsilon^{\nu\rho\sigma\tau} \Big)
             \end{align*}
             % \begin{align*}
             %     \trace{\gamma^5}      = & \trace{\text{odd \# of }\gamma\text{-matrices}} = 0           \\
