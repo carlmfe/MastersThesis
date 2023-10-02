@@ -1,8 +1,7 @@
 import numpy as np
 from numpy.typing import NDArray
-from sys import float_info
-EPSILON = float_info.epsilon
-TOL = np.sqrt(EPSILON)
+
+from .num_utils import EPSILON as TOL
 
 
 def inner_product(
@@ -56,7 +55,7 @@ def isLinearlyDependent(
     # If the components of u are the same multiple of the components of v,
     # the std(u/v) should be small. Furthermore, the components of u
     # corresponding to the zero-components of v should be zero.
-    if abs(np.std(proportionality)) < TOL and all(np.delete(u, nonzeros)) < TOL:
+    if abs(np.std(proportionality)) < TOL and all(abs(np.delete(u, nonzeros)) < TOL):
         if get_prop:
             return True, np.mean(proportionality)
         else:
@@ -88,8 +87,8 @@ def complete_nxn_basis(
         i.e. the zero-vector.
 
     Returns:
-        NDArray[np.complex64]: V, an ndarray with shape (n, n) that constitues a basis for
-                    an n-dimensional vector space.
+        NDArray[np.complex64]: V, an ndarray with shape (n, n) that constitues
+                               a basis for an n-dimensional vector space.
     """
     eye = np.eye(n, dtype=v.dtype)  # The trivial basis for the vector space.
     # The idea is to replace one of the basis vectors of eye with v.
@@ -97,7 +96,7 @@ def complete_nxn_basis(
         V = eye.copy()
         V[:, idx] = v
         # If V is invertible, it constitues a basis for the vector space.
-        if abs(np.linalg.det(V)) > EPSILON:
+        if abs(np.linalg.det(V)) > TOL:
             # Shifting the vector v in V to the required index.
             return shift(V.T, old_idx=idx, new_idx=index, axis=0).T
     raise RuntimeError(f"Could not complete basis for v={v}")
@@ -109,7 +108,7 @@ def gram_schmidt(V: NDArray[np.complex64]) -> NDArray[np.complex64]:
     Gram-Schmidt procedure.
 
     Args:
-        V (NDArray[np.complex64]): Matrix-like ndarray whose columns form a 
+        V (NDArray[np.complex64]): Matrix-like ndarray whose columns form a
                                    basis of a vector space.
 
     Returns:
