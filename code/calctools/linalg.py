@@ -10,7 +10,7 @@ def inner_product(
 ) -> float | complex:
     """Compute the inner product v^dagger * u for vector-like ndarrays v and
     u."""
-    return np.squeeze(v.conj().T @ u)
+    return np.squeeze(v.T @ u.conj())
 
 
 def magnitude(v: NDArray[np.complex64]) -> float:
@@ -30,7 +30,7 @@ def projection(
 ) -> NDArray[np.complex64]:
     """Compute the projection of v onto u for two vector-like ndarrays u and
     v."""
-    return inner_product(u, v) / inner_product(u, u) * u
+    return inner_product(v, u) / inner_product(u, u) * u
 
 
 def shift(
