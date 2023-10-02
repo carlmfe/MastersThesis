@@ -1,5 +1,11 @@
-from sympy import expand, nsimplify, simplify, factor, collect, pprint
-from utils import EPSILON
+from sympy import expand, nsimplify, simplify, factor, collect, pprint, Matrix
+from .utils import EPSILON
+from .num_utils import get_finite
+
+
+def print_matrix(matrix):
+    pprint(Matrix(get_finite(matrix)))
+    return None
 
 
 def prettyprint(expression, pretty=True, deepfactor=True, replace=None):

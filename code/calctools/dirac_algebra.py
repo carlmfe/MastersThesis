@@ -4,7 +4,7 @@ from sympy import conjugate, I
 from sympy import sqrt, cos, sin, exp
 import sys
 
-from utils import get_finite
+from .utils import get_finite
 
 zero = np.zeros((4, 4))
 
@@ -95,9 +95,11 @@ def lorentz_contract(v1, v2, num_idcs=1, is_matrices=False):
 
     else:
         if is_matrices:
-            result = result + v1[0]@v2[0] - v1[1]@v2[1] - v1[2]@v2[2] - v1[3]@v2[3]
+            result = result + v1[0]@v2[0] - \
+                v1[1]@v2[1] - v1[2]@v2[2] - v1[3]@v2[3]
         else:
-            result = result + v1[0]*v2[0] - v1[1]*v2[1] - v1[2]*v2[2] - v1[3]*v2[3]
+            result = result + v1[0]*v2[0] - v1[1] * \
+                v2[1] - v1[2]*v2[2] - v1[3]*v2[3]
 
     result = np.squeeze(result)
     if result.size == 1:
@@ -205,6 +207,36 @@ if __name__ == "__main__":
     p2 = fourvector(E, p, sym.pi, 0)
     pi = fourvector(Ei, k, theta, 0)
     pj = fourvector(Ej, k, theta+sym.pi, 0)
+
+    def is_even(sequence):
+        my_count = 0
+        for i, num in enumerate(sequence, start=1):
+            my_count += sum(num > num2 for num2 in sequence[i:])
+        return not my_count % 2
+
+    def LeviCivita(sequence):
+        # print(sequence)
+        if len(sequence) > len(set(sequence)):
+            return 0
+        elif is_even(sequence):
+            return 1
+        else:
+            return -1
+
+    minkowski_civita = np.array(
+        list(map(lambda idcs: LeviCivita(idcs),
+                 np.transpose(np.indices((4, 4, 4, 4)),
+                              axes=(1, 2, 3, 4, 0)).reshape(256, 4)))
+    ).reshape(4, 4, 4, 4)
+
+    pip1pjp2 = np.tensordot(
+        np.tensordot(pi, p1, axes=0),
+        np.tensordot(pj, p2, axes=0),
+        axes=0
+    )
+
+    print(lorentz_contract(minkowski_civita, pip1pjp2, num_idcs=4))
+    sys.exit()
 
     t = lorentz_contract(p1-pi, p1-pi)
     u = lorentz_contract(p1-pj, p1-pj)
