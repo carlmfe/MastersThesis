@@ -49,15 +49,33 @@ def isLinearlyDependent(
     u: NDArray[np.complex64],
     v: NDArray[np.complex64],
     get_prop=False
-):
-    nonzeros = np.nonzero(v)
-    proportionality = u[nonzeros] / v[nonzeros]
-    # If the components of u are the same multiple of the components of v,
-    # the std(u/v) should be small. Furthermore, the components of u
-    # corresponding to the zero-components of v should be zero.
-    if abs(np.std(proportionality)) < TOL and all(abs(np.delete(u, nonzeros)) < TOL):
+) -> bool:
+    """Check to see whether two vector-like ndarray u and v are linearly
+    dependent. That is, they can be written as u = prop*v, for some scalar
+    prop.
+
+    Args:
+        u (NDArray[np.complex64]): 1D-like ndarray.
+        v (NDArray[np.complex64]): 1D-like ndarray
+        get_prop (bool, optional): Whether to return prop in u = prop*v.
+                                   Defaults to False.
+
+    Returns:
+        bool: True if u and v are linearly dependent. Also returns a
+              complex/float if get_prop=True.
+    """
+    # If u and v are linearly dependent, they must be parallel. This means
+    # that |<u|v>| = |u|*|v|.
+    # If linearly dependent, then u = prop*v, and the proportionality can be
+    # found from <u|v> = prop*<v|v>.
+    uu = inner_product(u, u)
+    vv = inner_product(v, v)
+    uv = inner_product(u, v)
+
+    # Check linear dependence
+    if abs(uv*uv.conjugate() - uu*vv) < TOL:
         if get_prop:
-            return True, np.mean(proportionality)
+            return True, uv / vv
         else:
             return True
     else:
