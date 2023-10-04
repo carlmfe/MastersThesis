@@ -35,9 +35,9 @@
     \end{equation}
 
     \subsection{Factorisation algorithm}
-        The algorithm is will be based on finding vector \(\vec{v} \in  \mathbb{C}^n\) that satisfy \(A \vec{v}^* = \sigma \vec{v}\), for some real, positive \(\sigma\).
+        The algorithm is will be based on finding vector \(\vec{v} \in  \mathbb{C}^n\) that satisfy \(A \vec{v}^* = \sigma \vec{v}\), for some real, non-negative \(\sigma\).
         This vector will be called a \emph{Takagi vector} for future reference.
-        Existence of these vectors for any matrix \(A\) such that \(AA^\ast\) only has real, positive eigenvalues is detailed later.
+        Existence of these vectors for any matrix \(A\) such that \(AA^\ast\) only has real, non-negative eigenvalues is detailed later.
 
         To find \(U\), I propose here an algorithm based on the proof for Takagi factorisation in~\autocite{Horn}.
         Given a Takagi vector \(\vec{v} \in \mathbb{C}^n\) of \(A\),\footnote{A proof that this can be found is detailed elsewhere.} and an orthonormal basis \(\cclosed{\vec{v}, \vec{v}_2, \ldots, \vec{v}_n}\) of \(\mathbb{C}^n\), it is possible to write \(A\) as
@@ -84,57 +84,49 @@
 
 \section{Proofs}
     \paragraph{The Takagi vector.}
-    For any \(A \in M_{n}(\mathbb{C})\) such that \(AA^\ast\) only has real, positive eigenvalues, there exists a vector \(\vec{v} \in \mathbb{C}^n\) such that \(A \vec{v}^* = \sigma \vec{v}\), where \(\sigma\) is a real, positive number.\\
-    \emph{Proof.} Consider a vector \(\vec{x} \in \mathbb{C}^n\) that is an eigenvector of \(AA^\ast\) with corresponding eigenvalue \(\lambda\).
+    For any \(A \in M_{n}(\mathbb{C})\) such that \(AA^\ast\) only has real, non-negative eigenvalues, there exists a non-zero vector \(\vec{v} \in \mathbb{C}^n\) such that \(A \vec{v}^* = \sigma \vec{v}\), where \(\sigma\) is a real, non-negative number.\\
+    \emph{Proof.} Consider a vector \(\vec{x} \neq \vec{0} \in \mathbb{C}^n\) that is an eigenvector of \(AA^\ast\) with corresponding eigenvalue \(\lambda\).
     There are two cases:
     \begin{itemize}
         \item[(a)] \(A\vec{x}^*\) and \(\vec{x}\) are linearly dependent.
         \item[(b)] \(A\vec{x}^*\) and \(\vec{x}\) are linearly independent.
     \end{itemize}
     In case (a), we must have that \(A\vec{x}^* = \mu \vec{x}\) for some \(\mu \in \mathbb{C}\), since they are linearly dependent.
-    Then \(AA^\ast \vec{x} = A \mu^\ast \vec{x}^* = \abs{\mu}^2 \vec{x} \equiv \lambda \vec{x}\), which is positive by definition.\\
+    Then \(AA^\ast \vec{x} = A \mu^\ast \vec{x}^* = \abs{\mu}^2 \vec{x} \equiv \lambda \vec{x}\), which is non-negative by definition.\\
     In case (b), the vector \(\vec{y} = A\vec{x}^* + \mu \vec{x}\) is non-zero for any \(\mu \in \mathbb{C}\), since \(A\vec{x}^*\) and \(\vec{x}\) are linearly independent.
     Then we can choose \(\mu\) such that \(\abs{\mu}^2 = \lambda\) to get that \(A \vec{y}^* = A\pclosed{A^\ast \vec{x} + \mu^\ast \vec{x}^*} = \lambda\vec{x} + \mu^\ast A\vec{x^*} = \mu\mu^\ast \vec{x} + \mu^\ast A\vec{x}^* = \mu^\ast \pclosed{A \vec{x}^* + \mu \vec{x}} = \mu^\ast \vec{y}\).\\
     As such, we can always find a vector \(\tilde{\vec{v}} \in \mathbb{C}^n\) such that \(A \tilde{\vec{v}}^* = \mu \tilde{\vec{v}}\) for some \(\mu \in \mathbb{C}^n\).
     Furthermore, we can define a vector \(\vec{v} = \exp{i\theta} \tilde{\vec{v}}\) for a \(\theta \in \mathbb{R}\) to get \(A\vec{v}^* = A \pclosed{\exp{i\theta} \tilde{\vec{v}}}^\ast = \exp{-i\theta} A\tilde{\vec{v}}^* = \exp{-i\theta} \mu \tilde{\vec{v}} = \exp{-2i\theta} \mu \exp{i\theta} \tilde{\vec{v}} = \exp{-2i\theta} \mu \vec{v} \equiv \sigma \vec{v}\).
-    This allows us to choose the phase of \(\sigma = \exp{-2i\theta} \mu\) to be such that \(\sigma\) is real and positive.
+    This allows us to choose the phase of \(\sigma = \exp{-2i\theta} \mu\) to be such that \(\sigma\) is real and non-negative.
     \medskip
 
     \paragraph{Eigenvalues of \(AA^\ast\) for symmetric \(A\).}
     Given an \(N \by N\) complex matrix \(A\), the eigenvalues of \(AA^\ast\) are always real and non-negative.\\
     \emph{Proof}.
-    Consider the eigenvectors \(\cclosed{\vec{x}_i}\) of \(A\) with corresponding eigenvalues \(\mu_i\).
-    Since \(A\) is symmetric, these eigenvectors form a basis for \(\mathbb{C}^n\).
-    As such, any vector \(\vec{v} \in \mathbb{C}^n\) can be written as \(\vec{v} = \sum_i a_i \vec{x}_i\) for some coefficients \(a_i \in \mathbb{C}\).
-    The eigenvalues of \(AA^\ast\) are real and non-negative if and only if \(AA^\ast\) is positive semi-definite.
-    To check this, we can look at
-    \begin{align*}
-        \vec{v}^T AA^\ast \vec{v}^\ast
-        &= \pclosed{\sum_i A^T a_i \vec{x}_i}^T \pclosed{\sum_j A^\ast a_j^\ast \vec{x}_j^\ast}
-        = \sum_{ij} a_i a_j^\ast \pclosed{A \vec{x}_i}^T \pclosed{A^\ast \vec{x}_j^\ast} \\
-        &= \sum_{ij} a_i a_j^\ast \pclosed{\mu_i \vec{x}_i}^T \pclosed{\mu_j^\ast \vec{x}_j^\ast}
-        = \sum_{ij} a_i a_j^\ast \mu_i \mu_j^\ast \pclosed{\vec{x}_i^\dagger \vec{x}_j}^\ast \\
-        &= \sum_i \cclosed{\abs{a_i}^2 \abs{\mu_i}^2 \norm{x_i}^2 + 2\sum_{j>i} \Re{a_i a_j^\ast \mu_i \mu_j^\ast \pclosed{\vec{x}_i^\dagger \vec{x}_j}^\ast}}
-        \geq 0,
-    \end{align*}
-    where we have used that \(A\) is symmetric in the second transition.
-    Since any vector in \(\mathbb{C}^n\) can be written on the form of \(\vec{v}\), this means that \(AA^\ast\) must be positive semi-definite, and all its eigenvalues must be real and non-negative.
-    This last part can easily be seen by considering an eigenvector \(\vec{y}\) of \(AA^\ast\) with corresponding eigenvalue \(\lambda\).
-    Then
-    \[0 \leq \vec{y}^\dagger AA^\ast \vec{y} = \vec{y}^\dagger \lambda \vec{y} = \lambda \norm{\vec{y}}^2,\]
-    meaning \(\lambda \geq 0\).
+    Consider \(\vec{x} \neq \vec{0}\) an eigenvector of \(AA^\ast\) with corresponding eigenvalue \(\lambda\).
+    Then we must have that
+    \[\lambda \vec{x}^\dagger \vec{x} = \vec{x}^\dagger AA^\ast \vec{x} = \pclosed{A^\dagger \vec{x}}^\dagger \pclosed{A^\ast \vec{x}} = \pclosed{A^\ast \vec{x}}^\dagger \pclosed{A^\ast \vec{x}},\]
+    where we have used that \(A^\dagger = \pclosed{A^T}^\ast = A^\ast\).
+    This means that \(\lambda \geq 0\), since for any vector \(\vec{v} \in \mathbb{C}^n\) we have that \(\vec{v}^\dagger \vec{v} \geq 0\).
+    As this holds for all eigenvectors \(\vec{x}\) of \(AA^\ast\), all its eigenvalues must be non-negative.
 
-    \[AA^\ast = AA^\dagger = (AA^\dagger)^\dagger\]
-    \[\vec{x}^T A A^\ast \vec{x}^\ast = (A^T \vec{x})^T (A \vec{x})^\ast = (A \vec{x})^T (A \vec{x})^\ast = \mu \vec{x}^T \mu^\ast \vec{x}^\ast = \abs{\mu}^2 (\vec{x}^\dagger \vec{x})^\ast \geq 0\]
-    \[\sum_i a_i^\ast \vec{x}_i^T A A^\ast \sum_j a_j \vec{x}_j^\ast = \sum_{ij} a_i^\ast a_j (A \vec{x}_i)^T (A\vec{x}_j)^\ast = \sum_{ij} a_i^\ast a_j \mu_i \mu_j^\ast (\vec{x}_i^\dagger \vec{x}_j)^\ast\]
-    \[= \sum_i \abs{a_i}^2 \abs{\mu_i}^2 \norm{\vec{x}_i}^2 + 2\sum_{j>i} \Re{a_i^\ast a_j \mu_i \mu_j^\ast (\vec{x}_i^\dagger \vec{x}_j)^\ast}\]
+    \paragraph{Diagonalisation step of a symmetric matrix \(A\).}
+    For any symmetric matrix \(A \in M_n(\mathbb{C})\), there exist a unitary matrix \(V \in M_n(\mathbb{C})\) such that
+    \[V^\dagger A V^\ast = \begin{pmatrix} \sigma & \vec{0} \\ \vec{0} & A_2 \end{pmatrix},\]
+    where \(\sigma\) is a real, non-negative number and \(A_2 \in M_{n-1}(\mathbb{C})\) is also a symmetric matrix. \\
+    \emph{Proof.}
+    Consider a normalised Takagi vector \(\vec{v} \neq \vec{0}\) of \(A\) such that \(A\vec{v}^\ast = \sigma \vec{v}\) for some real, non-negative \(\sigma\) and \(\vec{v}^\dagger \vec{v} = 1\).
+    We can then complete a basis for \(\mathbb{C}^n\) with unit vectors \(\vec{v}_i\) where \(i \in 1, \ldots, n\), where we define \(\vec{v}_1 \equiv \vec{v}\).
+    Defining a unitary matrix \(V = \bclosed{\vec{v}_1, \ldots, \vec{v}_{n}}\), the first column of the product
+    \[\pclosed{V^\dagger A V^\ast}_{i1} = \vec{v}_i^\dagger A \vec{v}^* = \vec{v}_i^\dagger \sigma \vec{v} = \sigma \delta_{i1},\]
+    where \(\delta_{ij}\) is the Kronecker delta symbol, and we have used the Takagi property of \(\vec{v}\) and the orthonormality of \(\vec{v}_i^\dagger \vec{v}_j\).
+    This means only the first component of the first column of \(V^\dagger A V^\ast\) is non-zero, and has value \(\sigma\).
+    Now since \(A\) is symmetric, we have that
+    \(\pclosed{V^\dagger A V^\ast}^T = V^\dagger A^T V^\ast = V^\dagger A V^\ast\)
+    must also be symmetric, and thus must have the form
+    \[V^\dagger A V^\ast = \begin{pmatrix} \sigma & \vec{0} \\ \vec{0} & A_2 \end{pmatrix},\]
+    for a symmetric \(A_2 \in M_{n-1}(\mathbb{C})\).
 
-    \[(V^\dagger A V^\ast)_{i0} = V^\ast_{ki} A_{kl} V^\ast_{l0} = V^\ast_{ki} \sigma V_{k0} = \sigma \delta_{i0}\]
-    \[(V^\dagger A V^\ast)_{0i} = V^\ast_{k0} A_{kl} V^\ast_{li} = A_{lk} V^\ast_{k0} V^\ast_{li} = \sigma V_{l0} V_{li}^\ast = \sigma \delta_{0i}\]
-    \[\vec{v}_i^\dagger A \vec{v}^* = \vec{v}_i^\dagger \sigma \vec{v} = \sigma \vec{v}_i^\dagger \vec{v} = \sigma \vec{e}_0\]
-    \[\vec{v}^\dagger A \vec{v}_i = (A^T \vec{v}^\ast)^T \vec{v}_i = (A \vec{v}^\ast)^T \vec{v}_i = \sigma\vec{v}^\dagger \vec{v}_i = \sigma \vec{e}_0^T\]
-
-    \[(V^\dagger A V^\ast)^T = V^\dagger A^T V^\ast = V^\dagger A V^\ast\]
 
     \printbibliography
 
