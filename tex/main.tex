@@ -1,8 +1,9 @@
-\documentclass[a4paper, UKenglish]{book}
-\usepackage[UKenglish]{uiomasterfp}
+\documentclass[UKenglish]{uiomaster/uiomasterthesis}
+\usepackage[UKenglish]{uiomaster/uiomasterfp}
 
 \usepackage{style}
 \usepackage{commands}
+\usepackage{writingtools}
 
 \begin{document}
     \uiomasterfp[author=Carl Martin Fevang,
@@ -13,12 +14,15 @@
                  long,
                  subtitle=With Subtitle,
                  supervisor=Are Raklev,
-                 title=My Master Thesis]
+                 title=My Master's Thesis]
 
     \tableofcontents
 
     \chapter{Introduction}
     \include{chapters/introduction}
+
+    \chapter{Quantum Field Theory}
+    \include{chapters/QFT}
 
  
 \end{document}
