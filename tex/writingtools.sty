@@ -1,0 +1,151 @@
+%%% From Nanna Bryne %%%
+
+
+% !TEX root = ../thesis.tex
+
+
+
+
+% -------
+% Colours:
+
+\definecolor{n@pink}{rgb}{0.93, 0.51, 0.93}
+\definecolor{n@yellow}{rgb}{0.87, 1.0, 0.0}
+\definecolor{n@darkblue}{rgb}{0.0, 0.14, 0.4}
+\definecolor{n@redish}{rgb}{1.0, 0.0, 0.16}
+\definecolor{n@green}{rgb}{0.31, 0.49, 0.16}
+\definecolor{n@lilac}{rgb}{0.87, 0.0, 1.0}
+\definecolor{n@babyblue}{rgb}{0.63, 0.79, 0.95}
+\definecolor{n@blue}{rgb}{0.0, 0.5, 1.0}
+\definecolor{n@darkred}{RGB}{165, 63, 38}
+
+
+
+%TODO : "spelling" / "grammar"
+
+
+% in-sentence comment:
+% \newcommand{\comment}[1]{\textcolor{n@redish}{$\lceil$~\small{#1}~$\rfloor$}}
+\newcommand{\comment}[1]{\textcolor{n@redish}{%
+    {\large{$\boldsymbol{\ulcorner}$}}%
+    % {\fontfamily{phv}\selectfont
+    {\small{#1}}%
+    {\large{$\boldsymbol{\lrcorner}$}}}}
+
+% something important?
+\newcommand{\important}[1]{\colorbox{black}{\textcolor{white}{\textbf{#1}}}}
+
+% highlight
+\newcommand{\hl}[1]{\colorbox{n@yellow}{#1}}    
+
+% need citation:
+\makeatletter
+\newcommand{\needcite}[1][\@nil]{%
+\def\tmp{#1}%
+    \ifx\tmp\@nnil
+        ~\textcolor{n@darkblue}{$\vdots $ \copyright ~$\vdots $}~
+    \else
+        \textcolor{n@darkblue}{#1$^{\text{\copyright}}$}
+    \fi}
+\makeatother
+
+
+% rephrase:
+\newcommand{\rephrase}[1]{%
+    {\large{\textcolor{n@green}{$\boldsymbol{\lceil}$}}}%
+    {\normalsize{#1}}%
+    {\large{\textcolor{n@green}{$\boldsymbol{\rfloor}_{\circlearrowleft}$}}}}
+    
+% awkward wording:
+\newcommand{\cringe}[1]{%
+    {\large{\textcolor{n@green}{$\boldsymbol{\lceil}$}}}%
+    {\normalsize{#1}}%
+    {\large{\textcolor{n@green}{$\boldsymbol{\rfloor}_{\circlearrowleft}$}}}}
+
+
+% needs double-checking:
+\newcommand{\checkthis}[1]{%
+    {\large{\textcolor{n@lilac}{$\boldsymbol{\lceil}$}}}%
+    {\normalsize{#1}}%
+    {\large{\textcolor{n@lilac}{$\boldsymbol{\rfloor}_{?}$}}}}
+
+% Bullet points:
+\newenvironment{bullets}
+    {\par\medskip
+    \begin{itemize}
+     \begingroup\color{n@pink}%
+     \ignorespaces}
+   {\endgroup\end{itemize}
+    \medskip}
+
+% Phantom paragraph:
+\makeatletter
+\newcommand{\phpar}[1][\@nil]{%
+\def\tmp{#1}%
+    \ifx\tmp\@nnil
+        \par\colorbox{n@darkblue}{\textcolor{white}{\textsc{phantom paragraph}}}
+    \else
+        \par\colorbox{n@darkblue}{\textcolor{white}{\textsc{phantom paragraph:}}}~\textcolor{n@darkblue}{\textsc{#1}}
+    \fi}
+\makeatother
+
+% \newcommand{\phpar}[1][]{\colorbox{n@darkblue}{\textsc{phantom paragraph}}}
+
+
+
+% \newcommand*{\grammar}[2][]{\textcolor{n@green}{#2}\colorbox{n@green}{\textcolor{white}{#1}}}
+% Check spelling
+\makeatletter
+\newcommand{\grammar}[2][\@nil]{%
+\textcolor{n@blue}{#2\(^{?}\)}%
+\def\tmp{#1}%
+    \ifx\tmp\@nnil
+        %
+    \else
+        ~$^\text{\colorbox{n@blue}{\tiny{\textcolor{white}{#1}}}}$
+    \fi}
+\makeatother
+
+
+
+% sometext [...]
+\newcommand*{\blahblah}{\textcolor{n@darkred}{blah blah [\dots]}}
+
+% Temporary section
+
+\fancypagestyle{draft}{
+    \fancyhead[C]{
+        \begin{tikzpicture}[remember picture,overlay]
+            \node [opacity=0.1, rotate=54.74, minimum height=.3\paperwidth, minimum width=.9\paperheight] at (current page.center) {\fontsize{180}{210}\selectfont DRAFT};
+        \end{tikzpicture}
+    }
+}
+
+\newenvironment{draft}{% 
+    \noindent\textcolor{n@blue}{
+    \rule{\linewidth}{1.2pt}
+    }
+    \pagestyle{draft}
+    \textcolor{n@blue}{
+    \section*{DRAFT}
+    \begin{flushleft}
+        {\huge{$\boldsymbol{\ulcorner}$}}
+    \end{flushleft}
+    }%
+    \noindent%
+    }{
+    \pagestyle{plain}
+    \textcolor{n@blue}{
+    \section*{}
+    \begin{flushright}
+        {\huge{$\boldsymbol{\lrcorner}$}}
+    \end{flushright}
+    \noindent\rule{\linewidth}{1.2pt}
+    }%
+    }
+
+
+% need reference/showing
+\newcommand*{\provethis}[1]{\textcolor{n@darkblue}{%
+    {\large{[}}$\leftarrow${\small{#1}}{\large{]}$_\blacksquare$}%
+    }}
