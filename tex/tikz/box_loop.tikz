@@ -1,0 +1,21 @@
+\begin{feynman}
+    \vertex at (-1  , 1  ) (a);
+    \vertex at ( 1  , 1  ) (b);
+    \vertex at ( 1  ,-1  ) (c);
+    \vertex at (-1  ,-1  ) (d);
+    \vertex at (-2  , 2  ) (pa);
+    \vertex at ( 2  , 2  ) (pb);
+    \vertex at ( 2  ,-2  ) (pc);
+    \vertex at (-2  ,-2  ) (pd);
+
+    \diagram*{
+        (d) -- [momentum=\(q\), edge label'=\(m_0^2\)] (a)
+            -- [momentum=\(q+p_1\), edge label'=\(m_1^2\)] (b)
+            -- [momentum=\(q+p_2\), edge label'=\(m_2^2\)] (c)
+            -- [momentum=\(q+p_3\), edge label'=\(m_3^2\)] (d),
+        (pa) -- [momentum=\(p_1\)] (a),
+        (pb) -- [momentum'=\(p_2-p_1\)] (b),
+        (pc) -- [momentum=\(p_3-p_2\)] (c),
+        (pd) -- [momentum'=\(-p_3\)] (d),
+    };
+\end{feynman}

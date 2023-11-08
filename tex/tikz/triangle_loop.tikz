@@ -1,0 +1,17 @@
+\begin{feynman}
+    \vertex at (-1  , 1  ) (a);
+    \vertex at ( 1.2361, 1) (b);
+    \vertex at ( 0.1180,-1) (c);
+    \vertex at (-2  , 2  ) (pa);
+    \vertex at ( 2.2361, 2) (pb);
+    \vertex at ( 0.1180,-2.4142) (pc);
+
+    \diagram*{
+        (c) -- [momentum=\(q\), edge label'=\(m_0^2\)] (a)
+            -- [momentum=\(q+p_1\), edge label'=\(m_1^2\)] (b)
+            -- [momentum=\(q+p_2\), edge label'=\(m_2^2\)] (c),
+        (pa) -- [momentum=\(p_1\)] (a),
+        (pb) -- [momentum'=\(p_2-p_1\)] (b),
+        (pc) -- [momentum=\(p_2\)] (c),
+    };
+\end{feynman}
