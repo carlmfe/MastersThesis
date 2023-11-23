@@ -6,23 +6,33 @@
 \usepackage{writingtools}
 
 \begin{document}
-    \uiomasterfp[author=Carl Martin Fevang,
-                 colour=green,
-                 date=\today,
-                 dept=Department of Physics,
-                 fac=Faculty of Mathematics and Natural Sciences,
-                 long,
-                 subtitle=With Subtitle,
-                 supervisor=Are Raklev,
-                 title=My Master's Thesis]
+\uiomasterfp[author=Carl Martin Fevang,
+    colour=green,
+    date=\today,
+    dept=Department of Physics,
+    fac=Faculty of Mathematics and Natural Sciences,
+    long,
+    subtitle=With Subtitle,
+    supervisor=Are Raklev,
+    title=My Master's Thesis]
 
+\begin{draft}
     \tableofcontents
 
     \chapter{Introduction}
-    \include{chapters/introduction}
+        \include{chapters/introduction}
 
     \chapter{Quantum Field Theory}
-    \include{chapters/QFT}
+        \include{chapters/QFT}
 
- 
+    \chapter{Supersymmetry}
+        \include{chapters/SUSY}
+
+    \chapter{Neutralino Pair Production at Parton Level}
+        \include{chapters/parton_calculation}
+
+    \chapter{Proton---Proton Neutralino Pair Production}
+\end{draft}
+
+
 \end{document}

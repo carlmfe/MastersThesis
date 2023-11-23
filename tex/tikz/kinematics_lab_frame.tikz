@@ -1,0 +1,25 @@
+\node at (-3, 0) (z0) {};
+\node at (3, 0) (z1) {$z$};
+\node at (0, 2) (x1) {$x$};
+
+\node at (0, 0) (O) {};
+\node at (2, 0) (kj) {};
+\node at (2, 0.25) (kj_lbl) {$\vec{k}_j$};
+\node at (-2, 0) (ki) {};
+\node at (-2, 0.25) (ki_lbl) {$\vec{k}_i$};
+\node at (2, 1) (k) {$\vec{k}$};
+\node at (-2, -1) (pij) {$\vec{p}_i + \vec{p}_j$};
+
+\node at (1, 0) (a) {};
+\node at (0.89, 0.45) (b) {};
+\node at (0, -2) (ghost) {};
+
+\draw [->] (z0) -- (z1);
+\draw [->] (O.center) -- (x1);
+
+\draw [->] (ki) -- (O.center);
+\draw [->] (kj) -- (O.center);
+\draw [->] (O.center) -- (k);
+\draw [->] (O.center) -- (pij);
+
+\draw [bend right] (a.center) edge node [right, midway] {$\theta$} (b.center);

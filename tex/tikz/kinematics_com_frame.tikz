@@ -1,0 +1,44 @@
+% Axis nodes
+\node at (-3, 0) (z0) {};
+\node at (3, 0) (z1) {$z$};
+\node at (0, 2) (x1) {$x$};
+\node at (-0.84,-1.41) (y1) {$y$};
+% Origin and momenta nodes
+\node at (0, 0) (O) {};
+\node at (-2, 0) (k) {};
+\node at (-2, 0.25) (k_lbl) {$\vec{k}$};
+\node at (2, 0) (kij) {};
+\node at (2, -0.25) (kij_lbl) {$\vec{k}_i + \vec{k}_j$};
+\node at (1.5, 1) (pi) {};
+\node at (1.6, 1.1) (pi_lbl) {$\vec{p}_i$};
+\node at (-1.5, -1) (pj) {};
+\node at (-1.6, -1.1) (pj_lbl) {$\vec{p}_j$};
+% Helping nodes in drawing angular definitions
+\node at (-0.3, 1) (a) {};
+\node at (-0.3, -0.51) (b) {};
+\node at (0, 1.51) (e) {};
+\node at (1.5, -0.51) (c) {};
+\node at (0, 0.58) (phi0) {};
+\node at (-0.15, 0.5) (phi1) {};
+\node at (0.57, -0.19) (theta0) {};
+\node at (0.5, 0.33) (theta1) {};
+% Draw axes
+\draw [->] (z0) -- (z1);
+\draw [->] (O.center) -- (x1);
+\draw [->] (O.center) -- (y1);
+% Draw momentum arrows
+\draw [->] (kij) -- (O.center);
+\draw [->] (O.center) -- (k.center);
+\draw [->] (O.center) -- (pi.center);
+\draw [->] (O.center) -- (pj.center);
+% Draw angular definitions
+\draw [dashed] (pi.center) -- (a.center) -- (b.center) -- (c.center) -- (pi.center);
+\draw [dashed] (e.center) -- (a.center);
+\draw [->, dashed] (O.center) -- (a.center);
+\draw [->, dashed] (O.center) -- (c.center);
+\draw [bend right] (phi0.center) edge node [above, midway] {$\phi$} (phi1.center);
+\draw [bend right] (theta0.center) edge node [right, midway] {$\theta$} (theta1.center);
+% \draw [dashed] (k.center) -- (d.center) -- (e.center);
+% \draw [dashed] (O.center) -- (d.center);
+% \draw [bend right] (a.center) edge node [right, midway] {$\theta^\ast$} (c.center);
+% \draw [bend right] (c.center) edge node [right, midway] {$\phi^\ast$} (b.center);
