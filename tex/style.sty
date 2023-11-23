@@ -1,5 +1,4 @@
-% \usepackage[dvips]{graphicx}
-\usepackage{graphicx}
+% Style
 
 % Variable enumeration
 \usepackage{enumerate}
@@ -32,4 +31,7 @@
 % Tikz and Figures
 \usepackage{tikz}
 \usepackage[compat=1.1.0]{tikz-feynman}
-\newcommand{\inputtikz}[1]{\begin{tikzpicture} \input{tikz/#1.tikz} \end{tikzpicture}}
+\newcommand{\inputtikz}[2][]{\begin{tikzpicture}[#1] \input{tikz/#2.tikz} \end{tikzpicture}}
+
+% Math
+\usepackage{tensor}

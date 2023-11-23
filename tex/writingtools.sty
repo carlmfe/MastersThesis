@@ -27,21 +27,21 @@
 % in-sentence comment:
 % \newcommand{\comment}[1]{\textcolor{n@redish}{$\lceil$~\small{#1}~$\rfloor$}}
 \newcommand{\comment}[1]{\textcolor{n@redish}{%
-    {\large{$\boldsymbol{\ulcorner}$}}%
-    % {\fontfamily{phv}\selectfont
-    {\small{#1}}%
-    {\large{$\boldsymbol{\lrcorner}$}}}}
+        {\large{$\boldsymbol{\ulcorner}$}}%
+            % {\fontfamily{phv}\selectfont
+            {\small{#1}}%
+            {\large{$\boldsymbol{\lrcorner}$}}}}
 
 % something important?
 \newcommand{\important}[1]{\colorbox{black}{\textcolor{white}{\textbf{#1}}}}
 
 % highlight
-\newcommand{\hl}[1]{\colorbox{n@yellow}{#1}}    
+\newcommand{\hl}[1]{\colorbox{n@yellow}{#1}}
 
 % need citation:
 \makeatletter
 \newcommand{\needcite}[1][\@nil]{%
-\def\tmp{#1}%
+    \def\tmp{#1}%
     \ifx\tmp\@nnil
         ~\textcolor{n@darkblue}{$\vdots $ \copyright ~$\vdots $}~
     \else
@@ -53,35 +53,46 @@
 % rephrase:
 \newcommand{\rephrase}[1]{%
     {\large{\textcolor{n@green}{$\boldsymbol{\lceil}$}}}%
-    {\normalsize{#1}}%
-    {\large{\textcolor{n@green}{$\boldsymbol{\rfloor}_{\circlearrowleft}$}}}}
-    
+        {\normalsize{#1}}%
+        {\large{\textcolor{n@green}{$\boldsymbol{\rfloor}_{\circlearrowleft}$}}}}
+
 % awkward wording:
 \newcommand{\cringe}[1]{%
     {\large{\textcolor{n@green}{$\boldsymbol{\lceil}$}}}%
-    {\normalsize{#1}}%
-    {\large{\textcolor{n@green}{$\boldsymbol{\rfloor}_{\circlearrowleft}$}}}}
+        {\normalsize{#1}}%
+        {\large{\textcolor{n@green}{$\boldsymbol{\rfloor}_{\circlearrowleft}$}}}}
 
 
 % needs double-checking:
 \newcommand{\checkthis}[1]{%
     {\large{\textcolor{n@lilac}{$\boldsymbol{\lceil}$}}}%
-    {\normalsize{#1}}%
-    {\large{\textcolor{n@lilac}{$\boldsymbol{\rfloor}_{?}$}}}}
+        {\normalsize{#1}}%
+        {\large{\textcolor{n@lilac}{$\boldsymbol{\rfloor}_{?}$}}}}
 
 % Bullet points:
 \newenvironment{bullets}
-    {\par\medskip
+{\par\medskip
     \begin{itemize}
-     \begingroup\color{n@pink}%
-     \ignorespaces}
-   {\endgroup\end{itemize}
+        \begingroup\color{n@pink}%
+        \ignorespaces}
+        {\endgroup\end{itemize}
     \medskip}
+
+% TODO list:
+\newenvironment{TODO}
+{\par\medskip
+    \textcolor{n@redish}{\textbf{TODO:}}
+    \begin{itemize}
+        \begingroup\color{n@redish}%
+        \ignorespaces}
+        {\endgroup\end{itemize}
+    \medskip}
+
 
 % Phantom paragraph:
 \makeatletter
 \newcommand{\phpar}[1][\@nil]{%
-\def\tmp{#1}%
+    \def\tmp{#1}%
     \ifx\tmp\@nnil
         \par\colorbox{n@darkblue}{\textcolor{white}{\textsc{phantom paragraph}}}
     \else
@@ -97,8 +108,8 @@
 % Check spelling
 \makeatletter
 \newcommand{\grammar}[2][\@nil]{%
-\textcolor{n@blue}{#2\(^{?}\)}%
-\def\tmp{#1}%
+    \textcolor{n@blue}{#2\(^{?}\)}%
+    \def\tmp{#1}%
     \ifx\tmp\@nnil
         %
     \else
@@ -122,12 +133,12 @@
 }
 
 \newenvironment{draft}{% 
-    \noindent\textcolor{n@blue}{
+\noindent\textcolor{n@blue}{
     \rule{\linewidth}{1.2pt}
-    }
-    \pagestyle{draft}
-    \textcolor{n@blue}{
-    \section*{DRAFT}
+}
+\pagestyle{draft}
+\textcolor{n@blue}{
+\section*{DRAFT}
     \begin{flushleft}
         {\huge{$\boldsymbol{\ulcorner}$}}
     \end{flushleft}
@@ -136,7 +147,7 @@
     }{
     \pagestyle{plain}
     \textcolor{n@blue}{
-    \section*{}
+\section*{}
     \begin{flushright}
         {\huge{$\boldsymbol{\lrcorner}$}}
     \end{flushright}
@@ -145,7 +156,7 @@
     }
 
 
-% need reference/showing
-\newcommand*{\provethis}[1]{\textcolor{n@darkblue}{%
+    % need reference/showing
+    \newcommand*{\provethis}[1]{\textcolor{n@darkblue}{%
     {\large{[}}$\leftarrow${\small{#1}}{\large{]}$_\blacksquare$}%
     }}
