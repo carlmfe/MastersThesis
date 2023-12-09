@@ -25,32 +25,76 @@
     This means that in a \(2\to 2\) process, we have 2 degrees of freedom, and in a \(2\to 3\) process we have 5.
 
 
+    \subsection{2-body Phase Space}
+        The Lorentz invariant phase space differential for a 2-body final state with four-momenta \(p_i, p_j\) in \(d\) dimensions is
+        \begin{equation}
+            \mathrm{d}\Pi_{2\to 2} = \pclosed{2\pi}^d \delta^d\pclosed{P - p_i - p_j} \frac{\mathrm{d}^{d-1} \vec{p}_i}{\pclosed{2\pi}^{d-1}} \frac{1}{2E_i} \frac{\mathrm{d}^{d-1} \vec{p}_j}{\pclosed{2\pi}^{d-1}} \frac{1}{2E_j}.
+        \end{equation}
+        Going to the centre-of-mass frame of the incoming partons, we have \(P\^\mu = \pclosed{\sqrt{s}, 0, 0, 0}\), allowing us to integrate over the spatial part of Dirac delta-function to arrive at
+        \begin{equation}
+            \mathrm{d}\Pi_{2\to 2} = \frac{1}{\pclosed{2\pi}^{d-2}} \mathrm{d}^{d-1} \vec{p} \frac{1}{4E_i E_j} \delta\pclosed{\sqrt{s} - E(p, m_i) - E(p, m_j)},
+        \end{equation}
+        where the \(E(p, m) = \sqrt{p^2 + m^2}\).
+        We can write out the differential of the spatial component of \(p_i\) in spherical coordinates as \(\mathrm{d}^{d-1} \vec{p} = \mathrm{d}\Omega_{d-1} \mathrm{d}p \, p^{d-2} = \mathrm{d}\Omega_{d-2} \sin^{d-3}\theta \, \mathrm{d}\theta \, \mathrm{d}p \, p^{d-2}\).
+        As a \(2\to 2\) process is restricted to planar motion, we can always go to a frame of reference such that any amplitude we calculate will not be dependent on the spatial angles \(\mathrm{d} \Omega_{d-2}\), allowing us to integrate over them using that \(\integral{\Omega_{d-2}} = 2 \pi^{\frac{d-2}{2}} \frac{1}{\Gamma\pclosed{\frac{d-2}{2}}}\) to get
+        \begin{equation}
+            \mathrm{d}\Pi_{2\to 2} = \frac{1}{\pclosed{4\pi}^{\frac{d-2}{2}}} \frac{1}{\Gamma\pclosed{\frac{d-2}{2}}} \frac{p^{d-3}}{2 \sqrt{s}} \sin^{d-3}\theta \,\mathrm{d}\theta,
+        \end{equation}
+        where we understand the momentum to be given by \(p = \frac{\sqrt{\lambda(s, m_i^2, m_j^2)}}{2\sqrt{s}}\).
+        In \(d=4\) dimensions, it is often convenient to change to the Mandelstam variable \(t\), which for massless initial state particles becomes \(t=\frac{1}{2} \pclosed{-s+m_i^2+m_j^2+\sqrt{\lambda(s,m_i^2,m_j^2)}\cos\theta}\).
+        Making the change of variable, the differential phase space reduces to
+        \begin{equation}
+            \evalat{\mathrm{d}\Pi_{2\to 2}}{d=4} = \frac{1}{8\pi s} \,\mathrm{d}t
+        \end{equation}
+
     \subsection{3-body Phase Space}
         \comment{Fill out an introduction here.}\\
         The differential Lorentz invariant phase space for a 3-body final state with four-momenta \(p_i, p_j, k\) in \(d\) dimensions is
+        \begin{equation}
+            \mathrm{d}\Pi_{2\to 3} = (2\pi)^d \delta^d(P - p_i - p_j - k) \frac{\mathrm{d}^{d-1} \vec{p}_i}{(2\pi)^{d-1}} \frac{1}{2E_i} \frac{\mathrm{d}^{d-1} \vec{p}_j}{(2\pi)^{d-1}} \frac{1}{2E_j} \frac{\mathrm{d}^{d-1} \vec{k}}{(2\pi)^{d-1}} \frac{1}{2\omega}.
+        \end{equation}
+        First, it will be useful to write out the differential in \(\vec{k}\) in spherical coordinates where it reads \(\mathrm{d}^{d-1}\vec{k} = \omega^{d-2} \mathrm{d}\Omega_{d-1} \mathrm{d}\omega\).
+        Then we can go to the centre-of-mass frame of the neutralinos \(\vec{p}_i, \vec{p}_j\) where we have \(P - k = \pclosed{Q, 0, 0, 0}\).
+        This leaves
+        \begin{equation}
+            \mathrm{d}\Pi_{2\to 3} = \frac{1}{8} \frac{1}{\pclosed{2\pi}^{2d-3}} \delta(Q - E_i - E_j) \delta^{d-1}(\vec{p}_i + \vec{p}_j) \frac{\omega^{d-3}}{E_i E_j} \mathrm{d}^{d-1}\vec{p}_i\, \mathrm{d}^{d-1}\vec{p}_j\, \mathrm{d}\Omega_{d-2}\, \mathrm{d}\omega.
+        \end{equation}
+        \comment{Complete this calculation.}\\
+        It is important to note that there is an interdependence between \(Q^2\) and \(\omega\), which can be found using that \(P^2 = s\).
+        In the centre-of-mass frame of the neutralinos, the magnitude of the three-momentum of \(P\) must be \(\omega\), so we have the relation \(P_0^2 = s + \omega^2\), which together with momentum conservation \(P\_0 - \omega = Q\) yields
+        \begin{equation}
+            \omega = \frac{s-Q^2}{2Q}.
+        \end{equation}
+        Switching integration variables to \(Q^2\) and \(y = \frac{1}{2}\pclosed{1 + \cos\theta}\), we finally get
         \begin{align}
-            \mathrm{d}\Pi_\text{3-body} = \delta^d(P - p_i - p_j - k) \frac{\mathrm{d}^{d-1} \vec{p}_i}{(2\pi)^{d-1}} \frac{1}{2E_i} \frac{\mathrm{d}^{d-1} \vec{p}_j}{(2\pi)^{d-1}} \frac{1}{2E_j} \frac{\mathrm{d}^{d-1} \vec{k}}{(2\pi)^{d-1}} \frac{1}{2\omega}
+            \nonumber
+            \mathrm{d}\Pi_{2\to 3} = \frac{1}{8} \frac{1}{\pclosed{4\pi}^{\frac{3d-4}{2}}} \frac{1}{\Gamma\pclosed{\frac{d-2}{2}}} \frac{\pclosed{\lambda\pclosed{Q^2, m_i^2, m_j^2}}^{\frac{d-3}{2}}}{Q^{2d-2}} \pclosed{s^2-Q^4}\pclosed{s-Q^2}^{d-4} \\
+            \pclosed{y(1-y)}^{\frac{d-4}{2}} \mathrm{d}y\, \mathrm{d}Q^2\, \sin^{d-3}\theta^\ast \mathrm{d}\theta^\ast\, \mathrm{d}\Omega^\ast_{d-2}.
         \end{align}
 
 
+        % \begin{align}
+        %     \frac{\mathrm{d}^{d-1}\vec{k}}{(2\pi)^{d-1}} \frac{1}{2\omega} = -\frac{1}{(4\pi)^{\sfrac{d}{2}}} \frac{(s-Q^2)^{d-3}}{s^{\sfrac{(d-2)}{2}}} \pclosed{y(1-y)}^{\frac{d-4}{2}} \mathrm{d}y \, \mathrm{d}Q^2
+        % \end{align}
+        % \begin{align}
+        %     \frac{\mathrm{d}^{d-1} \vec{p}_i}{(2\pi)^{d-1}} \frac{1}{2E_i} \frac{\mathrm{d}^{d-1} \vec{p}_j}{(2\pi)^{d-1}} \frac{1}{2E_j} (2\pi)^d \delta^d(P - p_i - p_j - k) \\
+        %     = \frac{1}{(8\pi)^{\sfrac{d}{2}}} \frac{1}{\Gamma\!\pclosed{\frac{d-2}{2}}} \frac{\pclosed{\lambda(Q^2, m_i^2, m_j^2)}^{\frac{d-3}{2}}}{8 Q^{d-2}} \sin^{d-3}\theta^\ast \,\mathrm{d}\theta^\ast \, \mathrm{d}\phi^\ast
+        % \end{align}
 
-        \begin{align}
-            \frac{\mathrm{d}^{d-1}\vec{k}}{(2\pi)^{d-1}} \frac{1}{2\omega} = -\frac{1}{(4\pi)^{\sfrac{d}{2}}} \frac{(s-Q^2)^{d-3}}{s^{\sfrac{(d-2)}{2}}} \pclosed{y(1-y)}^{\frac{d-4}{2}} \mathrm{d}y \, \mathrm{d}Q^2
-        \end{align}
-        \begin{align}
-            \frac{\mathrm{d}^{d-1} \vec{p}_i}{(2\pi)^{d-1}} \frac{1}{2E_i} \frac{\mathrm{d}^{d-1} \vec{p}_j}{(2\pi)^{d-1}} \frac{1}{2E_j} (2\pi)^d \delta^d(P - p_i - p_j - k) \\
-            = \frac{1}{(8\pi)^{\sfrac{d}{2}}} \frac{1}{\Gamma\!\pclosed{\frac{d-2}{2}}} \frac{\pclosed{\lambda(Q^2, m_i^2, m_j^2)}^{\frac{d-3}{2}}}{8 Q^{d-2}} \sin^{d-3}\theta^\ast \,\mathrm{d}\theta^\ast \, \mathrm{d}\phi^\ast
-        \end{align}
+        % \begin{align}
+        %     \mathrm{d}\Pi_{2\to 3} = -\frac{1}{2^{\sfrac{3d}{2}} (2\pi)^d} \frac{1}{\Gamma\!\pclosed{\frac{d-2}{2}}} \frac{(s-Q^2)^{d-3}}{s^{\sfrac{(d-2)}{2}}} \pclosed{y(1-y)}^{\frac{d-4}{2}} \\
+        %     \frac{\pclosed{\lambda(Q^2, m_i^2, m_j^2)}^{\frac{d-3}{2}}}{8 Q^{d-2}} \sin^{d-3}\theta^\ast \,\mathrm{d}\theta^\ast \, \mathrm{d}\phi^\ast \, \mathrm{d}y \, \mathrm{d}Q^2
+        % \end{align}
 
-        \begin{align}
-            \mathrm{d}\Pi_\text{3-body} = -\frac{1}{2^{\sfrac{3d}{2}} (2\pi)^d} \frac{1}{\Gamma\!\pclosed{\frac{d-2}{2}}} \frac{(s-Q^2)^{d-3}}{s^{\sfrac{(d-2)}{2}}} \pclosed{y(1-y)}^{\frac{d-4}{2}} \\
-            \frac{\pclosed{\lambda(Q^2, m_i^2, m_j^2)}^{\frac{d-3}{2}}}{8 Q^{d-2}} \sin^{d-3}\theta^\ast \,\mathrm{d}\theta^\ast \, \mathrm{d}\phi^\ast \, \mathrm{d}y \, \mathrm{d}Q^2
-        \end{align}
+        % \begin{align}
+        %     \mathrm{d}\sigma = -\frac{1}{2^{\sfrac{3d}{2}} (2\pi)^d} \frac{1}{\Gamma\!\pclosed{\frac{d-2}{2}}} \frac{(s-Q^2)^{d-3}}{s^{\sfrac{(d-2)}{2}}} \pclosed{y(1-y)}^{\frac{d-4}{2}} \\
+        %     \frac{\pclosed{\lambda(Q^2, m_i^2, m_j^2)}^{\frac{d-3}{2}}}{16 s Q^{d-2}} \abs{\M}^2 \sin^{d-3}\theta^\ast \,\mathrm{d}\theta^\ast \, \mathrm{d}\phi^\ast \, \mathrm{d}y \, \mathrm{d}Q^2
+        % \end{align}
 
-        \begin{align}
-            \mathrm{d}\sigma = -\frac{1}{2^{\sfrac{3d}{2}} (2\pi)^d} \frac{1}{\Gamma\!\pclosed{\frac{d-2}{2}}} \frac{(s-Q^2)^{d-3}}{s^{\sfrac{(d-2)}{2}}} \pclosed{y(1-y)}^{\frac{d-4}{2}} \\
-            \frac{\pclosed{\lambda(Q^2, m_i^2, m_j^2)}^{\frac{d-3}{2}}}{16 s Q^{d-2}} \abs{\M}^2 \sin^{d-3}\theta^\ast \,\mathrm{d}\theta^\ast \, \mathrm{d}\phi^\ast \, \mathrm{d}y \, \mathrm{d}Q^2
-        \end{align}
+        % \begin{align}
+        %     \mathrm{d}\Pi_{2\to 3} = \frac{1}{\pclosed{4\pi}^{\frac{3d-4}{2}}} \frac{1}{\Gamma\pclosed{\frac{d-2}{2}}} \frac{\pclosed{\lambda\pclosed{Q^2, m_i^2, m_j^2}}^{\frac{d-3}{2}}}{Q^{d-2}} \sin^{d-3}\theta \mathrm{d}\theta\, \omega^{d-3} \mathrm{d}\omega\, \sin^{d-3}\theta^\ast \mathrm{d}\theta^\ast\, \mathrm{d}\Omega^\ast_{d-2}
+        % \end{align}
+
 
 
         Parametrising the free variables in a \(2 \to 3\) process can be tricky.
@@ -96,15 +140,32 @@
         \[(p_i^\ast + p_j^\ast)\^\mu \equiv \text{Boost}_z\pclosed{-\frac{1-z}{1+z}} \text{Rot}_y\pclosed{-\theta-\pi} \pclosed{p_i + p_j}^\mu = \pclosed{\sqrt{zs}, 0, 0, 0}\]
         as we expected.
 
-        Now we can parametrise \(\vec{p}_{i,j}^\ast\) in this frame using two angular variables \(\theta^\ast, \phi^\ast\) as
+        Now we can parametrise \({p_{i,j}^\ast}\^\mu\) in this frame using two angular variables \(\theta^\ast, \phi^\ast\), knowing that \(\vec{p}_i + \vec{p}_j = 0\),
         \begin{subequations}
             \begin{align}
                 {p_i^\ast}\^\mu & = \pclosed{E_i, p\sin\theta^\ast \cos\phi^\ast, p\sin\theta^\ast \sin\phi^\ast, p \cos\theta^\ast},    \\
-                {p_j^\ast}\^\mu & = \pclosed{E_j, -p\sin\theta^\ast \cos\phi^\ast, -p\sin\theta^\ast \sin\phi^\ast, -p \cos\theta^\ast}, \\
-                {k^\ast}\^\mu   & = \frac{\sqrt{s}}{2} \frac{1-z}{\sqrt{z}} \pclosed{1, 0, 0, -1},
+                {p_j^\ast}\^\mu & = \pclosed{E_j, -p\sin\theta^\ast \cos\phi^\ast, -p\sin\theta^\ast \sin\phi^\ast, -p \cos\theta^\ast}.
             \end{align}
         \end{subequations}
-        where \(E_{i,j}(z) = \frac{zs + m^2_{i,j} - m^2_{j,i}}{2 \sqrt{zs}}\) and \(p(z) = \frac{\sqrt{\lambda\pclosed{zs, m^2_i, m^2_j}}}{2 \sqrt{zs}}\).
+        To find what \(E_{i,j}\) and \(p\) need to be, we can transform \(k^\mu\) and \(k_{i,j}^\mu\) to this frame of reference, finding
+        \begin{subequations}
+            \begin{align}
+                {k^\ast}\^\mu                      & = \frac{\sqrt{s}}{2} \frac{1-z}{\sqrt{z}} \pclosed{1, 0, 0, -1}, \\
+                \pclosed{k_i^\ast + k_j^\ast}\^\mu & = \frac{s}{2\sqrt{z}} \pclosed{1+z, 0, 0, -(1-z)},
+            \end{align}
+        \end{subequations}
+        and use conservation of momentum and the fact that \({p_{i,j}^\ast}^2 = m^2_{i,j}\) to get that
+        \begin{subequations}
+            \begin{align}
+                E_{i,j}(z) & = \frac{zs + m^2_{i,j} - m^2_{j,i}}{2 \sqrt{zs}},               \\
+                p(z)       & = \frac{\sqrt{\lambda\pclosed{zs, m^2_i, m^2_j}}}{2 \sqrt{zs}}.
+            \end{align}
+        \end{subequations}
+
+        Now to get all momenta in the lab frame, we can apply the reverse transformations on \({p_{i,j}^\ast}\^\mu\) using that \(\text{Rot}^{-1}_y(\alpha) = \text{Rot}_y(-\alpha)\) and \(\text{Boost}_z^{-1}(\beta) = \text{Boost}_z(-\beta)\):
+            \begin{equation}
+                p_{i,j}^\mu = \text{Rot}_y\pclosed{\theta+\pi} \text{Boost}_z\pclosed{\frac{1-z}{1+z}} {p_{i,j}^\ast}\^\mu.
+            \end{equation}
 
 
 
@@ -124,28 +185,36 @@
             \caption{}
         \end{figure}
 
-        \clearpage
 
-
+        
+    \subsection{Differential Cross-Section}
         \begin{equation}
-            \lambda(x, y, z) = x^2 + y^2 + z^2 - 2xy - 2xz - 2yz
+            \mathrm{d}\hat{\sigma}^d = \frac{1}{\pclosed{4\pi}^{\frac{d-2}{2}}} \frac{1}{\Gamma\pclosed{\frac{d-2}{2}}} \frac{p^{d-3}}{4\hat{s}\sqrt{\hat{s}}} \abs{\M}^2 \sin^{d-3}\theta\, \mathrm{d}\theta
         \end{equation}
 
-        \begin{align}
-            \nonumber
-            t_{ii}(z, y, \theta^\ast, \phi^\ast) \equiv (k_i - p_i)^2 = \frac{1}{2z} \bigg\{ (m_i^2 + m_j^2)z - (m_i^2 - m_j^2)y(1-z) + sz(yz - y - z) \\
-            2z \sqrt{y(1-y)} \sqrt{\lambda(Q^2,m_i^2,m_j^2)}\sin\theta^\ast \cos\phi^\ast + (z-y-yz)\sqrt{\lambda(Q^2,m_i^2,m_j^2)} \cos\theta^\ast \bigg\}
-        \end{align}
+        \begin{equation}
+            \mathrm{d}\hat{\sigma} = \frac{1}{16\pi} \frac{1}{\hat{s}^2} \abs{\M}^2 \mathrm{d}t
+        \end{equation}
+        % \clearpage
+        % \begin{equation}
+        %     \lambda(x, y, z) = x^2 + y^2 + z^2 - 2xy - 2xz - 2yz
+        % \end{equation}
 
-        \begin{align}
-            \nonumber
-            m^2_{gi}(z, \theta^\ast) \equiv (p_i + k)^2 = \frac{1}{2z} \bigg\{ (m_i^2-m_j^2) + (m_i^2+m_j^2)z \\
-            + sz(1-z) + \sqrt{\lambda(Q^2, m_i^2, m_j^2)} (1-z) \cos\theta^\ast \bigg\}
-        \end{align}
+        % \begin{align}
+        %     \nonumber
+        %     t_{ii}(z, y, \theta^\ast, \phi^\ast) \equiv (k_i - p_i)^2 = \frac{1}{2z} \bigg\{ (m_i^2 + m_j^2)z - (m_i^2 - m_j^2)y(1-z) + sz(yz - y - z) \\
+        %     + 2z \sqrt{y(1-y)} \sqrt{\lambda(Q^2,m_i^2,m_j^2)}\sin\theta^\ast \cos\phi^\ast + (z-y-yz)\sqrt{\lambda(Q^2,m_i^2,m_j^2)} \cos\theta^\ast \bigg\}
+        % \end{align}
 
-        \begin{align}
-            \abs{\M}^2 \supset \frac{\pclosed{t_{ii}(z, y, \theta^\ast, \phi^\ast) - m_i^2} \pclosed{m^2_{gi}(z, \theta^\ast) - m_i^2 - (1-z)s}}{s y (1-z) \pclosed{t_{ii}(z, y, \theta^\ast, \phi^\ast) - m_A^2} \pclosed{t_{ii}(z, y, \theta^\ast, \phi^\ast) - m_B^2}}
-        \end{align}
+        % \begin{align}
+        %     \nonumber
+        %     m^2_{gi}(z, \theta^\ast) \equiv (p_i + k)^2 = \frac{1}{2z} \bigg\{ (m_i^2-m_j^2) + (m_i^2+m_j^2)z \\
+        %     + sz(1-z) + \sqrt{\lambda(Q^2, m_i^2, m_j^2)} (1-z) \cos\theta^\ast \bigg\}
+        % \end{align}
+
+        % \begin{align}
+        %     \abs{\M}^2 \supset \frac{\pclosed{t_{ii}(z, y, \theta^\ast, \phi^\ast) - m_i^2} \pclosed{m^2_{gi}(z, \theta^\ast) - m_i^2 - (1-z)s}}{s y (1-z) \pclosed{t_{ii}(z, y, \theta^\ast, \phi^\ast) - m_A^2} \pclosed{t_{ii}(z, y, \theta^\ast, \phi^\ast) - m_B^2}}
+        % \end{align}
 
 
 \section{Leading Order Cross-Section}
