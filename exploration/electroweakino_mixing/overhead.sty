@@ -61,9 +61,10 @@
 \newcommand{\margincomment}[1]{\marginpar{\scriptsize #1}}
 \newcommand{\wtilde}[1]{\widetilde{#1}}
 \newcommand{\wbar}[1]{\widebar{#1}}
+\newcommand{\mbeq}{\overset{!}{=}}
 
 % Calculus
-\newcommand{\integral}[1]{\ensuremath{\int\!\mathrm{d}#1\,}}
+\newcommand{\integral}[2][]{\ensuremath{\int#1\!\mathrm{d}#2\,}}
 \renewcommand{\d}[2][x]{\ensuremath{\frac{\mathrm{d}#2}{\mathrm{d}#1}}}
 \renewcommand{\exp}[1]{e^{#1}}
 \newcommand{\exptext}[1]{\operatorname{exp}\pclosed{#1}}
@@ -79,6 +80,9 @@
 \DeclareMathOperator{\diag}{diag}
 \DeclareMathOperator{\tr}{Tr}
 \newcommand{\by}{{\times}}
+\renewcommand*{\^}[1]{\indices{^{#1}}}  % tens. index upper
+\renewcommand*{\_}[1]{\indices{_{#1}}}  % tens. index lower
+\newcommand{\underscore}{\char`_} % Retrieve underscore _:
 
 % Complex Analysis
 \renewcommand{\Re}[1]{\operatorname{Re}\cclosed{#1}}
@@ -95,19 +99,19 @@
 \newcommand{\hinou}{\wtilde{H}^0_u}
 \newcommand{\hinod}{\wtilde{H}^0_d}
 \newcommand{\ewino}{\wtilde{\chi}}
-\newcommand{\nino}[1][]{\wtilde{\chi}^0_{#1}}
-\newcommand{\chino}[1][]{\wtilde{\chi}_{#1}^\pm}
-\newcommand{\pchino}[1][]{\wtilde{\chi}^+_{#1}}
-\newcommand{\nchino}[1][]{\wtilde{\chi}^-_{#1}}
+\newcommand{\nino}[1][]{\wtilde{\chi}^0\_{#1}}
+\newcommand{\chino}[1][]{\wtilde{\chi}\_{#1}^\pm}
+\newcommand{\pchino}[1][]{\wtilde{\chi}^+\_{#1}}
+\newcommand{\nchino}[1][]{\wtilde{\chi}^-\_{#1}}
 \newcommand{\barbino}{\wbar{\wtilde{B}}^0}
 \newcommand{\barwino}{\wbar{\wtilde{W}}^0}
 \newcommand{\barhinou}{\wbar{\wtilde{H}}^0_u}
 \newcommand{\barhinod}{\wbar{\wtilde{H}}^0_d}
 \newcommand{\barewino}{\wbar{\wtilde{\chi}}}
-\newcommand{\barnino}[1][]{\wbar{\wtilde{\chi}}^0_{#1}}
-\newcommand{\barchino}[1][]{\wbar{\wtilde{\chi}}_{#1}^\pm}
-\newcommand{\barpchino}[1][]{\wbar{\wtilde{\chi}}^+_{#1}}
-\newcommand{\barnchino}[1][]{\wbar{\wtilde{\chi}}^-_{#1}}
+\newcommand{\barnino}[1][]{\wbar{\wtilde{\chi}}^0\_{#1}}
+\newcommand{\barchino}[1][]{\wbar{\wtilde{\chi}}\_{#1}^\pm}
+\newcommand{\barpchino}[1][]{\wbar{\wtilde{\chi}}^+\_{#1}}
+\newcommand{\barnchino}[1][]{\wbar{\wtilde{\chi}}^-\_{#1}}
 
 % Statistics
 \newcommand{\expval}{\operatorname{\mathbb{E}}}

@@ -1,4 +1,4 @@
-% This file custom defined commands
+%%% This file custom defined commands %%%
 
 % Misc
 \newcommand{\pclosed}[1]{\left(#1\right)}
@@ -13,7 +13,7 @@
 \newcommand{\mbeq}{\overset{!}{=}}
 
 % Calculus
-\newcommand{\integral}[1]{\ensuremath{\int\!\mathrm{d}#1\,}}
+\newcommand{\integral}[2][]{\ensuremath{\int#1 \!\mathrm{d}#2\,}}
 \renewcommand{\d}[2][x]{\ensuremath{\frac{\mathrm{d}#2}{\mathrm{d}#1}}}
 \newcommand{\pd}[2][x]{\ensuremath{\frac{\partial #2}{\partial #1}}}
 \renewcommand{\exp}[1]{e^{#1}}
