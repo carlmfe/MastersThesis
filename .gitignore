@@ -12,6 +12,7 @@ __pycache__/
 *uio*
 *example*
 *sandbox*
+tex/chapters/*.pdf
 
 % Latex ignore
 *.acn
