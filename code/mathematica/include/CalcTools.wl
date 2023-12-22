@@ -20,11 +20,17 @@ Den[t,m1_]*Den[t,m2_]->tIntegral[0,m1,m2\[Conjugate]],
 t^2*Den[t,m1_]*Den[s,m2_]->tIntegral[2,m1]*Den[s,m2],
 t*Den[t,m1_]*Den[s,m2_]->tIntegral[1,m1]*Den[s,m2],
 Den[t,m1_]*Den[s,m2_]->tIntegral[0,m1]*Den[s,m2],
-t^2*Den[s,m_]*Den[s,m_]->tIntegral[2]*Den[s,m]*Den[s,m],
-t*Den[s,m_]*Den[s,m_]->tIntegral[1]*Den[s,m]*Den[s,m],
-Den[s,m_]*Den[s,m_]->tIntegral[0]*Den[s,m]*Den[s,m]
+t^2*Den[s,m1_]*Den[s,m2_]->tIntegral[2]*Den[s,m1]*Den[s,m2],
+t*Den[s,m1_]*Den[s,m2_]->tIntegral[1]*Den[s,m1]*Den[s,m2],
+Den[s,m1_]*Den[s,m2_]->tIntegral[0]*Den[s,m1]*Den[s,m2]
 }
-ToTIntegrals[expr_]:=(Collect[#1,tIntegral[args__],(Isolate[#1//Simplify,IsolateNames->CT]&)]&)[(Collect[Expand[expr],t,(Collect[#1,{Den[t,m1_]Den[t,m2_],Den[t,m1_]Den[s,m2_],Den[s,m_]Den[s,m_]}]&)]//Expand)/.tIntegralSubs]
+ToTIntegrals[expr_]:=(Collect[#1,tIntegral[args__],(Isolate[#1//Simplify,IsolateNames->CT]&)]&)[
+(Collect[
+Expand[expr],
+t,
+(Collect[#1,{Den[t,m1_]Den[t,m2_],Den[t,m1_]Den[s,m2_],Den[s,m1_]Den[s,m2_]}]&)
+]//Expand)/.tIntegralSubs
+]
 
 
 tIntegralRelations={

@@ -40,7 +40,8 @@ Zs[x_]->Conjugate[Zs[x]],
 Qtu[args__]->Conjugate[Qtu[args]],
 QtuC[args__]->Conjugate[QtuC[args]],
 DSf[args__]->DSfC[args],
-DSfC[args__]->DSf[args]};
+DSfC[args__]->DSf[args],
+DZ->DZ\[Conjugate]};
 
 
 ConjugateAmplitude[amp_]:=ReplaceAll[ComplexConjugate[amp],ComplexParameterRules];
@@ -53,13 +54,14 @@ MakeBoxes[pi,TraditionalForm]:="\!\(\*SubscriptBox[\(p\), \(i\)]\)";
 MakeBoxes[pj,TraditionalForm]:="\!\(\*SubscriptBox[\(p\), \(j\)]\)";
 
 
-MakeBoxes[Cq[x_],TraditionalForm]:=SubscriptBox["C",ToString[x]];
-MakeBoxes[Opp[i_,j_,x_],TraditionalForm]:=SubsuperscriptBox["O",RowBox[{ToString[i],"",ToString[j]}],ToString[x]];
-MakeBoxes[Csq[i_,a_,x_],TraditionalForm]:=SubsuperscriptBox["C",RowBox[{ToString[i],"",ToString[a]}],ToString[x]];
+MakeBoxes[Cq[x_],TraditionalForm]:=SubsuperscriptBox["C","qqZ",ToString[x]];
+MakeBoxes[Opp[i_,j_,x_],TraditionalForm]:=\!\(TraditionalForm\`SubsuperscriptBox["\<O\>", RowBox[{ToString[i], ToString[j]}], RowBox[{"\<\[Prime]\[Prime]\>", ToString[x]}]]\);
+MakeBoxes[Csq[i_,a_,x_],TraditionalForm]:=SubsuperscriptBox["C",RowBox[{"q",SubscriptBox[OverscriptBox["q","~"],ToString[a]],SubsuperscriptBox[OverscriptBox["\[Chi]","~"],ToString[i],"0"]}],ToString[x]];
 
 MakeBoxes[USf[args1__][a_,b_],TraditionalForm]:=SubscriptBox[OverscriptBox["Q","~"],RowBox[{ToString[a],",",ToString[b]}]];
 MakeBoxes[MNeu[a_],TraditionalForm]:=SubscriptBox["m",ToString[a]];
-MakeBoxes[MSf[a_,b__],TraditionalForm]:=SubscriptBox["m",SubscriptBox[OverscriptBox["q","~"],ToString[a]]];
+MakeBoxes[ZNeu[a_,b_],TraditionalForm]:=SubscriptBox["N",RowBox[{ToString[a],",",ToString[b]}]];
+MakeBoxes[MSf[a_,b__],TraditionalForm]:=\!\(TraditionalForm\`\(TraditionalForm\`SubscriptBox["\<m\>", SubscriptBox[OverscriptBox["\<q\>", "\<~\>"], ToString[a]]]\)\);
 MakeBoxes[MGl,TraditionalForm]=SubscriptBox["m",OverscriptBox["g","~"]];
 MakeBoxes[SB,TraditionalForm]=SubscriptBox["s","\[Beta]"];
 MakeBoxes[CB,TraditionalForm]=SubscriptBox["c","\[Beta]"];
