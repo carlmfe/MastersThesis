@@ -18,6 +18,7 @@
 \definecolor{n@babyblue}{rgb}{0.63, 0.79, 0.95}
 \definecolor{n@blue}{rgb}{0.0, 0.5, 1.0}
 \definecolor{n@darkred}{RGB}{165, 63, 38}
+\definecolor{n@gray}{RGB}{128, 128, 128}
 
 
 
@@ -86,6 +87,16 @@
         \begingroup\color{n@redish}%
         \ignorespaces}
         {\endgroup\end{itemize}
+    \medskip}
+
+% temporary paragraph
+\newenvironment{temporary}
+{\par\medskip
+    \begingroup\color{n@gray}%
+    \noindent\hrulefill Temporary \noindent\hrulefill
+        \ignorespaces}
+        {\par\noindent\hrulefill
+    \endgroup
     \medskip}
 
 
