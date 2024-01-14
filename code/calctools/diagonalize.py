@@ -36,11 +36,10 @@ def find_takagi_vector(
 
     # First assume that Ax* and x are linearly dependent.
     # Then we would need to check that Ax* = mu * x for some mu.
-    # Avoiding zero-division, we ignore the components where x is zero.
-
     Ax = A@x.conj()
     isLinDep, prop = isLinearlyDependent(Ax, x, get_prop=True)
-
+    # If they are linearly dependent, set Takagi vector v to be x, with mu as
+    # the proportionality between Ax* and x.
     if isLinDep:
         v = x
         mu = prop
@@ -68,7 +67,7 @@ def triangularize_matrix(A) -> NDArray[np.complex64]:
     """
     A -> U^dagger A U* = |sigma   * |
                          |  0    A2 |
-    where A2 is an (N-1)x(N-1) symmetric matrix.
+    where sigma is a positive number and A2 is an (N-1)x(N-1) symmetric matrix.
 
     Args:
         A (NDArray[np.complex64]): A symmetric NxN matrix.
