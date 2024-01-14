@@ -229,10 +229,10 @@
                 \L_{f\bino\wino} = -\sqrt{2} g & \Big\{ \wbar{\wtilde{B}}^0_D \bclosed{ \pclosed{Q_f - I^3_f} t_W \wtilde{f}_L^\ast P_L - Q_f t_W \wtilde{f}_R^\ast P_R } f_D \\
                                                & + \wbar{\wtilde{W}}^0_D \pclosed{I^3_f \wtilde{f}_L^\ast P_L} f_D + \cc \Big\}.
             \end{align}
-            Changing to the $\nino[i]$-basis we have
+            Changing to the $\nino[]$-basis we have
             \begin{align}
                 \label[eq]{nino-sf-f-terms}
-                \L_{\nino[i]\wtilde{f}f} = -\sqrt{2} g   \sum_{i} \wbar{\wtilde{\chi}}^0_i & \Big\{ \big[ \underbrace{\pclosed{Q_f - I^3_f}t_W N_{i1}  + I^3_f N_{i2}}_{\equiv C_{\nino[i] \wtilde{f} f}^{L*}} \big] \wtilde{f}_L^\ast P_L \underbrace{- Q_f t_W N_{i1}}_{\equiv C_{\nino[i] \wtilde{f} f}^{R*}} \wtilde{f}_R^\ast P_R \Big\} f_D + \cc
+                \L_{\nino[]\wtilde{f}f} = -\sqrt{2} g \sum_{i} \wbar{\wtilde{\chi}}^0_i & \Big\{ \big[ \underbrace{\pclosed{Q_f - I^3_f}t_W N_{i1}^\ast  + I^3_f N_{i2}^\ast}_{\equiv C_{\nino[i] \wtilde{f} f}^{L\ast}} \big] \wtilde{f}_L^\ast P_L \underbrace{- Q_f t_W N_{i1}}_{\equiv C_{\nino[i] \wtilde{f} f}^{R\ast}} \wtilde{f}_R^\ast P_R \Big\} f_D + \cc
             \end{align}
 
             We can generalise this to include squark mixing between the left- and right-handed squarks into mass eigenstates \(\wtilde{f}_{A=1,2}\), where
@@ -246,23 +246,21 @@
                                    \wtilde{f}_L \\
                                    \wtilde{f}_R
                                \end{pmatrix}
+                =
                 \begin{bmatrix}
                     V_{11} & V_{12} \\
                     V_{21} & V_{22}
-                \end{bmatrix} \begin{pmatrix}
-                                  \wtilde{f}_L \\
-                                  \wtilde{f}_R
-                              \end{pmatrix}.
+                \end{bmatrix}
+                \begin{pmatrix}
+                    \wtilde{f}_L \\
+                    \wtilde{f}_R
+                \end{pmatrix}.
             \end{align}
             This leaves us with the Lagrangian terms
-            \begin{subequations}
-                \begin{align}
-                    \label[eq]{nino-sf1-f-terms}
-                    \L_{\nino[i] \wtilde{f}_1 f} = -\sqrt{2} g \sum_{i} \wbar{\wtilde{\chi}}^0_i & \Big\{ \underbrace{V_{11}^\ast C_{\nino[i] \wtilde{f} f}^{L*}}_{\equiv C_{\nino[i] \wtilde{f}_1 f}^{L*}} P_L + \underbrace{V_{12}^\ast C_{\nino[i] \wtilde{f} f}^{R*}}_{\equiv C_{\nino[i] \wtilde{f}_1 f}^{R*}} P_R \Big\} \wtilde{f}_1^\ast f_D + \cc \\
-                    \label[eq]{nino-sf2-f-terms}
-                    \L_{\nino[i] \wtilde{f}_2 f} = -\sqrt{2} g \sum_{i} \wbar{\wtilde{\chi}}^0_i & \Big\{ \underbrace{V_{21}^\ast C_{\nino[i] \wtilde{f} f}^{L*}}_{\equiv C_{\nino[i] \wtilde{f}_2 f}^{L*}} P_L + \underbrace{V_{22}^\ast C_{\nino[i] \wtilde{f} f}^{R*}}_{\equiv C_{\nino[i] \wtilde{f}_2 f}^{R*}} P_R \Big\} \wtilde{f}_2^\ast f_D + \cc
-                \end{align}
-            \end{subequations}
+            \begin{align}
+                \label[eq]{nino-sfA-f-terms}
+                \L_{\nino[] \wtilde{f} f} = -\sqrt{2} g \sum_{i} \sum_{A} \wbar{\wtilde{\chi}}^0_i & \Big\{ \underbrace{R_{A1} C_{\nino[i] \wtilde{f} f}^{L}}_{\equiv C_{\nino[i] \wtilde{f}_A f}^{L\ast}} P_L + \underbrace{R_{A2} C_{\nino[i] \wtilde{f} f}^{R}}_{\equiv C_{\nino[i] \wtilde{f}_A f}^{R\ast}} P_R \Big\} \wtilde{f}_A^\ast f_D + \cc \\
+            \end{align}
 
         \subsubsection{Higgsino parts}
             The Higgs superfield doublets $H_u = \begin{pmatrix} H_u^+ \\ H_u^0 \end{pmatrix}$ and $H_d = \begin{pmatrix} H_d^0 \\ H_d^- \end{pmatrix}$ have kinetic terms
@@ -322,11 +320,11 @@
                     \vcenter{\hbox{
                             \inputtikz{chii-chij-Z_vertex}
                         }}
-                     & = ig \gamma^\mu \bclosed{O_{ij}^{\prime\prime L} P_L + O_{ij}^{\prime\prime R} P_R}                   \\
+                     & = ig \gamma^\mu \bclosed{O_{ij}^{\prime\prime L} P_L + O_{ij}^{\prime\prime R} P_R}                         \\
                     \vcenter{\hbox{
                             \inputtikz{q-chi-sq_vertex}
                         }}
-                     & = -i\sqrt{2}g \bclosed{ C_{\nino[i] \wtilde{q}_A q}^{L*} P_L + C_{\nino[i] \wtilde{q}_A q}^{R*} P_R }
+                     & = -i\sqrt{2}g \bclosed{ C_{\nino[i] \wtilde{q}_A q}^{L\ast} P_L + C_{\nino[i] \wtilde{q}_A q}^{R\ast} P_R }
                 \end{align}
             \end{subequations}
 
@@ -336,13 +334,13 @@
                 \centering
                 \begin{tabular}{|c|c|}
                     \hline
-                    Variable                             & Value                                                                                                                 \\
+                    Variable                            & Value                                                                   \\
                     \hline
-                    \(C_{\nino[i] \wtilde{f}_A f}^{L*}\) & \(\pclosed{\delta^A_1 V_{11}^\ast + \delta^A_2 V_{21}^\ast} \bclosed{\pclosed{Q_f-I^3_f} t_W N_{i1} + I^3_f N_{i2}}\) \\
-                    \(C_{\nino[i] \wtilde{f}_A f}^{R*}\) & \(-\pclosed{\delta^A_1 V_{12}^\ast + \delta^A_2 V_{22}^\ast} Q_f t_W N_{i1}\)                                         \\
+                    \(C_{\nino[i] \wtilde{f}_A f}^{L}\) & \(R_{A1}^\ast \bclosed{\pclosed{Q_f-I^3_f} t_W N_{i1} + I^3_f N_{i2}}\) \\
+                    \(C_{\nino[i] \wtilde{f}_A f}^{R}\) & \(-R_{A2}^\ast Q_f t_W N_{i1}^\ast\)                                    \\
                     \hline
-                    \(O^{\prime\prime L}_{ij}\)          & \(\frac{1}{2c_W} \pclosed{N_{i4} N_{j4}^\ast - N_{i3} N_{j3}^\ast}\)                                                  \\
-                    \(O^{\prime\prime R}_{ij}\)          & \(-\frac{1}{2c_W} \pclosed{N_{i4}^\ast N_{j4} - N_{i3}^\ast N_{j3}}\)                                                 \\
+                    \(O^{\prime\prime L}_{ij}\)         & \(\frac{1}{2c_W} \pclosed{N_{i4} N_{j4}^\ast - N_{i3} N_{j3}^\ast}\)    \\
+                    \(O^{\prime\prime R}_{ij}\)         & \(-\frac{1}{2c_W} \pclosed{N_{i4}^\ast N_{j4} - N_{i3}^\ast N_{j3}}\)   \\
                     \hline
                 \end{tabular}
                 \caption{A summary of the variables used in the derived Feynman rules and their definitions.}
