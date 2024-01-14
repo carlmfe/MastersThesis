@@ -3,82 +3,84 @@
 \begin{document}
 \chapter{Quantum Field Theory}
 
-    \section{Lagrangian Formalism and the Path Integral}
-        \phpar[Here I want to introduce the Lagrangian formulation of quantum field theory, and the types of fields we will be working with.
-            Furthermore, I want to introduce the perturbation series through the path integral, and talk about the nature of quantum effects.
-            Also derive Feynman rules from path integral.]
+\section{Lagrangian Formalism and the Path Integral}
+\phpar[Here I want to introduce the Lagrangian formulation of quantum field theory, and the types of fields we will be working with.
+    Furthermore, I want to introduce the perturbation series through the path integral, and talk about the nature of quantum effects.
+    Also derive Feynman rules from path integral.]
 
-    \section{Renormalised Quantum Field Theory}
-        \phpar[Talk about loop integrals, divergences, regularisation and renormalisation.]
+\section{Renormalised Quantum Field Theory}
+\phpar[Talk about loop integrals, divergences, regularisation and renormalisation.]
 
-    \section{The Standard Model}
-        \phpar[Introduce the \emph{relevant} fields of the Standard Model and its construction.
-            Maybe mention the Higgs mechanism?]
+\section{The Standard Model}
+\phpar[Introduce the \emph{relevant} fields of the Standard Model and its construction.
+    Maybe mention the Higgs mechanism?]
 
-    \section{Loop Integrals and Regularisation}
-        \phpar[Introduce loop integrals, how to calculate them, where divergences appear and how to regularise them.]
+\section{Loop Integrals and Regularisation}
+\phpar[Introduce loop integrals, how to calculate them, where divergences appear and how to regularise them.]
 
-        \subsection{Dimensional Regularisation}
+\subsection{Dimensional Regularisation}
 
-        \subsection{Passarino-Veltman Loop Integrals}
-            By Lorentz invariance, there are a limited set of forms that loop integrals can take.\needcite[Why is this?]
-            These can be categorised according to the number of propagator terms they include, which corresponds to the number of externally connected points there are in the loop.
-            A general scalar \(N\)-point loop integral takes the form
-            \begin{align}
-                T^N_0\pclosed{p_i^2, (p_i-p_j)^2; m_0^2, m_i^2} & = \frac{\pclosed{2\pi \mu}^{4-d}}{i \pi^2} \integral{^d q} \mathcal{D}_0 \prod_{i=1}^{N-1} \mathcal{D}_i,
-            \end{align}
-            where \(\mathcal{D}_0 = \bclosed{q^2-m_0^2}^{-1}\) and \(\mathcal{D}_i = \bclosed{\pclosed{q+p_i}^2-m_i^2}^{-1}\).
-            The first 4 scalar loop integrals are named accordingly
-            \begin{align}
-                T^1_0 & \equiv A_0(m_0^2)                                                                           \\
-                T^2_0 & \equiv B_0(p_1^2; m_0^2, m_1^2)                                                             \\
-                T^3_0 & \equiv C_0(p_1^2, p_2^2, (p_1-p_2)^2; m_0^2, m_1^2, m_2^2)                                  \\
-                T^4_0 & \equiv D_0(p_1^2, p_2^2, p_3^2, (p_1-p_2)^2, (p_1-p_3)^2, (p_2-p_3)^2; m_0^2, m_1^2, m_2^2)
-            \end{align}
+\subsection{Passarino-Veltman Loop Integrals}
+By Lorentz invariance, there are a limited set of forms that loop integrals can
+take.\needcite[Why is this?] These can be categorised according to the number
+of propagator terms they include, which corresponds to the number of externally
+connected points there are in the loop. A general scalar \(N\)-point loop
+integral takes the form
+\begin{align}
+    T^N_0\pclosed{p_i^2, (p_i-p_j)^2; m_0^2, m_i^2} & = \frac{\pclosed{2\pi \mu}^{4-d}}{i \pi^2} \integral{^d q} \mathcal{D}_0 \prod_{i=1}^{N-1} \mathcal{D}_i,
+\end{align}
+where \(\mathcal{D}_0 = \bclosed{q^2-m_0^2}^{-1}\) and \(\mathcal{D}_i = \bclosed{\pclosed{q+p_i}^2-m_i^2}^{-1}\).
+The first 4 scalar loop integrals are named accordingly
+\begin{align}
+    T^1_0 & \equiv A_0(m_0^2)                                                                           \\
+    T^2_0 & \equiv B_0(p_1^2; m_0^2, m_1^2)                                                             \\
+    T^3_0 & \equiv C_0(p_1^2, p_2^2, (p_1-p_2)^2; m_0^2, m_1^2, m_2^2)                                  \\
+    T^4_0 & \equiv D_0(p_1^2, p_2^2, p_3^2, (p_1-p_2)^2, (p_1-p_3)^2, (p_2-p_3)^2; m_0^2, m_1^2, m_2^2)
+\end{align}
 
-            \begin{figure}[ht!]
-                \centering
-                \begin{subfigure}{0.49\linewidth}
-                    \centering
-                    \inputtikz{triangle_loop}
-                    \caption{}
-                    \label{qft:fig:PV_triloop_conventions}
-                \end{subfigure}
-                \begin{subfigure}{0.49\linewidth}
-                    \centering
-                    \inputtikz{box_loop}
-                    \caption{}
-                    \label{qft:fig:PV_boxloop_conventions}
-                \end{subfigure}
-                \caption{Illustration of the momentum conventions for loop diagrams used in the Passarino-Veltman functions.}
-                \label{qft:fig:PV_loop_conventions}
-            \end{figure}
+\begin{figure}[ht!]
+    \centering
+    \begin{subfigure}{0.49\linewidth}
+        \centering
+        \inputtikz{triangle_loop}
+        \caption{}
+        \label{qft:fig:PV_triloop_conventions}
+    \end{subfigure}
+    \begin{subfigure}{0.49\linewidth}
+        \centering
+        \inputtikz{box_loop}
+        \caption{}
+        \label{qft:fig:PV_boxloop_conventions}
+    \end{subfigure}
+    \caption{Illustration of the momentum conventions for loop diagrams used in the Passarino-Veltman functions.}
+    \label{qft:fig:PV_loop_conventions}
+\end{figure}
 
-            More complicated Lorentz structure can be obtained in loop integrals, however, these can still be related to the scalar integrals by exploiting the possible tensorial structure they can have.
-            Defining an arbitrary loop integral
-            \begin{equation}
-                T^N_{\mu_1\cdots\mu_P}\pclosed{p_i^2, (p_i-p_j)^2; m_0^2, m_i^2} = \frac{\pclosed{2\pi \mu}^{4-d}}{i \pi^2} \integral{^d q} q_{\mu_1}\cdots q_{\mu_P} \mathcal{D}_0 \prod_{i=1}^{N-1} \mathcal{D}_i.
-            \end{equation}
-            These tensors can only depend on the metric \(\tensor{g}{^\mu^\nu}\) and the external momenta \(p_i\).
-            The possible structures up to four-point loops are as following:
-            \begin{subequations}
-                \begin{align}
-                    B^\mu                & = p_1^\mu B_1,                                                                                                                                                                                                         \\
-                    B^{\mu\nu}           & = g^{\mu\nu} B_{00} + p_1^\mu p_1^\nu B_{11},                                                                                                                                                                          \\
-                    C^\mu                & = \sum_{i=1}^2 p_i^\mu C_i,                                                                                                                                                                                            \\
-                    C^{\mu\nu}           & = g^{\mu\nu} C_{00} + \sum_{i,j=1}^{2} p_i^\mu p_j^\nu C_{ij},                                                                                                                                                         \\
-                    C^{\mu\nu\rho}       & = \sum_{i=1}^2 (g^{\mu\nu} p_i^{\rho} + g^{\mu\rho} p_i^{\nu} + g^{\nu\rho} p_i^{\mu}) C_{00i} + \sum_{i,j,k=1}^2 p_i^\mu p_j^\nu p_k^\rho C_{ijk},                                                                    \\
-                    D^\mu                & = \sum_{i=1}^3 p_i^\mu D_i,                                                                                                                                                                                            \\
-                    D^{\mu\nu}           & = g^{\mu\nu} D_{00} + \sum_{i,j=1}^{3} p_i^\mu p_j^\nu D_{ij},                                                                                                                                                         \\
-                    D^{\mu\nu\rho}       & = \sum_{i=1}^3 (g^{\mu\nu} p_i^{\rho} + g^{\mu\rho} p_i^{\nu} + g^{\nu\rho} p_i^{\mu}) D_{00i} + \sum_{i,j,k=1}^3 p_i^\mu p_j^\nu p_k^\rho D_{ijk},                                                                    \\
-                    \nonumber
-                    D^{\mu\nu\rho\sigma} & = (g^{\mu\nu}g^{\rho\sigma} + g^{\mu\rho}g^{\nu\sigma} + g^{\mu\sigma}g^{\nu\rho})D_{0000}                                                                                                                             \\
-                    \nonumber
-                                         & + \sum_{i,j=1}^3 (g_{\mu\nu}p_i^\rho p_j^\sigma + g_{\mu\nu}p_i^\sigma p_j^\rho + g_{\mu\rho}p_i^\nu p_j^\sigma + g_{\mu\rho}p_i^\sigma p_j^\nu + g_{\mu\sigma}p_i^\rho p_j^\nu + g_{\mu\nu}p_i^\nu p_j^\rho) D_{00ij} \\
-                                         & + \sum_{i,j,k,l=1}^3 p_i^\mu p_j^\nu p_k^\rho p_l^\sigma D_{ijkl},
-                \end{align}
-            \end{subequations}
-            where all coefficients must be completely symmetric in \(i,j,k,l\).
-
+More complicated Lorentz structure can be obtained in loop integrals, however,
+these can still be related to the scalar integrals by exploiting the possible
+tensorial structure they can have. Defining an arbitrary loop integral
+\begin{equation}
+    T^N_{\mu_1\cdots\mu_P}\pclosed{p_i^2, (p_i-p_j)^2; m_0^2, m_i^2} = \frac{\pclosed{2\pi \mu}^{4-d}}{i \pi^2} \integral{^d q} q_{\mu_1}\cdots q_{\mu_P} \mathcal{D}_0 \prod_{i=1}^{N-1} \mathcal{D}_i.
+\end{equation}
+These tensors can only depend on the metric \(\tensor{g}{^\mu^\nu}\) and the external momenta \(p_i\).
+The possible structures up to four-point loops are as following:
+\begin{subequations}
+    \begin{align}
+        B^\mu                & = p_1^\mu B_1,                                                                                                                                                                                                         \\
+        B^{\mu\nu}           & = g^{\mu\nu} B_{00} + p_1^\mu p_1^\nu B_{11},                                                                                                                                                                          \\
+        C^\mu                & = \sum_{i=1}^2 p_i^\mu C_i,                                                                                                                                                                                            \\
+        C^{\mu\nu}           & = g^{\mu\nu} C_{00} + \sum_{i,j=1}^{2} p_i^\mu p_j^\nu C_{ij},                                                                                                                                                         \\
+        C^{\mu\nu\rho}       & = \sum_{i=1}^2 (g^{\mu\nu} p_i^{\rho} + g^{\mu\rho} p_i^{\nu} + g^{\nu\rho} p_i^{\mu}) C_{00i} + \sum_{i,j,k=1}^2 p_i^\mu p_j^\nu p_k^\rho C_{ijk},                                                                    \\
+        D^\mu                & = \sum_{i=1}^3 p_i^\mu D_i,                                                                                                                                                                                            \\
+        D^{\mu\nu}           & = g^{\mu\nu} D_{00} + \sum_{i,j=1}^{3} p_i^\mu p_j^\nu D_{ij},                                                                                                                                                         \\
+        D^{\mu\nu\rho}       & = \sum_{i=1}^3 (g^{\mu\nu} p_i^{\rho} + g^{\mu\rho} p_i^{\nu} + g^{\nu\rho} p_i^{\mu}) D_{00i} + \sum_{i,j,k=1}^3 p_i^\mu p_j^\nu p_k^\rho D_{ijk},                                                                    \\
+        \nonumber
+        D^{\mu\nu\rho\sigma} & = (g^{\mu\nu}g^{\rho\sigma} + g^{\mu\rho}g^{\nu\sigma} + g^{\mu\sigma}g^{\nu\rho})D_{0000}                                                                                                                             \\
+        \nonumber
+                             & + \sum_{i,j=1}^3 (g_{\mu\nu}p_i^\rho p_j^\sigma + g_{\mu\nu}p_i^\sigma p_j^\rho + g_{\mu\rho}p_i^\nu p_j^\sigma + g_{\mu\rho}p_i^\sigma p_j^\nu + g_{\mu\sigma}p_i^\rho p_j^\nu + g_{\mu\nu}p_i^\nu p_j^\rho) D_{00ij} \\
+                             & + \sum_{i,j,k,l=1}^3 p_i^\mu p_j^\nu p_k^\rho p_l^\sigma D_{ijkl},
+    \end{align}
+\end{subequations}
+where all coefficients must be completely symmetric in \(i,j,k,l\).
 
 \end{document}

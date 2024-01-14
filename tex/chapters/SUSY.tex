@@ -3,184 +3,202 @@
 \begin{document}
 \chapter{Supersymmetry}
 
-    \section{Introduction to Supersymmetry}
-        \phpar[Introduce supersymmetry, what the symmetry is and how it transforms fermionic and bosonic fields through each other.
-            Introduce superspace, Grassmann calculus, superfields and superlagrangians.]
+\section{Introduction to Supersymmetry}
+\phpar[Introduce supersymmetry, what the symmetry is and how it transforms fermionic and bosonic fields through each other.
+    Introduce superspace, Grassmann calculus, superfields and superlagrangians.]
 
-        \subsection{A Simple Supersymmetric Theory}
-            To illustrate what supersymmetry looks like in practice, it can be helpful to look at a simple example.
-            Take a Lagrangian for a massive complex scalar field \(\phi\) and a massive Weyl spinor field \(\psi\)
-            \begin{equation}
-                \L = (\partial\_{\mu} \phi)(\partial\^{\mu}\phi^\ast) + i \psi \sigma\^{\mu} \partial\_{\mu} \psi^\dagger
-                - \abs{m_B}^2 \phi \phi^\ast - \frac{1}{2}m_F (\psi\psi) - \frac{1}{2} m_F^\ast (\psi\psi)^\dagger.
-            \end{equation}
-            To impose some symmetry between the bosonic and fermionic degrees of freedom, we want to examine a transformation of the scalar field through the spinor field and vice versa.
-            A general, infinitesimal such transformation can be parametrised by
-            \begin{subequations}
-                \begin{align}
-                    \delta\phi                         & = \epsilon a (\theta\psi),                                                                                                                                   \\
-                    \delta\phi^\ast                    & = \epsilon a^\ast (\theta\psi)^\dagger,                                                                                                                      \\
-                    \delta\psi\_{\alpha}               & = \epsilon \pclosed{c (\sigma\^{\mu} \theta^\dagger)\_{\alpha} \partial\_{\mu} \phi + F(\phi, \phi^\ast) \theta\_{\alpha}},                                  \\
-                    \delta{\psi^\dagger}\_{\dot\alpha} & = \epsilon \pclosed{c^\ast (\theta \sigma\^{\mu})\_{\dot\alpha} \partial\_{\mu} \phi^\ast + F^\ast(\phi, \phi^\ast) \theta\indices*{^\dagger_{\dot\alpha}}},
-                \end{align}
-            \end{subequations}
-            where \(\epsilon\) is some infinitesimal parameter for the transformation, \(\theta\) is some Grassmann-valued Weyl spinor, \(a, c\) are complex coefficients of the transformation and \(F(\phi, \phi^\ast)\) is some linear function \(\phi\) and \(\phi^\ast\).
-            The change in the scalar field part of the Lagrangian is
-            \begin{equation}
-                \label{susy:eq:dLphi}
-                \delta\L_\phi / \epsilon = a (\theta\partial\_{\mu}\psi) \pclosed{\partial\^{\mu} \phi^\ast} - a\abs{m_B}^2 (\theta\psi) \phi^\ast + \cc,
-            \end{equation}
-            and likewise for the spinor field part
-            \begin{equation}
-                \label{susy:eq:dLpsi}
-                \delta\L_\psi/\epsilon = -i c^\ast (\psi \sigma\^{\mu}\bar{\sigma}\^{\nu}\theta) \partial\_{\mu}\partial\_{\nu} \phi^\ast + i (\psi \sigma\^{\mu} \theta^\dagger) \partial\_{\mu} F^\ast + m_F \bclosed{c (\psi\sigma\^{\mu}\theta^\dagger) \partial\_{\mu} \phi + (\psi\theta) F} + \cc
-            \end{equation}
-            The first term in \cref{susy:eq:dLpsi} can be rewritten using the commutativity of partial derivatives and the identity \(\tensor{\pclosed{\sigma\^{\mu} \bar{\sigma}\^{\nu} + \sigma\^{\mu} \bar{\sigma}\^{\nu}}}{_\alpha^\beta} = -2\tensor{g}{^\mu^\nu} \tensor*{\delta}{_\alpha^\beta}\) to get \(i c^\ast \pclosed{\theta \psi} \partial\_{\mu}\partial\^{\mu} \phi^\ast\).
-            Up to a total derivative, we can then write the change in the spinor part as
-            \begin{equation}
-                \delta\L_\psi/\epsilon = -i c^\ast (\theta\partial\_{\mu}\psi)\partial\^{\mu} \phi^\ast + (\psi \sigma\^{\mu} \theta^\dagger) \partial\_{\mu} \pclosed{i F^\ast + m_F c \phi} + m_F \theta\psi F + \cc.
-            \end{equation}
-            The total change of the Lagrangian (again up to a total derivate) can then be grouped as
-            \begin{align}
-                \nonumber
-                \delta\L/\epsilon = & \pclosed{a-ic^\ast} (\theta\partial\_{\mu}\psi) \pclosed{\partial\^{\mu} \phi^\ast}
-                + (\psi \sigma\^{\mu} \theta^\dagger) \partial\_{\mu} \pclosed{i F^\ast + m_F c \phi}                     \\
-                                    & + (\theta\psi) \pclosed{a\abs{m_B}^2\phi^\ast + m_F F} + \cc,
-            \end{align}
-            giving us three different conditions for the action to be invariant:
-            \begin{subequations}
-                \begin{align}
-                    a - ic^\ast                    & = 0, \\
-                    i F^\ast + m_F c \phi          & = 0, \\
-                    a\abs{m_B}^2 \phi^\ast + m_F F & = 0.
-                \end{align}
-            \end{subequations}
-            This is fulfilled if
-            \begin{subequations}
-                \begin{align}
-                    c            & = i a^\ast,              \\
-                    F            & = -a m_F^\ast \phi^\ast, \\
-                    a\abs{m_B}^2 & = a^\ast \abs{m_F}^2.
-                \end{align}
-            \end{subequations}
-            What is interesting is the last condition, because it requires \(a\) to be real, as both \(\abs{m_B}^2\) and \(\abs{m_F}^2\) are real, but also requires \(\abs{m_B}^2 = \abs{m_F}^2\).
-            For the theory to be supersymmetric in this sense, the masses of the boson and fermion must be the same!
+\subsection{A Simple Supersymmetric Theory}
+To illustrate what supersymmetry looks like in practice, it can be helpful to
+look at a simple example. Take a Lagrangian for a massive complex scalar field
+\(\phi\) and a massive Weyl spinor field \(\psi\)
+\begin{equation}
+    \L = (\partial\_{\mu} \phi)(\partial\^{\mu}\phi^\ast) + i \psi \sigma\^{\mu} \partial\_{\mu} \psi^\dagger
+    - \abs{m_B}^2 \phi \phi^\ast - \frac{1}{2}m_F (\psi\psi) - \frac{1}{2} m_F^\ast (\psi\psi)^\dagger.
+\end{equation}
+To impose some symmetry between the bosonic and fermionic degrees of freedom, we want to examine a transformation of the scalar field through the spinor field and vice versa.
+A general, infinitesimal such transformation can be parametrised by
+\begin{subequations}
+    \begin{align}
+        \delta\phi                         & = \epsilon a (\theta\psi),                                                                                                                                   \\
+        \delta\phi^\ast                    & = \epsilon a^\ast (\theta\psi)^\dagger,                                                                                                                      \\
+        \delta\psi\_{\alpha}               & = \epsilon \pclosed{c (\sigma\^{\mu} \theta^\dagger)\_{\alpha} \partial\_{\mu} \phi + F(\phi, \phi^\ast) \theta\_{\alpha}},                                  \\
+        \delta{\psi^\dagger}\_{\dot\alpha} & = \epsilon \pclosed{c^\ast (\theta \sigma\^{\mu})\_{\dot\alpha} \partial\_{\mu} \phi^\ast + F^\ast(\phi, \phi^\ast) \theta\indices*{^\dagger_{\dot\alpha}}},
+    \end{align}
+\end{subequations}
+where \(\epsilon\) is some infinitesimal parameter for the transformation, \(\theta\) is some Grassmann-valued Weyl spinor, \(a, c\) are complex coefficients of the transformation and \(F(\phi, \phi^\ast)\) is some linear function \(\phi\) and \(\phi^\ast\).
+The change in the scalar field part of the Lagrangian is
+\begin{equation}
+    \label{susy:eq:dLphi}
+    \delta\L_\phi / \epsilon = a (\theta\partial\_{\mu}\psi) \pclosed{\partial\^{\mu} \phi^\ast} - a\abs{m_B}^2 (\theta\psi) \phi^\ast + \cc,
+\end{equation}
+and likewise for the spinor field part
+\begin{equation}
+    \label{susy:eq:dLpsi}
+    \delta\L_\psi/\epsilon = -i c^\ast (\psi \sigma\^{\mu}\bar{\sigma}\^{\nu}\theta) \partial\_{\mu}\partial\_{\nu} \phi^\ast + i (\psi \sigma\^{\mu} \theta^\dagger) \partial\_{\mu} F^\ast + m_F \bclosed{c (\psi\sigma\^{\mu}\theta^\dagger) \partial\_{\mu} \phi + (\psi\theta) F} + \cc
+\end{equation}
+The first term in \cref{susy:eq:dLpsi} can be rewritten using the commutativity of partial derivatives and the identity \(\tensor{\pclosed{\sigma\^{\mu} \bar{\sigma}\^{\nu} + \sigma\^{\mu} \bar{\sigma}\^{\nu}}}{_\alpha^\beta} = -2\tensor{g}{^\mu^\nu} \tensor*{\delta}{_\alpha^\beta}\) to get \(i c^\ast \pclosed{\theta \psi} \partial\_{\mu}\partial\^{\mu} \phi^\ast\).
+Up to a total derivative, we can then write the change in the spinor part as
+\begin{equation}
+    \delta\L_\psi/\epsilon = -i c^\ast (\theta\partial\_{\mu}\psi)\partial\^{\mu} \phi^\ast + (\psi \sigma\^{\mu} \theta^\dagger) \partial\_{\mu} \pclosed{i F^\ast + m_F c \phi} + m_F \theta\psi F + \cc.
+\end{equation}
+The total change of the Lagrangian (again up to a total derivate) can then be grouped as
+\begin{align}
+    \nonumber
+    \delta\L/\epsilon = & \pclosed{a-ic^\ast} (\theta\partial\_{\mu}\psi) \pclosed{\partial\^{\mu} \phi^\ast}
+    + (\psi \sigma\^{\mu} \theta^\dagger) \partial\_{\mu} \pclosed{i F^\ast + m_F c \phi}                     \\
+                        & + (\theta\psi) \pclosed{a\abs{m_B}^2\phi^\ast + m_F F} + \cc,
+\end{align}
+giving us three different conditions for the action to be invariant:
+\begin{subequations}
+    \begin{align}
+        a - ic^\ast                    & = 0, \\
+        i F^\ast + m_F c \phi          & = 0, \\
+        a\abs{m_B}^2 \phi^\ast + m_F F & = 0.
+    \end{align}
+\end{subequations}
+This is fulfilled if
+\begin{subequations}
+    \begin{align}
+        c            & = i a^\ast,              \\
+        F            & = -a m_F^\ast \phi^\ast, \\
+        a\abs{m_B}^2 & = a^\ast \abs{m_F}^2.
+    \end{align}
+\end{subequations}
+What is interesting is the last condition, because it requires \(a\) to be real, as both \(\abs{m_B}^2\) and \(\abs{m_F}^2\) are real, but also requires \(\abs{m_B}^2 = \abs{m_F}^2\).
+For the theory to be supersymmetric in this sense, the masses of the boson and fermion must be the same!
 
-            Revisiting \(F\), it can be introduced as an auxiliary field to bookkeep the supersymmetry transformation.
-            By including the non-dynamical term to the Lagrangian \(\L_F = F^\ast F + m F \phi + m^\ast F^\ast \phi^\ast\), we make sure \(F\) takes the correct value in the transformation from its equation of motion
-            \(\pd[F]{\L} = F^\ast + m \phi \mbeq 0\).
-            Inserting \(F\) back into the Lagrangian reproduces the mass term of the scalar field, allowing us to write the original Lagrangian as
-            \begin{align}
-                \L = & (\partial\_{\mu} \phi)(\partial\^{\mu}\phi^\ast) + i \psi \sigma\^{\mu} \partial\_{\mu} \psi^\dagger + F^\ast F + m F \phi + m^\ast F^\ast \phi^\ast - \frac{1}{2}m (\psi\psi) - \frac{1}{2}m^\ast (\psi\psi)^\dagger,
-            \end{align}
-            with the \emph{supersymmetry transformation} rules
-            \begin{subequations}
-                \begin{align}
-                     & \delta\phi       = \epsilon (\theta \psi),                                                                                                                                       &
-                     & \delta\phi^\ast = \epsilon (\theta\psi)^\dagger,                                                                                                                                   \\
-                     & \delta\psi\_{\alpha} = \epsilon \pclosed{-i(\sigma\^{\mu} \theta^\dagger)\_{\alpha} \partial\_{\mu} \phi  + F \theta\_{\alpha}},                                                 &
-                     & \delta\psi\indices*{^\dagger_{\dot\alpha}} = \epsilon \pclosed{i(\theta \sigma\^{\mu})\_{\dot\alpha} \partial\_{\mu} \phi^\ast + F^\ast \theta\indices*{^\dagger_{\dot\alpha}}},   \\
-                     & \delta F         = i \epsilon \pclosed{\partial\_{\mu} \psi \sigma\^{\mu} \theta^\dagger},                                                                                       &
-                     & \delta F^\ast = -i \epsilon \pclosed{\theta \sigma\^{\mu} \partial\_{\mu} \psi^\dagger},
-                \end{align}
-            \end{subequations}
-            where I have set \(a=1\) without loss of generality, and found the appropriate transformation law for \(F\) such that the Lagrangian is invariant up to total derivatives.
-            The dynamics of this Lagrangian are the same as before, but the supersymmetry is now made manifest, i.e.~the transformation is free of any dependence on the contents of the Lagrangian.
+Revisiting \(F\), it can be introduced as an auxiliary field to bookkeep the
+supersymmetry transformation. By including the non-dynamical term to the
+Lagrangian \(\L_F = F^\ast F + m F \phi + m^\ast F^\ast \phi^\ast\), we make
+sure \(F\) takes the correct value in the transformation from its equation of
+motion \(\pd[F]{\L} = F^\ast + m \phi \mbeq 0\). Inserting \(F\) back into the
+Lagrangian reproduces the mass term of the scalar field, allowing us to write
+the original Lagrangian as
+\begin{align}
+    \L = & (\partial\_{\mu} \phi)(\partial\^{\mu}\phi^\ast) + i \psi \sigma\^{\mu} \partial\_{\mu} \psi^\dagger + F^\ast F + m F \phi + m^\ast F^\ast \phi^\ast - \frac{1}{2}m (\psi\psi) - \frac{1}{2}m^\ast (\psi\psi)^\dagger,
+\end{align}
+with the \emph{supersymmetry transformation} rules
+\begin{subequations}
+    \begin{align}
+         & \delta\phi       = \epsilon (\theta \psi),                                                                                                                                       &
+         & \delta\phi^\ast = \epsilon (\theta\psi)^\dagger,                                                                                                                                   \\
+         & \delta\psi\_{\alpha} = \epsilon \pclosed{-i(\sigma\^{\mu} \theta^\dagger)\_{\alpha} \partial\_{\mu} \phi  + F \theta\_{\alpha}},                                                 &
+         & \delta\psi\indices*{^\dagger_{\dot\alpha}} = \epsilon \pclosed{i(\theta \sigma\^{\mu})\_{\dot\alpha} \partial\_{\mu} \phi^\ast + F^\ast \theta\indices*{^\dagger_{\dot\alpha}}},   \\
+         & \delta F         = i \epsilon \pclosed{\partial\_{\mu} \psi \sigma\^{\mu} \theta^\dagger},                                                                                       &
+         & \delta F^\ast = -i \epsilon \pclosed{\theta \sigma\^{\mu} \partial\_{\mu} \psi^\dagger},
+    \end{align}
+\end{subequations}
+where I have set \(a=1\) without loss of generality, and found the appropriate transformation law for \(F\) such that the Lagrangian is invariant up to total derivatives.
+The dynamics of this Lagrangian are the same as before, but the supersymmetry is now made manifest, i.e.~the transformation is free of any dependence on the contents of the Lagrangian.
 
-            In fact, one can show that a general supersymmetric Lagrangian consisting of a scalar field and a fermion field can be written
-            \begin{equation}
-                \L = (\partial\_{\mu} \phi)(\partial\^{\mu}\phi^\ast) + i \psi \sigma\^{\mu} \partial\_{\mu} \psi^\dagger + F^\ast F + \cclosed{m F \phi - \frac{1}{2}m (\psi\psi) - \lambda \phi (\psi\psi) + \cc}
-            \end{equation}
-            up to renormalisable interactions.
+In fact, one can show that a general supersymmetric Lagrangian consisting of a
+scalar field and a fermion field can be written
+\begin{equation}
+    \L = (\partial\_{\mu} \phi)(\partial\^{\mu}\phi^\ast) + i \psi \sigma\^{\mu} \partial\_{\mu} \psi^\dagger + F^\ast F + \cclosed{m F \phi - \frac{1}{2}m (\psi\psi) - \lambda \phi (\psi\psi) + \cc}
+\end{equation}
+up to renormalisable interactions.
 
-    \section{The Super-Poincaré Group}
-        \phpar[Introduce the Super-Poincaré algebra, and superspace as a vessel for manifestly supersymmetric theories.
-            Lead into superfields, and general supersymmetric superlagrangians.]
+\section{The Super-Poincaré Group}
+\phpar[Introduce the Super-Poincaré algebra, and superspace as a vessel for manifestly supersymmetric theories.
+    Lead into superfields, and general supersymmetric superlagrangians.]
 
-        \subsection{The Poincaré and Super-Poincaré Algebras}
+\subsection{The Poincaré and Super-Poincaré Algebras}
 
+\subsection{Superspace}
+To facilitate the construction of supersymmetric theories, it will be helpful
+to construct a space such that the generators of the Super-Poincaré group
+manifest as simple coordinate transformations, as in the case of the ordinary
+Poincaré group. Starting with a general element \(g \in SP\), it can be
+parametrised through the exponential map as
+\begin{equation}
+    g = \exptext{ix\^{\mu} P\_{\mu} + i(\theta Q) + i (\theta Q)^\dagger + \frac{i}{2}\tensor{\omega}{_\mu_\nu}\tensor{M}{^\mu^\nu}},
+\end{equation}
+where \(x^\mu, \theta\^{\alpha}, \theta\indices*{^\dagger_{\dot\alpha}}, \tensor{\omega}{_\mu_\nu}\) parametrise the group, and \(P_\mu, Q\_{\alpha}, Q\indices*{^\dagger^{\dot\alpha}}, \tensor{M}{^\mu^\nu}\) are the generators of the group.
+Since the parameters \(x\^{\mu}, \theta\^{\alpha}, \theta\indices*{^\dagger_{\dot\alpha}}\) live in a representation of the Lorentz algebra generated by \(\tensor{M}{^\mu^\nu}\), the effect of this part of the Super-Poincaré group on the parameters can be determined easily.
+Likewise, the parameters \(\tensor{\omega}{_\mu_\nu}\) are in a trivial representation of the algebra generated by \(P\_{\mu}, Q\_{\alpha}, Q\indices*{^\dagger^{\dot\alpha}}\), and need not then be considered.
+It is therefore poignant to create a space with \(x\^{\mu}, \theta\^{\alpha}, \theta\indices*{^\dagger_{\dot\alpha}}\) as the coordinates, modding out the Lorentz algebra part.
+We create superspace as a coordinate system with coordinates \(z\^{\pi} = (x\^{\mu}, \theta\^{\alpha}, \theta\indices*{^\dagger_{\dot\alpha}})\), and look at how they transform under Super-Poincaré group transformations.
+A function \(F(z)\) on superspace can then be written using the generators \(K\_\pi = (P\_\mu, Q\_\alpha, Q\indices*{^\dagger^{\dot\alpha}})\) as \(F(z) = \exptext{iz\^\pi K\_\pi} F(0)\).
+Applying a Super-Poincaré group element without the Lorentz generators \(\bar{g}(a, \eta) = \exptext{ia\^\mu P\_\mu + i (\eta Q) + i (\eta Q)^\dagger}\) we have
+\begin{equation}
+    F(z^\prime) = \exptext{i{z^\prime}\^\pi K\_\pi} F(0) = \exptext{ia\^\mu P\_\mu + i (\eta Q) + i (\eta Q)^\dagger} \exptext{iz\^\pi K\_\pi} F(0),
+\end{equation}
+which by the \needcite[Baker-Campbell-Hausdorff] formula gives
+\begin{equation}
+    {z^\prime}\^\pi K\_\pi = (x\^\mu + a\^\mu) P\_\mu + (\theta\^\alpha + \eta\^\alpha)Q\_\alpha + (\theta\indices*{^\dagger_{\dot\alpha}} + \eta\indices*{^\dagger_{\dot\alpha}})Q\indices*{^\dagger^{\dot\alpha}} + \frac{i}{2}\bclosed{a\^\mu P\_\mu + (\eta Q) + (\eta Q)^\dagger, z\^\pi K\_\pi} + \ldots
+\end{equation}
+Now, \(P\_\mu\) commutes with all of \(K\_\pi\), and \(Q\_\alpha\) (\(Q\indices*{^\dagger^{\dot\alpha}}\)) anti-commute with themselves, for every combination of different \(\alpha\) (\(\dot\alpha\)), so the only relevant part of the commutator is
+\begin{equation}
+    \commutator{(\eta Q)}{(\theta Q)^\dagger} + \commutator{(\eta Q)^\dagger}{(\theta Q)} = -\eta\^\alpha \anticommutator{Q\_\alpha}{Q\indices*{^\dagger_{\dot\alpha}}} \theta\indices*{^\dagger^{\dot\alpha}} + (\eta \leftrightarrow \theta) = -2(\eta \sigma\^\mu \theta^\dagger)P\_\mu + (\eta \leftrightarrow \theta).
+\end{equation}
+Since this commutator is proportional to \(P\_\mu\) which in turn commutes with everything, all higher order commutators vanish, and we can conclude that the transformed coordinates \({z^\prime}\^\pi\) are given by
+\begin{equation}
+    {z^\prime}\^\pi = \pclosed{x\^\mu + a\^\mu + i(\theta \sigma\^\mu \eta^\dagger) - i(\eta \sigma\^\mu \theta^\dagger), \theta\^\alpha + \eta\^\alpha, \theta\indices*{^\dagger_{\dot\alpha}} + \eta\indices*{^\dagger_{\dot\alpha}}}.
+\end{equation}
+This gives us a differential representation of the \(K\_\pi\) generators as
+\begin{subequations}
+    \begin{align}
+        P\_\mu                            & = -i \partial\_\mu,                                                                   \\
+        Q\_\alpha                         & = - (\sigma\^\mu \theta^\dagger)\_\alpha \partial\_\mu - i \partial\_\alpha,          \\
+        Q\indices*{^\dagger_{\dot\alpha}} & = -(\theta \bar{\sigma}\^\mu)\_{\dot\alpha} \partial\_\mu - i \partial\_{\dot\alpha}.
+    \end{align}
+\end{subequations}
 
-        \subsection{Superspace}
-            To facilitate the construction of supersymmetric theories, it will be helpful to construct a space such that the generators of the Super-Poincaré group manifest as simple coordinate transformations, as in the case of the ordinary Poincaré group.
-            Starting with a general element \(g \in SP\), it can be parametrised through the exponential map as
-            \begin{equation}
-                g = \exptext{ix\^{\mu} P\_{\mu} + i(\theta Q) + i (\theta Q)^\dagger + \frac{i}{2}\tensor{\omega}{_\mu_\nu}\tensor{M}{^\mu^\nu}},
-            \end{equation}
-            where \(x^\mu, \theta\^{\alpha}, \theta\indices*{^\dagger_{\dot\alpha}}, \tensor{\omega}{_\mu_\nu}\) parametrise the group, and \(P_\mu, Q\_{\alpha}, Q\indices*{^\dagger^{\dot\alpha}}, \tensor{M}{^\mu^\nu}\) are the generators of the group.
-            Since the parameters \(x\^{\mu}, \theta\^{\alpha}, \theta\indices*{^\dagger_{\dot\alpha}}\) live in a representation of the Lorentz algebra generated by \(\tensor{M}{^\mu^\nu}\), the effect of this part of the Super-Poincaré group on the parameters can be determined easily.
-            Likewise, the parameters \(\tensor{\omega}{_\mu_\nu}\) are in a trivial representation of the algebra generated by \(P\_{\mu}, Q\_{\alpha}, Q\indices*{^\dagger^{\dot\alpha}}\), and need not then be considered.
-            It is therefore poignant to create a space with \(x\^{\mu}, \theta\^{\alpha}, \theta\indices*{^\dagger_{\dot\alpha}}\) as the coordinates, modding out the Lorentz algebra part.
-            We create superspace as a coordinate system with coordinates \(z\^{\pi} = (x\^{\mu}, \theta\^{\alpha}, \theta\indices*{^\dagger_{\dot\alpha}})\), and look at how they transform under Super-Poincaré group transformations.
-            A function \(F(z)\) on superspace can then be written using the generators \(K\_\pi = (P\_\mu, Q\_\alpha, Q\indices*{^\dagger^{\dot\alpha}})\) as \(F(z) = \exptext{iz\^\pi K\_\pi} F(0)\).
-            Applying a Super-Poincaré group element without the Lorentz generators \(\bar{g}(a, \eta) = \exptext{ia\^\mu P\_\mu + i (\eta Q) + i (\eta Q)^\dagger}\) we have
-            \begin{equation}
-                F(z^\prime) = \exptext{i{z^\prime}\^\pi K\_\pi} F(0) = \exptext{ia\^\mu P\_\mu + i (\eta Q) + i (\eta Q)^\dagger} \exptext{iz\^\pi K\_\pi} F(0),
-            \end{equation}
-            which by the \needcite[Baker-Campbell-Hausdorff] formula gives
-            \begin{equation}
-                {z^\prime}\^\pi K\_\pi = (x\^\mu + a\^\mu) P\_\mu + (\theta\^\alpha + \eta\^\alpha)Q\_\alpha + (\theta\indices*{^\dagger_{\dot\alpha}} + \eta\indices*{^\dagger_{\dot\alpha}})Q\indices*{^\dagger^{\dot\alpha}} + \frac{i}{2}\bclosed{a\^\mu P\_\mu + (\eta Q) + (\eta Q)^\dagger, z\^\pi K\_\pi} + \ldots
-            \end{equation}
-            Now, \(P\_\mu\) commutes with all of \(K\_\pi\), and \(Q\_\alpha\) (\(Q\indices*{^\dagger^{\dot\alpha}}\)) anti-commute with themselves, for every combination of different \(\alpha\) (\(\dot\alpha\)), so the only relevant part of the commutator is
-            \begin{equation}
-                \commutator{(\eta Q)}{(\theta Q)^\dagger} + \commutator{(\eta Q)^\dagger}{(\theta Q)} = -\eta\^\alpha \anticommutator{Q\_\alpha}{Q\indices*{^\dagger_{\dot\alpha}}} \theta\indices*{^\dagger^{\dot\alpha}} + (\eta \leftrightarrow \theta) = -2(\eta \sigma\^\mu \theta^\dagger)P\_\mu + (\eta \leftrightarrow \theta).
-            \end{equation}
-            Since this commutator is proportional to \(P\_\mu\) which in turn commutes with everything, all higher order commutators vanish, and we can conclude that the transformed coordinates \({z^\prime}\^\pi\) are given by
-            \begin{equation}
-                {z^\prime}\^\pi = \pclosed{x\^\mu + a\^\mu + i(\theta \sigma\^\mu \eta^\dagger) - i(\eta \sigma\^\mu \theta^\dagger), \theta\^\alpha + \eta\^\alpha, \theta\indices*{^\dagger_{\dot\alpha}} + \eta\indices*{^\dagger_{\dot\alpha}}}.
-            \end{equation}
-            This gives us a differential representation of the \(K\_\pi\) generators as
-            \begin{subequations}
-                \begin{align}
-                    P\_\mu                            & = -i \partial\_\mu,                                                                   \\
-                    Q\_\alpha                         & = - (\sigma\^\mu \theta^\dagger)\_\alpha \partial\_\mu - i \partial\_\alpha,          \\
-                    Q\indices*{^\dagger_{\dot\alpha}} & = -(\theta \bar{\sigma}\^\mu)\_{\dot\alpha} \partial\_\mu - i \partial\_{\dot\alpha}.
-                \end{align}
-            \end{subequations}
+Now, to look into what the these functions of superspace look like, we can
+expand \(F(z)\) in terms of the coordinates \(\theta\^\alpha,
+\theta\indices*{^\dagger_{\dot\alpha}}\), as these expansions are finite due to
+the fact that none of these coordinates can appear more than once. Demanding
+that the function \(F(z)\) be invariant under Lorentz transformations, the
+\(x\^\mu\)-dependendt coefficients of the expansion must transform such that
+each term is a scalar (or fully contracted Lorentz structure). This limits a
+general such function of superspace to be written as
+\begin{align}
+    \label{susy:eq:superspace_function}
+    \nonumber
+    F(z) = & f(x) + \theta\^\alpha \phi\_\alpha(x) + \theta\indices*{^\dagger_{\dot\alpha}} \chi\indices*{^\dagger^{\dot\alpha}}(x) + (\theta\theta) m(x) + (\theta\theta)^\dagger n(x)                                                                              \\
+           & + (\theta \sigma\^\mu \theta^\dagger) V\_\mu(x) + (\theta\theta) \theta\indices*{^\dagger_{\dot\alpha}} \lambda\indices*{^\dagger^{\dot\alpha}}(x) + (\theta\theta)^\dagger \theta\^\alpha \psi\_\alpha(x) + (\theta\theta)(\theta\theta)^\dagger d(x).
+\end{align}
 
-            Now, to look into what the these functions of superspace look like, we can expand \(F(z)\) in terms of the coordinates \(\theta\^\alpha, \theta\indices*{^\dagger_{\dot\alpha}}\), as these expansions are finite due to the fact that none of these coordinates can appear more than once.
-            Demanding that the function \(F(z)\) be invariant under Lorentz transformations, the \(x\^\mu\)-dependendt coefficients of the expansion must transform such that each term is a scalar (or fully contracted Lorentz structure).
-            This limits a general such function of superspace to be written as
-            \begin{align}
-                \label{susy:eq:superspace_function}
-                \nonumber
-                F(z) = & f(x) + \theta\^\alpha \phi\_\alpha(x) + \theta\indices*{^\dagger_{\dot\alpha}} \chi\indices*{^\dagger^{\dot\alpha}}(x) + (\theta\theta) m(x) + (\theta\theta)^\dagger n(x)                                                                              \\
-                       & + (\theta \sigma\^\mu \theta^\dagger) V\_\mu(x) + (\theta\theta) \theta\indices*{^\dagger_{\dot\alpha}} \lambda\indices*{^\dagger^{\dot\alpha}}(x) + (\theta\theta)^\dagger \theta\^\alpha \psi\_\alpha(x) + (\theta\theta)(\theta\theta)^\dagger d(x).
-            \end{align}
+\subsection{Superfields}
+To construct a manifestly supersymmetric theory, it will then be useful to
+start with finding representations of the Super-Poincaré group. This is exactly
+what we have already done; the functions on superspace find themselves in a
+representation space of a differential representation of the \(K\_\pi\)
+generators of the Super-Poincaré group, and a scalar representation of the
+remaining Lorentz generators. Inside the general function on superspace
+\cref{susy:eq:superspace_function}, we find many component functions in
+different representation spaces of the Lorentz group. Furthermore,
+supersymmetry transformations transform these fields into one another. This
+seems like an ideal vessel for constructing supersymmetric fields theories.
 
+We define the \emph{superfield} \(\Phi\) as an operator valued function on
+superspace. The general one \cref{susy:eq:superspace_function} is in a
+reducible representation space of the Super-Poincaré group, so we define three
+\emph{irreducible} representations that will be useful going forward:
+\begin{align}
+    \textit{Left-handed scalar superfield:}  &  & \bar{D}\_{\dot\alpha}\Phi & = 0    \\
+    \textit{Right-handed scalar superfield:} &  & D\_{\alpha}\Phi^\dagger   & = 0    \\
+    \textit{Vector superfield:}              &  & \Phi^\dagger              & = \Phi
+\end{align}
+Here the dagger operation refers to complex conjugation, and the differential operators \(D\_\alpha, \bar{D}\_{\dot\alpha}\) are defined as
+\begin{subequations}
+    \begin{align}
+        D\_\alpha             & = \partial\_\alpha + i(\sigma\^\mu \theta^\dagger)\_\alpha \partial\_\mu,      \\
+        \bar{D}\_{\dot\alpha} & = -\partial\_{\dot\alpha} - i (\theta\sigma\^\mu)\_{\dot\alpha} \partial\_\mu.
+    \end{align}
+\end{subequations}
+These differential operators are covariant differentials in the sense that the commute with supersymmetry transformations, i.e. \(D\_\alpha F(z) \to {D^\prime}\_\alpha (\bar{g} F(z)) = \bar{g} \pclosed{D\_\alpha F(z)}\)
 
-        \subsection{Superfields}
-            To construct a manifestly supersymmetric theory, it will then be useful to start with finding representations of the Super-Poincaré group.
-            This is exactly what we have already done; the functions on superspace find themselves in a representation space of a differential representation of the \(K\_\pi\) generators of the Super-Poincaré group, and a scalar representation of the remaining Lorentz generators.
-            Inside the general function on superspace \cref{susy:eq:superspace_function}, we find many component functions in different representation spaces of the Lorentz group.
-            Furthermore, supersymmetry transformations transform these fields into one another.
-            This seems like an ideal vessel for constructing supersymmetric fields theories.
+\section{Minimal Supersymmetric Standard Model}
+\phpar[Introduce the field content of the MSSM and explain conventions and names.
+    Talk about the relevant parts of the superlagrangian.]
 
-            We define the \emph{superfield} \(\Phi\) as an operator valued function on superspace.
-            The general one \cref{susy:eq:superspace_function} is in a reducible representation space of the Super-Poincaré group, so we define three \emph{irreducible} representations that will be useful going forward:
-            \begin{align}
-                \textit{Left-handed scalar superfield:}  &  & \bar{D}\_{\dot\alpha}\Phi & = 0    \\
-                \textit{Right-handed scalar superfield:} &  & D\_{\alpha}\Phi^\dagger   & = 0    \\
-                \textit{Vector superfield:}              &  & \Phi^\dagger              & = \Phi
-            \end{align}
-            Here the dagger operation refers to complex conjugation, and the differential operators \(D\_\alpha, \bar{D}\_{\dot\alpha}\) are defined as
-            \begin{subequations}
-                \begin{align}
-                    D\_\alpha             & = \partial\_\alpha + i(\sigma\^\mu \theta^\dagger)\_\alpha \partial\_\mu,      \\
-                    \bar{D}\_{\dot\alpha} & = -\partial\_{\dot\alpha} - i (\theta\sigma\^\mu)\_{\dot\alpha} \partial\_\mu.
-                \end{align}
-            \end{subequations}
-            These differential operators are covariant differentials in the sense that the commute with supersymmetry transformations, i.e. \(D\_\alpha F(z) \to {D^\prime}\_\alpha (\bar{g} F(z)) = \bar{g} \pclosed{D\_\alpha F(z)}\)
+\section{Electroweakinos}
+\phpar[Introduce the electroweakinos and how they are derived from the various fermions partners of electroweak bosons.
+    Talk about mass matrices and mass eigenstates]
+\subsection{Mass mixing}
 
-    \section{Minimal Supersymmetric Standard Model}
-        \phpar[Introduce the field content of the MSSM and explain conventions and names.
-            Talk about the relevant parts of the superlagrangian.]
-
-    \section{Electroweakinos}
-        \phpar[Introduce the electroweakinos and how they are derived from the various fermions partners of electroweak bosons.
-            Talk about mass matrices and mass eigenstates]
-        \subsection{Mass mixing}
-
-    \section{Feynman Rules of Neutralinos}
-        \phpar[Derive the ordinary Lagrangian for neutralinos from the superlagrangian.]
+\section{Feynman Rules of Neutralinos}
+\phpar[Derive the ordinary Lagrangian for neutralinos from the superlagrangian.]
 
 \end{document}
