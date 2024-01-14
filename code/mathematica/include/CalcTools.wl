@@ -14,33 +14,37 @@ MakeBoxes[tIntegral[tpow_,m1_,m2_],TraditionalForm]:=\!\(TraditionalForm\`RowBox
 
 
 tIntegralSubs={
-t^2*Den[t,m1_]*Den[t,m2_]->tIntegral[2,m1,m2\[Conjugate]],
-t*Den[t,m1_]*Den[t,m2_]->tIntegral[1,m1,m2\[Conjugate]],
-Den[t,m1_]*Den[t,m2_]->tIntegral[0,m1,m2\[Conjugate]],
-t^2*Den[t,m1_]*Den[s,m2_]->tIntegral[2,m1]*Den[s,m2],
-t*Den[t,m1_]*Den[s,m2_]->tIntegral[1,m1]*Den[s,m2],
-Den[t,m1_]*Den[s,m2_]->tIntegral[0,m1]*Den[s,m2],
-t^2*Den[s,m1_]*Den[s,m2_]->tIntegral[2]*Den[s,m1]*Den[s,m2],
-t*Den[s,m1_]*Den[s,m2_]->tIntegral[1]*Den[s,m1]*Den[s,m2],
-Den[s,m1_]*Den[s,m2_]->tIntegral[0]*Den[s,m1]*Den[s,m2]
+	t^2*Den[t,m1_]*Den[t,m2_]->tIntegral[2,m1,m2\[Conjugate]],
+	t*Den[t,m1_]*Den[t,m2_]->tIntegral[1,m1,m2\[Conjugate]],
+	Den[t,m1_]*Den[t,m2_]->tIntegral[0,m1,m2\[Conjugate]],
+	t^2*Den[t,m1_]*Den[s,m2_]->tIntegral[2,m1]*Den[s,m2],
+	t*Den[t,m1_]*Den[s,m2_]->tIntegral[1,m1]*Den[s,m2],
+	Den[t,m1_]*Den[s,m2_]->tIntegral[0,m1]*Den[s,m2],
+	t^2*Den[s,m1_]*Den[s,m2_]->tIntegral[2]*Den[s,m1]*Den[s,m2],
+	t*Den[s,m1_]*Den[s,m2_]->tIntegral[1]*Den[s,m1]*Den[s,m2],
+	Den[s,m1_]*Den[s,m2_]->tIntegral[0]*Den[s,m1]*Den[s,m2]
 }
 ToTIntegrals[expr_]:=(Collect[#1,tIntegral[args__],(Isolate[#1//Simplify,IsolateNames->CT]&)]&)[
-(Collect[
-Expand[expr],
-t,
-(Collect[#1,{Den[t,m1_]Den[t,m2_],Den[t,m1_]Den[s,m2_],Den[s,m1_]Den[s,m2_]}]&)
-]//Expand)/.tIntegralSubs
+	(Collect[
+		Expand[expr],
+		t,
+		(Collect[#1,{Den[t,m1_]Den[t,m2_],Den[t,m1_]Den[s,m2_],Den[s,m1_]Den[s,m2_]}]&)
+	]//Expand)/.tIntegralSubs
 ]
 
 
 tIntegralRelations={
-tIntegral[2,m_]->tIntegral[1]+m*tIntegral[0]+m^2*tIntegral[0,m],
-tIntegral[1,m_]->tIntegral[0]+m*tIntegral[0,m],
-tIntegral[0,m1_,m2_]->(tIntegral[0,m1]-tIntegral[0,m2])/(m1-m2),
-tIntegral[1,m1_,m2_]->(m1*tIntegral[0,m1]-m2*tIntegral[0,m2])/(m1-m2),
-tIntegral[2,m1_,m2_]->tIntegral[0]+(m1^2*tIntegral[0,m1]-m2^2*tIntegral[0,m2])/(m1-m2)
-};
-ReduceTIntegrals[expr_]:=Collect[(expr/.tIntegralRelations)//Expand//ReleaseHold,tIntegral[args__],(Isolate[(#1//Simplify),IsolateNames->CT]&)]
+	tIntegral[2,m_]->tIntegral[1]+m*tIntegral[0]+m^2*tIntegral[0,m],
+	tIntegral[1,m_]->tIntegral[0]+m*tIntegral[0,m],
+	tIntegral[0,m1_,m2_]->(tIntegral[0,m1]-tIntegral[0,m2])/(m1-m2),
+	tIntegral[1,m1_,m2_]->(m1*tIntegral[0,m1]-m2*tIntegral[0,m2])/(m1-m2),
+	tIntegral[2,m1_,m2_]->tIntegral[0]+(m1^2*tIntegral[0,m1]-m2^2*tIntegral[0,m2])/(m1-m2)
+}
+ReduceTIntegrals[expr_]:=Collect[
+	(expr/.tIntegralRelations)//Expand//FRH,
+	tIntegral[args__],
+	(Isolate[(#1//Simplify),IsolateNames->CT]&)
+]
 
 
 T0[\[CapitalDelta]1_,\[CapitalDelta]2_]:=Assuming[{\[CapitalDelta]1\[NotElement]Reals,\[CapitalDelta]2\[NotElement]Reals,t1>t0},(Log[(t1-\[CapitalDelta]1)/(t0-\[CapitalDelta]1)]-Log[(t1-\[CapitalDelta]2\[Conjugate])/(t0-\[CapitalDelta]2\[Conjugate])])/(\[CapitalDelta]1-\[CapitalDelta]2\[Conjugate])]

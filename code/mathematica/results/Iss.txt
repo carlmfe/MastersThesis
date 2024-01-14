@@ -1,7 +1,6 @@
 2*FeynCalc`IndexDelta[a, b]^2*SMP["g_W"]^4*
- ((2*tRed[i]*tRed[j]*(Conjugate[Zs[L]]*Zs[L] + Conjugate[Zs[R]]*Zs[R]))/
-   (SMP["cos_W"]^4*(s - SMP["m_Z"]^2)^2) + 
-  (2*uRed[i]*uRed[j]*(Conjugate[Zs[L]]*Zs[L] + Conjugate[Zs[R]]*Zs[R]))/
-   (SMP["cos_W"]^4*(s - SMP["m_Z"]^2)^2) - 
+ ((2*(t^2 + u^2 - t*MNeu[i]^2 - u*MNeu[i]^2 - t*MNeu[j]^2 - u*MNeu[j]^2 + 
+     2*MNeu[i]^2*MNeu[j]^2)*(Conjugate[Zs[L]]*Zs[L] + 
+     Conjugate[Zs[R]]*Zs[R]))/(SMP["cos_W"]^4*(s - SMP["m_Z"]^2)^2) - 
   (2*s*MNeu[i]*MNeu[j]*(Conjugate[Zs[L]]^2 + Conjugate[Zs[R]]^2 + Zs[L]^2 + 
      Zs[R]^2))/(SMP["cos_W"]^4*(s - SMP["m_Z"]^2)^2))
