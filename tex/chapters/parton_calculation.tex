@@ -78,6 +78,13 @@
 
             \comment{Comment on integration boundaries.}\\
             \[(m_i + m_j)^2 \leq Q^2 \leq s\]
+
+            With two initial state momenta, the amplitude will be independent of the azimuthal angle in the centre-of-mass frame of the initial partons.
+            This lets us integrate over it for a factor of \(2\pi\).
+
+            \begin{equation}
+                \mathrm{d}\Pi_{2\to 3} = \frac{1}{\pclosed{2\pi}^{2d-3}} \frac{1}{\Gamma\pclosed{\frac{d-2}{2}}} \frac{1}{2^d \pi^{\frac{3d-4}{2}}} \frac{\lambda^{\frac{d-3}{2}\pclosed{Q^2, m_i^2, m_j^2}}}{s}\frac{\pclosed{1-z}^{\frac{d-3}{2}}}{z^{\frac{d-2}{2}}} \pclosed{y(1-y)}^{\frac{d-4}{2}} \mathrm{d}y\, \mathrm{d}\Omega_{d-1}^\star\, \mathrm{d}Q^2.
+            \end{equation}
             % \comment{Complete this calculation.}\\
             % It is important to note that there is an interdependence between \(Q^2\) and \(\omega\), which can be found using that \(P^2 = s\).
             % In the centre-of-mass frame of the neutralinos, the magnitude of the three-momentum of \(P\) must be \(\omega\), so we have the relation \(P_0^2 = s + \omega^2\), which together with momentum conservation \(P\_0 - \omega = Q\) yields
@@ -212,7 +219,13 @@
             \end{equation}
 
             \begin{equation}
-                \mathrm{d}\hat{\sigma} = \frac{1}{16\pi} \frac{1}{\hat{s}^2} \abs{\M}^2 \mathrm{d}t
+                \mathrm{d}\hat{\sigma} = \frac{1}{16\pi} \frac{1}{\hat{s}^2} \abs{\M}^2 \mathrm{d}\hat{t}
+            \end{equation}
+
+
+            Averaged over spin and colour, and taking account of symmetry if the particles are identical, the differential cross-section in \(d=4\) dimensions is.
+            \begin{equation}
+                \mathrm{d}\hat{\sigma} = \pclosed{\frac{1}{2}}^{\delta_{ij}} \frac{1}{64 N_C^2 \pi} \frac{1}{\hat{s}^2} \sum_{\substack{\text{spin}\\\text{colour}}} \abs{\M}^2 \mathrm{d}\hat{t}
             \end{equation}
             % \clearpage
             % \begin{equation}
@@ -237,6 +250,177 @@
 
 
     \section{Leading Order Cross-Section}
+
+        \subsection{The Matrix Elements}
+            \begin{figure} [ht!]
+                \centering
+                \begin{subfigure}{0.3\linewidth}
+                    \centering
+                    \inputtikz{s_channel}
+                    \caption{\(s\)-channel}
+                \end{subfigure}
+                \begin{subfigure}{0.3\linewidth}
+                    \centering
+                    \inputtikz{t_channel}
+                    \caption{\(t\)-channel}
+                \end{subfigure}
+                \begin{subfigure}{0.3\linewidth}
+                    \centering
+                    \inputtikz{u_channel}
+                    \caption{\(u\)-channel}
+                \end{subfigure}
+                \caption{The leading order diagrams contributing to neutralino pair production at parton-level.}
+                \label{fig:tree_level_diagrams}
+            \end{figure}
+
+            At leading order the contributing diagrams to the parton-level process are shown in \cref{fig:tree_level_diagrams}.
+            In the following, I will make use of the shorthand notation for the spinors \(w_{i/j} = w(p_{i/j}), w_{1,2} = w(k_{i/j})\) where \(w\) is either \(u\) or \(v\).
+            The resulting amplitudes, using the Feynman rules in \needcite[Feynman rules section], are then
+            \begin{subequations}
+                \begin{align}
+                    \nonumber
+                    \M_{\hat{s}} = -\frac{g^2}{2} D_Z(\hat{s})           & \bclosed{ \bar{u}_i\gamma^\mu\pclosed{O^{\prime\prime L}_{ij}P_L + O^{\prime\prime R}_{ij}P_R} v_j }           \\
+                                                                         & \times \bclosed{ \bar{v}_2 \gamma_\mu \pclosed{C^L_{Zqq}P_L + C^R_{Zqq}P_R} u_1 },                             \\
+                    \nonumber
+                    \M_{\hat{t}} = -\sum_A 2g^2 D_{\tilde{q}_A}(\hat{t}) & \bclosed{ \bar{u}_i \pclosed{C_{\nino[i]\tilde{q}_Aq}^{L\ast}P_L + C_{\nino[i]\tilde{q}_Aq}^{R\ast} P_R} u_1 } \\
+                                                                         & \times \bclosed{ \bar{v}_2 \pclosed{C^R_{\nino[j]\tilde{q}_Aq}P_L + C^L_{\nino[j]\tilde{q}_Aq}P_R} v_j },      \\
+                    \nonumber
+                    \M_{\hat{u}} = -\sum_B 2g^2 D_{\tilde{q}_B}(\hat{u}) & \bclosed{ \bar{u}_j \pclosed{C_{\nino[j]\tilde{q}_Bq}^{L\ast}P_L + C_{\nino[j]\tilde{q}_Bq}^{R\ast} P_R} u_1 } \\
+                                                                         & \times \bclosed{ \bar{v}_2 \pclosed{C^R_{\nino[i]\tilde{q}_Bq}P_L + C^L_{\nino[i]\tilde{q}_Bq}P_R} v_i },
+                \end{align}
+            \end{subequations}
+            where \(D_p(q^2) = \frac{1}{q^2 - m_p^2 + i\Gamma_p m_p}\) is the \needcite[Breit-Wigner propagator] of a particle with mass \(m_p\) and decay width \(\Gamma_p\).
+
+            These matrix elements can be expanded using the \textit{supercharges}
+            \begin{subequations}
+                \begin{align}
+                    Z^X      & = C_{qqZ}^X O_{ij}^{\prime\prime X},                                            \\
+                    Q_A^{XY} & = C_{\nino[i] \tilde{q}_A q}^{X} \pclosed{C_{\nino[j] \tilde{q}_A q}^{X}}^\ast,
+                \end{align}
+            \end{subequations}
+            and the Dirac quadrilinears
+            \begin{subequations}
+                \begin{align}
+                    q^S_{XY}(w_a, w_b, w_c, w_d) = & \bclosed{\bar{w}_a P_X w_b} \bclosed{\bar{w}_c P_Y w_d}                       \\
+                    q^V_{XY}(w_a, w_b, w_c, w_d) = & \bclosed{\bar{w}_a \gamma^\mu P_X w_b} \bclosed{\bar{w}_c \gamma_\mu P_Y w_d}
+                \end{align}
+            \end{subequations}
+            to arrive at
+            \begin{subequations}
+                \begin{align}
+                    \nonumber
+                    \M_{\hat{s}} = -\frac{g^2}{2} D_Z(\hat{s}) & \Big[ Z_s^L q^V_{LL}(u_i, v_j, v_2, u_1) - \pclosed{Z_s^R}^\ast q^V_{LR}(u_i, v_j, v_2, u_1)   \\
+                                                               & - \pclosed{Z_s^L}^\ast q^V_{RL}(u_i, v_j, v_2, u_1) + Z_s^R q^V_{RR}(u_i, v_j, v_2, u_1) \Big] \\
+                    % \nonumber
+                    % \M_{\hat{t}} = -\sum_A 2g^2 D_{\tilde{q}_A}(\hat{t}) & \bclosed{ \bar{u}_i \pclosed{C_{\nino[i]\tilde{q}_Aq}^{L\ast}P_L + C_{\nino[i]\tilde{q}_Aq}^{R\ast} P_R} u_1 } \\
+                    %                                                      & \times \bclosed{ \bar{v}_2 \pclosed{C^R_{\nino[j]\tilde{q}_Aq}P_L + C^L_{\nino[j]\tilde{q}_Aq}P_R} v_j },      \\
+                    % \nonumber
+                    % \M_{\hat{u}} = -\sum_B 2g^2 D_{\tilde{q}_B}(\hat{u}) & \bclosed{ \bar{u}_j \pclosed{C_{\nino[j]\tilde{q}_Bq}^{L\ast}P_L + C_{\nino[j]\tilde{q}_Bq}^{R\ast} P_R} u_1 } \\
+                    %                                                      & \times \bclosed{ \bar{v}_2 \pclosed{C^R_{\nino[i]\tilde{q}_Bq}P_L + C^L_{\nino[i]\tilde{q}_Bq}P_R} v_i }.
+                \end{align}
+            \end{subequations}
+
+
+        \subsection{Differential Result}
+            \begin{align}
+                \nonumber
+                \d[\hat{t}]{\hat{\sigma}_0} = & \frac{\pi \alpha_W^2}{N_C \hat{s}^2} \pclosed{\frac{1}{2}}^{\delta_{ij}} \Bigg\{ \sum_{X,Y} \bclosed{\abs{Q^{XY}_{\hat{t}}}^2 \pclosed{\hat{t}-m_i^2}\pclosed{\hat{t}-m_j^2} + \abs{Q^{XY}_{\hat{u}}}^2 \pclosed{\hat{u}-m_i^2}\pclosed{\hat{u}-m_j^2}} \\
+                                              & - \sum_X \bclosed{2\Re{\pclosed{Q_{u}^{XX}}^\ast Q_{t}^{XX}} m_i m_j \hat{s} - 2\Re{\pclosed{Q_{u}^{XX^\prime}}^\ast Q_{t}^{XX^\prime}} \pclosed{\hat{t}\hat{u} - m_i^2m_j^2}} \Bigg\}
+            \end{align}
+
+        \subsection{Phase Space Integral}
+            To integrate over the variable \(t\), we can classify the types of integrals that will arise.
+            All the integrals take the form
+            \begin{equation}
+                T^p(\Delta_1, \Delta_2) \equiv \int_{t_-}^{t_+} \!\mathrm{d}t\, \frac{t^p}{(t-\Delta_1)(t-\Delta_2^\ast)}
+            \end{equation}
+            for some \(\Delta_{1,2}\) dependent on \(s\), the neutralino masses and the squark masses and decay rates, and \(p\) is some integer.
+
+            Defining \(\Delta_A^t = m_A^2 + i\Gamma_A m_A\), \(\Delta_A^u = m_i^2 + m_j^2 - s - m_A^2 - i\Gamma_A m_A\), all integrals that will arise are
+            \begin{subequations}
+                \begin{align}
+                    T^2(0, 0) =                                     & t_+ - t_-                                                                                                                                                                                                                                                 \\
+                    T^3(0, 0) =                                     & \frac{1}{2} \pclosed{t_+^2 - t_-^2}                                                                                                                                                                                                                       \\
+                    T^4(0, 0) =                                     & \frac{1}{3} \pclosed{t_+^3 - t_-^3}                                                                                                                                                                                                                       \\
+                    T^1\!\pclosed{\Delta_A^{t/u}, 0} =              & \ln\frac{t_+ - \Delta_A^{t/u}}{t_- - \Delta_A^{t/u}}                                                                                                                                                                                                      \\
+                    T^2\!\pclosed{\Delta_A^{t/u}, 0} =              & t_+ - t_- + \Delta_A^{t/u} \ln\frac{t_+ - \Delta_A^{t/u}}{t_- - \Delta_A^{t/u}}                                                                                                                                                                           \\
+                    T^3\!\pclosed{\Delta_A^{t/u}, 0} =              & \frac{1}{2}(t_+^2 - t_-^2) + \Delta_A^{t/u}(t_+ - t_-) + \pclosed{\Delta_A^{t/u}}^2 \ln\frac{t_+ - \Delta_A^{t/u}}{t_- - \Delta_A^{t/u}}                                                                                                                  \\
+                    T^0\!\pclosed{\Delta_A^{t/u}, \Delta_B^{t/u}} = & \frac{1}{\Delta_A^{t/u} - \pclosed{\Delta_B^{t/u}}^\ast} \cclosed{\ln\frac{t_+ - \Delta_A^{t/u}}{t_- - \Delta_A^{t/u}} - \ln\frac{t_+ - \pclosed{\Delta_B^{t/u}}^\ast}{t_- - \pclosed{\Delta_B^{t/u}}^\ast}}                                              \\
+                    T^1\!\pclosed{\Delta_A^{t/u}, \Delta_B^{t/u}} = & \frac{1}{\Delta_A^{t/u} - \pclosed{\Delta_B^{t/u}}^\ast} \cclosed{\Delta_A^{t/u} \ln\frac{t_+ - \Delta_A^{t/u}}{t_- - \Delta_A^{t/u}} - \pclosed{\Delta_B^{t/u}}^\ast \ln\frac{t_+ - \pclosed{\Delta_B^{t/u}}^\ast}{t_- - \pclosed{\Delta_B^{t/u}}^\ast}} \\
+                    \nonumber
+                    T^2\!\pclosed{\Delta_A^{t/u}, \Delta_B^{t/u}} = & t_+ - t_- + \frac{1}{\Delta_A^{t/u} - \pclosed{\Delta_B^{t/u}}^\ast}                                                                                                                                                                                      \\
+                                                                    & \times \cclosed{\pclosed{\Delta_A^{t/u}}^2 \ln\frac{t_+ - \Delta_A^{t/u}}{t_- - \Delta_A^{t/u}} - \pclosed{\Delta_B^{t/u}}^{\ast^2} \ln\frac{t_+ - \pclosed{\Delta_B^{t/u}}^\ast}{t_- - \pclosed{\Delta_B^{t/u}}^\ast}}
+                \end{align}
+            \end{subequations}
+
+            This allows us to write the integrated leading order cross-section as a function of the \(t\)-limits with just the terms \(t_+-t_-\), \(t_+^2-t_-^2\), \(t_+^3-t_-^3\) and \(\ln\frac{t_+-\Delta}{t_--\Delta}\).
+            \begin{align}
+                \sigma^0 = & 2\Re{\sum_{A,B} \ln\frac{t_+ - m_A^2 - i\Gamma_A m_A}{t_- - m_A^2 - i\Gamma_A m_A}} \cclosed{}
+            \end{align}
+
+            \[2 \left(\Re{}\left(\log \left(\frac{-m_{\tilde{q}_{A}}^2-i \Gamma _{A} m_{\tilde{q}_{A}}+t_+}{-m_{\tilde{q}_{A}}^2-i\Gamma _{A} m_{\tilde{q}_{A}}+t_-}\right) \left(-\frac{s m_i m_j \left(\left(Q_{A}^{R\bar{R}}\right){}^* \left(Z_s^R\right){}^*+\left(Z_s^L\right){}^*
+                            Q_{A}^{L\bar{L}}\right)}{s-m_Z \left(m_Z-i \Gamma _Z\right)}+\frac{\left(m_i^2-m_{\tilde{q}_{A}} \left(m_{\tilde{q}_{A}}
+                            +i\Gamma _{A}\right)\right) \left(m_j^2-m_{\tilde{q}_{A}} \left(m_{\tilde{q}_{A}}
+                            +i \Gamma _{A}\right)\right)\left(Q_{A}^{L\bar{L}} Z_s^L+\left(Q_{A}^{R\bar{R}}\right){}^* Z_s^R\right)}{s-m_Z \left(m_Z-i\Gamma _Z\right)}
+                        +\frac{\left(\left(Q_{B}^{LR}\right){}^*Q_{A}^{LR}+\left(Q_{A}^{RL}\right){}^* Q_{B}^{RL}
+                            +\left(Q_{B}^{L\bar{L}}\right){}^* Q_{A}^{L\bar{L}}
+                            +\left(Q_{A}^{R\bar{R}}\right){}^*Q_{B}^{R\bar{R}}\right) \left(m_i^2-m_{\tilde{q}_{A}} \left(m_{\tilde{q}_{A}}
+                            +i \Gamma _{A}\right)\right)\left(m_{\tilde{q}_{A}} \left(m_{\tilde{q}_{A}}
+                            +i\Gamma _{A}\right)-m_j^2\right)}{-m_{\tilde{q}_{A}}^2
+                            -i\Gamma _{A} m_{\tilde{q}_{A}}+m_{\tilde{q}_{B}} \left(m_{\tilde{q}_{B}}-i \Gamma _{B}\right)}
+                        +\frac{sm_i m_j \left(\left(Q_{A}^{R\bar{R}}\right){}^* \left(Q_{B}^{R\bar{R}}\right){}^*
+                            +Q_{A}^{L\bar{L}} Q_{B}^{L\bar{L}}\right)}{-m_i^2-m_j^2+m_{\tilde{q}_{A}}^2
+                            +m_{\tilde{q}_{B}}^2+s+im_{\tilde{q}_{A}} \Gamma _{A}-i m_{\tilde{q}_{B}} \Gamma _{B}}
+                        +\frac{\left(\left(Q_{B}^{RL}\right){}^*Q_{A}^{LR}
+                            +\left(Q_{A}^{RL}\right){}^* Q_{B}^{LR}\right) \left(\left(m_j^2-m_{\tilde{q}_{A}} \left(m_{\tilde{q}_{A}}
+                            +i\Gamma _{A}\right)\right) m_i^2+m_{\tilde{q}_{A}} \left(m_{\tilde{q}_{A}}
+                            +i \Gamma _{A}\right) \left(-m_j^2+m_{\tilde{q}_{A}}^2+s
+                            +im_{\tilde{q}_{A}} \Gamma _{A}\right)\right)}{-m_i^2-m_j^2+m_{\tilde{q}_{A}}^2+m_{\tilde{q}_{B}}^2+s
+                            +i m_{\tilde{q}_{A}}\Gamma _{A}-i m_{\tilde{q}_{B}} \Gamma _{B}}\right)\right)
+                +\Re{}\left(\log \left(\frac{-m_i^2-m_j^2+m_{\tilde{q}_{A}}^2+s+t_+
+                            +im_{\tilde{q}_{A}} \Gamma _{A}}{-m_i^2-m_j^2+m_{\tilde{q}_{A}}^2+s+t_-
+                            +i m_{\tilde{q}_{A}} \Gamma _{A}}\right)\left(-\frac{s m_i m_j \left(\left(Q_{A}^{L\bar{L}}\right){}^* \left(Q_{B}^{L\bar{L}}\right){}^*
+                            +Q_{A}^{R\bar{R}} Q_{B}^{R\bar{R}}\right)}{-m_i^2-m_j^2+m_{\tilde{q}_{A}}^2+m_{\tilde{q}_{B}}^2+s
+                            +im_{\tilde{q}_{A}} \Gamma _{A}-i m_{\tilde{q}_{B}} \Gamma _{B}}
+                        +\frac{\left(\left(Q_{A}^{L\bar{L}}\right){}^*\left(Z_s^L\right){}^*+\left(Z_s^R\right){}^* Q_{A}^{R\bar{R}}\right) \left(m_i^2-m_{\tilde{q}_{A}} \left(m_{\tilde{q}_{A}}
+                            +i\Gamma _{A}\right)\right) \left(m_{\tilde{q}_{A}} \left(m_{\tilde{q}_{A}}
+                            +i \Gamma _{A}\right)-m_j^2\right)}{s-m_Z\left(m_Z-i \Gamma _Z\right)}
+                        +\frac{s m_i m_j \left(\left(Q_{A}^{L\bar{L}}\right){}^* Z_s^L+Q_{A}^{R\bar{R}} Z_s^R\right)}{s-m_Z\left(m_Z-i \Gamma _Z\right)}+\frac{\left(\left(Q_{B}^{RL}\right){}^* Q_{A}^{RL}+\left(Q_{A}^{LR}\right){}^* Q_{B}^{LR}+\left(Q_{B}^{R\bar{R}}\right){}^*Q_{A}^{R\bar{R}}+\left(Q_{A}^{L\bar{L}}\right){}^* Q_{B}^{L\bar{L}}\right)
+                            \left(m_i^2-m_{\tilde{q}_{A}}\left(m_{\tilde{q}_{A}}+i \Gamma _{A}\right)\right)
+                            \left(m_{\tilde{q}_{A}} \left(m_{\tilde{q}_{A}}+i \Gamma_{A}\right)-m_j^2\right)}
+                        {m_{\tilde{q}_{A}}^2+i \Gamma _{A} m_{\tilde{q}_{A}}-m_{\tilde{q}_{B}}\left(m_{\tilde{q}_{B}}-i \Gamma _{B}\right)}
+                        -\frac{\left(\left(Q_{B}^{LR}\right){}^* Q_{A}^{RL}+\left(Q_{A}^{LR}\right){}^*Q_{B}^{RL}\right)
+                            \left(\left(m_j^2-m_{\tilde{q}_{A}} \left(m_{\tilde{q}_{A}}+i \Gamma _{A}\right)\right)
+                            m_i^2+m_{\tilde{q}_{A}} \left(m_{\tilde{q}_{A}}+i \Gamma _{A}\right) \left(-m_j^2+m_{\tilde{q}_{A}}^2+s+im_{\tilde{q}_{A}} \Gamma _{A}\right)\right)}
+                        {-m_i^2-m_j^2+m_{\tilde{q}_{A}}^2+m_{\tilde{q}_{B}}^2+s+i m_{\tilde{q}_{A}}\Gamma _{A}-i m_{\tilde{q}_{B}} \Gamma _{B}}\right)\right)\right)
+                +\frac{2 \left(t_+^3-t_-^3\right) \left(\left(Z_s^L\right){}^*
+                    Z_s^L+\left(Z_s^R\right){}^* Z_s^R\right)}{3 \left(s-m_Z \left(m_Z-i
+                    \Gamma _Z\right)\right) \left(s-m_Z \left(m_Z+i \Gamma _Z\right)\right)}+\frac{1}{2}
+                \left(t_+^2-t_-^2\right) \left(\left(\left(Q_{A}^{L\bar{L}}\right){}^* \left(Z_s^L\right){}^*+\left(Z_s^R\right){}^* Q_{A}^{R\bar{R}}\right)
+                \left(\frac{1}{s-m_Z \left(m_Z+i \Gamma _Z\right)}-\frac{1}{s-m_Z
+                            \left(m_Z-i \Gamma _Z\right)}\right)+\left(\frac{1}{s-m_Z \left(m_Z-i
+                            \Gamma _Z\right)}-\frac{1}{s-m_Z
+                            \left(m_Z+i \Gamma _Z\right)}\right) \left(Q_{A}^{L\bar{L}}
+                    Z_s^L+\left(Q_{A}^{R\bar{R}}\right){}^* Z_s^R\right)+\frac{2 \left(-m_i^2-m_j^2+s\right)
+                        \left(\left(Z_s^L\right){}^* Z_s^L+\left(Z_s^R\right){}^* Z_s^R\right)}{\left(s-m_Z \left(m_Z-i \Gamma _Z\right)\right) \left(s-m_Z
+                        \left(m_Z+i \Gamma_Z\right)\right)}\right)+(t_+-t_-) \left(\left(Q_{B}^{LR}\right){}^* Q_{A}^{LR}+\left(Q_{B}^{RL}\right){}^*
+                Q_{A}^{LR}+\left(Q_{B}^{LR}\right){}^* Q_{A}^{RL}+\left(Q_{B}^{RL}\right){}^* Q_{A}^{RL}+\left(Q_{A}^{LR}\right){}^*
+                Q_{B}^{LR}+\left(Q_{A}^{RL}\right){}^* Q_{B}^{LR}+\left(Q_{A}^{LR}\right){}^* Q_{B}^{RL}+\left(Q_{A}^{RL}\right){}^*
+                Q_{B}^{RL}+\left(Q_{B}^{L\bar{L}}\right){}^* Q_{A}^{L\bar{L}}+\left(Q_{B}^{R\bar{R}}\right){}^* Q_{A}^{R\bar{R}}+\left(Q_{A}^{L\bar{L}}\right){}^*
+                Q_{B}^{L\bar{L}}+\left(Q_{A}^{R\bar{R}}\right){}^* Q_{B}^{R\bar{R}}+\left(\left(Q_{A}^{L\bar{L}}\right){}^*
+                \left(Z_s^L\right){}^*+\left(Z_s^R\right){}^* Q_{A}^{R\bar{R}}\right) \left(\frac{m_{\tilde{q}_{A}}^2+i \Gamma _{A}
+                    m_{\tilde{q}_{A}}-s}{s-m_Z \left(m_Z-i \Gamma _Z\right)}-\frac{m_i^2+m_j^2-m_{\tilde{q}_{A}}^2+i m_{\tilde{q}_{A}}
+                    \Gamma _{A}}{s-m_Z \left(m_Z+i \Gamma _Z\right)}\right)+\left(\frac{m_{\tilde{q}_{A}}^2-i \Gamma _{A} m_{\tilde{q}_{A}}-s}{s-m_Z
+                    \left(m_Z+i \Gamma _Z\right)}-\frac{m_i^2+m_j^2-m_{\tilde{q}_{A}} \left(m_{\tilde{q}_{A}}+i \Gamma _{A}
+                    \right)}{s-m_Z
+                    \left(m_Z-i \Gamma _Z\right)}\right) \left(Q_{A}^{L\bar{L}}
+                Z_s^L+\left(Q_{A}^{R\bar{R}}\right){}^* Z_s^R\right)+\frac{-s m_i
+                    m_j \left(\left(Z_s^L\right){}^*\right){}^2+\left(s \left(s-m_j^2\right)-m_i^2 \left(s-2 m_j^2\right)\right) Z_s^L \left(Z_s^L\right){}^*-s \left(\left(Z_s^R\right){}^*\right){}^2
+                    m_i m_j+\left(Z_s^R\right){}^* \left(s \left(s-m_j^2\right)-m_i^2
+                    \left(s-2 m_j^2\right)\right) Z_s^R-s m_i m_j \left(\left(Z_s^L\right){}^2+\left(Z_s^R\right){}^2\right)}{\left(s-m_Z
+                    \left(m_Z-i \Gamma _Z\right)\right) \left(s-m_Z \left(m_Z+i \Gamma _Z
+                        \right)\right)}\right)\]
+
 
     \section{NLO Corrections}
         \begin{TODO}
