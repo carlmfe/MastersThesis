@@ -33,6 +33,10 @@
             {\small{#1}}%
             {\large{$\boldsymbol{\lrcorner}$}}}}
 
+% comment in margin:
+\setlength\marginparwidth{80pt}
+\newcommand{\margincomment}[1]{\marginpar{\textcolor{n@redish}{\scriptsize #1}}}
+
 % something important?
 \newcommand{\important}[1]{\colorbox{black}{\textcolor{white}{\textbf{#1}}}}
 
@@ -80,8 +84,11 @@
     \medskip}
 
 % TODO list:
+\newcommand{\unchecked}{\(\square\)}
+\newcommand{\checked}{\makebox[0pt][l]{\(\square\)}\raisebox{.15ex}{\hspace{0.1em}\(\checkmark\)}}
 \newenvironment{TODO}
 {\par\medskip
+    \renewcommand\labelitemi{\unchecked}
     \textcolor{n@redish}{\textbf{TODO:}}
     \begin{itemize}
         \begingroup\color{n@redish}%
