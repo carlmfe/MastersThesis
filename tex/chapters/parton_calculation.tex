@@ -63,7 +63,7 @@ Making the change of variable, the differential phase space reduces to
 \end{equation}
 
 \subsection{3-body Phase Space}
-\comment{Fill out an introduction here.}\\
+\todo{Fill out an introduction here.}\\
 The differential Lorentz invariant phase space for a 3-body final state with four-momenta \(p_i, p_j, k\), where \(k^2=0\) in \(d\) dimensions is
 \begin{equation}
 	\mathrm{d}\Pi_{2\to 3} = (2\pi)^d \delta^d(P - p_i - p_j - k) \frac{\mathrm{d}^{d-1} \vec{p}_i}{(2\pi)^{d-1}} \frac{1}{2E_i} \frac{\mathrm{d}^{d-1} \vec{p}_j}{(2\pi)^{d-1}} \frac{1}{2E_j} \frac{\mathrm{d}^{d-1} \vec{k}}{(2\pi)^{d-1}} \frac{1}{2\omega}.
@@ -85,8 +85,10 @@ It will also be useful to make a change of integration variable to \(Q^2\), leav
 	\mathrm{d}\Pi_{2\to 3} = \frac{1}{\pclosed{2\pi}^{2d-3}} \frac{\omega^{d-3} \abs{\vec{p}_i^\star}^{d-3}}{16Q\sqrt{s}} \mathrm{d}\Omega_{d-1}^\star\, \mathrm{d}\Omega_{d-1}\, \mathrm{d}Q^2.
 \end{equation}
 
-\comment{Comment on integration boundaries.}\\
-\[(m_i + m_j)^2 \leq Q^2 \leq s\]
+\todo{Comment on integration boundaries.}\\
+\begin{temporary}
+	\[(m_i + m_j)^2 \leq Q^2 \leq s\]
+\end{temporary}
 
 With two initial state momenta, the amplitude will be independent of the
 azimuthal angle in the centre-of-mass frame of the initial partons. This lets
@@ -341,6 +343,37 @@ to arrive at
 		+                                                          & Q_A^{LL} b_R(v_2, v_i) b_L(u_j, u_1) + Q_A^{LR} b_R(v_2, v_i) b_R(u_j, u_1) \Big].
 	\end{align}
 \end{subequations}
+
+\begin{temporary}
+	\begin{subequations}
+		\begin{align}
+			\pclosed{b_{L/R}(w_a, w_b)}^\dagger =     & b_{R/L}(w_b, w_a)     \\
+			\pclosed{b_{L/R}^\mu(w_a, w_b)}^\dagger = & b_{L/R}^\mu(w_b, w_a)
+		\end{align}
+	\end{subequations}
+
+	\begin{subequations}
+		\begin{align}
+			\nonumber
+			\M^\dagger_{\hat{s}} = -\frac{g^2}{2} D_Z^\ast(\hat{s}) \Big[           & \pclosed{Z^L}^\ast b_L^\mu(v_j, u_i){b_L}\_{\mu}(u_1, v_2) - Z^R b_L^\mu(v_j, u_i){b_R}\_{\mu}(u_1, v_2)         \\
+			-                                                                       & Z^L b_R^\mu(v_j, u_i){b_L}\_{\mu}(u_1, v_2) + \pclosed{Z^R}^\ast b_R^\mu(v_j, u_i){b_R}\_{\mu}(u_1, v_2) \Big]   \\
+			\nonumber
+			\M^\dagger_{\hat{t}} = -\sum_A 2g^2 D^\ast_{\tilde{q}_A}(\hat{t}) \Big[ & Q_A^{RL} b_L(u_1, u_i) b_L(v_j, v_2) +  Q_A^{RR} b_L(u_1, u_i) b_R(v_j, v_2)                                     \\
+			+                                                                       & Q_A^{LL} b_R(u_1, u_i) b_L(v_j, v_2) + Q_A^{LR} b_R(u_1, u_i) b_R(v_j, v_2) \Big]                                \\
+			\nonumber
+			\M^\dagger_{\hat{u}} = -\sum_B 2g^2 D^\ast_{\tilde{q}_B}(\hat{u}) \Big[ & \pclosed{Q_A^{LR}}^\ast b_L(v_i, v_2) b_L(u_1, u_j) + \pclosed{Q_A^{LL}}^\ast b_L(v_i, v_2) b_R(u_1, u_j)        \\
+			+                                                                       & \pclosed{Q_A^{RR}}^\ast b_R(v_i, v_2) b_L(u_1, u_j) + \pclosed{Q_A^{RL}}^\ast b_R(v_i, v_2) b_R(u_1, u_j) \Big].
+		\end{align}
+	\end{subequations}
+
+	\begin{align}
+		\sum_{\text{spins}} b_X(w_a, w_b) b_Y(w_b, w_a) =         & 2 \Big[ (1-\delta_{XY}) (p_a \cdot p_b) + \operatorname{rsgn} \delta_{XY} m_a m_b \Big],                                                                                               \\
+		\nonumber
+		\sum_{\text{spins}} b_X^\mu(w_a, w_b) b_Y^\nu(w_b, w_a) = & 2\Big[ \delta_{XY}\pclosed{p_a^\mu p_b^\nu - \g (p_a \cdot p_b) + p_a^\nu p_b^\mu + (-1)^{\delta_{XY}} i \epsilon^{\mu\nu\alpha\beta} \tensor{(p_a)}{_\alpha} \tensor{(p_b)}{_\beta}}, \\
+		                                                          & + (1-\delta_{XY})\operatorname{rsgn} m_a m_b \g \Big]
+	\end{align}
+	where \(\operatorname{rsgn}\) is 1 if \(w_a, w_b\) are spinors of the same type, e.g. both are \(u\)-spinors, and -1 otherwise.
+\end{temporary}
 
 \subsection{Differential Result}
 \begin{align}
