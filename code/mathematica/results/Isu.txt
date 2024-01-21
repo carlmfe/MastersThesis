@@ -1,9 +1,0 @@
-2*FeynCalc`IndexDelta[a, b]^2*SMP["g_W"]^4*
- (-((uRed[i]*uRed[j]*(Conjugate[Zs[L]]*QtuC[A, L, L] - 
-      Conjugate[Zs[R]]*QtuC[A, R, R] + Conjugate[QtuC[A, L, L]]*Zs[L] - 
-      Conjugate[QtuC[A, R, R]]*Zs[R]))/((u - MSf[A, 3, 1]^2)*SMP["cos_W"]^2*
-     (s - SMP["m_Z"]^2))) + 
-  (s*MNeu[i]*MNeu[j]*(Conjugate[QtuC[A, L, L]]*Conjugate[Zs[L]] - 
-     Conjugate[QtuC[A, R, R]]*Conjugate[Zs[R]] + QtuC[A, L, L]*Zs[L] - 
-     QtuC[A, R, R]*Zs[R]))/((u - MSf[A, 3, 1]^2)*SMP["cos_W"]^2*
-    (s - SMP["m_Z"]^2)))

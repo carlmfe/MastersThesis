@@ -1,4 +1,0 @@
-(4*FeynCalc`IndexDelta[a, b]^2*(Conjugate[Qtu[B, L, R]]*Qtu[A, L, R] + 
-   Conjugate[Qtu[A, R, L]]*Qtu[B, R, L] + Conjugate[QtuC[B, L, L]]*
-    QtuC[A, L, L] + Conjugate[QtuC[A, R, R]]*QtuC[B, R, R])*SMP["g_W"]^4*
-  tRed[i]*tRed[j])/((t - MSf[A, 3, 1]^2)*(t - MSf[B, 3, 1]^2))

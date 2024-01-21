@@ -11,18 +11,20 @@ Needs["XSec`"]
 (*Replacement rules for Z-boson couplings*)
 (*Replacement rules for squark-quark-neutralino coupling*)
 AmpSimplifyRules={
+	(*
 	FeynCalc`Index[Sfermion,5]:>A,
 	FeynCalc`Index[Sfermion,6]:>M,
 	FeynCalc`Index[Neutralino,5]:>k,
+	*)
 	SMP["e"]:>SMP["g_W"]SMP["sin_W"],
 	SMP["m_u"]->0
 };
 ZSimplifyRules={
-	4SMP["sin_W"]^2-3->-6Cq[L]SMP["cos_W"],
-	SMP["sin_W"]^2->-3/2Cq[R]SMP["cos_W"],
-	Conjugate[ZNeu[i,4]]:> (2Conjugate[Opp[i,j,L]]SMP["cos_W"]+Conjugate[ZNeu[i,3]]ZNeu[j,3])/ZNeu[j,4],
-	ZNeu[i,4]:> (2Opp[i,j,L]SMP["cos_W"]+ZNeu[i,3]Conjugate[ZNeu[j,3]])/Conjugate[ZNeu[j,4]],
-	Conjugate[Opp[i,j,L]]:>-Opp[i,j,R]
+	4SMP["sin_W"]^2-3 -> -6Cq[L]SMP["cos_W"],
+	SMP["sin_W"]^2 -> -3/2Cq[R]SMP["cos_W"],
+	Conjugate[ZNeu[i,4]] :> (2Conjugate[Opp[i,j,L]]SMP["cos_W"]+Conjugate[ZNeu[i,3]]ZNeu[j,3])/ZNeu[j,4],
+	ZNeu[i,4] :> (2Opp[i,j,L]SMP["cos_W"]+ZNeu[i,3]Conjugate[ZNeu[j,3]])/Conjugate[ZNeu[j,4]],
+	Conjugate[Opp[i,j,L]] :> -Opp[i,j,R]
 };
 (*QSimplifyRules={
 USf[args__][a_,1]\[Conjugate]ZNeu[i_,1]->(Csq[a,i,L]-1/2USf[args][a,1]\[Conjugate]ZNeu[i,2])/(SMP["sin_W"]/(6SMP["cos_W"])),
@@ -46,6 +48,12 @@ Convert2QZCharges[expr_]:=NestWhile[
 	(MemberQ[#1,ZNeu[args__],{0,-1},Heads->True]&),
 	1,5
 ]
+
+
+MakeBoxes[DSf[s_,t_,g_],TraditionalForm]:=SubscriptBox["\[CapitalDelta]",MakeBoxes[s,TraditionalForm]]
+MakeBoxes[DSfC[s_,t_,g_],TraditionalForm]:=SubsuperscriptBox["\[CapitalDelta]",MakeBoxes[s,TraditionalForm],"*"]
+MakeBoxes[DZ,TraditionalForm]=SubscriptBox["\[CapitalDelta]","Z"];
+MakeBoxes[FeynCalc`Index[Sfermion,a_],TraditionalForm]:=MakeBoxes[a,TraditionalForm]
 
 
 (*A list of the parameters that are complex, and relations between them*)
@@ -74,14 +82,14 @@ MakeBoxes[pi,TraditionalForm]:="\!\(\*SubscriptBox[\(p\), \(i\)]\)";
 MakeBoxes[pj,TraditionalForm]:="\!\(\*SubscriptBox[\(p\), \(j\)]\)";
 
 
-MakeBoxes[Cq[x_],TraditionalForm]:=SubsuperscriptBox["C","qqZ",ToString[x]];
-MakeBoxes[Opp[i_,j_,x_],TraditionalForm]:=\!\(TraditionalForm\`SubsuperscriptBox["\<O\>", RowBox[{ToString[i], ToString[j]}], RowBox[{"\<\[Prime]\[Prime]\>", ToString[x]}]]\);
-MakeBoxes[Csq[i_,a_,x_],TraditionalForm]:=SubsuperscriptBox["C",RowBox[{"q",SubscriptBox[OverscriptBox["q","~"],ToString[a]],SubsuperscriptBox[OverscriptBox["\[Chi]","~"],ToString[i],"0"]}],ToString[x]];
+MakeBoxes[Cq[x_],TraditionalForm]:=SubsuperscriptBox["C","qqZ",MakeBoxes[x,TraditionalForm]];
+MakeBoxes[Opp[i_,j_,x_],TraditionalForm]:=\!\(TraditionalForm\`SubsuperscriptBox["\<O\>", RowBox[{MakeBoxes[i, TraditionalForm], MakeBoxes[j, TraditionalForm]}], RowBox[{"\<\[Prime]\[Prime]\>", MakeBoxes[x, TraditionalForm]}]]\);
+MakeBoxes[Csq[i_,a_,x_],TraditionalForm]:=SubsuperscriptBox["C",RowBox[{"q",SubscriptBox[OverscriptBox["q","~"],MakeBoxes[a,TraditionalForm]],SubsuperscriptBox[OverscriptBox["\[Chi]","~"],MakeBoxes[i,TraditionalForm],"0"]}],MakeBoxes[x,TraditionalForm]];
 
-MakeBoxes[USf[args1__][a_,b_],TraditionalForm]:=SubscriptBox[OverscriptBox["Q","~"],RowBox[{ToString[a],",",ToString[b]}]];
-MakeBoxes[MNeu[a_],TraditionalForm]:=SubscriptBox["m",ToString[a]];
-MakeBoxes[ZNeu[a_,b_],TraditionalForm]:=SubscriptBox["N",RowBox[{ToString[a],",",ToString[b]}]];
-MakeBoxes[MSf[a_,b__],TraditionalForm]:=\!\(TraditionalForm\`\(TraditionalForm\`SubscriptBox["\<m\>", SubscriptBox[OverscriptBox["\<q\>", "\<~\>"], ToString[a]]]\)\);
+MakeBoxes[USf[args1__][a_,b_],TraditionalForm]:=SubscriptBox[OverscriptBox["Q","~"],RowBox[{MakeBoxes[a,TraditionalForm],",",MakeBoxes[b,TraditionalForm]}]];
+MakeBoxes[MNeu[a_],TraditionalForm]:=SubscriptBox["m",MakeBoxes[a,TraditionalForm]];
+MakeBoxes[ZNeu[a_,b_],TraditionalForm]:=SubscriptBox["N",RowBox[{MakeBoxes[a,TraditionalForm],",",MakeBoxes[b,TraditionalForm]}]];
+MakeBoxes[MSf[a_,b__],TraditionalForm]:=\!\(TraditionalForm\`\(TraditionalForm\`SubscriptBox["\<m\>", SubscriptBox[OverscriptBox["\<q\>", "\<~\>"], MakeBoxes[a, TraditionalForm]]]\)\);
 MakeBoxes[MGl,TraditionalForm]=SubscriptBox["m",OverscriptBox["g","~"]];
 MakeBoxes[SB,TraditionalForm]=SubscriptBox["s","\[Beta]"];
 MakeBoxes[CB,TraditionalForm]=SubscriptBox["c","\[Beta]"];
@@ -89,7 +97,7 @@ MakeBoxes[TB,TraditionalForm]=SubscriptBox["t","\[Beta]"];
 
 MakeBoxes[SMP["sin_W"],TraditionalForm]=SubscriptBox["s","W"];
 MakeBoxes[SMP["cos_W"],TraditionalForm]=SubscriptBox["c","W"];
-MakeBoxes[FeynCalc`IndexDelta[a_,b_],TraditionalForm]:=SubscriptBox["\[Delta]",RowBox[{ToString[a],ToString[b]}]];
+MakeBoxes[FeynCalc`IndexDelta[a_,b_],TraditionalForm]:=SubscriptBox["\[Delta]",RowBox[{MakeBoxes[a,TraditionalForm],MakeBoxes[b,TraditionalForm]}]];
 
 
 SuperChargeRules={
@@ -114,9 +122,9 @@ SuperChargeRules={
 	Conjugate[Csq[i,a_,x_]]Conjugate[Csq[j,a_,y_]]:>Conjugate[Qtu[a,x,y]]
 };
 
-MakeBoxes[Zs[x_],TraditionalForm]:=SubsuperscriptBox["Z","s",ToString[x]];
-MakeBoxes[Qtu[a_,x_,y_],TraditionalForm]:=SubsuperscriptBox["Q",ToString[a],RowBox[{ToString[x],ToString[y]}]];
-MakeBoxes[QtuC[a_,x_,y_],TraditionalForm]:=SubsuperscriptBox["Q",ToString[a],RowBox[{ToString[x],OverscriptBox[ToString[y],"_"]}]];
+MakeBoxes[Zs[x_],TraditionalForm]:=SubsuperscriptBox["Z","s",MakeBoxes[x,TraditionalForm]];
+MakeBoxes[Qtu[a_,x_,y_],TraditionalForm]:=SubsuperscriptBox["Q",MakeBoxes[a,TraditionalForm],RowBox[{MakeBoxes[x,TraditionalForm],MakeBoxes[y,TraditionalForm]}]];
+MakeBoxes[QtuC[a_,x_,y_],TraditionalForm]:=SubsuperscriptBox["Q",MakeBoxes[a,TraditionalForm],RowBox[{MakeBoxes[x,TraditionalForm],OverscriptBox[MakeBoxes[y,TraditionalForm],"_"]}]];
 
 
 (*Set Mandelstam variables*)
