@@ -27,11 +27,13 @@
 
 % in-sentence comment:
 % \newcommand{\comment}[1]{\textcolor{n@redish}{$\lceil$~\small{#1}~$\rfloor$}}
-\newcommand{\comment}[1]{\textcolor{n@redish}{%
+\newcommand{\comment}[1]{
+    \textcolor{n@redish}{%
         {\large{$\boldsymbol{\ulcorner}$}}%
             % {\fontfamily{phv}\selectfont
             {\small{#1}}%
-            {\large{$\boldsymbol{\lrcorner}$}}}}
+            {\large{$\boldsymbol{\lrcorner}$}}}
+}
 
 % comment in margin:
 \setlength\marginparwidth{80pt}
@@ -51,7 +53,8 @@
         ~\textcolor{n@darkblue}{$\vdots $ \copyright ~$\vdots $}~
     \else
         \textcolor{n@darkblue}{#1$^{\text{\copyright}}$}
-    \fi}
+    \fi
+}
 \makeatother
 
 
@@ -75,39 +78,44 @@
         {\large{\textcolor{n@lilac}{$\boldsymbol{\rfloor}_{?}$}}}}
 
 % Bullet points:
-\newenvironment{bullets}
-{\par\medskip
+\newenvironment{bullets}{
+    \par\medskip
     \begin{itemize}
         \begingroup\color{n@pink}%
-        \ignorespaces}
-        {\endgroup\end{itemize}
+        \ignorespaces
+        }{
+        \endgroup\end{itemize}
     \medskip}
 
 % TODO list:
 \newcommand{\unchecked}{\(\square\)}
 \newcommand{\checked}{\makebox[0pt][l]{\(\square\)}\raisebox{.15ex}{\hspace{0.1em}\(\checkmark\)}}
-\newenvironment{TODO}
-{\par\medskip
+\newenvironment{TODO}{
+    \par\medskip
     \renewcommand\labelitemi{\unchecked}
     \textcolor{n@redish}{\textbf{TODO:}}
     \begin{itemize}
         \begingroup\color{n@redish}%
-        \ignorespaces}
-        {\endgroup\end{itemize}
-    \medskip}
+        \ignorespaces
+        }{
+        \endgroup\end{itemize}
+    \medskip
+}
 
 % TODO comment
 \newcommand{\todo}[1]{\textcolor{n@redish}{TODO: #1}}
 
 % temporary paragraph
-\newenvironment{temporary}
-{\par\medskip
+\newenvironment{temporary}{
+    \par\medskip
     \begingroup\color{n@gray}%
-    \noindent\hrulefill Temporary \noindent\hrulefill
-        \ignorespaces}
-        {\par\noindent\hrulefill
+    \noindent\hrulefill Temporary \noindent\hrulefill\\
+    \ignorespaces
+}{
+    \par\noindent\hrulefill\\
     \endgroup
-    \medskip}
+    \medskip
+}
 
 
 % Phantom paragraph:
@@ -118,7 +126,8 @@
         \par\colorbox{n@darkblue}{\textcolor{white}{\textsc{phantom paragraph}}}
     \else
         \par\colorbox{n@darkblue}{\textcolor{white}{\textsc{phantom paragraph:}}}~\textcolor{n@darkblue}{\textsc{#1}}
-    \fi}
+    \fi
+}
 \makeatother
 
 % \newcommand{\phpar}[1][]{\colorbox{n@darkblue}{\textsc{phantom paragraph}}}
@@ -135,7 +144,8 @@
         %
     \else
         ~$^\text{\colorbox{n@blue}{\tiny{\textcolor{white}{#1}}}}$
-    \fi}
+    \fi
+}
 \makeatother
 
 
@@ -154,30 +164,30 @@
 }
 
 \newenvironment{draft}{% 
-\noindent\textcolor{n@blue}{
-    \rule{\linewidth}{1.2pt}
-}
-\pagestyle{draft}
-\textcolor{n@blue}{
-\section*{DRAFT}
-    \begin{flushleft}
-        {\huge{$\boldsymbol{\ulcorner}$}}
-    \end{flushleft}
+    \noindent\textcolor{n@blue}{
+        \rule{\linewidth}{1.2pt}
+    }
+    \pagestyle{draft}
+    \textcolor{n@blue}{
+        \section*{DRAFT}
+        \begin{flushleft}
+            {\huge{$\boldsymbol{\ulcorner}$}}
+        \end{flushleft}
     }%
     \noindent%
-    }{
+}{
     \pagestyle{plain}
     \textcolor{n@blue}{
-\section*{}
-    \begin{flushright}
-        {\huge{$\boldsymbol{\lrcorner}$}}
-    \end{flushright}
-    \noindent\rule{\linewidth}{1.2pt}
+        \section*{}
+        \begin{flushright}
+            {\huge{$\boldsymbol{\lrcorner}$}}
+        \end{flushright}
+        \noindent\rule{\linewidth}{1.2pt}
     }%
-    }
+}
 
 
-    % need reference/showing
-    \newcommand*{\provethis}[1]{\textcolor{n@darkblue}{%
-    {\large{[}}$\leftarrow${\small{#1}}{\large{]}$_\blacksquare$}%
-    }}
+% need reference/showing
+\newcommand*{\provethis}[1]{\textcolor{n@darkblue}{%
+{\large{[}}$\leftarrow${\small{#1}}{\large{]}$_\blacksquare$}%
+}}
