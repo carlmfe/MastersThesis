@@ -8,8 +8,187 @@
     Furthermore, I want to introduce the perturbation series through the path integral, and talk about the nature of quantum effects.
     Also derive Feynman rules from path integral.]
 
+In this thesis, I will use the Lagrangian framework to formulate QFT. Here I
+will introduce the basics of how to formulate a QFT in such a way using the
+path integral formalism. This leads to a perturbative formulation of scattering
+and computation of correlation functions, which is the basis for the
+calculations that will be made. \medskip
+
 \section{Renormalised Quantum Field Theory}
 \phpar[Talk about loop integrals, divergences, regularisation and renormalisation.]
+
+\todo{Mention Wick rotation and evaluation of loop integrals?}
+
+Divergences appear in perturbative correlation functions in QFT, and can be
+categorised into \emph{ultraviolet} (UV) divergences and \emph{infrared} (IR)
+divergences. They are so named after which region of momentum space they
+originate from --- high momentum for UV and low momentum for IR. The two types
+of divergences are dealt with entirely differently, and here I will lay out how
+to deal with UV divergences through \emph{renormalisation}. \medskip
+
+Consider a loop like the one in \cref{qft:fig:example_loop}: If we consider a
+massless particle in the loop, the loop integral will take the form
+\begin{equation}
+    \label{qft:eq:example_loop}
+    \loopintegral[4]{q} \frac{1}{\pclosed{q^2 + i\epsilon}^2} = \frac{i}{(2\pi)^4} \integral{\Omega_4} \integral[_0^\infty]{q_E} \frac{1}{q_E},
+\end{equation}
+which diverges for both low and high momenta. \comment{Mention what went into this integral, i.e. Wick rotation and \(i\epsilon\).} Had the particle been massive, the momentum would have a non-zero lower limit, and the IR divergence would disappear.
+However, the UV divergence must be handled differently.
+
+\subsection{Regularisation}
+
+\begin{figure}[!h]
+    \centering
+    \inputtikz{ex_loop}
+    \caption{Simple example of a loop diagram in a scalar theory.}
+    \label{qft:fig:example_loop}
+\end{figure}
+
+A first step to handle the divergences is to deform our theory in some way to
+make the loop integral formally finite, but recovering the divergence in the
+limit that the deformation disappears. An intuitive deformation would be to cap
+the momentum integral at some \(\Lambda\), recovering our original theory in
+the limit \(\Lambda \to \infty\). To illustrate the procedure of regularisation
+and subsequently renormalisation, it will be useful to have an example, for
+which I choose a scalar Lagrangian \(\L = \frac{1}{2} \pclosed{\partial_\mu
+    \phi}^2 - \frac{1}{2}m_\phi^2 \phi^2 - \frac{\lambda}{3!} \phi^3\).
+\comment{Perhaps introduce this model earlier?} Regularising the IR divergence
+in \cref{qft:eq:example_loop} by giving our scalar a mass \(m\), and the UV
+divergence with a momentum cap \(\Lambda\), we are left with
+\begin{align}
+    \nonumber
+    \int_{\abs{q} < \Lambda}\! \frac{\mathrm{d}^4q}{(2\pi)^4} \frac{1}{\pclosed{(q^2-m^2)+i\epsilon}^2} = \frac{i}{(2\pi)^4} \integral{\Omega_4} \integral[_0^\Lambda]{q_E} \frac{q_E^3}{\pclosed{q_E^2 - m^2}^2} \\
+    = \frac{i}{16\pi^2} \cclosed{\ln\pclosed{1 + \frac{\Lambda^2}{m^2}} - \frac{\Lambda^2}{\Lambda^2 + m^2}},
+\end{align}
+where now evidently the divergences manifest as a logarithm.
+\medskip
+
+Another popular choice of regularisation, which I will use in this thesis, is
+\emph{dimensional regularisation}. It entails analytically continuing the
+number of space-time dimension from the ordinary integer 4 dimension and to \(d
+= 4-2\epsilon\) dimensions for some small \(\epsilon\). This removes much of
+the intuition for what we are doing, but turns out to be computationally very
+efficient. Our loop integral \cref{qft:eq:example_loop} will then turn into
+\begin{align}
+    \nonumber
+    \loopintegral[d]{q} \frac{1}{\pclosed{q^2+i\epsilon}^2} = \frac{i 2\pi^{\sfrac{d}{2}}}{(2\pi)^d} \frac{1}{\Gamma(\sfrac{d}{2})} \integral[_0^\infty]{q} q_E^{d-5} \\
+    = \frac{i 2\pi^{2-\epsilon}}{(2\pi)^{4-2\epsilon}} \frac{1}{\Gamma\pclosed{2-\epsilon}} \cclosed{ \integral[_0^\mu]{q} \frac{1}{q_E^{1+2\epsilon}} + \integral[_\mu^\infty]{q} \frac{1}{q_E^{1+2\epsilon}} } = \frac{i}{16\pi^2} \pclosed{\frac{1}{\epsilon_\text{IR}} - \frac{1}{\epsilon_\text{UV}}} + O(\epsilon),
+\end{align}
+where in the second equality, the momentum integral is split into a low-energy and high-energy part with some scale \(\mu\). Here a trick was performed, as the low-energy part requires \(\epsilon < 0\) to be convergent, whereas the high-energy part requires \(\epsilon>0\). The two different divergences thus require different deformations of the theory to be finite, and should be handled separately, hence the subscripts. In the end, the divergences using dimensional regularisation come out as \(\frac{1}{\epsilon}\)-terms.
+
+\subsection{Counterterm Renormalisation}
+To take care of UV divergences, we note that there is freedom in how we define
+our Lagrangian. We should be able to rescale our fields like \(\phi_0 =
+\sqrt{Z_\phi} \phi\), and rescale our couplings like \(m_{\phi,0}^2 = Z_m
+m_\phi^2\) and \(\lambda_0 = Z_\lambda \lambda\). Although suggestively naming
+terms such as \emph{mass term} with mass \(m_\phi^0\) implies a connection to
+the mass of a particle, we have yet to define what that would mean
+experimentally. Thus, rescaling our parameters and fields parametrises the way
+in which we can tune our theory, allowing us freedom in choosing the way our
+theory connects to experiments.
+
+This approach actually allows us to make a perturbative scheme for fixing our
+(re)normalisations of the fields and couplings. There are many choices for how
+to connect theory to experiment, but one common approach for field and mass
+renormalisation is to identify the pole of the two-point correlation function
+\(\mathcal{G}(x, y)\) of a particle to the mass resonance measurable in
+experiment.\margincomment{Is there a better explanation for this experiment
+    than `mass resonance'?} This allows us to perturbatively calculate the
+two-point correlator, and then fix our normalisations accordingly, such that
+our imposed condition on it holds at every order in the perturbation series. We
+achieve this systematically with \textit{counterterms}, which in essence are
+additional Feynman rules added to the theory. By expanding the renormalisation
+parameters as \(Z = 1 + \delta\), the \(\delta\) will carry the correction to
+the normalisation to any given order in a coupling constant. To one-loop order,
+the self-energy of our \needcite[scalar theory] is diagramatically given by
+\begin{equation*}
+    \inputtikz[baseline=(in.base)]{SE_LO} + \inputtikz[baseline=(in.base)]{SE_NLO} + \inputtikz[baseline=(in.base)]{SE_cnt},
+\end{equation*}
+where the crossed dot represents an insertion of the \(\delta\) into the LO amplitude. \cringe{Since the \(\delta\) carries corrections proportional to the NLO amplitudes, it should be seen as coming in at NLO}.
+
+\subsection{On-Shell Renormalisation}
+Categorising all higher order contributions that can arise to the LO
+self-energy of a massive particle, they come in the form of
+\textit{one-particle-irreducible} (1PI) diagrams. These are diagrams where all
+lines with loop momentum running through are connected. Other diagrams can be
+reconstructed as the sum of 1PI diagrams.
+
+\section{Yang-Mills Theories}
+\begin{TODO}
+    \item [\checked] Derive kinetic term for complex scalar field.
+    \item Derive kinetic term for gauge field.
+\end{TODO}
+\phpar[Introduce gauge theory in the path integral formalism and go through Yang-Mills theory with gauge fixing]
+
+Gauge theory in QFT is based on imposing \textit{internal symmetries} on the
+Lagrangian. Internal symmetries are symmetries separate from \textit{external
+    symmetries} in that they are not symmetries of coordinate transformations, but
+rather symmetries based on transformations of the fields. Typically, the field
+transformations under which the Lagrangian is invariant are Lie groups, and are
+referred to as the \textit{gauge group}. A collection of fields that transform
+into each other under the fundamental representation\footnote{More on this
+    later.} is called a \textit{multiplet}.
+
+Let us consider a complex scalar field theory to illustrate. Let \(\phi_i\) be
+a multiplet of complex scalar fields, and let the gauge group be a general
+non-Abelian group, locally defined by a set of generators \(T^a\). Locally, the
+group elements can then be described using the exponential map as\needcite{}
+\begin{equation}
+    g(\vec{\alpha}) = \exptext{i \alpha^a T^a},
+\end{equation}
+for a set of real parameters \(\vec{\alpha}\).\footnote{I will use bold notation \(\vec\alpha\) will refer to the collection of parameters \(\alpha^a\), of which there is one for each generator \(T^a\).}
+The transformation law for \(\Phi = \pclosed{\phi_1, \ldots}^T\)
+\begin{equation}
+    \label{qft:eq:gauge_transformation}
+    \Phi \to g(\vec{\alpha}) \Phi = \exptext{i \alpha^a T^a} \Phi,
+\end{equation}
+which for an infinitesimal set of parameters \(\epsilon^a\) becomes
+\begin{equation}
+    \Phi \to \pclosed{1 + i \epsilon^a T^a} \Phi.
+\end{equation}
+\medskip
+Now, we would like to categorise the Lagrangian terms that are invariant under such transformations.
+The ordinary free Klein-Gordon Lagrangian \(\L_\text{KG} = \partial^\mu \Phi^\dagger \partial_\mu \Phi - m^2 \Phi^\dagger \Phi\) is invariant.
+However, if we promote our gauge symmetry to be a local symmetry, i.e.\ let the parameters become spacetime-dependent \(\vec{\alpha} \to \vec{\alpha}(x)\), this is no longer the case.
+Since space-time coordinates are unchanged under gauge transformations, it follows that so too is the derivative \(\partial_\mu\).
+However, it will be useful to rewrite this in as somewhat convoluted way, letting it ``transform'' according to\footnote{It can be shown to be equivalent to \(\partial_\mu\) when applied to any field (whether they transform under the gauge transformations or not).}\footnote{In the following I suppress the argument such that \(g = g\pclosed{\vec{\alpha}(x)}\)}
+\begin{equation}
+    \partial_\mu \to \partial_\mu = g \partial_\mu g^{-1} + \pclosed{\partial_\mu g} g^{-1},
+\end{equation}
+which in turn makes the field derivative transform to
+\begin{equation}
+    \partial_\mu \Phi \to g \partial_\mu \Phi + \pclosed{\partial_\mu g} \Phi,
+\end{equation}
+leaving the kinetic term variant.
+So we must rethink the kinetic term of Lagrangian.
+To get the right transformation properties of the derivative term, we need a \textit{covariant derivate } \(D_\mu\) such that \(D_\mu \Phi \to g D_\mu \Phi\).
+In order to create such a \(D_\mu\), we must require that it transforms as \(D_\mu \to g D_\mu g^{-1}\).
+This can be done by introducing the \textit{gauge field} \(\mathcal{A}_\mu(x) \equiv A_\mu^a(x) T^a\)\margincomment{It should probably be noted that \(\mathcal{A}_\mu\) is a real-valued field.} which transforms according to
+\begin{equation}
+    \mathcal{A}_\mu \to g \mathcal{A}_\mu g^{-1} - \frac{i}{q} \pclosed{\partial_\mu g} g^{-1}.
+\end{equation}
+The last term can compensate for the extra term in the ``transformation'' law of \(\partial_\mu\).
+We can then define the covariant derivative \(D_\mu = \partial_\mu - iq \mathcal{A}_\mu\) to achieve this.
+\medskip
+
+In summary, with a local gauge symmetry, a gauge field \(\mathcal{A}_\mu\) must
+be introduced such that kinetic terms in the original Lagrangian can be
+invariant under the gauge transformation. In our case this amounts to adding
+the interaction term
+\begin{equation}
+    L_{A\Phi\text{-int}} = -iq\bclosed{(\partial^\mu \Phi^\dagger) \mathcal{A}_\mu \Phi - \Phi^\dagger \mathcal{A}^\mu (\partial_\mu \Phi)} + q^2 \Phi^\dagger \mathcal{A}^\mu \mathcal{A}_\mu \Phi
+\end{equation}
+to the Klein-Gordon Lagrangian \(\L_{KG}\).
+Now, the Lagrangian is gauge invariant, but there still remains to add dynamics to the gauge field \(\mathcal{A}_\mu\).
+To this end, we can make field-strength \(\mathcal{F}_{\mu\nu} \equiv F_{\mu\nu}^a T^a\) tensor that transforms as \(\mathcal{F}_{\mu\nu} \to g \mathcal{F}_{\mu\nu} g^{-1}\).
+The covariant derivative already has this property, and so we can define \(\mathcal{F}_{\mu\nu} = \commutator{D_\mu}{D_\nu}\), which would include derivative terms for the \(\mathcal{A}_\mu\) gauge field and let us construct a gauge invariant term \(\tr\cclosed{\mathcal{F}^{\mu\nu} \mathcal{F}_{\mu\nu}}\).
+\todo{Why do we choose \(\mathcal{F}_{\mu\nu}\) to be antisymmetric?}
+
+\begin{temporary}
+    \begin{equation}
+        \tr\cclosed{\mathcal{F}^{\mu\nu} \mathcal{F}_{\mu\nu}} \to \tr\cclosed{g \mathcal{F}^{\mu\nu} \mathcal{F}_{\mu\nu} g^{-1}} = \tr\cclosed{g^{-1} g \mathcal{F}^{\mu\nu} \mathcal{F}_{\mu\nu}} = \tr\cclosed{\mathcal{F}^{\mu\nu} \mathcal{F}_{\mu\nu}}
+    \end{equation}
+\end{temporary}
 
 \section{The Standard Model}
 \phpar[Introduce the \emph{relevant} fields of the Standard Model and its construction.

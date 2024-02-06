@@ -1,0 +1,10 @@
+\begin{feynman}[every blob={/tikz/fill=gray!30,/tikz/inner sep=2pt}]
+\vertex[label=above right:\(q\)] at (-1.5, 1.5) (q);
+\vertex[label=below right:\(\bar{q}\)] at (-1.5,-1.5) (qbar);
+
+\diagram*{
+    ()
+};
+
+
+\end{feynman}

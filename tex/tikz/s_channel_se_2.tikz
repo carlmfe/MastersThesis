@@ -1,0 +1,22 @@
+\begin{feynman}[every blob={/tikz/fill=gray!30,/tikz/inner sep=2pt}]
+    \vertex[label=above left:\(q\)] at (-1.5, 1.5) (q);
+    \vertex[label=below left:\(\bar{q}\)] at (-1.5,-1.5) (qbar);
+    \vertex at ( 0 , 0  ) (v1);
+    \vertex at ( 1.5, 0  ) (v2);
+    \vertex[label=above right:\(\tilde{\chi}_i^0\)] at ( 3 , 1.5) (chii);
+    \vertex[label=below right:\(\tilde{\chi}_j^0\)] at ( 3 ,-1.5) (chij);
+    \vertex at (2.7, 0.75) (a);
+    \vertex at (2.7,-0.75) (b);
+    \vertex[blob] at (-0.75,-0.75) (blob) {\contour{black}{}};
+
+    \diagram*{
+        (q) -- [fermion] (v1)
+            -- [fermion] (blob)
+            -- [fermion] (qbar),
+        (v1) -- [boson] (v2),
+        (chii) -- (v2)
+               -- (chij),
+        (v2) -- [boson] (v2),
+        (a) -- [stealth-, out=225, in=135] (b)
+    };
+\end{feynman}
