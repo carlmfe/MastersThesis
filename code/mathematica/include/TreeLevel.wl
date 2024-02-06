@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-BeginPackage["TreeLevel`"];
+BeginPackage["TreeLevel`"]
 
 
 Needs["FeynCalc`"]
@@ -65,7 +65,6 @@ ComplexParameterRules={
 	SqrtEGl->Conjugate[SqrtEGl],
 	Zs[x_]->Conjugate[Zs[x]],
 	Qtu[args__]->Conjugate[Qtu[args]],
-	QtuC[args__]->Conjugate[QtuC[args]],
 	DSf[args__]->DSfC[args],
 	DSfC[args__]->DSf[args],
 	DZ->DZ\[Conjugate]
@@ -86,7 +85,8 @@ MakeBoxes[Cq[x_],TraditionalForm]:=SubsuperscriptBox["C","qqZ",MakeBoxes[x,Tradi
 MakeBoxes[Opp[i_,j_,x_],TraditionalForm]:=\!\(TraditionalForm\`SubsuperscriptBox["\<O\>", RowBox[{MakeBoxes[i, TraditionalForm], MakeBoxes[j, TraditionalForm]}], RowBox[{"\<\[Prime]\[Prime]\>", MakeBoxes[x, TraditionalForm]}]]\);
 MakeBoxes[Csq[i_,a_,x_],TraditionalForm]:=SubsuperscriptBox["C",RowBox[{"q",SubscriptBox[OverscriptBox["q","~"],MakeBoxes[a,TraditionalForm]],SubsuperscriptBox[OverscriptBox["\[Chi]","~"],MakeBoxes[i,TraditionalForm],"0"]}],MakeBoxes[x,TraditionalForm]];
 
-MakeBoxes[USf[args1__][a_,b_],TraditionalForm]:=SubscriptBox[OverscriptBox["Q","~"],RowBox[{MakeBoxes[a,TraditionalForm],",",MakeBoxes[b,TraditionalForm]}]];
+(*MakeBoxes[USf[args1__][a_,b_],TraditionalForm]:=SubscriptBox[OverscriptBox["R","~"],RowBox[{MakeBoxes[a,TraditionalForm],",",MakeBoxes[b,TraditionalForm]}]];*)
+MakeBoxes[USf[__][a_,b_], TraditionalForm] := SubsuperscriptBox["R", RowBox[{MakeBoxes[a,TraditionalForm], MakeBoxes[b, TraditionalForm]}], OverscriptBox["q","~"]]
 MakeBoxes[MNeu[a_],TraditionalForm]:=SubscriptBox["m",MakeBoxes[a,TraditionalForm]];
 MakeBoxes[ZNeu[a_,b_],TraditionalForm]:=SubscriptBox["N",RowBox[{MakeBoxes[a,TraditionalForm],",",MakeBoxes[b,TraditionalForm]}]];
 MakeBoxes[MSf[a_,b__],TraditionalForm]:=\!\(TraditionalForm\`\(TraditionalForm\`SubscriptBox["\<m\>", SubscriptBox[OverscriptBox["\<q\>", "\<~\>"], MakeBoxes[a, TraditionalForm]]]\)\);
@@ -116,31 +116,18 @@ SuperChargeRules={
 	Cq[R]^2 Opp[i_,j_,L]^2:>(Zs[R]\[Conjugate])^2,
 	Cq[L]^2 (Opp[i_,j_,L]\[Conjugate])^2:>(Zs[L]\[Conjugate])^2,
 	Cq[R]^2 (Opp[i_,j_,R]\[Conjugate])^2:>(Zs[R]\[Conjugate])^2,
-	Csq[i,a_,x_]Csq[j,a_,y_]:>Qtu[a,x,y],
-	Csq[i,a_,x_]Conjugate[Csq[j,a_,y_]]:>QtuC[a,x,y],
-	Csq[j,a_,y_]Conjugate[Csq[i,a_,x_]]:>Conjugate[QtuC[a,x,y]],
-	Conjugate[Csq[i,a_,x_]]Conjugate[Csq[j,a_,y_]]:>Conjugate[Qtu[a,x,y]]
-};
+	Csq[i,a_,x_]Conjugate[Csq[j,a_,y_]]:>Qtu[a,x,y],
+	Csq[j,a_,y_]Conjugate[Csq[i,a_,x_]]:>Conjugate[Qtu[a,x,y]]
+}
 
-MakeBoxes[Zs[x_],TraditionalForm]:=SubsuperscriptBox["Z","s",MakeBoxes[x,TraditionalForm]];
-MakeBoxes[Qtu[a_,x_,y_],TraditionalForm]:=SubsuperscriptBox["Q",MakeBoxes[a,TraditionalForm],RowBox[{MakeBoxes[x,TraditionalForm],MakeBoxes[y,TraditionalForm]}]];
-MakeBoxes[QtuC[a_,x_,y_],TraditionalForm]:=SubsuperscriptBox["Q",MakeBoxes[a,TraditionalForm],RowBox[{MakeBoxes[x,TraditionalForm],OverscriptBox[MakeBoxes[y,TraditionalForm],"_"]}]];
+MakeBoxes[Zs[x_],TraditionalForm]:=SubsuperscriptBox["Z","s",MakeBoxes[x,TraditionalForm]]
+MakeBoxes[Qtu[a_,x_,y_],TraditionalForm]:=SubsuperscriptBox["Q",MakeBoxes[a,TraditionalForm],RowBox[{MakeBoxes[x,TraditionalForm],MakeBoxes[y,TraditionalForm]}]]
 
 
 (*Set Mandelstam variables*)
 FCClearScalarProducts[];
 SetMandelstam[s, t, u, ki, kj, -pi, -pj, 0, 0, MNeu[i], MNeu[j]];
 SetMandelstamParameters[s,t,u,MNeu[i]^2+MNeu[j]^2];
-
-
-Subscript[M, s][0]=FeynCalc`IndexDelta[a,b] SMP["g_W"]^2 (-Zs[R]\[Conjugate] Spinor[-Momentum[p2,D],0,1] . DiracGamma[LorentzIndex[\[Mu],D],D] . DiracGamma[6] . Spinor[Momentum[p1,D],0,1] Spinor[Momentum[pj,D],MNeu[j],1] . DiracGamma[LorentzIndex[\[Mu],D],D] . DiracGamma[6] . Spinor[-Momentum[pi,D],MNeu[i],1] FeynAmpDenominator[PropagatorDenominator[Momentum[pi+pj,D],SMP["m_Z"]]]-Zs[L]\[Conjugate] Spinor[-Momentum[p2,D],0,1] . DiracGamma[LorentzIndex[\[Mu],D],D] . DiracGamma[7] . Spinor[Momentum[p1,D],0,1] Spinor[Momentum[pj,D],MNeu[j],1] . DiracGamma[LorentzIndex[\[Mu],D],D] . DiracGamma[7] . Spinor[-Momentum[pi,D],MNeu[i],1] FeynAmpDenominator[PropagatorDenominator[Momentum[pi+pj,D],SMP["m_Z"]]]+Spinor[-Momentum[p2,D],0,1] . DiracGamma[LorentzIndex[\[Mu],D],D] . DiracGamma[7] . Spinor[Momentum[p1,D],0,1] Spinor[Momentum[pj,D],MNeu[j],1] . DiracGamma[LorentzIndex[\[Mu],D],D] . DiracGamma[6] . Spinor[-Momentum[pi,D],MNeu[i],1] FeynAmpDenominator[PropagatorDenominator[Momentum[pi+pj,D],SMP["m_Z"]]] Zs[L]+Spinor[-Momentum[p2,D],0,1] . DiracGamma[LorentzIndex[\[Mu],D],D] . DiracGamma[6] . Spinor[Momentum[p1,D],0,1] Spinor[Momentum[pj,D],MNeu[j],1] . DiracGamma[LorentzIndex[\[Mu],D],D] . DiracGamma[7] . Spinor[-Momentum[pi,D],MNeu[i],1] FeynAmpDenominator[PropagatorDenominator[Momentum[pi+pj,D],SMP["m_Z"]]] Zs[R])
-Subscript[M, t][0]=-2 Conjugate[Qtu[A,R,L]] Dot[Spinor[-Momentum[p2,D],0,1],DiracGamma[6],Spinor[-Momentum[pj,D],MNeu[j],1]] Dot[Spinor[Momentum[pi,D],MNeu[i],1],DiracGamma[6],Spinor[Momentum[p1,D],0,1]] FeynAmpDenominator[PropagatorDenominator[-Momentum[p2-pj,D],MSf[A,3,1]]] FeynCalc`IndexDelta[a,b] SMP["g_W"]^2-2 Conjugate[QtuC[A,R,R]] Dot[Spinor[-Momentum[p2,D],0,1],DiracGamma[7],Spinor[-Momentum[pj,D],MNeu[j],1]] Dot[Spinor[Momentum[pi,D],MNeu[i],1],DiracGamma[6],Spinor[Momentum[p1,D],0,1]] FeynAmpDenominator[PropagatorDenominator[-Momentum[p2-pj,D],MSf[A,3,1]]] FeynCalc`IndexDelta[a,b] SMP["g_W"]^2-2 Dot[Spinor[-Momentum[p2,D],0,1],DiracGamma[7],Spinor[-Momentum[pj,D],MNeu[j],1]] Dot[Spinor[Momentum[pi,D],MNeu[i],1],DiracGamma[7],Spinor[Momentum[p1,D],0,1]] FeynAmpDenominator[PropagatorDenominator[-Momentum[p2-pj,D],MSf[A,3,1]]] FeynCalc`IndexDelta[a,b] Qtu[A,L,R] SMP["g_W"]^2-2 Dot[Spinor[-Momentum[p2,D],0,1],DiracGamma[6],Spinor[-Momentum[pj,D],MNeu[j],1]] Dot[Spinor[Momentum[pi,D],MNeu[i],1],DiracGamma[7],Spinor[Momentum[p1,D],0,1]] FeynAmpDenominator[PropagatorDenominator[-Momentum[p2-pj,D],MSf[A,3,1]]] FeynCalc`IndexDelta[a,b] QtuC[A,L,L] SMP["g_W"]^2
-Subscript[M, u][0]=2 Conjugate[Qtu[A,L,R]] Dot[Spinor[-Momentum[p2,D],0,1],DiracGamma[6],Spinor[-Momentum[pi,D],MNeu[i],1]] Dot[Spinor[Momentum[pj,D],MNeu[j],1],DiracGamma[6],Spinor[Momentum[p1,D],0,1]] FeynAmpDenominator[PropagatorDenominator[-Momentum[p2-pi,D],MSf[A,3,1]]] FeynCalc`IndexDelta[a,b] SMP["g_W"]^2+2 Conjugate[QtuC[A,L,L]] Dot[Spinor[-Momentum[p2,D],0,1],DiracGamma[6],Spinor[-Momentum[pi,D],MNeu[i],1]] Dot[Spinor[Momentum[pj,D],MNeu[j],1],DiracGamma[7],Spinor[Momentum[p1,D],0,1]] FeynAmpDenominator[PropagatorDenominator[-Momentum[p2-pi,D],MSf[A,3,1]]] FeynCalc`IndexDelta[a,b] SMP["g_W"]^2+2 Dot[Spinor[-Momentum[p2,D],0,1],DiracGamma[7],Spinor[-Momentum[pi,D],MNeu[i],1]] Dot[Spinor[Momentum[pj,D],MNeu[j],1],DiracGamma[7],Spinor[Momentum[p1,D],0,1]] FeynAmpDenominator[PropagatorDenominator[-Momentum[p2-pi,D],MSf[A,3,1]]] FeynCalc`IndexDelta[a,b] Qtu[A,R,L] SMP["g_W"]^2+2 Dot[Spinor[-Momentum[p2,D],0,1],DiracGamma[7],Spinor[-Momentum[pi,D],MNeu[i],1]] Dot[Spinor[Momentum[pj,D],MNeu[j],1],DiracGamma[6],Spinor[Momentum[p1,D],0,1]] FeynAmpDenominator[PropagatorDenominator[-Momentum[p2-pi,D],MSf[A,3,1]]] FeynCalc`IndexDelta[a,b] QtuC[A,R,R] SMP["g_W"]^2
-
-
-Subscript[\!\(\*OverscriptBox[\(M\), \(_\)]\), s][0]=ConjugateAmplitude[Subscript[M, s][0]]
-Subscript[\!\(\*OverscriptBox[\(M\), \(_\)]\), t][0]=ConjugateAmplitude[Subscript[M, t][0]]
-Subscript[\!\(\*OverscriptBox[\(M\), \(_\)]\), u][0]=ConjugateAmplitude[Subscript[M, u][0]]
 
 
 Begin["`Private`"];

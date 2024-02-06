@@ -41,8 +41,26 @@ TraceLoopAmp[amp_]:=FCTraceFactor[CalcColorFactor[DotSimplify[Simplify[amp],Expa
 (*A  function  for  collecting  and  evaluating  loop  integrals  in  amplitudes  by  Passarino - Veltman  functions.*)
 
 
-EvalPVLoopAmp[amp_]:=(Collect2[#1,PaVe,Factoring->Function[x,Factor2[TrickMandelstam[x,MandelstamParameters]]]]&)[FeynAmpDenominatorExplicit[(#1/. (h:PaVe)[x__]:>TrickMandelstam[h[x],MandelstamParameters]&)[Contract[DiracSimplify[(TID[#1,qloop,ToPaVe->True]&)[DiracSimplify[Contract[amp]]]]]]]];
-CheckPVRemainder[amp_]:=PossibleZeroQ[TID[SelectFree2[amp,PaVe],qloop]]
+(*EvalPVLoopAmp[amp_] := (Collect2[
+	#1,PaVe,Factoring->Function[x,Factor2[TrickMandelstam[x,MandelstamParameters]]]
+]&)[
+	FeynAmpDenominatorExplicit[
+		(#1/. (h:PaVe)[x__]:>TrickMandelstam[h[x],MandelstamParameters]&)[
+			Contract[
+				DiracSimplify[
+					(TID[#1,qloop,ToPaVe->True]&)[
+						DiracSimplify[Contract[amp]]
+					]
+				]
+			]
+		]
+	]
+]*)
+EvalPVLoopAmp[amp_] := amp // Contract // DiracSimplify // TID[#,qloop,ToPaVe->True]& //
+	DiracSimplify // Contract //
+	FeynAmpDenominatorExplicit[# /. (h:{A0, B0, C0, D0})[x__]:>TrickMandelstam[h[x],MandeltamParameters]]& //
+	Collect2[#, {A0, B0, C0, D0}, Factoring -> Function[x, Factor2[TrickMandelstam[x, MandelstamParameters]]]]&
+CheckPVRemainder[amp_] := PossibleZeroQ[TID[SelectFree2[amp,PaVe],qloop]]
 
 
 (* ::Text:: *)
@@ -78,17 +96,17 @@ MakeBoxes[uMass[s_,t_,g_],TraditionalForm]:=SubsuperscriptBox["\[CapitalDelta]",
 (*Function  for  collecting  the  typical kinematic  terms  for the process.*)
 
 
-tij=((t-FeynCalc`MNeu[i]^2)(t-FeynCalc`MNeu[j]^2));
-uij=((u-FeynCalc`MNeu[i]^2)(u-FeynCalc`MNeu[j]^2));
-tuij=Simplify[tij+uij];
+tij=((t-FeynCalc`MNeu[i]^2)(t-FeynCalc`MNeu[j]^2))
+uij=((u-FeynCalc`MNeu[i]^2)(u-FeynCalc`MNeu[j]^2))
+tuij=Simplify[tij+uij]
 IsolateKinematicTerms={
 	t^2->t^2-tuij+KTU,
 	t-FeynCalc`MNeu[i_]^2->KT[i],
 	u-FeynCalc`MNeu[i_]^2->KU[i],
 	FeynCalc`MNeu[i_]FeynCalc`MNeu[j_]s->KS[i,j]
-};
-KinematicTerms={t-FeynCalc`MNeu[i_]^2,u-FeynCalc`MNeu[i_]^2,FeynCalc`MNeu[i_]FeynCalc`MNeu[j_]s};
-IsolatedKinematicTerms={KT[i_],KU[i_],KS[i_,j_],KTU};
+}
+KinematicTerms={t-FeynCalc`MNeu[i_]^2,u-FeynCalc`MNeu[i_]^2,FeynCalc`MNeu[i_]FeynCalc`MNeu[j_]s}
+IsolatedKinematicTerms={KT[i_],KU[i_],KS[i_,j_],KTU}
 FreeKinematicTerms={
 	KTU->tij+uij,
 	KT[i_]->t-FeynCalc`MNeu[i]^2,
@@ -137,7 +155,7 @@ CollectDenPaVe[expr_, OptionsPattern[]] := OptionValue[Prefactor] Collect2[
 		{A0[_], B0[__], C0[__], D0[__]},
 		Factoring -> OptionValue[FinalFactoring]
 	]&)
-]/. {FeynCalc`Collect`Private`unity -> 1}
+] /. {FeynCalc`Collect`Private`unity -> 1}
 (*FIXME: Where does the FeynCalc`unity come from and why?*)
 
 
@@ -150,7 +168,7 @@ ReduceMandelstam[expr_]:=TrickMandelstam[expr,MandelstamParameters]//Simplify/.{
 Begin["`Private`"]
 
 
-End[];
+End[]
 
 
 EndPackage[];
