@@ -100,7 +100,7 @@ achieve this systematically with \textit{counterterms}, which in essence are
 additional Feynman rules added to the theory. By expanding the renormalisation
 parameters as \(Z = 1 + \delta\), the \(\delta\) will carry the correction to
 the normalisation to any given order in a coupling constant. To one-loop order,
-the self-energy of our \needcite[scalar theory] is diagramatically given by
+the self-energy of our \needcite[scalar theory] is diagrammatically given by
 \begin{equation*}
     \inputtikz[baseline=(in.base)]{SE_LO} + \inputtikz[baseline=(in.base)]{SE_NLO} + \inputtikz[baseline=(in.base)]{SE_cnt},
 \end{equation*}
@@ -111,7 +111,61 @@ Categorising all higher order contributions that can arise to the LO
 self-energy of a massive particle, they come in the form of
 \textit{one-particle-irreducible} (1PI) diagrams. These are diagrams where all
 lines with loop momentum running through are connected. Other diagrams can be
-reconstructed as the sum of 1PI diagrams.
+reconstructed as the sum of 1PI diagrams. Denoting the leading order correlator
+\(\mathcal{G}_0(p)\) and the contribution from one insertion of all 1PI
+diagrams \(i\Sigma(p)\), we get a series\footnote{A note on the argument \(p\)
+    of these functions: The two-point-correlators in momentum space depend on the
+    four-momentum \(p^\mu\) in such a way that when it is put in between the
+    external particle representations (i.e.\ 1 for scalars, spinors for fermions
+    and polarisation vectors for vector bosons) the result will be Lorentz
+    invariant.}
+\begin{align}
+    \nonumber
+    i\mathcal{G}(p) = & \inputtikz[baseline=(in.center)]{SE_LO} + \inputtikz[baseline=(in.center)]{SE_1PI} + \inputtikz[baseline=(in.center)]{SE_2PI} + \ldots                    \\
+    \nonumber
+    =                 & i\mathcal{G}_0(p) + i\mathcal{G}_0(p) i\Sigma(p) i\mathcal{G}_0(p) + i\mathcal{G}_0(p) i\Sigma(p) i\mathcal{G}_0(p) i\Sigma(p) i\mathcal{G}_0(p) + \ldots \\
+    \nonumber
+    =                 & i\mathcal{G}_0(p) \bclosed{i\Sigma(p) i\mathcal{G}_0(p) + \pclosed{i\Sigma(p) i\mathcal{G}_0(p)}^2 + \ldots}                                              \\
+    =                 & i\mathcal{G}_0(p) \frac{1}{1 + \Sigma(p) \mathcal{G}_0(p)} = \frac{i}{\mathcal{G}_0^{-1}(p) + \Sigma(p)}.
+\end{align}
+So the computation of the two-point correlator to any order can be done simply by computing the sum of the 1PI diagrams to that order. These contributions will generally diverge, but then we can take into account the renormalisation parameters. Since this is a \textit{bare} function, i.e.\ using the non-renormalised quantities, we can get the renormalised two-point correlator \(\mathcal{G}^\text{R}(p)\) through
+\begin{equation}
+    \mathcal{G}^\text{R} = \frac{1}{Z_\psi} \mathcal{G}^\text{bare}(p) = \frac{1}{1 + \delta_\psi} \mathcal{G}^\text{bare}(p),
+\end{equation}
+for any field \(\psi\), seeing as the two-point correlator is quadratic in \(\psi\) and thereby quadratic in \(\sqrt{Z_\psi}\).
+\medskip
+
+On-shell mass renormalisation seeks to identify the pole of the two-point
+correlator with the physical mass as observed in experiment. This is a
+generalisation the property of the LO two-point function to arbitrary order. It
+yields two conditions:
+\begin{center}
+    \begin{itemize}
+        \item [(I)] \(\evalat{\bclosed{\pclosed{\mathcal{G}^\text{R}_0(p)}^{-1} + \Sigma(p)}}{p^2 = m_\text{pole}^2} = 0\),
+        \item [(II)] \(\operatorname{Res}\cclosed{\mathcal{G}^\text{R}(p), p^2 = m_\text{pole}^2} = 1\),
+    \end{itemize}
+\end{center}
+where \(\operatorname{Res}\cclosed{f(z), z = z_0}\) is the residue of the function \(f\) at \(z_0\).
+\medskip
+
+For our scalar theory, where the leading order two-point correlator is
+\(\mathcal{G}(p) = \frac{i}{p^2 - m_\phi^2}\), this means that we get the
+relations
+\begin{center}
+    \begin{itemize}
+        \item [(I)] \(\delta_m m_\phi^2 = \Sigma(m_\phi^2)\),
+        \item [(II)] \(\delta_\phi = -\evalat{\d[p^2]{}\Sigma(p^2)}{p^2 = m_\phi^2}\).
+    \end{itemize}
+\end{center}
+\provethis{}
+
+\todo{Outline chiral mass renormalisation.}
+
+% \feynmandiagram [horizontal=in to out, baseline=(current bounding box.center)] {
+% in -- [scalar] blob1 [label=center:1PI, blob, fill=n@terracotta]
+% -- [scalar] blob2 [label=center:1PI, blob, fill=n@terracotta]
+% -- [scalar] out
+% };
 
 \section{Yang-Mills Theories}
 \begin{TODO}
@@ -196,6 +250,10 @@ The covariant derivative already has this property, and so we can define \(\math
 
 \section{Loop Integrals and Regularisation}
 \phpar[Introduce loop integrals, how to calculate them, where divergences appear and how to regularise them.]
+\begin{TODO}
+    \item Introduce \DRbar\ renormalisation scheme and talk about Yukawa counterterm in
+    relation to SUSY breaking.
+\end{TODO}
 
 \subsection{Dimensional Regularisation}
 

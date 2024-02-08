@@ -1,0 +1,11 @@
+\begin{feynman}
+    \vertex[] (in);
+    \vertex[right=of in, label=center:1PI, blob, fill=n@terracotta] (blob) {\contour{black}{}};
+    \vertex[right=of blob] (out);
+
+    \diagram*{
+    (in) -- [scalar] (blob)
+         -- [scalar] (out)
+    };
+
+\end{feynman}

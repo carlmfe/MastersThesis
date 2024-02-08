@@ -1,7 +1,6 @@
 \begin{feynman}
-    \vertex[label=left:\(p\)] at (-1.5, 0) (in);
-    \vertex[label=right:\(p\)] at (1.5, 0) (out);
-
+    \vertex[] (in);
+    \vertex[right=of in] (out);
 
     \diagram*{
     (in) -- [scalar] (out)
