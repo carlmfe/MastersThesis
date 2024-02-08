@@ -34,11 +34,11 @@ ToTIntegrals[expr_]:=(Collect[#1,tIntegral[__],(Isolate[#//Simplify]&)]&)[
 
 
 tIntegralRelations={
-	tIntegral[2,m_]->tIntegral[1]+m*tIntegral[0]+m^2*tIntegral[0,m],
-	tIntegral[1,m_]->tIntegral[0]+m*tIntegral[0,m],
-	tIntegral[0,m1_,m2_]->(tIntegral[0,m1]-tIntegral[0,m2])/(m1-m2),
-	tIntegral[1,m1_,m2_]->(m1*tIntegral[0,m1]-m2*tIntegral[0,m2])/(m1-m2),
-	tIntegral[2,m1_,m2_]->tIntegral[0]+(m1^2*tIntegral[0,m1]-m2^2*tIntegral[0,m2])/(m1-m2)
+	tIntegral[1, \[CapitalDelta]_] -> tIntegral[0] + \[CapitalDelta] tIntegral[0, \[CapitalDelta]],
+	tIntegral[2, \[CapitalDelta]_] -> tIntegral[1] + \[CapitalDelta] tIntegral[0] + \[CapitalDelta]^2 tIntegral[0, \[CapitalDelta]],
+	tIntegral[0, \[CapitalDelta]1_, \[CapitalDelta]2_] -> (tIntegral[0, \[CapitalDelta]1] - tIntegral[0, \[CapitalDelta]2\[Conjugate]])/(\[CapitalDelta]1-\[CapitalDelta]2\[Conjugate]),
+	tIntegral[1, \[CapitalDelta]1_, \[CapitalDelta]2_] -> (\[CapitalDelta]1 tIntegral[0, \[CapitalDelta]1] - \[CapitalDelta]2 tIntegral[0, \[CapitalDelta]2\[Conjugate]])/(\[CapitalDelta]1-\[CapitalDelta]2\[Conjugate]),
+	tIntegral[2, \[CapitalDelta]1_, \[CapitalDelta]2_] -> tIntegral[0] + (\[CapitalDelta]1^2 tIntegral[0, \[CapitalDelta]1] - (\[CapitalDelta]2\[Conjugate])^2 tIntegral[0, \[CapitalDelta]2\[Conjugate]])/(\[CapitalDelta]1-\[CapitalDelta]2\[Conjugate])
 }
 ReduceTIntegrals[expr_]:=Collect[
 	(expr/.tIntegralRelations)//Expand//FRH,
@@ -51,12 +51,12 @@ tIntegralDict={
 	tIntegral[0]->2 p Sqrt[s],
 	tIntegral[1]->p Sqrt[s] (s-MNeu[i]^2-MNeu[j]^2),
 	tIntegral[2]->p Sqrt[s] (8/3 s*p^2+2MNeu[i]^2MNeu[j]^2),
-	tIntegral[0,\[CapitalDelta]_]->dLog[2 p Sqrt[s]+s-2 \[CapitalDelta]-MNeu[i]^2-MNeu[j]^2,-2 p Sqrt[s]+s-2 \[CapitalDelta]-MNeu[i]^2-MNeu[j]^2],
-	tIntegral[1,\[CapitalDelta]_]->2 p Sqrt[s]+\[CapitalDelta] dLog[2 p Sqrt[s]+s-2 \[CapitalDelta]-MNeu[i]^2-MNeu[j]^2,-2 p Sqrt[s]+s-2 \[CapitalDelta]-MNeu[i]^2-MNeu[j]^2],
-	tIntegral[2,\[CapitalDelta]_]->2 p Sqrt[s] \[CapitalDelta]+\[CapitalDelta]^2 dLog[2 p Sqrt[s]+s-2 \[CapitalDelta]-MNeu[i]^2-MNeu[j]^2,-2 p Sqrt[s]+s-2 \[CapitalDelta]-MNeu[i]^2-MNeu[j]^2]+p Sqrt[s] (s-MNeu[i]^2-MNeu[j]^2),
-	tIntegral[0,\[CapitalDelta]1_,\[CapitalDelta]2_]->1/(\[CapitalDelta]1-Conjugate[\[CapitalDelta]2]) (dLog[2 p Sqrt[s]+s-2 \[CapitalDelta]1-MNeu[i]^2-MNeu[j]^2,-2 p Sqrt[s]+s-2 \[CapitalDelta]1-MNeu[i]^2-MNeu[j]^2]+dLog[-2 p Sqrt[s]+s-2 Conjugate[\[CapitalDelta]2]-MNeu[i]^2-MNeu[j]^2,2 p Sqrt[s]+s-2 Conjugate[\[CapitalDelta]2]-MNeu[i]^2-MNeu[j]^2]),
-	tIntegral[1,\[CapitalDelta]1_,\[CapitalDelta]2_]->1/(\[CapitalDelta]1-Conjugate[\[CapitalDelta]2]) (\[CapitalDelta]1 dLog[2 p Sqrt[s]+s-2 \[CapitalDelta]1-MNeu[i]^2-MNeu[j]^2,-2 p Sqrt[s]+s-2 \[CapitalDelta]1-MNeu[i]^2-MNeu[j]^2]+Conjugate[\[CapitalDelta]2] dLog[-2 p Sqrt[s]+s-2 Conjugate[\[CapitalDelta]2]-MNeu[i]^2-MNeu[j]^2,2 p Sqrt[s]+s-2 Conjugate[\[CapitalDelta]2]-MNeu[i]^2-MNeu[j]^2]),
-	tIntegral[2,\[CapitalDelta]1_,\[CapitalDelta]2_]->1/(\[CapitalDelta]1-Conjugate[\[CapitalDelta]2]) (2 p Sqrt[s] \[CapitalDelta]1-2 p Sqrt[s] Conjugate[\[CapitalDelta]2]+\[CapitalDelta]1^2 dLog[2 p Sqrt[s]+s-2 \[CapitalDelta]1-MNeu[i]^2-MNeu[j]^2,-2 p Sqrt[s]+s-2 \[CapitalDelta]1-MNeu[i]^2-MNeu[j]^2]+Conjugate[\[CapitalDelta]2]^2 dLog[-2 p Sqrt[s]+s-2 Conjugate[\[CapitalDelta]2]-MNeu[i]^2-MNeu[j]^2,2 p Sqrt[s]+s-2 Conjugate[\[CapitalDelta]2]-MNeu[i]^2-MNeu[j]^2])
+	tIntegral[0,\[CapitalDelta]_]->dLog[(MNeu[i]^2+MNeu[j]^2-s)/2+ p Sqrt[s] - \[CapitalDelta], (MNeu[i]^2+MNeu[j]^2-s)/2 - p Sqrt[s] - \[CapitalDelta]],
+	tIntegral[1,\[CapitalDelta]_]->2 p Sqrt[s]+\[CapitalDelta] dLog[(MNeu[i]^2+MNeu[j]^2-s)/2+ p Sqrt[s] - \[CapitalDelta], (MNeu[i]^2+MNeu[j]^2-s)/2 - p Sqrt[s] - \[CapitalDelta]],
+	tIntegral[2,\[CapitalDelta]_]->2 p Sqrt[s] \[CapitalDelta]+\[CapitalDelta]^2 dLog[(MNeu[i]^2+MNeu[j]^2-s)/2+ p Sqrt[s] - \[CapitalDelta], (MNeu[i]^2+MNeu[j]^2-s)/2 - p Sqrt[s] - \[CapitalDelta]]+p Sqrt[s] (s-MNeu[i]^2-MNeu[j]^2),
+	tIntegral[0,\[CapitalDelta]1_,\[CapitalDelta]2_]->1/(\[CapitalDelta]1-Conjugate[\[CapitalDelta]2]) (dLog[(MNeu[i]^2+MNeu[j]^2-s)/2+ p Sqrt[s] - \[CapitalDelta]1, (MNeu[i]^2+MNeu[j]^2-s)/2 - p Sqrt[s] - \[CapitalDelta]1]+dLog[(MNeu[i]^2+MNeu[j]^2-s)/2+ p Sqrt[s] - Conjugate[\[CapitalDelta]2], (MNeu[i]^2+MNeu[j]^2-s)/2 - p Sqrt[s] - Conjugate[\[CapitalDelta]2]]),
+	tIntegral[1,\[CapitalDelta]1_,\[CapitalDelta]2_]->1/(\[CapitalDelta]1-Conjugate[\[CapitalDelta]2]) (\[CapitalDelta]1 dLog[(MNeu[i]^2+MNeu[j]^2-s)/2+ p Sqrt[s] - \[CapitalDelta]1, (MNeu[i]^2+MNeu[j]^2-s)/2 - p Sqrt[s] - \[CapitalDelta]1]+Conjugate[\[CapitalDelta]2] dLog[(MNeu[i]^2+MNeu[j]^2-s)/2+ p Sqrt[s] - Conjugate[\[CapitalDelta]2], (MNeu[i]^2+MNeu[j]^2-s)/2 - p Sqrt[s] - Conjugate[\[CapitalDelta]2]]),
+	tIntegral[2,\[CapitalDelta]1_,\[CapitalDelta]2_]->1/(\[CapitalDelta]1-Conjugate[\[CapitalDelta]2]) (2 p Sqrt[s] \[CapitalDelta]1-2 p Sqrt[s] Conjugate[\[CapitalDelta]2]+\[CapitalDelta]1^2 dLog[(MNeu[i]^2+MNeu[j]^2-s)/2+ p Sqrt[s] - \[CapitalDelta]1, (MNeu[i]^2+MNeu[j]^2-s)/2 - p Sqrt[s] - \[CapitalDelta]1]+Conjugate[\[CapitalDelta]2]^2 dLog[(MNeu[i]^2+MNeu[j]^2-s)/2+ p Sqrt[s] - Conjugate[\[CapitalDelta]2], (MNeu[i]^2+MNeu[j]^2-s)/2 - p Sqrt[s] - Conjugate[\[CapitalDelta]2]])
 }
 FreeTIntegrals[expr_]:=Collect[expr, tIntegral[__]]/.tIntegralDict
 
