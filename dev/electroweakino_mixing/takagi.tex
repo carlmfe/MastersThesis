@@ -1,0 +1,133 @@
+\documentclass[english, notitlepage]{article}
+
+\usepackage{overhead}
+\usepackage[style=verbose]{biblatex}
+
+\addbibresource{takagi.bib}
+
+\title{Takagi Factorisation}
+\author{Carl Martin Fevang}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+    This document describes the diagonalisation procedure by Takagi for diagonalising symmetric, complex-valued matrices.
+\end{abstract}
+
+\section{Schur decomposition and singular-value decomposition}
+    Schur decomposition tells us that any (potentially complex) matrix \(A\) can be written as
+    \[
+        A = U^\dagger \Delta U,
+    \]
+    where \(U\) is a unitary matrix, and \(\Delta\) is an upper triangular matrix.
+    It follows then that if \(A\) as a symmetric matrix (\(A^T = A\)), then
+    \[
+        \pclosed{U^\dagger \Delta U} = \pclosed{U^\dagger \Delta U}^T = U^T \Delta^T U^\ast
+    \]
+
+\section{Takagi factorisation}
+    Assume \(A = A^T\) is a symmetric, complex-valued, \(n \by n\) matrix.
+    Takagi factorisation~\autocite{Horn} tells us that there exists a unitary matrix \(U\), and a real, non-negative diagonal matrix \(D\) such that
+    \begin{equation}
+        \label{eq:takagi}
+        A = U^T D U.
+    \end{equation}
+
+    \subsection{Factorisation algorithm}
+        The algorithm is will be based on finding vector \(\vec{v} \in  \mathbb{C}^n\) that satisfy \(A \vec{v}^* = \sigma \vec{v}\), for some real, non-negative \(\sigma\).
+        This vector will be called a \emph{Takagi vector} for future reference.
+        Existence of these vectors for any matrix \(A\) such that \(AA^\ast\) only has real, non-negative eigenvalues is detailed later.
+
+        To find \(U\), I propose here an algorithm based on the proof for Takagi factorisation in~\autocite{Horn}.
+        Given a Takagi vector \(\vec{v} \in \mathbb{C}^n\) of \(A\),\footnote{A proof that this can be found is detailed elsewhere.} and an orthonormal basis \(\cclosed{\vec{v}, \vec{v}_2, \ldots, \vec{v}_n}\) of \(\mathbb{C}^n\), it is possible to write \(A\) as
+        \[
+            A = V \begin{bmatrix}
+                \sigma         & \boldsymbol{0} \\
+                \boldsymbol{0} & A_2
+            \end{bmatrix} V^T,
+        \]
+        where \(A_2\) is a symmetric \((n-1) \by (n-1)\) matrix and \(V\) is a unitary matrix with the aforementioned orthonormal basis as its columns.
+        This process can be repeated with \(A_2\) and so on until you have
+        \[
+            A = V_1 \cdots V_{n} \begin{bmatrix}
+                \sigma_1                                            & \multicolumn{2}{c}{\raisebox{-7pt}{\mbox{\Large 0}}}   \\
+                                                                    & \ddots                                               & \\
+                \multicolumn{2}{c}{\raisebox{7pt}{\mbox{\Large 0}}} & \sigma_n
+            \end{bmatrix} V_{n}^T \cdots V_{1}^T,
+        \]
+        where
+        \[
+            V_p = \begin{bmatrix}
+                \mathbb{I}_{(p-1) \by (p-1)} & \boldsymbol{0} \\
+                \boldsymbol{0}               & \tilde{V}_p,
+            \end{bmatrix}
+        \]
+        and \(\tilde{V}_p\) is the unitary matrix that makes a diagonalisation step on \(A_p\).
+        Comparing to \cref{eq:takagi}, we find that
+        \begin{subequations}
+            \begin{align}
+                U & = V_{n}^T \cdots V_{1}^T,                                  \\
+                D & = \operatorname{diag}\pclosed{\sigma_1, \ldots, \sigma_n}.
+            \end{align}
+        \end{subequations}
+        It is easy to show that \(U\) is unitary, as promised.
+        Furthermore, by assumption, all the values \(\sigma_p\) are real and positive.
+        Now the values on the diagonal of \(D\) can be permuted to any order using a permutation matrix \(P\), such that we get
+        \[
+            A = U_P^T D_P U_P,
+        \]
+        where \(U_P = P U\) and \(D_P = P D P^T\).
+        \(U_P\) is still unitary, and \(D_P\) diagonal.
+
+
+
+\section{Proofs}
+    \paragraph{The Takagi vector.}
+    For any \(A \in M_{n}(\mathbb{C})\) such that \(AA^\ast\) only has real, non-negative eigenvalues, there exists a non-zero vector \(\vec{v} \in \mathbb{C}^n\) such that \(A \vec{v}^* = \sigma \vec{v}\), where \(\sigma\) is a real, non-negative number.\\
+    \emph{Proof.} Consider a vector \(\vec{x} \neq \vec{0} \in \mathbb{C}^n\) that is an eigenvector of \(AA^\ast\) with corresponding eigenvalue \(\lambda\).
+    There are two cases:
+    \begin{itemize}
+        \item[(a)] \(A\vec{x}^*\) and \(\vec{x}\) are linearly dependent.
+        \item[(b)] \(A\vec{x}^*\) and \(\vec{x}\) are linearly independent.
+    \end{itemize}
+    In case (a), we must have that \(A\vec{x}^* = \mu \vec{x}\) for some \(\mu \in \mathbb{C}\), since they are linearly dependent.
+    Then \(AA^\ast \vec{x} = A \mu^\ast \vec{x}^* = \abs{\mu}^2 \vec{x} \equiv \lambda \vec{x}\), which is non-negative by definition.\\
+    In case (b), the vector \(\vec{y} = A\vec{x}^* + \mu \vec{x}\) is non-zero for any \(\mu \in \mathbb{C}\), since \(A\vec{x}^*\) and \(\vec{x}\) are linearly independent.
+    Then we can choose \(\mu\) such that \(\abs{\mu}^2 = \lambda\) to get that \(A \vec{y}^* = A\pclosed{A^\ast \vec{x} + \mu^\ast \vec{x}^*} = \lambda\vec{x} + \mu^\ast A\vec{x^*} = \mu\mu^\ast \vec{x} + \mu^\ast A\vec{x}^* = \mu^\ast \pclosed{A \vec{x}^* + \mu \vec{x}} = \mu^\ast \vec{y}\).\\
+    As such, we can always find a vector \(\tilde{\vec{v}} \in \mathbb{C}^n\) such that \(A \tilde{\vec{v}}^* = \mu \tilde{\vec{v}}\) for some \(\mu \in \mathbb{C}^n\).
+    Furthermore, we can define a vector \(\vec{v} = \exp{i\theta} \tilde{\vec{v}}\) for a \(\theta \in \mathbb{R}\) to get \(A\vec{v}^* = A \pclosed{\exp{i\theta} \tilde{\vec{v}}}^\ast = \exp{-i\theta} A\tilde{\vec{v}}^* = \exp{-i\theta} \mu \tilde{\vec{v}} = \exp{-2i\theta} \mu \exp{i\theta} \tilde{\vec{v}} = \exp{-2i\theta} \mu \vec{v} \equiv \sigma \vec{v}\).
+    This allows us to choose the phase of \(\sigma = \exp{-2i\theta} \mu\) to be such that \(\sigma\) is real and non-negative.
+    \medskip
+
+    \paragraph{Eigenvalues of \(AA^\ast\) for symmetric \(A\).}
+    Given an \(N \by N\) complex matrix \(A\), the eigenvalues of \(AA^\ast\) are always real and non-negative.\\
+    \emph{Proof}.
+    Consider \(\vec{x} \neq \vec{0}\) an eigenvector of \(AA^\ast\) with corresponding eigenvalue \(\lambda\).
+    Then we must have that
+    \[\lambda \vec{x}^\dagger \vec{x} = \vec{x}^\dagger AA^\ast \vec{x} = \pclosed{A^\dagger \vec{x}}^\dagger \pclosed{A^\ast \vec{x}} = \pclosed{A^\ast \vec{x}}^\dagger \pclosed{A^\ast \vec{x}},\]
+    where we have used that \(A^\dagger = \pclosed{A^T}^\ast = A^\ast\).
+    This means that \(\lambda \geq 0\), since for any vector \(\vec{v} \in \mathbb{C}^n\) we have that \(\vec{v}^\dagger \vec{v} \geq 0\).
+    As this holds for all eigenvectors \(\vec{x}\) of \(AA^\ast\), all its eigenvalues must be non-negative.
+
+    \paragraph{Diagonalisation step of a symmetric matrix \(A\).}
+    For any symmetric matrix \(A \in M_n(\mathbb{C})\), there exist a unitary matrix \(V \in M_n(\mathbb{C})\) such that
+    \[V^\dagger A V^\ast = \begin{pmatrix} \sigma & \vec{0} \\ \vec{0} & A_2 \end{pmatrix},\]
+    where \(\sigma\) is a real, non-negative number and \(A_2 \in M_{n-1}(\mathbb{C})\) is also a symmetric matrix. \\
+    \emph{Proof.}
+    Consider a normalised Takagi vector \(\vec{v} \neq \vec{0}\) of \(A\) such that \(A\vec{v}^\ast = \sigma \vec{v}\) for some real, non-negative \(\sigma\) and \(\vec{v}^\dagger \vec{v} = 1\).
+    We can then complete a basis for \(\mathbb{C}^n\) with unit vectors \(\vec{v}_i\) where \(i \in 1, \ldots, n\), where we define \(\vec{v}_1 \equiv \vec{v}\).
+    Defining a unitary matrix \(V = \bclosed{\vec{v}_1, \ldots, \vec{v}_{n}}\), the first column of the product
+    \[\pclosed{V^\dagger A V^\ast}_{i1} = \vec{v}_i^\dagger A \vec{v}^* = \vec{v}_i^\dagger \sigma \vec{v} = \sigma \delta_{i1},\]
+    where \(\delta_{ij}\) is the Kronecker delta symbol, and we have used the Takagi property of \(\vec{v}\) and the orthonormality of \(\vec{v}_i^\dagger \vec{v}_j\).
+    This means only the first component of the first column of \(V^\dagger A V^\ast\) is non-zero, and has value \(\sigma\).
+    Now since \(A\) is symmetric, we have that
+    \(\pclosed{V^\dagger A V^\ast}^T = V^\dagger A^T V^\ast = V^\dagger A V^\ast\)
+    must also be symmetric, and thus must have the form
+    \[V^\dagger A V^\ast = \begin{pmatrix} \sigma & \vec{0} \\ \vec{0} & A_2 \end{pmatrix},\]
+    for a symmetric \(A_2 \in M_{n-1}(\mathbb{C})\).
+
+
+    \printbibliography
+
+\end{document}

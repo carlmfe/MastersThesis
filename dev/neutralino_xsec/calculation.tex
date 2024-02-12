@@ -1,0 +1,309 @@
+\documentclass[english,notitlepage]{article}
+
+\usepackage{overhead}
+\usepackage[style=verbose]{biblatex}
+
+\addbibresource{calculation.bib}
+
+
+
+\title{Leading Order Neutralino Calculation}
+\author{Carl Martin Fevang}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+    \noindent
+    Here, I will outline the calculation of neutralino pair production from proton--proton collisions at parton level to leading order.
+\end{abstract}
+
+\subsection{Kinematics}
+    At parton level, only quark--antiquark interactions can produce neutralinos to leading order.
+    Thereby, the only contributing process is \(q(p_1) \bar{q}(p_2) \to \nino[i](p_i) \nino[j](p_j)\).
+    With a process such as this where there are only two initial momenta and two final momenta, the entire kinematic process is confined to a plane, and the four-momenta can be parametrised as
+    \begin{subequations}
+        \begin{align}
+            p_1 = \pclosed{\frac{\sqrt{\hat{s}}}{2}, 0, 0, \frac{\sqrt{\hat{s}}}{2}} &  & p_2 = \pclosed{\frac{\sqrt{\hat{s}}}{2}, 0, 0, -\frac{\sqrt{\hat{s}}}{2}} \\
+            p_i = \pclosed{E_i, p \sin\theta, 0, p \cos\theta}                       &  & p_j = \pclosed{E_j, -p\sin\theta, 0, -p\cos\theta},
+        \end{align}
+    \end{subequations}
+    where \(p^2 = E_i^2 - m_i^2 = E_j^2 - m_j^2\) and \(E_i + E_j = \sqrt{\hat{s}}\).
+    These constraints lead to
+    \begin{subequations}
+        \begin{align}
+            E_{i, j} & = \frac{\hat{s} + m_{i, j}^2 - m_{j, i}^2}{2 \sqrt{\hat{s}}},                               \\
+            p^2      & = \frac{\hat{s}}{4} - \frac{m_i^2 + m_j^2}{2} + \frac{\pclosed{m_i^2 - m_j^2}^2}{4\hat{s}},
+        \end{align}
+    \end{subequations}
+    such that only two independent parameters define the interaction: \(\hat{s}\) and \(\theta\).
+    For convenience, I will use the Mandelstam variables\footnote{Perhaps cite this.} defined as
+    \begin{subequations}
+        \begin{align}
+            \hat{s} = \pclosed{p_1 + p_2}^2 & = \pclosed{p_i + p_j}^2, \\
+            \hat{t} = \pclosed{p_1-p_i}^2   & = \pclosed{p_2-p_j}^2,   \\
+            \hat{u} = \pclosed{p_1-p_j}^2   & = \pclosed{p_2-p_i}^2.   \\
+        \end{align}
+    \end{subequations}
+    Under the constraint \(\hat{s} + \hat{t} + \hat{u} = m_i^2 + m_j^2\), we still only have two degrees of freedom like before.
+    % \begin{subequations}
+    %     \begin{align}
+    %          & (p_1 \cdot p_2) = \frac{\hat{s}}{2}         &  & (p_i \cdot p_j) = \frac{\hat{s}-m_i^2-m_j^2}{2} \\
+    %          & (p_1 \cdot p_i) = \frac{m_i^2 - \hat{t}}{2} &  & (p_2 \cdot p_j) = \frac{m_j^2-\hat{t}}{2}       \\
+    %          & (p_1 \cdot p_j) = \frac{m_j^2 - \hat{u}}{2} &  & (p_2 \cdot p_i) = \frac{m_i^2-\hat{u}}{2}
+    %     \end{align}
+    % \end{subequations}
+
+\subsection{Matrix elements}
+    The only contributing matrix elements at leading order are visualised in \cref{fig:tree_level_diagrams}.
+
+    \begin{figure} [ht!]
+        \centering
+        \inputtikz{s_channel}
+        \inputtikz{t_channel}
+        \inputtikz{u_channel}
+        \caption{The tree-level diagrams contributing to neutralino pair production.}
+        \label{fig:tree_level_diagrams}
+    \end{figure}
+
+    Using the Feynman rules from \comment{reference here} we get the matrix elements
+    \begin{subequations}
+        \begin{align}
+            \nonumber
+            \M_{\hat{s}} = -\frac{g^2}{2} D_Z(\hat{s})            & \bclosed{ \wbar{u}_i\gamma^\mu\pclosed{O^{\prime\prime L}_{ij}P_L + O^{\prime\prime R}_{ij}P_R} v_j }           \\
+                                                                  & \times \bclosed{ \wbar{v}_2 \gamma_\mu \pclosed{C^L_{Zqq}P_L + C^R_{Zqq}P_R} u_1 },                             \\
+            \nonumber
+            \M_{\hat{t}} = -\sum_A 2g^2 D_{\wtilde{q}_A}(\hat{t}) & \bclosed{ \wbar{u}_i \pclosed{C_{\nino[i]\tilde{q}_Aq}^{L\ast}P_L + C_{\nino[i]\tilde{q}_Aq}^{R\ast} P_R} u_1 } \\
+                                                                  & \times \bclosed{ \wbar{v}_2 \pclosed{C^R_{\nino[j]\tilde{q}_Aq}P_L + C^L_{\nino[j]\tilde{q}_Aq}P_R} v_j },      \\
+            \nonumber
+            \M_{\hat{u}} = -\sum_B 2g^2 D_{\wtilde{q}_B}(\hat{u}) & \bclosed{ \wbar{u}_j \pclosed{C_{\nino[j]\tilde{q}_Bq}^{L\ast}P_L + C_{\nino[j]\tilde{q}_Bq}^{R\ast} P_R} u_1 } \\
+                                                                  & \times \bclosed{ \wbar{v}_2 \pclosed{C^R_{\nino[i]\tilde{q}_Bq}P_L + C^L_{\nino[i]\tilde{q}_Bq}P_R} v_i }.
+        \end{align}
+    \end{subequations}
+    Here I denote boson propagators
+    \[
+        D_b(q^2) = \frac{1}{q^2 - m_b^2 \pclosed{+ i m_b \Gamma_b}},
+    \]
+    where \(m_b\) is the mass of the boson \(b\) and \(\Gamma_b\) is its decay rate (which I will optionally include if stated).
+    Fermion spinors \(u_a, v_a\) are used as a shorthand for \(u(p_a), v(p_a)\) with \(a \in 1, 2, i, j\).
+
+\subsection{Cross-section}
+    The differential cross-section for the process \(q(p_1)\bar{q}(p_2) \to \nino[i](p_i) \nino[j](p_j)\) can be found by
+    \begin{equation}
+        \mathrm{d}\sigma = \frac{1}{4E_1E_2|\vec{v}_1 - \vec{v}_2|} \abs{\M}^2 \mathrm{d}\Pi_\text{LIPS},
+    \end{equation}
+    where \(\vec{v}_a = \vec{p}_a / E_a\) and \(\mathrm{d}\Pi_\text{LIPS}\) is the Lorentz-invariant phase space differential of the final state particles.
+    For massless initial state particles in the centre-of-mass frame, it
+    reduces to
+    \begin{equation}
+        \mathrm{d}\sigma = \frac{1}{2\hat{s}} \abs{\M}^2 \mathrm{d}\Pi_\text{LIPS}.
+    \end{equation}
+    Now, to look at the square of the matrix elements.
+    Summing over the spins and taking symmetry factors into account, we have at tree-level
+    \begin{align}
+        \abs{\M_0}^2 = \frac{1}{4 N_C} \pclosed{\frac{1}{2}}^{\delta_{ij}} \sum_\text{spins} \abs{\M_s + \M_t - \M_u}^2,
+    \end{align}
+    where the factor of \(\frac{1}{4N_C}\) comes from averaging over initial state spins and colours and the factor of \(\frac{1}{2}\) is a symmetry factor which is included if the final state particles are identical.
+    The Relative Sign of Interfering Feynman graphs (RSIF) is due to even or odd permutations of external spinors.
+    We can then define the tree-level differential cross-section as
+    \begin{equation}
+        \label{eq:dsigma}
+        \mathrm{d}\sigma_0 = \frac{1}{8N_C} \pclosed{\frac{1}{2}}^{\delta_{ij}} \frac{1}{\hat{s}} \pclosed{I_{\hat{s}\hat{s}} + I_{\hat{t}\hat{t}} + I_{\hat{u}\hat{u}} + 2I_{\hat{s}\hat{t}} - 2I_{\hat{s}\hat{u}} - 2I_{\hat{t}\hat{u}}} \mathrm{d}\Pi_\text{LIPS},
+    \end{equation}
+    where \(I_{\hat{m}\hat{n}} = \sum_{\text{spins}} \Re{\M_{\hat{m}}^\ast \M_{\hat{n}}}, \quad \hat{m}, \hat{n} \in \hat{s}, \hat{t}, \hat{u}\).
+
+
+    Defining \(\hat{t}_{i, j} = \hat{t} - m_{i, j}^2\), \(\hat{u}_{i, j} = \hat{u} - m_{i, j}^2\), we have
+    \begin{subequations}
+        \begin{align}
+            \nonumber
+            I_{\hat{s}\hat{s}} & = 4 g^4 \abs{D_Z(\hat{s})}^2 \bigg[ \pclosed{\abs{Z^L}^2 + \abs{Z^R}^2} \pclosed{\pclosed{\hat{t}-m_i^2}\pclosed{\hat{t}-m_j^2} + \pclosed{\hat{u}-m_i^2}\pclosed{\hat{u}-m_j^2}}                                                      \\
+                               & \hspace{2.4cm} - 2\Re{\pclosed{Z^L}^2 + \pclosed{Z^R}^2} m_i m_j \hat{s} \bigg]                                                                                                                                                        \\
+            \nonumber
+            I_{\hat{t}\hat{t}} & = 4 g^4 \sum_{A, B} D_{\tilde{q}_A}(\hat{t}) D^\ast_{\tilde{q}_B}(\hat{t}) \bigg[\pclosed{Q_A^{LL}}^\ast Q_B^{LL} + \pclosed{Q_A^{LR}}^\ast Q_B^{LR}                                                                                   \\
+                               & \hspace{3.4cm} + \pclosed{Q_A^{RL}}^\ast Q_B^{RL} + \pclosed{Q_A^{RR}}^\ast Q_B^{RR}\bigg] \pclosed{\hat{t}-m_i^2} \pclosed{\hat{t}-m_j^2}                                                                                             \\
+            \nonumber
+            I_{\hat{u}\hat{u}} & = 4 g^4 \sum_{A, B} D_{\tilde{q}_A}(\hat{u}) D^\ast_{\tilde{q}_B}(\hat{u}) \bigg[Q_A^{LL}\pclosed{Q_B^{LL}}^\ast + Q_A^{LR}\pclosed{Q_B^{LR}}^\ast                                                                                     \\
+                               & \hspace{3.4cm} + Q_A^{RL}\pclosed{Q_B^{RL}}^\ast + Q_A^{RR}\pclosed{Q_B^{RR}}^\ast\bigg] \pclosed{\hat{u}-m_i^2} \pclosed{\hat{u}-m_j^2}                                                                                               \\
+            \nonumber
+            I_{\hat{s}\hat{t}} & = 4 g^4 \sum_{A} \operatorname{Re} \bigg\{ D_Z(\hat{s}) D^\ast_{\tilde{q}_A}(\hat{t}) \bigg[\pclosed{\pclosed{Z^L}^\ast Q_A^{LL} + \pclosed{Z^R}^\ast Q_A^{RR}} \pclosed{\hat{t} - m_i^2} \pclosed{\hat{t} - m_j^2}                    \\
+                               & \hspace{4.1cm} - \pclosed{Z^L Q_A^{LL} + Z^R Q_A^{RR}} m_i m_j \hat{s}  \bigg] \bigg\}                                                                                                                                                 \\
+            \nonumber
+            I_{\hat{s}\hat{u}} & = 4 g^4 \sum_{A} \operatorname{Re} \bigg\{ D_Z(\hat{s}) D^\ast_{\tilde{q}_A}(\hat{u}) \bigg[ \pclosed{Z^L \pclosed{Q_A^{LL}}^\ast + Z^R \pclosed{Q_A^{RR}}^\ast} \pclosed{\hat{u} - m_i^2} \pclosed{\hat{u} - m_j^2}                   \\
+                               & \hspace{4.1cm} - \pclosed{\pclosed{Z^L}^\ast \pclosed{Q_A^{LL}}^\ast + \pclosed{Z^R}^\ast \pclosed{Q_A^{RR}}^\ast} m_i m_j \hat{s} \bigg] \bigg\}                                                                                      \\
+            \nonumber
+            I_{\hat{t}\hat{u}} & = 4 g^4 \sum_{A, B} \operatorname{Re} \bigg\{ D_{\tilde{q}_A}(\hat{t}) D^\ast_{\tilde{q}_B}(\hat{u}) \bigg[\pclosed{\pclosed{Q_A^{LL}}^\ast \pclosed{Q_B^{LL}}^\ast + \pclosed{Q_A^{RR}}^\ast \pclosed{Q_B^{RR}}^\ast} m_i m_j \hat{s} \\
+                               & \hspace{2cm} - \pclosed{\pclosed{Q_A^{RL}}^\ast\pclosed{Q_B^{LR}}^\ast + \pclosed{Q_A^{LR}}^\ast\pclosed{Q_B^{RL}}^\ast} \pclosed{\hat{t}\hat{u} - m_i^2m_j^2}\bigg] \bigg\}
+        \end{align}
+    \end{subequations}
+    % \(Q_{\hat{t}\hat{u}}^{MNOP} = C_{\nino[i] \tilde{q}_A q}^{M} C_{\nino[j] \tilde{q}_A q}^{N} C_{\nino[i] \tilde{q}_B q}^{O} C_{\nino[j] \tilde{q}_B q}^{P}\), \(M, N, O, P \in \cclosed{L, R, L^\ast, R^\ast}\).
+
+
+    \begin{align}
+        \nonumber
+        \d[t]{\hat{\sigma}_0} = & \frac{\pi \alpha_W^2}{N_C \hat{s}} \pclosed{\frac{1}{2}}^{\delta_{ij}} \Bigg\{ \sum_{X,Y} \bclosed{\abs{Q^{XY}_{\hat{t}}}^2 \pclosed{\hat{t}-m_i^2}\pclosed{\hat{t}-m_j^2} + \abs{Q^{XY}_{\hat{u}}}^2 \pclosed{\hat{u}-m_i^2}\pclosed{\hat{u}-m_j^2}} \\
+                                & - \sum_X \bclosed{2\Re{\pclosed{Q_{u}^{XX}}^\ast Q_{t}^{XX}} m_i m_j \hat{s} - 2\Re{\pclosed{Q_{u}^{XX^\prime}}^\ast Q_{t}^{XX^\prime}} \pclosed{\hat{t}\hat{u} - m_i^2m_j^2}} \Bigg\}
+    \end{align}
+
+    \begin{subequations}
+        \begin{align}
+            Z^X      & = C_{qqZ}^X O_{ij}^{\prime\prime X}                                            \\
+            Q_A^{XY} & = C_{\nino[i] \tilde{q}_A q}^{X} \pclosed{C_{\nino[j] \tilde{q}_A q}^{X}}^\ast
+        \end{align}
+    \end{subequations}
+
+    \begin{subequations}
+        \begin{align}
+            Q^{XY}_{\hat{t}} & = \pclosed{Z^X}^\ast D_Z(\hat{s}) \delta_{XY} + \sum_A \pclosed{Q_A^{XY}}^\ast D_{\tilde{q}_A}(\hat{t}) \\
+            Q^{XY}_{\hat{u}} & = Z^X D_Z(\hat{s}) \delta_{XY} + \sum_A Q_A^{YX} D_{\tilde{q}_A}(\hat{u})
+        \end{align}
+    \end{subequations}
+
+\subsection{Integrating over \(t\)}
+    To integrate over the variable \(\hat{t}\), we must replace \(\hat{u}\) using the relation \(\hat{s} + \hat{t} + \hat{u} = m_i^2 + m_j^2\).
+
+\section{Fierz identities}
+    Introducing first the generalised gamma matrices \(\Gamma_I^r\) defined in the following way:
+    \begin{subequations}
+        \begin{align}
+            \Gamma_S^0            & = \mathbb{1},                        \\
+            \Gamma_V^{0,\ldots,3} & = \gamma^\mu,                        \\
+            \Gamma_T^{0,\ldots,5} & = \sigma^{\mu\nu}, \quad (\mu < \nu) \\
+            \Gamma_A^{0,\ldots,3} & = \gamma^\mu \gamma^5,               \\
+            \Gamma_P^0            & = \gamma^5,
+        \end{align}
+    \end{subequations}
+    where \(\sigma^{\mu\nu} = \frac{i}{2} \bclosed{\gamma^\mu, \gamma^\nu}\) and \(\gamma^5 = i \gamma^0 \gamma^1 \gamma^2 \gamma^3\). The upper index \(r\) is understood to be summed over if it is repeated in an expression, while the index \(I\) is only summed over when explicitly stated. The complement \(\Gamma_{I,r}\) is found by lowering any Lorentz index in the standard way.
+    The generalised Fierz identity then tells us that for spinors \(w_{1,\ldots,4}\) that can either be positive energy spinors \(u\) or negative energy spinors \(v\), we have that
+    \begin{align}
+        \pclosed{\wbar{w}_1 \Gamma_I^r w_2} \pclosed{\wbar{w}_3 \Gamma_{J}^s w_4} & = \sum_{M,N} \tensor*[^{IJ}_{rs}]{C}{^{MN}_{tu}} \pclosed{\wbar{w}_1 \Gamma_M^t w_4} \pclosed{\wbar{w}_3 \Gamma_N^u w_2},
+    \end{align}
+    with numerical coefficients \(\tensor*[^{IJ}_{rs}]{C}{^{MN}_{tu}}\). The coefficients are found by
+    \begin{align}
+        \tensor*[^{IJ}_{rs}]{C}{^{MN}_{tu}} & = \frac{1}{16} \tr\bclosed{\Gamma_{M,t} \Gamma_I^r \Gamma_{N,u} \Gamma_J^{s}}
+    \end{align}
+    The Fierz transformation matrix \(F\) is given by\footcite{Nieves:2003in}
+    \begin{align}
+        F = \frac{1}{4}
+        \begin{bmatrix}
+            1  & 1  & \frac{1}{2} & -1 & 1  \\
+            4  & -2 & 0           & -2 & -4 \\
+            12 & 0  & -2          & 0  & 12 \\
+            -4 & -2 & 0           & -2 & 4  \\
+            1  & -1 & \frac{1}{2} & 1  & 1
+        \end{bmatrix}
+    \end{align}
+    in the bilinear product basis
+    \begin{subequations}
+        \begin{align}
+            q_S(1234) & = \pclosed{\wbar{w}_1 w_2} \pclosed{\wbar{w}_3 w_4}                                         \\
+            q_V(1234) & = \pclosed{\wbar{w}_1 \gamma^\mu w_2} \pclosed{\wbar{w}_3 \gamma_\mu w_4}                   \\
+            q_T(1234) & = \pclosed{\wbar{w}_1 \sigma^{\mu\nu} w_2} \pclosed{\wbar{w}_3 \sigma_{\mu\nu} w_4}         \\
+            q_A(1234) & = \pclosed{\wbar{w}_1 \gamma^\mu \gamma^5 w_2} \pclosed{\wbar{w}_3 \gamma_\mu \gamma^5 w_4} \\
+            q_P(1234) & = \pclosed{\wbar{w}_1 \gamma^5 w_2} \pclosed{\wbar{w}_3 \gamma^5 w_4}                       \\
+        \end{align}
+    \end{subequations}
+    where a vector \(\vec{q}\) is given by
+    \begin{align}
+        \vec{q}(abcd) & = \sum_{i=1}^5 n_i \vec{e}_i,
+    \end{align}
+    for some coefficients \(n_i\) and with the canonical unit vectors \(\cclosed{\vec{e}_i} = \Big\{\begin{pmatrix} 1\\0\\\vdots \end{pmatrix}, \begin{pmatrix} 0\\1\\\vdots \end{pmatrix}, \ldots \Big\}\).
+    The Dirac quadrilinear \(\vec{q}\) represents is found by the sum
+    \begin{align}
+        \sum_{i=0}^{5} n_i q_{B_i}(abcd),
+    \end{align}
+    where \(B_i = S, V, T, A, P\).
+
+    The Fierz transformation swapping the indices \(2 \leftrightarrow 4\) can be found by
+    \begin{align}
+        \vec{q}(1234) = F \vec{q}(1432)
+    \end{align}
+
+\section{Factorisation}
+
+    \begin{align}
+        \nonumber
+          & \bclosed{\wbar{u}_i \pclosed{C^{L*}_i P_L + C^{R*}_i P_R} u_1} \bclosed{\wbar{v}_2 \pclosed{C^{R}_j P_L + C^{L}_j P_R} v_j}                     \\
+        \nonumber
+        = & C_{SS}\bclosed{\wbar{u}_i u_1} \bclosed{\wbar{v}_2 v_j} + C_{SP}\bclosed{\wbar{u}_i u_1} \bclosed{\wbar{v}_2 \gamma^5 v_j}                      \\
+          & + C_{PS}\bclosed{\wbar{u}_i \gamma^5 u_1} \bclosed{\wbar{v}_2 v_j} + C_{PP}\bclosed{\wbar{u}_i \gamma^5 u_1} \bclosed{\wbar{v}_2 \gamma^5 v_j},
+    \end{align}
+    where we have
+    \begin{subequations}
+        \begin{align}
+            C_{SS} & = \frac{1}{4} \pclosed{C^{L*}_i + C^{R*}_i}\pclosed{C^{L}_j + C^{R}_j}  \\
+            C_{SP} & = \frac{1}{4} \pclosed{C^{L*}_i + C^{R*}_i}\pclosed{C^{L}_j - C^{R}_j}  \\
+            C_{PS} & = -\frac{1}{4} \pclosed{C^{L*}_i - C^{R*}_i}\pclosed{C^{L}_j + C^{R}_j} \\
+            C_{PP} & = -\frac{1}{4} \pclosed{C^{L*}_i - C^{R*}_i}\pclosed{C^{L}_j - C^{R}_j}
+        \end{align}
+    \end{subequations}
+
+    \begin{align}
+        \nonumber
+          & \bclosed{\wbar{u}_i \pclosed{C^{L}_{\nino[i]\wtilde{q}_A q} P_L + C^{R*}_{\nino[i]\wtilde{q}_A q} P_R} u_1}
+        \bclosed{\wbar{v}_2 \pclosed{C^{R}_{\nino[j]\wtilde{q}_A q} P_L + C^{L}_{\nino[j]\wtilde{q}_A q} P_R} v_j}                                                                                                                                             \\
+        \nonumber
+        = & C^{L*}_{\nino[i]\wtilde{q}_A q}C^{R}_{\nino[j]\wtilde{q}_A q} \bclosed{\frac{1}{2}\pclosed{\wbar{u}_i P_L v_j} \pclosed{\wbar{v}_2 P_L u_1} + \frac{1}{8}\pclosed{\wbar{u}_i \sigma^{\mu\nu} v_j} \pclosed{\wbar{v}_2 \sigma_{\mu\nu} P_L u_1} }   \\
+        \nonumber
+          & + C^{L*}_{\nino[i]\wtilde{q}_A q}C^{L}_{\nino[j]\wtilde{q}_A q} \bclosed{\frac{1}{2}\pclosed{\wbar{u}_i \gamma^\mu P_R v_j} \pclosed{\wbar{v}_2 \gamma_\mu P_L u_1}}                                                                               \\
+        \nonumber
+          & + C^{R*}_{\nino[i]\wtilde{q}_A q}C^{R}_{\nino[j]\wtilde{q}_A q} \bclosed{\frac{1}{2}\pclosed{\wbar{u}_i \gamma^\mu P_L v_j} \pclosed{\wbar{v}_2 \gamma_\mu P_R u_1}}                                                                               \\
+          & + C^{R*}_{\nino[i]\wtilde{q}_A q}C^{L}_{\nino[j]\wtilde{q}_A q} \bclosed{\frac{1}{2}\pclosed{\wbar{u}_i P_R v_j} \pclosed{\wbar{v}_2 P_R u_1} + \frac{1}{8}\pclosed{\wbar{u}_i \sigma^{\mu\nu} v_j} \pclosed{\wbar{v}_2 \sigma_{\mu\nu} P_R u_1} }
+    \end{align}
+
+
+\section{Integrals}
+    \begin{subequations}
+        \begin{align}
+            T^0_0 \equiv                     & \int_{t_-}^{t_+} \!\mathrm{d}t\, = t_+ - t_-                                                                                                                                                                                                         \\
+            T^1_0 \equiv                     & \int_{t_-}^{t_+} \!\mathrm{d}t\, t = \frac{1}{2} \pclosed{t_+^2 - t_-^2}                                                                                                                                                                             \\
+            T^2_0 \equiv                     & \int_{t_-}^{t_+} \!\mathrm{d}t\, t^2 = \frac{1}{3} \pclosed{t_+^3 - t_-^3}                                                                                                                                                                           \\
+            T_1^0(\Delta) \equiv             & \int_{t_-}^{t_+} \!\mathrm{d}t\, \frac{1}{\pclosed{t-\Delta}} = \ln\frac{t_+ - \Delta}{t_- - \Delta}                                                                                                                                                 \\
+            T_1^1(\Delta) \equiv             & \int_{t_-}^{t_+} \!\mathrm{d}t\, \frac{t}{\pclosed{t-\Delta}} = t_+ - t_- + \Delta \ln\frac{t_+ - \Delta}{t_- - \Delta}                                                                                                                              \\
+            T_1^2(\Delta) \equiv             & \int_{t_-}^{t_+} \!\mathrm{d}t\, \frac{t^2}{\pclosed{t-\Delta}} = \frac{1}{2}\pclosed{t_+^2 - t_-^2} + \Delta \pclosed{t_+ - t_-} + \Delta^2 \ln\frac{t_+ - \Delta}{t_- - \Delta}                                                                    \\
+            T_2^0(\Delta_1, \Delta_2) \equiv & \int_{t_-}^{t_+} \!\mathrm{d}t\, \frac{1}{\pclosed{t-\Delta_1}\pclosed{t-\Delta_2^\ast}} = \frac{1}{\Delta_1 - \Delta_2^\ast} \cclosed{\ln\frac{t_+-\Delta_1}{t_--\Delta_1} - \ln\frac{t_+-\Delta_2^\ast}{t_--\Delta_2^\ast}}                        \\
+            T_2^1(\Delta_1, \Delta_2) \equiv & \int_{t_-}^{t_+} \!\mathrm{d}t\, \frac{t}{\pclosed{t-\Delta_1}\pclosed{t-\Delta_2^\ast}} = \frac{1}{\Delta_1 - \Delta_2^\ast} \cclosed{\Delta_1 \ln\frac{t_+-\Delta_1}{t_--\Delta_1} - \Delta_2^\ast \ln\frac{t_+-\Delta_2^\ast}{t_--\Delta_2^\ast}} \\
+            \nonumber
+            T_2^2(\Delta_1, \Delta_2) \equiv & \int_{t_-}^{t_+} \!\mathrm{d}t\, \frac{t^2}{\pclosed{t-\Delta_1}\pclosed{t-\Delta_2^\ast}} = t_+ - t_-                                                                                                                                               \\
+                                             & \qquad + \frac{1}{\Delta_1 - \Delta_2^\ast} \cclosed{\Delta_1^2 \ln\frac{t_+-\Delta_1}{t_--\Delta_1} - \pclosed{\Delta_2^\ast}^2 \ln\frac{t_+-\Delta_2^\ast}{t_--\Delta_2^\ast}}
+        \end{align}
+    \end{subequations}
+
+    % \begin{subequations}
+    %     \begin{align}
+    %         T_1^1(\Delta) & = T_0^0 + \Delta T_1^0(\Delta) \\
+    %         T_1^2(\Delta) & = T_0^1 + \Delta T_0^0 + \Delta^2 T_1^0(\Delta) \\
+    %         T_2^0(\Delta_1, \Delta_2) & = \begin{cases}
+    %             \frac{1}{\Delta_1 - \Delta_2} \bclosed{T_1^0(\Delta_1) - T_1^0(\Delta_2)} & \Delta_1 \neq \Delta_2 \\
+    %             \frac{1}{t_+ - \Delta} - \frac{1}{t_- - \Delta} & \Delta_1 = \Delta_2 \equiv \Delta
+    %         \end{cases} \\
+    %         T_2^1(\Delta_1, \Delta_2) & = \begin{cases}
+    %             \frac{1}{\Delta_1 - \Delta_2} \bclosed{\Delta_1 T_1^0(\Delta_1) - \Delta_2 T_1^0(\Delta_2)} & \Delta_1 \neq \Delta_2 \\
+    %             T_1^0(\Delta) + \Delta T_2^0(\Delta, \Delta) & \Delta_1 = \Delta_2 \equiv \Delta
+    %         \end{cases} \\
+    %         T_2^0(\Delta_1, \Delta_2) & = \begin{cases}
+    %             T_0^0 + \frac{1}{\Delta_1 - \Delta_2} \bclosed{\Delta_1^2 T_1^0(\Delta_1) - \Delta_2^2 T_1^0(\Delta_2)} & \Delta_1 \neq \Delta_2 \\
+    %             T_0^0 + 2\Delta T_1^0(\Delta) + \Delta^2 T_2^0(\Delta, \Delta) & \Delta_1 = \Delta_2 \equiv \Delta
+    %         \end{cases}
+    %     \end{align}
+    % \end{subequations}
+
+    \begin{equation}
+        T_2^p(\Delta_1, \Delta_2) \equiv \int_{t_-}^{t_+}\!\mathrm{d}t\, \frac{t^p}{(t-\Delta_1)(t-\Delta_2^\ast)}
+    \end{equation}
+
+    \begin{subequations}
+        \begin{align}
+            T_0^0         & = T_2^2(0, 0)      \\
+            T_0^1         & = T_2^3(0, 0)      \\
+            T_0^2         & = T_2^4(0, 0)      \\
+            T_1^0(\Delta) & = T_2^1(\Delta, 0) \\
+            T_1^1(\Delta) & = T_2^2(\Delta, 0) \\
+            T_1^2(\Delta) & = T_2^3(\Delta, 0)
+        \end{align}
+    \end{subequations}
+
+    \[T_2^p(\Delta_2, \Delta_1) = \pclosed{T_2^p(\Delta_1, \Delta_2)}^\ast\]
+
+
+\end{document}

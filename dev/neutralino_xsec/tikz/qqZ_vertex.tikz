@@ -1,0 +1,11 @@
+\begin{feynman}
+    \vertex at (-1  , 1  ) (q) {\(q\)};
+    \vertex at (-1  ,-1  ) (qbar) {\(\bar{q}\)};
+    \vertex at (   0,   0) (v);
+    \vertex at (   1,   0) (Z) {\(Z\)};
+    \diagram*{
+        (q) -- [fermion] (v)
+            -- [fermion] (qbar),
+        (v) -- [boson] (Z)
+    };
+\end{feynman}

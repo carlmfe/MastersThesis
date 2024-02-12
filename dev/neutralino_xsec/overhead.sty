@@ -1,0 +1,113 @@
+\usepackage{graphicx}
+
+% Use all allowed space
+\addtolength{\hoffset}{-0.5cm}
+\addtolength{\textwidth}{1.0cm}
+\addtolength{\voffset}{-1.5cm}
+\addtolength{\textheight}{3cm}
+\setlength{\columnsep}{0.5cm}
+
+\setlength{\parindent}{0pt}
+
+
+
+% Variable enumeration
+\usepackage{enumerate}
+\usepackage{hyperref}
+
+% Fonts and characters
+\usepackage{xcolor} % for colouring text
+\usepackage{amsmath}
+\usepackage{amssymb} % for d'Alambertian
+\usepackage{xfrac} % provides \sfrac
+\usepackage{mathabx} % provides \widebar
+\usepackage{bbold} % provides mathbb
+\usepackage{tensor} % provides tensor indexing
+
+% Formatting
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage[font=small, labelfont=bf]{caption}
+\usepackage{multirow} % provides multicolumn
+
+% Referecing sections, equations etc
+\usepackage[capitalize]{cleveref}
+\crefdefaultlabelformat{\textbf{#2}}
+\crefname{eq}{Eq.}{Eq.}
+\crefname{sec}{Sec.}{Sec.}
+\crefname{app}{App.}{App.}
+\crefname{fig}{Figure}{Figure}
+\crefname{tab}{Tab.}{Tab.}
+\crefdefaultlabelformat{#2#1#3}
+\usepackage{appendix}
+
+% Tikz and Figures
+\usepackage{tikz}
+\usepackage[compat=1.1.0]{tikz-feynman}
+\newcommand{\inputtikz}[1]{\begin{tikzpicture} \input{tikz/#1.tikz} \end{tikzpicture}}
+
+
+%%% Commands %%%
+
+% Misc
+\newcommand{\comment}[1]{\textcolor{red}{#1}}
+\newcommand{\pclosed}[1]{\left(#1\right)}
+\newcommand{\bclosed}[1]{\left[#1\right]}
+\newcommand{\cclosed}[1]{\left\{#1\right\}}
+\newcommand{\vclosed}[1]{\left|#1\right|}
+\newcommand{\msub}[2]{\ensuremath{{#1}_\text{#2}}}
+\DeclareMathOperator{\cc}{c.c.}
+\newcommand{\margincomment}[1]{\marginpar{\scriptsize #1}}
+\newcommand{\wtilde}[1]{\widetilde{#1}}
+\newcommand{\wbar}[1]{\widebar{#1}}
+
+% Calculus
+\newcommand{\integral}[1]{\ensuremath{\int\!\mathrm{d}#1\,}}
+\renewcommand{\d}[2][x]{\ensuremath{\frac{\mathrm{d}#2}{\mathrm{d}#1}}}
+\renewcommand{\exp}[1]{e^{#1}}
+\newcommand{\exptext}[1]{\operatorname{exp}\pclosed{#1}}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Nabla}{\boldsymbol{\nabla}}
+\newcommand{\evalat}[2]{\left.#1\right|_{#2}}
+\newcommand{\dA}{\operatorname{\Box}}
+
+% Linear algebra
+\renewcommand{\vec}[1]{\boldsymbol{#1}}
+\newcommand{\norm}[2][]{\ensuremath{\|#2\|_{#1}}}
+\DeclareMathOperator{\eye}{\mathbb{I}}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\tr}{Tr}
+\newcommand{\by}{{\times}}
+
+% Complex Analysis
+\renewcommand{\Re}[1]{\operatorname{Re}\cclosed{#1}}
+\newcommand{\abs}[1]{\ensuremath{\vclosed{#1}}}
+
+% QFT notation
+\newcommand{\dimof}[1]{\bigl[#1\bigr]}
+\renewcommand{\L}{\mathcal{L}}
+\newcommand{\M}{\mathcal{M}}
+
+% SUSY notation
+\newcommand{\bino}{\wtilde{B}^0}
+\newcommand{\wino}{\wtilde{W}^0}
+\newcommand{\hinou}{\wtilde{H}^0_u}
+\newcommand{\hinod}{\wtilde{H}^0_d}
+\newcommand{\ewino}{\wtilde{\chi}}
+\newcommand{\nino}[1][]{\wtilde{\chi}^0_{#1}}
+\newcommand{\chino}[1][]{\wtilde{\chi}_{#1}^\pm}
+\newcommand{\pchino}[1][]{\wtilde{\chi}^+_{#1}}
+\newcommand{\nchino}[1][]{\wtilde{\chi}^-_{#1}}
+\newcommand{\barbino}{\wbar{\wtilde{B}}^0}
+\newcommand{\barwino}{\wbar{\wtilde{W}}^0}
+\newcommand{\barhinou}{\wbar{\wtilde{H}}^0_u}
+\newcommand{\barhinod}{\wbar{\wtilde{H}}^0_d}
+\newcommand{\barewino}{\wbar{\wtilde{\chi}}}
+\newcommand{\barnino}[1][]{\wbar{\wtilde{\chi}}^0_{#1}}
+\newcommand{\barchino}[1][]{\wbar{\wtilde{\chi}}_{#1}^\pm}
+\newcommand{\barpchino}[1][]{\wbar{\wtilde{\chi}}^+_{#1}}
+\newcommand{\barnchino}[1][]{\wbar{\wtilde{\chi}}^-_{#1}}
+
+% Statistics
+\newcommand{\expval}{\operatorname{\mathbb{E}}}

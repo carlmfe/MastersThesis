@@ -1,0 +1,21 @@
+\begin{feynman}
+    \vertex at (-1 , 1  ) (q) {\(q\)};
+    \vertex at (-1 ,-1  ) (qbar) {\(\bar{q}\)};
+    \vertex at ( 0 , 0  ) (v1);
+    \vertex at ( 1 , 0  ) (v2);
+    \vertex at ( 2 , 1  ) (chii) {\(\nino[i]\)};
+    \vertex at ( 2 ,-1  ) (chij) {\(\nino[j]\)};
+    \vertex at (1.8, 0.5) (a);
+    \vertex at (1.8,-0.5) (b);
+    \diagram*{
+        (q) -- [fermion] (v1)
+            -- [fermion] (qbar),
+        (v1) -- [boson] (v2),
+        (chii) -- (v2)
+               -- (chij),
+        (v2) -- [boson] (v2),
+        (a) -- [stealth-, out=225, in=135] (b)
+    };
+\end{feynman}
+
+
