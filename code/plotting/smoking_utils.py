@@ -6,6 +6,7 @@ import shutil
 from slha_utils import *
 
 SMOKING_ROOT = "/home/carlmfe/Documents/master/smoking/"
+BIN_ROOT = "bin/"
 PDF_SET = "PDF4LHC21_40_pdfas"
 # PDF_SET = "CT14lo"
 VERBOSE = True
@@ -25,7 +26,7 @@ def set_centre_of_mass_energy(s):
 
 def run_neutralino_production(slha_filepath, outfilepath, tnum = False):
     clargs = [
-        SMOKING_ROOT+"bin/run_neutralino_production",
+        BIN_ROOT+"run_neutralino_production",
         "-o", "0",
         "-S", str(S),
         "-r", slha_filepath,
@@ -59,7 +60,7 @@ def run_neu_prod_wreplacement(slha_filepath, vals, tnum = False):
 
 def run_cross_section(slha_filepath, outfilepath, pid1, pid2, tnum = False):
     clargs = [
-        SMOKING_ROOT+"bin/cross_section",
+        BIN_ROOT+"cross_section",
         "--pid1", str(pid1),
         "--pid2", str(pid2),
         "-o", "0",
