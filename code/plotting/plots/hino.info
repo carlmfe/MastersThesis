@@ -1,0 +1,10 @@
+###This file lists command line arguments used to create plot 'plots/hino.pdf'.###
+
+pid1, 1000022
+pid2, 1000023
+pdf_set, PDF4LHC21_40_pdfas
+S, 13600
+verbose, False
+slha, hino.slha
+param, Neutralino mass [GeV]
+param_range, [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500]
