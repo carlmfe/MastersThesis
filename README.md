@@ -1,6 +1,6 @@
 This is the repository for my Master's Thesis in Theoretical Physics at the University of Oslo.
 
-#Master's Thesis in Theoretical Physics
+# Master's Thesis in Theoretical Physics
 by Carl Martin Fevang
 
 Supervisor: Are Raklev

@@ -5,7 +5,8 @@
 \chapter{Neutralino Pair Production at Parton Level}
 
 \begin{TODO}
-	\item Formulate a section on the dipole formalism used in Debove et al. and make a
+	\item Formulate a section on the dipole formalism used in Debove et al.
+	and make a
 	comparison.
 \end{TODO}
 
@@ -27,36 +28,77 @@ scalar products by \(m^2_{ij} \equiv (p_i + p_j)^2\) for \(j \neq i\), and
 \(m^2_i \equiv p_i^2\), we can find a relation between scalar products by using
 momentum conservation.
 \begin{align} \nonumber
-	m^2_{ij} & = \pclosed{p_i - \sum_{k\neq j} p_k}^2 = \pclosed{\sum_{k\neq i,j} p_k}^2 = \sum_{k\neq i,j} \sum_{l\neq i,j} p_k\cdot p_l \\
+	m^2_{ij} & = \pclosed{p_i - \sum_{k\neq j} p_k}^2 =
+	\pclosed{\sum_{k\neq i,j} p_k}^2 = \sum_{k\neq i,j} \sum_{l\neq i,j}
+	p_k\cdot
+	p_l
+	\\
 	\nonumber
-	         & = \sum_{k\neq i,j} \sum_{l\neq i,j,k} \frac{m^2_{kl} - m^2_k - m^2_l}{2} + \sum_{k\neq i,j} m^2_k                          \\
+	         & = \sum_{k\neq i,j} \sum_{l\neq i,j,k} \frac{m^2_{kl} - m^2_k
+	- m^2_l}{2} + \sum_{k\neq i,j} m^2_k
+	\\
 	\nonumber
-	         & = \sum_{k\neq i,j} \sum_{\substack{l\neq i,j                                                                               \\l>k}} m^2_{kl} - \frac{1}{2} \sum_{k\neq i, j} (N-3) m^2_k - \frac{1}{2} \sum_{l\neq i,j} (N-3) m^2_l + \sum_{k\neq i,j} m^2_k \\
-	         & = \sum_{k\neq i,j} \sum_{\substack{l\neq i,j                                                                               \\l>k}} m^2_{kl} - (N-4) \sum_{k\neq i, j} m^2_k.
+	         & = \sum_{k\neq i,j} \sum_{\substack{l\neq i,j
+	\\l>k}} m^2_{kl}
+	- \frac{1}{2} \sum_{k\neq i, j} (N-3) m^2_k - \frac{1}{2} \sum_{l\neq
+		i,j}
+	(N-3) m^2_l + \sum_{k\neq i,j} m^2_k
+	\\
+	         & = \sum_{k\neq i,j} \sum_{\substack{l\neq i,j
+	\\l>k}} m^2_{kl}
+	- (N-4) \sum_{k\neq i, j} m^2_k.
 \end{align}
-\comment{This little generalised relation might not be immediately necessary\ldots}
-Furthermore, we assign the \(N\) scalar products \(m^2_i\) to the invariant masses of the incoming and outgoing particles, thus not counting them as degrees of freedom, leaving us with
-\(n_\text{dof} = \frac{N(N-3)}{2}\) degrees of freedom.\footnote{I note that we often consider the invariant mass of the incoming bodies to be fixed, which would reduce our degrees of freedom by one.}
-This means that in a \(2\to 2\) process, we have 2 degrees of freedom, and in a \(2\to 3\) process we have 5.
+\comment{This little generalised relation might not be immediately
+necessary\ldots}
+Furthermore, we assign the \(N\) scalar products \(m^2_i\) to the invariant
+masses of the incoming and outgoing particles, thus not counting them as
+degrees of freedom, leaving us with
+\(n_\text{dof} = \frac{N(N-3)}{2}\) degrees of freedom.\footnote{I note that we
+	often consider the invariant mass of the incoming bodies to be fixed,
+	which
+	would reduce our degrees of freedom by one.}
+This means that in a \(2\to 2\) process, we have 2 degrees of freedom, and in a
+\(2\to 3\) process we have 5.
 
 \subsection{2-body Phase Space}
 The Lorentz invariant phase space differential for a 2-body final state with
 four-momenta \(p_i, p_j\) in \(d\) dimensions is
 \begin{equation}
-	\mathrm{d}\Pi_{2\to 2} = \pclosed{2\pi}^d \delta^d\pclosed{P - p_i - p_j} \frac{\mathrm{d}^{d-1} \vec{p}_i}{\pclosed{2\pi}^{d-1}} \frac{1}{2E_i} \frac{\mathrm{d}^{d-1} \vec{p}_j}{\pclosed{2\pi}^{d-1}} \frac{1}{2E_j}.
+	\mathrm{d}\Pi_{2\to 2} = \pclosed{2\pi}^d \delta^d\pclosed{P - p_i -
+		p_j} \frac{\mathrm{d}^{d-1} \vec{p}_i}{\pclosed{2\pi}^{d-1}}
+	\frac{1}{2E_i}
+	\frac{\mathrm{d}^{d-1} \vec{p}_j}{\pclosed{2\pi}^{d-1}} \frac{1}{2E_j}.
 \end{equation}
-Going to the centre-of-mass frame of the incoming partons, we have \(P\^\mu = \pclosed{\sqrt{s}, 0, 0, 0}\), allowing us to integrate over the spatial part of Dirac delta-function to arrive at
+Going to the centre-of-mass frame of the incoming partons, we have \(P\^\mu =
+\pclosed{\sqrt{s}, 0, 0, 0}\), allowing us to integrate over the spatial part
+of Dirac delta-function to arrive at
 \begin{equation}
-	\mathrm{d}\Pi_{2\to 2} = \frac{1}{\pclosed{2\pi}^{d-2}} \mathrm{d}^{d-1} \vec{p} \frac{1}{4E_i E_j} \delta\pclosed{\sqrt{s} - E(p, m_i) - E(p, m_j)},
+	\mathrm{d}\Pi_{2\to 2} = \frac{1}{\pclosed{2\pi}^{d-2}}
+	\mathrm{d}^{d-1} \vec{p} \frac{1}{4E_i E_j} \delta\pclosed{\sqrt{s} -
+		E(p, m_i)
+		- E(p, m_j)},
 \end{equation}
 where the \(E(p, m) = \sqrt{p^2 + m^2}\).
-We can write out the differential of the spatial component of \(p_i\) in spherical coordinates as \(\mathrm{d}^{d-1} \vec{p} = \mathrm{d}\Omega_{d-1} \mathrm{d}p \, p^{d-2} = \mathrm{d}\Omega_{d-2} \sin^{d-3}\theta \, \mathrm{d}\theta \, \mathrm{d}p \, p^{d-2}\).
-As a \(2\to 2\) process is restricted to planar motion, we can always go to a frame of reference such that any amplitude we calculate will not be dependent on the spatial angles \(\mathrm{d} \Omega_{d-2}\), allowing us to integrate over them using that \(\integral{\Omega_{d-2}} = 2 \pi^{\frac{d-2}{2}} \frac{1}{\Gamma\pclosed{\frac{d-2}{2}}}\) to get
+We can write out the differential of the spatial component of \(p_i\) in
+spherical coordinates as \(\mathrm{d}^{d-1} \vec{p} = \mathrm{d}\Omega_{d-1}
+\mathrm{d}p \, p^{d-2} = \mathrm{d}\Omega_{d-2} \sin^{d-3}\theta \,
+\mathrm{d}\theta \, \mathrm{d}p \, p^{d-2}\).
+As a \(2\to 2\) process is restricted to planar motion, we can always go to a
+frame of reference such that any amplitude we calculate will not be dependent
+on the spatial angles \(\mathrm{d} \Omega_{d-2}\), allowing us to integrate
+over them using that \(\integral{\Omega_{d-2}} = 2 \pi^{\frac{d-2}{2}}
+\frac{1}{\Gamma\pclosed{\frac{d-2}{2}}}\) to get
 \begin{equation}
-	\mathrm{d}\Pi_{2\to 2} = \frac{1}{\pclosed{4\pi}^{\frac{d-2}{2}}} \frac{1}{\Gamma\pclosed{\frac{d-2}{2}}} \frac{p^{d-3}}{2 \sqrt{s}} \sin^{d-3}\theta \,\mathrm{d}\theta,
+	\mathrm{d}\Pi_{2\to 2} = \frac{1}{\pclosed{4\pi}^{\frac{d-2}{2}}}
+	\frac{1}{\Gamma\pclosed{\frac{d-2}{2}}} \frac{p^{d-3}}{2 \sqrt{s}}
+	\sin^{d-3}\theta \,\mathrm{d}\theta,
 \end{equation}
-where we understand the momentum to be given by \(p = \frac{\sqrt{\lambda(s, m_i^2, m_j^2)}}{2\sqrt{s}}\).
-In \(d=4\) dimensions, it is often convenient to change to the Mandelstam variable \(t\), which for massless initial state particles becomes \(t=\frac{1}{2} \pclosed{-s+m_i^2+m_j^2+\sqrt{\lambda(s,m_i^2,m_j^2)}\cos\theta}\).
+where we understand the momentum to be given by \(p = \frac{\sqrt{\lambda(s,
+		m_i^2, m_j^2)}}{2\sqrt{s}}\).
+In \(d=4\) dimensions, it is often convenient to change to the Mandelstam
+variable \(t\), which for massless initial state particles becomes
+\(t=\frac{1}{2}
+\pclosed{-s+m_i^2+m_j^2+\sqrt{\lambda(s,m_i^2,m_j^2)}\cos\theta}\).
 Making the change of variable, the differential phase space reduces to
 \begin{equation}
 	\evalat{\mathrm{d}\Pi_{2\to 2}}{d=4} = \frac{1}{8\pi s} \,\mathrm{d}t
@@ -64,25 +106,50 @@ Making the change of variable, the differential phase space reduces to
 
 \subsection{3-body Phase Space}
 \todo{Fill out an introduction here.}\\
-The differential Lorentz invariant phase space for a 3-body final state with four-momenta \(p_i, p_j, k\), where \(k^2=0\) in \(d\) dimensions is
+The differential Lorentz invariant phase space for a 3-body final state with
+four-momenta \(p_i, p_j, k\), where \(k^2=0\) in \(d\) dimensions is
 \begin{equation}
-	\mathrm{d}\Pi_{2\to 3} = (2\pi)^d \delta^d(P - p_i - p_j - k) \frac{\mathrm{d}^{d-1} \vec{p}_i}{(2\pi)^{d-1}} \frac{1}{2E_i} \frac{\mathrm{d}^{d-1} \vec{p}_j}{(2\pi)^{d-1}} \frac{1}{2E_j} \frac{\mathrm{d}^{d-1} \vec{k}}{(2\pi)^{d-1}} \frac{1}{2\omega}.
+	\mathrm{d}\Pi_{2\to 3} = (2\pi)^d \delta^d(P - p_i - p_j - k)
+	\frac{\mathrm{d}^{d-1} \vec{p}_i}{(2\pi)^{d-1}} \frac{1}{2E_i}
+	\frac{\mathrm{d}^{d-1} \vec{p}_j}{(2\pi)^{d-1}} \frac{1}{2E_j}
+	\frac{\mathrm{d}^{d-1} \vec{k}}{(2\pi)^{d-1}} \frac{1}{2\omega}.
 \end{equation}
-First, it will be useful to write out the differential in \(\vec{k}\) in spherical coordinates where it reads \(\mathrm{d}^{d-1}\vec{k} = \omega^{d-2} \mathrm{d}\Omega_{d-1} \mathrm{d}\omega\).
-The differentials in \(\vec{p}_{i/j}\) together with the delta-function are easier to compute in the centre-of-mass frame of the neutralinos where we have \(P - k = \pclosed{Q, 0, 0, 0}\).
+First, it will be useful to write out the differential in \(\vec{k}\) in
+spherical coordinates where it reads \(\mathrm{d}^{d-1}\vec{k} = \omega^{d-2}
+\mathrm{d}\Omega_{d-1} \mathrm{d}\omega\).
+The differentials in \(\vec{p}_{i/j}\) together with the delta-function are
+easier to compute in the centre-of-mass frame of the neutralinos where we have
+\(P - k = \pclosed{Q, 0, 0, 0}\).
 This leaves
 \begin{equation}
-	\mathrm{d}\Pi_{2\to 3} = \frac{1}{8} \frac{1}{\pclosed{2\pi}^{2d-3}} \delta(Q - E_i^\star - E_j^\star) \delta^{d-1}(\vec{p}^\star_i + \vec{p}_j^\star) \frac{\omega^{d-3}}{E_i^\star E_j^\star} \mathrm{d}^{d-1}\vec{p}_i^\star\, \mathrm{d}^{d-1}\vec{p}_j^\star\, \mathrm{d}\Omega_{d-1}\, \mathrm{d}\omega,
+	\mathrm{d}\Pi_{2\to 3} = \frac{1}{8} \frac{1}{\pclosed{2\pi}^{2d-3}}
+	\delta(Q - E_i^\star - E_j^\star) \delta^{d-1}(\vec{p}^\star_i +
+	\vec{p}_j^\star) \frac{\omega^{d-3}}{E_i^\star E_j^\star}
+	\mathrm{d}^{d-1}\vec{p}_i^\star\, \mathrm{d}^{d-1}\vec{p}_j^\star\,
+	\mathrm{d}\Omega_{d-1}\, \mathrm{d}\omega,
 \end{equation}
-where the stars denote quantities calculated in the aforementioned reference frame.
-Integrating trivially over \(\vec{p}_j^\star\) using the delta-function, and writing using polar coordinates \(\mathrm{d}^{d-1}\vec{p}_i = \mathrm{d}\Omega_{d-1}^\star \, \mathrm{d}\!\abs{\vec{p}_i^\star} \abs{\vec{p}_i^\star}^{d-2}\) to integrate over \(\delta\pclosed{Q - E_i^\star - E_j^\star}\), we get
+where the stars denote quantities calculated in the aforementioned reference
+frame.
+Integrating trivially over \(\vec{p}_j^\star\) using the delta-function, and
+writing using polar coordinates \(\mathrm{d}^{d-1}\vec{p}_i =
+\mathrm{d}\Omega_{d-1}^\star \, \mathrm{d}\!\abs{\vec{p}_i^\star}
+\abs{\vec{p}_i^\star}^{d-2}\) to integrate over \(\delta\pclosed{Q - E_i^\star
+	- E_j^\star}\), we get
 \begin{equation}
-	\mathrm{d}\Pi_{2\to 3} = \frac{1}{\pclosed{2\pi}^{2d-3}} \frac{\omega^{d-3} \abs{\vec{p}_i^\star}^{d-3}}{8Q} \mathrm{d}\Omega_{d-1}^\star\, \mathrm{d}\Omega_{d-1}\, \mathrm{d}\omega.
+	\mathrm{d}\Pi_{2\to 3} = \frac{1}{\pclosed{2\pi}^{2d-3}}
+	\frac{\omega^{d-3} \abs{\vec{p}_i^\star}^{d-3}}{8Q}
+	\mathrm{d}\Omega_{d-1}^\star\, \mathrm{d}\Omega_{d-1}\,
+	\mathrm{d}\omega.
 \end{equation}
-Here, we understand the magnitude of the three-momenta to be given by \(\abs{\vec{p}_i^\star} = \frac{\sqrt{\lambda(Q^2, m_i^2, m_j^2)}}{2Q}\) and \(\omega = \frac{s-Q^2}{2\sqrt{s}}\).'
-It will also be useful to make a change of integration variable to \(Q^2\), leaving us finally with
+Here, we understand the magnitude of the three-momenta to be given by
+\(\abs{\vec{p}_i^\star} = \frac{\sqrt{\lambda(Q^2, m_i^2, m_j^2)}}{2Q}\) and
+\(\omega = \frac{s-Q^2}{2\sqrt{s}}\).'
+It will also be useful to make a change of integration variable to \(Q^2\),
+leaving us finally with
 \begin{equation}
-	\mathrm{d}\Pi_{2\to 3} = \frac{1}{\pclosed{2\pi}^{2d-3}} \frac{\omega^{d-3} \abs{\vec{p}_i^\star}^{d-3}}{16Q\sqrt{s}} \mathrm{d}\Omega_{d-1}^\star\, \mathrm{d}\Omega_{d-1}\, \mathrm{d}Q^2.
+	\mathrm{d}\Pi_{2\to 3} = \frac{1}{\pclosed{2\pi}^{2d-3}}
+	\frac{\omega^{d-3} \abs{\vec{p}_i^\star}^{d-3}}{16Q\sqrt{s}}
+	\mathrm{d}\Omega_{d-1}^\star\, \mathrm{d}\Omega_{d-1}\, \mathrm{d}Q^2.
 \end{equation}
 
 \todo{Comment on integration boundaries.}\\
@@ -95,7 +162,15 @@ azimuthal angle in the centre-of-mass frame of the initial partons. This lets
 us integrate over it for a factor of \(2\pi\).
 
 \begin{equation}
-	\mathrm{d}\Pi_{2\to 3} = \frac{1}{\pclosed{2\pi}^{2d-3}} \frac{1}{\Gamma\pclosed{\frac{d-2}{2}}} \frac{1}{2^d \pi^{\frac{3d-4}{2}}} \frac{\lambda^{\frac{d-3}{2}\pclosed{Q^2, m_i^2, m_j^2}}}{s}\frac{\pclosed{1-z}^{\frac{d-3}{2}}}{z^{\frac{d-2}{2}}} \pclosed{y(1-y)}^{\frac{d-4}{2}} \mathrm{d}y\, \mathrm{d}\Omega_{d-1}^\star\, \mathrm{d}Q^2.
+	\mathrm{d}\Pi_{2\to 3} = \frac{1}{\pclosed{2\pi}^{2d-3}}
+	\frac{1}{\Gamma\pclosed{\frac{d-2}{2}}} \frac{1}{2^d
+		\pi^{\frac{3d-4}{2}}}
+	\frac{\lambda^{\frac{d-3}{2}\pclosed{Q^2,
+
+				m_i^2,m_j^2}}}{s}\frac{\pclosed{1-z}^{\frac{d-3}{2}}}{z^{\frac{d-2}{2}}}
+	\pclosed{y(1-y)}^{\frac{d-4}{2}} \mathrm{d}y\,
+	\mathrm{d}\Omega_{d-1}^\star\,
+	\mathrm{d}Q^2.
 \end{equation}
 % \comment{Complete this calculation.}\\
 % It is important to note that there is an interdependence between \(Q^2\) and \(\omega\), which can be found using that \(P^2 = s\).
@@ -142,16 +217,23 @@ scattering by considering the outgoing neutralinos with momenta
 \(\vec{p}_{i,j}\) as a single system. This lets us write the momenta as
 \begin{subequations}
 	\begin{align}
-		k_i^\mu            & = \frac{\sqrt{s}}{2} \pclosed{1, 0, 0, 1},                                   \\
-		k_j^\mu            & = \frac{\sqrt{s}}{2} \pclosed{1, 0, 0, -1},                                  \\
-		k\^{\mu}           & = \frac{\sqrt{s}}{2} (1-z) \pclosed{1, \sin\theta, 0, \cos\theta},           \\
-		(p_i + p_j)\^{\mu} & = \frac{\sqrt{s}}{2} \pclosed{(1+z), -(1-z)\sin\theta, 0, -(1-z)\cos\theta}.
+		k_i^\mu            & = \frac{\sqrt{s}}{2} \pclosed{1, 0, 0, 1},
+		\\
+		k_j^\mu            & = \frac{\sqrt{s}}{2} \pclosed{1, 0, 0,
+			-1},
+		\\
+		k\^{\mu}           & = \frac{\sqrt{s}}{2} (1-z) \pclosed{1,
+			\sin\theta, 0, \cos\theta},
+		\\
+		(p_i + p_j)\^{\mu} & = \frac{\sqrt{s}}{2} \pclosed{(1+z),
+			-(1-z)\sin\theta, 0, -(1-z)\cos\theta}.
 	\end{align}
 \end{subequations}
 
 The centre-of-mass frame of the neutralinos is defined by \((p^\ast_i +
 p^\ast_k)\^{\mu} = \pclosed{\sqrt{zs}, 0, 0, 0}\).\footnote{I will from now on
-	always put a star on quantities pertaining to the centre-of-mass frame of the
+	always put a star on quantities pertaining to the centre-of-mass frame
+	of the
 	neutralinos.} We find the transformation to this frame then by making
 appropriate boosts and rotations of this four-vector. Let us start by rotating
 the 3-momentum to lie along the positive \(z\)-direction. As the
@@ -165,8 +247,10 @@ around the \(y\)-axis, we can be parametrised by the following matrix
 		0 & -\sin\alpha & 0 & \cos\alpha
 	\end{pmatrix}.
 \end{equation}
-Using \(\alpha = -\theta-\pi\) we get that \(\text{Rot}_y(-\theta-\pi) (p_i + p_j)\^{\mu} = \frac{\sqrt{s}}{2} \pclosed{(1+z), 0, 0, (1-z)}\).
-We can subsequently boost along the \(z\)-axis to eliminate the \(z\)-component.
+Using \(\alpha = -\theta-\pi\) we get that \(\text{Rot}_y(-\theta-\pi) (p_i +
+p_j)\^{\mu} = \frac{\sqrt{s}}{2} \pclosed{(1+z), 0, 0, (1-z)}\).
+We can subsequently boost along the \(z\)-axis to eliminate the
+\(z\)-component.
 Such a boost can be parametrised by
 \begin{equation}
 	\text{Boost}_z(\beta) = \begin{pmatrix}
@@ -177,8 +261,12 @@ Such a boost can be parametrised by
 	\end{pmatrix},
 \end{equation}
 where \(\gamma = \pclosed{1 - \beta^2}^{-\sfrac{1}{2}}\).
-The \(z\)-component is eliminated using \(\beta = -\frac{1-z}{1+z}\), such that we end up with
-\[(p_i^\ast + p_j^\ast)\^\mu \equiv \text{Boost}_z\pclosed{-\frac{1-z}{1+z}} \text{Rot}_y\pclosed{-\theta-\pi} \pclosed{p_i + p_j}^\mu = \pclosed{\sqrt{zs}, 0, 0, 0}\]
+The \(z\)-component is eliminated using \(\beta = -\frac{1-z}{1+z}\), such that
+we end up with
+\[(p_i^\ast + p_j^\ast)\^\mu \equiv \text{Boost}_z\pclosed{-\frac{1-z}{1+z}}
+	\text{Rot}_y\pclosed{-\theta-\pi} \pclosed{p_i + p_j}^\mu =
+	\pclosed{\sqrt{zs},
+		0, 0, 0}\]
 as we expected.
 
 Now we can parametrise \({p_{i,j}^\ast}\^\mu\) in this frame using two angular
@@ -186,22 +274,32 @@ variables \(\theta^\ast, \phi^\ast\), knowing that \(\vec{p}_i + \vec{p}_j =
 0\),
 \begin{subequations}
 	\begin{align}
-		{p_i^\ast}\^\mu & = \pclosed{E_i, p\sin\theta^\ast \cos\phi^\ast, p\sin\theta^\ast \sin\phi^\ast, p \cos\theta^\ast},    \\
-		{p_j^\ast}\^\mu & = \pclosed{E_j, -p\sin\theta^\ast \cos\phi^\ast, -p\sin\theta^\ast \sin\phi^\ast, -p \cos\theta^\ast}.
+		{p_i^\ast}\^\mu & = \pclosed{E_i, p\sin\theta^\ast
+			\cos\phi^\ast, p\sin\theta^\ast \sin\phi^\ast, p
+		\cos\theta^\ast},                                   \\
+		{p_j^\ast}\^\mu & = \pclosed{E_j, -p\sin\theta^\ast
+			\cos\phi^\ast, -p\sin\theta^\ast \sin\phi^\ast, -p
+			\cos\theta^\ast}.
 	\end{align}
 \end{subequations}
-To find what \(E_{i,j}\) and \(p\) need to be, we can transform \(k^\mu\) and \(k_{i,j}^\mu\) to this frame of reference, finding
+To find what \(E_{i,j}\) and \(p\) need to be, we can transform \(k^\mu\) and
+\(k_{i,j}^\mu\) to this frame of reference, finding
 \begin{subequations}
 	\begin{align}
-		{k^\ast}\^\mu                      & = \frac{\sqrt{s}}{2} \frac{1-z}{\sqrt{z}} \pclosed{1, 0, 0, -1}, \\
-		\pclosed{k_i^\ast + k_j^\ast}\^\mu & = \frac{s}{2\sqrt{z}} \pclosed{1+z, 0, 0, -(1-z)},
+		{k^\ast}\^\mu                      & = \frac{\sqrt{s}}{2}
+		\frac{1-z}{\sqrt{z}} \pclosed{1, 0, 0, -1},                \\
+		\pclosed{k_i^\ast + k_j^\ast}\^\mu & = \frac{s}{2\sqrt{z}}
+		\pclosed{1+z, 0, 0, -(1-z)},
 	\end{align}
 \end{subequations}
-and use conservation of momentum and the fact that \({p_{i,j}^\ast}^2 = m^2_{i,j}\) to get that
+and use conservation of momentum and the fact that \({p_{i,j}^\ast}^2 =
+m^2_{i,j}\) to get that
 \begin{subequations}
 	\begin{align}
-		E_{i,j}(z) & = \frac{zs + m^2_{i,j} - m^2_{j,i}}{2 \sqrt{zs}},               \\
-		p(z)       & = \frac{\sqrt{\lambda\pclosed{zs, m^2_i, m^2_j}}}{2 \sqrt{zs}}.
+		E_{i,j}(z) & = \frac{zs + m^2_{i,j} - m^2_{j,i}}{2 \sqrt{zs}},
+		\\
+		p(z)       & = \frac{\sqrt{\lambda\pclosed{zs, m^2_i,
+					m^2_j}}}{2 \sqrt{zs}}.
 	\end{align}
 \end{subequations}
 
@@ -210,7 +308,8 @@ transformations on \({p_{i,j}^\ast}\^\mu\) using that
 \(\text{Rot}^{-1}_y(\alpha) = \text{Rot}_y(-\alpha)\) and
 \(\text{Boost}_z^{-1}(\beta) = \text{Boost}_z(-\beta)\):
 \begin{equation}
-	p_{i,j}^\mu = \text{Rot}_y\pclosed{\theta+\pi} \text{Boost}_z\pclosed{\frac{1-z}{1+z}} {p_{i,j}^\ast}\^\mu.
+	p_{i,j}^\mu = \text{Rot}_y\pclosed{\theta+\pi}
+	\text{Boost}_z\pclosed{\frac{1-z}{1+z}} {p_{i,j}^\ast}\^\mu.
 \end{equation}
 
 \begin{figure}
@@ -218,30 +317,39 @@ transformations on \({p_{i,j}^\ast}\^\mu\) using that
 	\begin{subfigure}{.49\textwidth}
 		\centering
 		\inputtikz[auto, >=latex, scale=1.1]{kinematics_lab_frame}
-		\caption{Angular definition in the centre-of-mass frame of the initial particles with momenta \(\vec{k}_{i,j}\).}
+		\caption{Angular definition in the centre-of-mass frame of the
+			initial particles with momenta \(\vec{k}_{i,j}\).}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{.49\textwidth}
 		\centering
 		\inputtikz[auto, >=latex, scale=1.1]{kinematics_com_frame}
-		\caption{Angular definitions in the centre-of-mass frame of the outgoing particles with momenta \(\vec{p}_{i,j}\).}
+		\caption{Angular definitions in the centre-of-mass frame of the
+			outgoing particles with momenta \(\vec{p}_{i,j}\).}
 	\end{subfigure}
 	\caption{}
 \end{figure}
 
 \subsection{Differential Cross-Section}
 \begin{equation}
-	\mathrm{d}\hat{\sigma}^d = \frac{1}{\pclosed{4\pi}^{\frac{d-2}{2}}} \frac{1}{\Gamma\pclosed{\frac{d-2}{2}}} \frac{p^{d-3}}{4\hat{s}\sqrt{\hat{s}}} \abs{\M}^2 \sin^{d-3}\theta\, \mathrm{d}\theta
+	\mathrm{d}\hat{\sigma}^d = \frac{1}{\pclosed{4\pi}^{\frac{d-2}{2}}}
+	\frac{1}{\Gamma\pclosed{\frac{d-2}{2}}}
+	\frac{p^{d-3}}{4\hat{s}\sqrt{\hat{s}}}
+	\abs{\M}^2 \sin^{d-3}\theta\, \mathrm{d}\theta
 \end{equation}
 
 \begin{equation}
-	\mathrm{d}\hat{\sigma} = \frac{1}{16\pi} \frac{1}{\hat{s}^2} \abs{\M}^2 \mathrm{d}\hat{t}
+	\mathrm{d}\hat{\sigma} = \frac{1}{16\pi} \frac{1}{\hat{s}^2} \abs{\M}^2
+	\mathrm{d}\hat{t}
 \end{equation}
 
 Averaged over spin and colour, and taking account of symmetry if the particles
 are identical, the differential cross-section in \(d=4\) dimensions is.
 \begin{equation}
-	\mathrm{d}\hat{\sigma} = \pclosed{\frac{1}{2}}^{\delta_{ij}} \frac{1}{64 N_C^2 \pi} \frac{1}{\hat{s}^2} \sum_{\substack{\text{spin}\\\text{colour}}} \abs{\M}^2 \mathrm{d}\hat{t}
+	\mathrm{d}\hat{\sigma} = \pclosed{\frac{1}{2}}^{\delta_{ij}}
+	\frac{1}{64 N_C^2 \pi} \frac{1}{\hat{s}^2}
+	\sum_{\substack{\text{spin}\\\text{colour}}} \abs{\M}^2
+	\mathrm{d}\hat{t}
 \end{equation}
 % \clearpage
 % \begin{equation}
@@ -288,7 +396,8 @@ are identical, the differential cross-section in \(d=4\) dimensions is.
 		\inputtikz{u_channel}
 		\caption{\(u\)-channel}
 	\end{subfigure}
-	\caption{The leading order diagrams contributing to neutralino pair production at parton-level.}
+	\caption{The leading order diagrams contributing to neutralino pair
+		production at parton-level.}
 	\label{pc:fig:tree_level_diagrams}
 \end{figure}
 
@@ -300,23 +409,47 @@ using the Feynman rules in \needcite[Feynman rules section], are then
 \begin{subequations}
 	\begin{align}
 		\nonumber
-		\M_{\hat{s}} = -\frac{g^2}{2} D_Z(\hat{s})           & \bclosed{ \bar{u}_i\gamma^\mu\pclosed{O^{\prime\prime L}_{ij}P_L + O^{\prime\prime R}_{ij}P_R} v_j }           \\
-		                                                     & \times \bclosed{ \bar{v}_2 \gamma_\mu \pclosed{C^L_{Zqq}P_L + C^R_{Zqq}P_R} u_1 },                             \\
+		\M_{\hat{s}} = -\frac{g^2}{2} D_Z(\hat{s})           &
+		\bclosed{ \bar{u}_i\gamma^\mu\pclosed{O^{\prime\prime
+						L}_{ij}P_L +
+				O^{\prime\prime R}_{ij}P_R} v_j }
+		\\
+		                                                     & \times
+		\bclosed{ \bar{v}_2 \gamma_\mu \pclosed{C^L_{Zqq}P_L +
+		C^R_{Zqq}P_R} u_1 },
+		\\
 		\nonumber
-		\M_{\hat{t}} = -\sum_A 2g^2 D_{\tilde{q}_A}(\hat{t}) & \bclosed{ \bar{u}_i \pclosed{C_{\nino[i]\tilde{q}_Aq}^{L\ast}P_L + C_{\nino[i]\tilde{q}_Aq}^{R\ast} P_R} u_1 } \\
-		                                                     & \times \bclosed{ \bar{v}_2 \pclosed{C^R_{\nino[j]\tilde{q}_Aq}P_L + C^L_{\nino[j]\tilde{q}_Aq}P_R} v_j },      \\
+		\M_{\hat{t}} = -\sum_A 2g^2 D_{\tilde{q}_A}(\hat{t}) &
+		\bclosed{ \bar{u}_i
+			\pclosed{C_{\nino[i]\tilde{q}_Aq}^{L\ast}P_L +
+				C_{\nino[i]\tilde{q}_Aq}^{R\ast} P_R} u_1 }
+		\\
+		                                                     & \times
+		\bclosed{ \bar{v}_2 \pclosed{C^R_{\nino[j]\tilde{q}_Aq}P_L +
+		C^L_{\nino[j]\tilde{q}_Aq}P_R} v_j },
+		\\
 		\nonumber
-		\M_{\hat{u}} = -\sum_B 2g^2 D_{\tilde{q}_B}(\hat{u}) & \bclosed{ \bar{u}_j \pclosed{C_{\nino[j]\tilde{q}_Bq}^{L\ast}P_L + C_{\nino[j]\tilde{q}_Bq}^{R\ast} P_R} u_1 } \\
-		                                                     & \times \bclosed{ \bar{v}_2 \pclosed{C^R_{\nino[i]\tilde{q}_Bq}P_L + C^L_{\nino[i]\tilde{q}_Bq}P_R} v_i },
+		\M_{\hat{u}} = -\sum_B 2g^2 D_{\tilde{q}_B}(\hat{u}) &
+		\bclosed{ \bar{u}_j
+			\pclosed{C_{\nino[j]\tilde{q}_Bq}^{L\ast}P_L +
+				C_{\nino[j]\tilde{q}_Bq}^{R\ast} P_R} u_1 }
+		\\
+		                                                     & \times
+		\bclosed{ \bar{v}_2 \pclosed{C^R_{\nino[i]\tilde{q}_Bq}P_L +
+		C^L_{\nino[i]\tilde{q}_Bq}P_R} v_i },
 	\end{align}
 \end{subequations}
-where \(D_p(q^2) = \frac{1}{q^2 - m_p^2 + i\Gamma_p m_p}\) is the \needcite[Breit-Wigner propagator] of a particle with mass \(m_p\) and decay width \(\Gamma_p\).
+where \(D_p(q^2) = \frac{1}{q^2 - m_p^2 + i\Gamma_p m_p}\) is the
+\needcite[Breit-Wigner propagator] of a particle with mass \(m_p\) and decay
+width \(\Gamma_p\).
 
 These matrix elements can be expanded using the \textit{supercharges}
 \begin{subequations}
 	\begin{align}
-		Z^X      & = C_{qqZ}^X O_{ij}^{\prime\prime X},                                            \\
-		Q_A^{XY} & = C_{\nino[i] \tilde{q}_A q}^{X} \pclosed{C_{\nino[j] \tilde{q}_A q}^{Y}}^\ast,
+		Z^X      & = C_{qqZ}^X O_{ij}^{\prime\prime X},
+		\\
+		Q_A^{XY} & = C_{\nino[i] \tilde{q}_A q}^{X}
+		\pclosed{C_{\nino[j] \tilde{q}_A q}^{Y}}^\ast,
 	\end{align}
 \end{subequations}
 % and the Dirac quadrilinears
@@ -337,14 +470,32 @@ to arrive at
 \begin{subequations}
 	\begin{align}
 		\nonumber
-		\M_{\hat{s}} = -\frac{g^2}{2} D_Z(\hat{s}) \Big[           & Z^L b_L^\mu(u_i, v_j){b_L}\_{\mu}(v_2, u_1) - \pclosed{Z^R}^\ast b_L^\mu(u_i, v_j){b_R}\_{\mu}(v_2, u_1)         \\
-		-                                                          & \pclosed{Z^L}^\ast b_{R}^\mu(u_i, v_j){b_L}\_{\mu}(v_2, u_1) + Z^R b_R^\mu(u_i, v_j){b_R}\_{\mu}(v_2, u_1) \Big] \\
+		\M_{\hat{s}} = -\frac{g^2}{2} D_Z(\hat{s}) \Big[           &
+		Z^L b_L^\mu(u_i, v_j){b_L}\_{\mu}(v_2, u_1) -
+		\pclosed{Z^R}^\ast b_L^\mu(u_i,
+		v_j){b_R}\_{\mu}(v_2, u_1)                                   \\
+		-                                                          &
+		\pclosed{Z^L}^\ast b_{R}^\mu(u_i, v_j){b_L}\_{\mu}(v_2, u_1) +
+		Z^R b_R^\mu(u_i,
+		v_j){b_R}\_{\mu}(v_2, u_1) \Big]                             \\
 		\nonumber
-		\M_{\hat{t}} = -\sum_A 2g^2 D_{\tilde{q}_A}(\hat{t}) \Big[ & \pclosed{Q_A^{LR}}^\ast b_L(u_i, u_1) b_L(v_2, v_j) +  \pclosed{Q_A^{LL}}^\ast b_L(u_i, u_1) b_R(v_2, v_j)       \\
-		+                                                          & \pclosed{Q_A^{RR}}^\ast b_R(u_i, u_1) b_L(v_2, v_j) + \pclosed{Q_A^{RL}}^\ast b_R(u_i, u_1) b_R(v_2, v_j) \Big]  \\
+		\M_{\hat{t}} = -\sum_A 2g^2 D_{\tilde{q}_A}(\hat{t}) \Big[ &
+		\pclosed{Q_A^{LR}}^\ast b_L(u_i, u_1) b_L(v_2, v_j) +
+		\pclosed{Q_A^{LL}}^\ast
+		b_L(u_i, u_1) b_R(v_2, v_j)                                  \\
+		+                                                          &
+		\pclosed{Q_A^{RR}}^\ast b_R(u_i, u_1) b_L(v_2, v_j) +
+		\pclosed{Q_A^{RL}}^\ast
+		b_R(u_i, u_1) b_R(v_2, v_j) \Big]                            \\
 		\nonumber
-		\M_{\hat{u}} = -\sum_A 2g^2 D_{\tilde{q}_A}(\hat{u}) \Big[ & Q_A^{RL} b_L(v_2, v_i) b_L(u_j, u_1) + Q_A^{RR} b_L(v_2, v_i) b_R(u_j, u_1)                                      \\
-		+                                                          & Q_A^{LL} b_R(v_2, v_i) b_L(u_j, u_1) + Q_A^{LR} b_R(v_2, v_i) b_R(u_j, u_1) \Big].
+		\M_{\hat{u}} = -\sum_A 2g^2 D_{\tilde{q}_A}(\hat{u}) \Big[ &
+		Q_A^{RL} b_L(v_2, v_i) b_L(u_j, u_1) + Q_A^{RR} b_L(v_2, v_i)
+		b_R(u_j, u_1)
+		\\
+		+                                                          &
+		Q_A^{LL} b_R(v_2, v_i) b_L(u_j, u_1) + Q_A^{LR} b_R(v_2, v_i)
+		b_R(u_j, u_1)
+		\Big].
 	\end{align}
 \end{subequations}
 
@@ -352,32 +503,73 @@ To get the matrix element squared we can use that the complex conjugate of the
 Dirac bilinears is given by
 \begin{subequations}
 	\begin{align}
-		\pclosed{b_{L/R}(w_a, w_b)}^\dagger =     & b_{R/L}(w_b, w_a),     \\
-		\pclosed{b_{L/R}^\mu(w_a, w_b)}^\dagger = & b_{L/R}^\mu(w_b, w_a).
+		\pclosed{b_{L/R}(w_a, w_b)}^\dagger =     & b_{R/L}(w_b, w_a),
+		\\
+		\pclosed{b_{L/R}^\mu(w_a, w_b)}^\dagger = & b_{L/R}^\mu(w_b,
+		w_a).
 	\end{align}
 \end{subequations}
-Furthermore, when summing over the spins of the various spinors in the bilinears, they have the sum identities
+Furthermore, when summing over the spins of the various spinors in the
+bilinears, they have the sum identities
 \begin{align}
-	\sum_{\text{spins}} b_X(w_a, w_b) b_Y(w_b, w_a) =         & 2 \Big[ (1-\delta_{XY}) (p_a \cdot p_b) + \operatorname{rsgn} \delta_{XY} m_a m_b \Big],                                                                                              \\
+	\sum_{\text{spins}} b_X(w_a, w_b) b_Y(w_b, w_a) =         & 2 \Big[
+		(1-\delta_{XY}) (p_a \cdot p_b) + \operatorname{rsgn}
+		\delta_{XY} m_a m_b
+		\Big],
+	\\
 	\nonumber
-	\sum_{\text{spins}} b_X^\mu(w_a, w_b) b_Y^\nu(w_b, w_a) = & 2\Big[ \delta_{XY}\pclosed{p_a^\mu p_b^\nu - \g (p_a \cdot p_b) + p_a^\nu p_b^\mu + (-1)^{\delta_{XY}} i \epsilon^{\mu\nu\alpha\beta} \tensor{(p_a)}{_\alpha} \tensor{(p_b)}{_\beta}} \\
-	                                                          & + (1-\delta_{XY})\operatorname{rsgn} m_a m_b \g \Big],
+	\sum_{\text{spins}} b_X^\mu(w_a, w_b) b_Y^\nu(w_b, w_a) = & 2\Big[
+	\delta_{XY}\pclosed{p_a^\mu p_b^\nu - \g (p_a \cdot p_b) + p_a^\nu
+		p_b^\mu +
+		(-1)^{\delta_{XY}} i \epsilon^{\mu\nu\alpha\beta}
+		\tensor{(p_a)}{_\alpha}
+	\tensor{(p_b)}{_\beta}}                                             \\
+	                                                          & +
+	(1-\delta_{XY})\operatorname{rsgn} m_a m_b \g \Big],
 \end{align}
-where \(\operatorname{rsgn}\) is 1 if \(w_a, w_b\) are spinors of the same type, e.g. both are \(u\)-spinors, and -1 otherwise.
+where \(\operatorname{rsgn}\) is 1 if \(w_a, w_b\) are spinors of the same
+type, e.g. both are \(u\)-spinors, and -1 otherwise.
 
 \begin{temporary}
 
 	\begin{subequations}
 		\begin{align}
 			\nonumber
-			\M^\dagger_{\hat{s}} = -\frac{g^2}{2} D_Z^\ast(\hat{s}) \Big[           & \pclosed{Z^L}^\ast b_L^\mu(v_j, u_i){b_L}\_{\mu}(u_1, v_2) - Z^R b_L^\mu(v_j, u_i){b_R}\_{\mu}(u_1, v_2)         \\
-			-                                                                       & Z^L b_R^\mu(v_j, u_i){b_L}\_{\mu}(u_1, v_2) + \pclosed{Z^R}^\ast b_R^\mu(v_j, u_i){b_R}\_{\mu}(u_1, v_2) \Big]   \\
+			\M^\dagger_{\hat{s}} = -\frac{g^2}{2} D_Z^\ast(\hat{s})
+			\Big[                               &
+			\pclosed{Z^L}^\ast b_L^\mu(v_j, u_i){b_L}\_{\mu}(u_1,
+			v_2) -
+			Z^R b_L^\mu(v_j, u_i){b_R}\_{\mu}(u_1, v_2)
+			\\
+			-
+			                                    & Z^L b_R^\mu(v_j,
+			u_i){b_L}\_{\mu}(u_1, v_2) +
+			\pclosed{Z^R}^\ast b_R^\mu(v_j, u_i){b_R}\_{\mu}(u_1,
+			v_2) \Big]
+			\\
 			\nonumber
-			\M^\dagger_{\hat{t}} = -\sum_A 2g^2 D^\ast_{\tilde{q}_A}(\hat{t}) \Big[ & Q_A^{RL} b_L(u_1, u_i) b_L(v_j, v_2) +  Q_A^{RR} b_L(u_1, u_i) b_R(v_j, v_2)                                     \\
-			+                                                                       & Q_A^{LL} b_R(u_1, u_i) b_L(v_j, v_2) + Q_A^{LR} b_R(u_1, u_i) b_R(v_j, v_2) \Big]                                \\
+			\M^\dagger_{\hat{t}} = -\sum_A 2g^2
+			D^\ast_{\tilde{q}_A}(\hat{t}) \Big[ & Q_A^{RL} b_L(u_1,
+			u_i) b_L(v_j, v_2) +
+			Q_A^{RR} b_L(u_1, u_i) b_R(v_j, v_2)
+			\\
+			+
+			                                    & Q_A^{LL} b_R(u_1,
+			u_i) b_L(v_j, v_2) + Q_A^{LR} b_R(u_1, u_i)
+			b_R(v_j, v_2) \Big]
+			\\
 			\nonumber
-			\M^\dagger_{\hat{u}} = -\sum_B 2g^2 D^\ast_{\tilde{q}_B}(\hat{u}) \Big[ & \pclosed{Q_A^{LR}}^\ast b_L(v_i, v_2) b_L(u_1, u_j) + \pclosed{Q_A^{LL}}^\ast b_L(v_i, v_2) b_R(u_1, u_j)        \\
-			+                                                                       & \pclosed{Q_A^{RR}}^\ast b_R(v_i, v_2) b_L(u_1, u_j) + \pclosed{Q_A^{RL}}^\ast b_R(v_i, v_2) b_R(u_1, u_j) \Big].
+			\M^\dagger_{\hat{u}} = -\sum_B 2g^2
+			D^\ast_{\tilde{q}_B}(\hat{u}) \Big[ &
+			\pclosed{Q_A^{LR}}^\ast b_L(v_i, v_2)
+			b_L(u_1, u_j) + \pclosed{Q_A^{LL}}^\ast b_L(v_i, v_2)
+			b_R(u_1, u_j)
+			\\
+			+
+			                                    &
+			\pclosed{Q_A^{RR}}^\ast b_R(v_i, v_2) b_L(u_1, u_j) +
+			\pclosed{Q_A^{RL}}^\ast b_R(v_i, v_2) b_R(u_1, u_j)
+			\Big].
 		\end{align}
 	\end{subequations}
 
@@ -386,56 +578,128 @@ where \(\operatorname{rsgn}\) is 1 if \(w_a, w_b\) are spinors of the same type,
 \subsection{Differential Result}
 \begin{align}
 	\nonumber
-	\d[\hat{t}]{\hat{\sigma}_0} = & \frac{\pi \alpha_W^2}{N_C \hat{s}^2} \pclosed{\frac{1}{2}}^{\delta_{ij}} \Bigg\{ \sum_{X,Y} \bclosed{\abs{Q^{XY}_{\hat{t}}}^2 \pclosed{\hat{t}-m_i^2}\pclosed{\hat{t}-m_j^2} + \abs{Q^{XY}_{\hat{u}}}^2 \pclosed{\hat{u}-m_i^2}\pclosed{\hat{u}-m_j^2}} \\
-	                              & - \sum_X \bclosed{2\Re{\pclosed{Q_{u}^{XX}}^\ast Q_{t}^{XX}} m_i m_j \hat{s} - 2\Re{\pclosed{Q_{u}^{XX^\prime}}^\ast Q_{t}^{XX^\prime}} \pclosed{\hat{t}\hat{u} - m_i^2m_j^2}} \Bigg\}
+	\d[\hat{t}]{\hat{\sigma}_0} = & \frac{\pi \alpha_W^2}{N_C \hat{s}^2}
+	\pclosed{\frac{1}{2}}^{\delta_{ij}} \Bigg\{ \sum_{X,Y}
+	\bclosed{\abs{Q^{XY}_{\hat{t}}}^2
+		\pclosed{\hat{t}-m_i^2}\pclosed{\hat{t}-m_j^2} +
+		\abs{Q^{XY}_{\hat{u}}}^2
+	\pclosed{\hat{u}-m_i^2}\pclosed{\hat{u}-m_j^2}}                      \\
+	                              & - \sum_X
+	\bclosed{2\Re{\pclosed{Q_{u}^{XX}}^\ast Q_{t}^{XX}} m_i m_j \hat{s} -
+		2\Re{\pclosed{Q_{u}^{XX^\prime}}^\ast Q_{t}^{XX^\prime}}
+		\pclosed{\hat{t}\hat{u} - m_i^2m_j^2}} \Bigg\}
 \end{align}
 
 \subsection{Phase Space Integral}
 To integrate over the variable \(\hat{t}\), we can classify the types of
 integrals that will arise. All the integrals take the form
 \begin{equation}
-	T^p(\Delta_1, \Delta_2) \equiv \int_{t_-}^{t_+} \!\mathrm{d}\hat{t}\, \frac{\hat{t}^p}{(\hat{t}-\Delta_1)(\hat{t}-\Delta_2^\ast)}
+	T^p(\Delta_1, \Delta_2) \equiv \int_{t_-}^{t_+} \!\mathrm{d}\hat{t}\,
+	\frac{\hat{t}^p}{(\hat{t}-\Delta_1)(\hat{t}-\Delta_2^\ast)}
 \end{equation}
-for some \(\Delta_{1,2}\) dependent on \(\hat{s}\), the neutralino masses and the squark masses and decay rates, and \(p\) is some integer.
+for some \(\Delta_{1,2}\) dependent on \(\hat{s}\), the neutralino masses and
+the squark masses and decay rates, and \(p\) is some integer.
 
 \todo{Talk about complex logarithms and define log-difference function.}\\
 \todo{Maybe substitute in \(p\).}\\
-Using the the integral limits are \(t_\pm = \frac{\hat{s} - m_i^2 - m_j^2}{2} \pm \sqrt{\hat{s}}p\), we get that the possible integrals evaluate to
+Using the the integral limits are \(t_\pm = \frac{\hat{s} - m_i^2 - m_j^2}{2}
+\pm \sqrt{\hat{s}}p\), we get that the possible integrals evaluate to
 \begin{subequations}
 	\begin{align}
-		T^2(0, 0) =                         & 2\sqrt{\hat{s}}p                                                                                                                                                                                        \\
-		T^3(0, 0) =                         & \sqrt{\hat{s}}p\pclosed{\hat{s} - m_i^2 - m_j^2}                                                                                                                                                        \\
-		T^4(0, 0) =                         & \sqrt{\hat{s}}p \pclosed{\frac{8}{3}hat{s}p^2 + 2m_i^2mj^2}                                                                                                                                             \\
-		T^1\!\pclosed{\Delta, 0} =          & \operatorname{dLog}\pclosed{t_+ - \Delta, t_- - \Delta}                                                                                                                                                 \\
-		T^2\!\pclosed{\Delta, 0} =          & 2\sqrt{\hat{s}}p + \Delta \operatorname{dLog}\pclosed{t_+ - \Delta, t_- - \Delta}                                                                                                                       \\
-		T^3\!\pclosed{\Delta, 0} =          & \frac{\sqrt{\hat{s}}p}{2}\pclosed{\hat{s} - m_i^2 - m_j^2} + 2\Delta\sqrt{\hat{s}}p  + \Delta^2 \operatorname{dLog}\pclosed{t_+ - \Delta, t_- - \Delta}                                                 \\
-		T^0\!\pclosed{\Delta_1, \Delta_2} = & \frac{1}{\Delta_1 - \Delta_2^\ast} \cclosed{\operatorname{dLog}\pclosed{t_+ - \Delta_1, t_- - \Delta_1} - \operatorname{dLog}\pclosed{t_+ - \Delta_2^\ast, t_- - \Delta_2^\ast}}                        \\
-		T^1\!\pclosed{\Delta_1, \Delta_2} = & \frac{1}{\Delta_1 - \Delta_2^\ast} \cclosed{\Delta_1 \operatorname{dLog}\pclosed{t_+ - \Delta_1, t_- - \Delta_1} - \Delta_2^\ast \operatorname{dLog}\pclosed{t_+ - \Delta_2^\ast, t_- - \Delta_2^\ast}} \\
+		T^2(0, 0) =                         & 2\sqrt{\hat{s}}p
+		\\
+		T^3(0, 0) =                         &
+		\sqrt{\hat{s}}p\pclosed{\hat{s} - m_i^2 - m_j^2}
+		\\
+		T^4(0, 0) =                         & \sqrt{\hat{s}}p
+		\pclosed{\frac{8}{3}hat{s}p^2 + 2m_i^2mj^2}
+		\\
+		T^1\!\pclosed{\Delta, 0} =          &
+		\operatorname{dLog}\pclosed{t_+ - \Delta, t_- - \Delta}
+		\\
+		T^2\!\pclosed{\Delta, 0} =          & 2\sqrt{\hat{s}}p + \Delta
+		\operatorname{dLog}\pclosed{t_+ - \Delta, t_- - \Delta}
+		\\
+		T^3\!\pclosed{\Delta, 0} =          &
+		\frac{\sqrt{\hat{s}}p}{2}\pclosed{\hat{s} - m_i^2 - m_j^2} +
+		2\Delta\sqrt{\hat{s}}p	+ \Delta^2
+		\operatorname{dLog}\pclosed{t_+ - \Delta,
+			t_- - \Delta}
+		\\
+		T^0\!\pclosed{\Delta_1, \Delta_2} = & \frac{1}{\Delta_1 -
+			\Delta_2^\ast} \cclosed{\operatorname{dLog}\pclosed{t_+
+				- \Delta_1, t_- -
+				\Delta_1} - \operatorname{dLog}\pclosed{t_+ -
+				\Delta_2^\ast, t_- -
+				\Delta_2^\ast}}
+		\\
+		T^1\!\pclosed{\Delta_1, \Delta_2} = & \frac{1}{\Delta_1 -
+			\Delta_2^\ast} \cclosed{\Delta_1
+			\operatorname{dLog}\pclosed{t_+ - \Delta_1,
+				t_- - \Delta_1} - \Delta_2^\ast
+			\operatorname{dLog}\pclosed{t_+ -
+				\Delta_2^\ast, t_- - \Delta_2^\ast}}
+		\\
 		\nonumber
-		T^2\!\pclosed{\Delta_1, \Delta_2} = & 2\sqrt{\hat{s}}p  + \frac{1}{\Delta_1 - \Delta_2^\ast}                                                                                                                                                  \\
-		                                    & \times \cclosed{\Delta_1^2 \operatorname{dLog}\pclosed{t_+ - \Delta_1, t_- - \Delta_1} - \pclosed{\Delta_2^\ast}^2 \operatorname{dLog}\pclosed{t_+ - \Delta_2^\ast, t_- - \Delta_2^\ast}}
+		T^2\!\pclosed{\Delta_1, \Delta_2} = & 2\sqrt{\hat{s}}p	+
+		\frac{1}{\Delta_1 - \Delta_2^\ast}
+		\\
+		                                    & \times
+		\cclosed{\Delta_1^2 \operatorname{dLog}\pclosed{t_+ - \Delta_1,
+				t_- - \Delta_1}
+			- \pclosed{\Delta_2^\ast}^2
+			\operatorname{dLog}\pclosed{t_+ - \Delta_2^\ast,
+				t_- - \Delta_2^\ast}}
 	\end{align}
 \end{subequations}
-In here, I have defined \(\operatorname{dLog}(z, w)\) to be the log-difference between to complex number \(z, w\) such that
+In here, I have defined \(\operatorname{dLog}(z, w)\) to be the log-difference
+between to complex number \(z, w\) such that
 \begin{equation}
-	\operatorname{dLog}(z, w) \equiv \ln\abs{\frac{z}{w}} + i\pclosed{\arctan\frac{\Im{z}}{\Re{z}} - \arctan\frac{\Im{w}}{\Re{w}}}.
+	\operatorname{dLog}(z, w) \equiv \ln\abs{\frac{z}{w}} +
+	i\pclosed{\arctan\frac{\Im{z}}{\Re{z}} - \arctan\frac{\Im{w}}{\Re{w}}}.
 \end{equation}
-The only non-zero arguments that will appear in these integrals are \(\Delta^{\hat{t}}_A = m_{\tilde{q}_A}^2 - i\Gamma_{\tilde{q}_A} m_{\tilde{q}_A}\) and \(\Delta^{\hat{u}}_A = m_i^2 + m_j^2 - \hat{s} - m_{\tilde{q}_A}^2 + i\Gamma_{\tilde{q}_A} m_{\tilde{q}_A}\).
+The only non-zero arguments that will appear in these integrals are
+\(\Delta^{\hat{t}}_A = m_{\tilde{q}_A}^2 - i\Gamma_{\tilde{q}_A}
+m_{\tilde{q}_A}\) and \(\Delta^{\hat{u}}_A = m_i^2 + m_j^2 - \hat{s} -
+m_{\tilde{q}_A}^2 + i\Gamma_{\tilde{q}_A} m_{\tilde{q}_A}\).
 
 \begin{temporary}
 	\begin{align}
-		\hat{\sigma}^0 = & \frac{\pi \alpha^2}{\hat{s}^2 c_W^4 N_C} \pclosed{\frac{1}{2}}^{\delta_{ij}}                                                                                                                                   \\
-		\times           & \Bigg\{ \frac{2\sqrt{\hat{s}}p\pclosed{\abs{Z^L}^2 + \abs{Z^R}^2} \pclosed{\frac{32}{3}\hat{s} p^2 - (m_i^2-m_j^2)^2 + 8m_i^2 m_j^2 + \hat{s}(m_i^2+m_j^2)}}{\abs{\hat{s}-\Delta_Z}^2}                         \\
-		                 & - \frac{4\sqrt{\hat{s}}p\Re{(Z^L)^2 + (Z^R)^2} \hat{s} m_i m_j}{\abs{s-\Delta_Z}^2}                                                                                                                            \\
-		                 & 2\operatorname{Re}\Bigg\{ \operatorname{dLog}(t_+ - \Delta_A, t_- - \Delta_A) \bigg[ \frac{\pclosed{Q_A^{LL}Q_B^{LL}+Q_A^{RR}Q_B^{RR}}^\ast \hat{s}m_im_j}{\Delta_A + \Delta_B^\ast + \hat{s} - m_i^2 - m_j^2} \\
-		                 & \frac{\pclosed{Q_A^{LR}Q_B^{RL}+Q_A^{RL}Q_B^{LR}}^\ast \pclosed{\Delta_A(\Delta_A-\hat{s}+m_i^2+m_j^2) + m_i^2 m_j^2}}{\Delta_A + \Delta_B^\ast + \hat{s} - m_i^2 - m_j^2} \bigg] \Bigg\}
+		\hat{\sigma}^0 = & \frac{\pi \alpha^2}{\hat{s}^2 c_W^4 N_C}
+		\pclosed{\frac{1}{2}}^{\delta_{ij}}
+		\\
+		\times           & \Bigg\{
+		\frac{2\sqrt{\hat{s}}p\pclosed{\abs{Z^L}^2 + \abs{Z^R}^2}
+			\pclosed{\frac{32}{3}\hat{s} p^2 - (m_i^2-m_j^2)^2 +
+				8m_i^2 m_j^2 +
+				hat{s}(m_i^2+m_j^2)}}{\abs{\hat{s}-\Delta_Z}^2}
+		\\
+		                 & - \frac{4\sqrt{\hat{s}}p\Re{(Z^L)^2 +
+				(Z^R)^2} \hat{s} m_i m_j}{\abs{s-\Delta_Z}^2}
+		\\
+		                 & \sum_{X,Y} 4\operatorname{Re}\Bigg\{
+		\operatorname{dLog}(t_+ - \Delta_A, t_- - \Delta_A) \bigg[
+		\frac{\delta_{XY}\Re{Q_A^{XX}Q_B^{XX}}
+		\hat{s}m_im_j}{\Delta_A
+		+ \Delta_B^\ast + \hat{s} - m_i^2 - m_j^2}
+		\\
+		                 & \frac{(1-\delta_{XY})\Re{Q_A^{XY}Q_B^{YX}}
+		\pclosed{\Delta_A(\Delta_A-\hat{s}+m_i^2+m_j^2) + m_i^2
+			m_j^2}}{\Delta_A +
+		\Delta_B^\ast + \hat{s} - m_i^2 - m_j^2}
+		\\
+		                 & + \frac{\Re{Q_A^{XY}
+		\pclosed{Q_B^{XY}}^\ast} (\Delta_A - m_i^2)(\Delta_A -
+		m_j^2)}{\Delta_A -
+		\Delta_B^\ast} \bigg] \Bigg\}
 		\Bigg\}
 	\end{align}
 \end{temporary}
 
 \section{NLO Corrections}
 \begin{TODO}
-	\item Discuss supersymmetry breaking in dimensional regularisation and its effect on
+	\item Discuss supersymmetry breaking in dimensional regularisation and
+	its effect on
 	the cross-section.
 \end{TODO}
 \subsection{Self-Energy Contributions}
