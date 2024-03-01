@@ -1,3 +1,4 @@
+
 import os
 import argparse
 
@@ -44,7 +45,7 @@ if clargs.code == "smoking":
     run_cross_section(clargs.readfile, tmpresfile, pid1, pid2, clargs.tnum)
 elif clargs.code == "resummino":
     run_resummino(clargs.readfile, (pid1, pid2), tmpresfile, clargs.tempstem)
-    
+
 write_results(tmpresfile, outfile, (pid1, pid2), clargs.label)
 os.remove(tmpresfile)
 

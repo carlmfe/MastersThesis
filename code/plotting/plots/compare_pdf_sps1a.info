@@ -1,0 +1,10 @@
+###This file lists info to recreate plot 'plots/compare_pdf_sps1a.pdf'.###
+
+pid1, 1000022
+pid2, 1000023
+pdf_set, PDF4LHC21_40_pdfas
+S, 13600
+verbose, False
+slha, /home/carlmfe/Documents/master/smoking/example/sps1a.slha
+processes, [(1000022, 1000022), (1000022, 1000023), (1000022, 1000025), (1000022, 1000035), (1000023, 1000023), (1000023, 1000025), (1000023, 1000035), (1000025, 1000025), (1000025, 1000035), (1000035, 1000035)]
+pdf_sets, ['PDF4LHC21_40_pdfas', 'PDF4LHC15_nnlo_100', 'CT14nlo']

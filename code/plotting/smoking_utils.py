@@ -1,7 +1,6 @@
-import sys
+
 import os
 import subprocess
-import shutil
 
 from slha_utils import *
 
@@ -55,7 +54,7 @@ def run_neu_prod_wreplacement(slha_filepath, vals, tnum = False):
         result.append(read_smoking_result("temp_output.slha"))
     os.remove("temp.slha")
     os.remove("temp_output.slha")
-    
+
     return result
 
 def run_cross_section(slha_filepath, outfilepath, pid1, pid2, tnum = False):
@@ -81,7 +80,7 @@ def run_resummino(slha_filepath, processes, outfilepath=None, tempstem=None):
     for proc in processes:
         tmpinfile = mktmpfile(extension=".in", stem=tempstem)
 
-        write_ressumino_infile(proc, slha_filepath, tmpinfile)
+        write_ressumino_infile(tmpinfile, particle1 = proc[0], particle2 = proc[1], slha=slha_filepath)
         clargs = [
             "resummino",
             tmpinfile,
@@ -93,21 +92,24 @@ def run_resummino(slha_filepath, processes, outfilepath=None, tempstem=None):
         output = subprocess.run(clargs, capture_output=not VERBOSE)
         os.remove(tmpinfile)
 
-def write_ressumino_infile(proc, slha_filepath, filename):
+def write_ressumino_infile(filename, **contents):
+
+    if "collider_type" not in contents.keys():
+        contents["collider_type"] = "proton-proton"
+    if "center_of_mass_energy" not in contents.keys():
+        contents["center_of_mass_energy"] = S
+    if "result" not in contents.keys():
+        contents["result"] = "total"
+    if "pdf_lo" not in contents.keys():
+        contents["pdf_lo"] = PDF_SET
+    if "mu_f" not in contents.keys():
+        contents["mu_f"] = 1.0
+    if "mu_r" not in contents.keys():
+        contents["mu_r"] = 1.0
+
     outfile = open(filename, "w")
-    file_contents = "\n".join([
-        "collider_type = proton-proton",
-        f"center_of_mass_energy = {S}",
-        f"particle1 = {proc[0]}",
-        f"particle2 = {proc[1]}",
-        "result = total",
-        f"slha = {slha_filepath}",
-        f"pdf_lo = {PDF_SET}",
-        "mu_f = 0.5",
-        "mu_r = 2.0"
-    ])
-    for line in file_contents:
-        outfile.write(line)
+    for key, value in contents.items():
+        outfile.write(f"{key} = {value}\n")
     outfile.close()
 
 def read_resummino_result(filepath):
@@ -124,7 +126,7 @@ def read_resummino_result(filepath):
     return results
 
 def id_result_file(result_filepath):
-    with open(result_filepath) as resfile:
+    with open(result_filepath, "r") as resfile:
         header = resfile.readline()
 
         if header == "{\n":
