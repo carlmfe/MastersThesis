@@ -24,6 +24,31 @@ def mktmpfile(extension="", stem=None, rootpath = None):
 
     return tmpfilename
 
+def mktmpcopy(filepath, stem=None, rootpath=None):
+    extension = filepath.split(".")[-1]
+
+    if stem is None:
+        stem = __TEMPSTEM
+    
+    global __TEMPCNT
+
+    if rootpath is None:
+        ROOT = os.getcwd() + "/"
+    else:
+        ROOT = rootpath
+        if ROOT[-1] != "/":
+            ROOT = ROOT + "/"
+    tmpfilename = stem+str(__TEMPCNT)+extension
+
+    tmp = open(ROOT+tmpfilename, "w")
+    with open(filepath, "r") as infile:
+        tmp.write(infile.read())
+    tmp.close()
+
+    __TEMPCNT += 1
+
+    return tmpfilename
+
 def cleartmpfiles(extension="", stem=None, rootpath = None):
     if stem is None:
         stem = __TEMPSTEM
@@ -40,7 +65,7 @@ def cleartmpfiles(extension="", stem=None, rootpath = None):
             continue
 
 def read_smoking_result(filepath):
-    results = dict()
+    results = {}
 
     with open(filepath, "r") as results_file:
         is_result = False
@@ -55,7 +80,7 @@ def read_smoking_result(filepath):
     return results
 
 def read_prospino_result(filepath):
-    results = dict()
+    results = {}
 
     with open(filepath, "r") as results_file:
         is_result = False
@@ -71,7 +96,7 @@ def read_prospino_result(filepath):
                 is_result = True
 
 def read_masses(filepath):
-    results = list()
+    results = []
 
     with open(filepath, "r") as slha_file:
         is_block_mass = False
@@ -87,8 +112,8 @@ def read_masses(filepath):
                 is_block_mass = True
 
 def idxsort_masses(masses):
-    avg_masses = list()
-    mass_idcs_sorted = list()
+    avg_masses = []
+    mass_idcs_sorted = []
     mass_idx_func = lambda idx1, idx2 : idx1*(9-idx1) // 2 + (idx2-idx1)
 
     for idx1 in range(4):
@@ -105,11 +130,14 @@ def idxsort_masses(masses):
 
     return mass_idcs_sorted
 
-def copy_slha_with_replacement(slha_filepath, filename, rule):
+def copy_slha_with_replacement(slha_filepath, filename, rules):
     outfile = open(filename, "w")
 
     with open(slha_filepath, "r") as infile:
         for line in infile.readlines():
-            outfile.write(line.replace(*rule))
+            line_replaced = line
+            for rule in rules:
+                line_replaced = line_replaced.replace(*rule)
+            outfile.write(line_replaced)
 
     outfile.close()

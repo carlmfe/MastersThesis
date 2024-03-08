@@ -4,10 +4,10 @@ import subprocess
 
 from slha_utils import *
 
-SMOKING_ROOT = "/home/carlmfe/Documents/master/smoking/"
-BIN_ROOT = "bin/"
-PDF_SET = "PDF4LHC21_40_pdfas"
-# PDF_SET = "CT14lo"
+SMOKING_ROOT = '/home/carlmfe/Documents/master/smoking/'
+BIN_ROOT = 'bin/'
+PDF_SET = 'PDF4LHC21_40_pdfas'
+# PDF_SET = 'CT14lo'
 VERBOSE = True
 S = 13000
 
@@ -23,52 +23,18 @@ def set_centre_of_mass_energy(s):
     global S
     S = s
 
-def run_neutralino_production(slha_filepath, outfilepath, tnum = False):
-    clargs = [
-        BIN_ROOT+"run_neutralino_production",
-        "-o", "0",
-        "-S", str(S),
-        "-r", slha_filepath,
-        "-w", outfilepath,
-        "-P", PDF_SET
-    ]
-    if tnum: clargs.append("--tnum")
-    output = subprocess.run(clargs, capture_output=not VERBOSE)
-
-def run_neu_prod_wreplacement(slha_filepath, vals, tnum = False):
-    result = list()
-
-    ROOT = os.getcwd() + "/"
-
-    temp = open("temp_output.slha", "w")
-    temp.close()
-    for val in vals:
-        temp_file = open("temp.slha", "w")
-        with open(slha_filepath, "r") as slhafile:
-            temp_file.write(
-                "".join(slhafile.readlines()).replace("@a", str(val))
-            )
-        temp_file.close()
-        # run_neutralino_production(SMOKING_ROOT+"example/hino.slha", ROOT+"temp_output.slha", tnum = tnum)
-        run_cross_section(ROOT+"temp.slha", ROOT+"temp_output.slha", pid1=1000022, pid2=1000023, tnum = tnum)
-        result.append(read_smoking_result("temp_output.slha"))
-    os.remove("temp.slha")
-    os.remove("temp_output.slha")
-
-    return result
-
 def run_cross_section(slha_filepath, outfilepath, pid1, pid2, tnum = False):
     clargs = [
-        BIN_ROOT+"cross_section",
-        "--pid1", str(pid1),
-        "--pid2", str(pid2),
-        "-o", "0",
-        "-S", str(S),
-        "-r", slha_filepath,
-        "-w", outfilepath,
-        "-P", PDF_SET
+        BIN_ROOT+'cross_section',
+        '--pid1', str(pid1),
+        '--pid2', str(pid2),
+        '-o', '0',
+        '-S', str(S),
+        '-r', slha_filepath,
+        '-w', outfilepath,
+        '-P', PDF_SET
     ]
-    if tnum: clargs.append("--tnum")
+    if tnum: clargs.append('--tnum')
     output = subprocess.run(clargs, capture_output=not VERBOSE)
 
 def run_resummino(slha_filepath, processes, outfilepath=None, tempstem=None):
@@ -78,101 +44,99 @@ def run_resummino(slha_filepath, processes, outfilepath=None, tempstem=None):
         processes = (processes, )
 
     for proc in processes:
-        tmpinfile = mktmpfile(extension=".in", stem=tempstem)
+        tmpinfile = mktmpfile(extension='.in', stem=tempstem)
 
         write_ressumino_infile(tmpinfile, particle1 = proc[0], particle2 = proc[1], slha=slha_filepath)
         clargs = [
-            "resummino",
+            'resummino',
             tmpinfile,
-            "-l",
+            '-l',
         ]
         if outfilepath is not None:
-            clargs.append("-o")
+            clargs.append('-o')
             clargs.append(outfilepath)
         output = subprocess.run(clargs, capture_output=not VERBOSE)
         os.remove(tmpinfile)
 
 def write_ressumino_infile(filename, **contents):
 
-    if "collider_type" not in contents.keys():
-        contents["collider_type"] = "proton-proton"
-    if "center_of_mass_energy" not in contents.keys():
-        contents["center_of_mass_energy"] = S
-    if "result" not in contents.keys():
-        contents["result"] = "total"
-    if "pdf_lo" not in contents.keys():
-        contents["pdf_lo"] = PDF_SET
-    if "mu_f" not in contents.keys():
-        contents["mu_f"] = 1.0
-    if "mu_r" not in contents.keys():
-        contents["mu_r"] = 1.0
+    if 'collider_type' not in contents:
+        contents['collider_type'] = 'proton-proton'
+    if 'center_of_mass_energy' not in contents:
+        contents['center_of_mass_energy'] = S
+    if 'result' not in contents:
+        contents['result'] = 'total'
+    if 'pdf_lo' not in contents:
+        contents['pdf_lo'] = PDF_SET
+    if 'mu_f' not in contents:
+        contents['mu_f'] = 1.0
+    if 'mu_r' not in contents:
+        contents['mu_r'] = 1.0
 
-    outfile = open(filename, "w")
+    outfile = open(filename, 'w')
     for key, value in contents.items():
         outfile.write(f"{key} = {value}\n")
     outfile.close()
 
 def read_resummino_result(filepath):
-    with open(filepath, "r") as infile:
-        entries = ("".join(infile.readlines())).split("\n")[1:-1]
-        results = dict()
+    with open(filepath, 'r') as infile:
+        entries = (''.join(infile.readlines())).split('\n')[1:-1]
+        results = {}
         for entry in entries:
-            entry = entry.replace(",", "")
-            entry = entry.replace(r'"', "")
-            key, value = entry.split(": ")
+            entry = entry.replace(',', '')
+            entry = entry.replace(r'"', '')
+            key, value = entry.split(': ')
             results[key] = value
         # print(entries)
-        # results = eval("".join(infile.readlines()))
+        # results = eval(''.join(infile.readlines()))
     return results
 
 def id_result_file(result_filepath):
-    with open(result_filepath, "r") as resfile:
+    with open(result_filepath, 'r') as resfile:
         header = resfile.readline()
 
-        if header == "{\n":
-            return "resummino"
+        if header == '{\n':
+            return 'resummino'
         else:
             for line in resfile.readlines():
-                if "smoking" in line:
-                    return "smoking"
+                if 'smoking' in line:
+                    return 'smoking'
         if header == "# SOFTSUSY4.1.5 SLHA compliant output\n":
-            return "prospino"
+            return 'prospino'
         else:
             # TODO: perhaps raise error
             return
-
-def write_results(infilename, outfilename, process, id=None):
+        
+def write_results(infilename, outfilename, process, key=None):
     result_type = id_result_file(infilename)
 
     pid1, pid2 = process
     proc_handle = f"{pid1-1000000}+{pid2-1000000}"
-    if id is None: id = proc_handle
+    if key is None: key = proc_handle
 
-
-
-    if result_type == "smoking":
+    if result_type == 'smoking':
         res = read_smoking_result(infilename)
         val = float(res[proc_handle])
-    elif result_type == "resummino":
+    elif result_type == 'resummino':
         res = read_resummino_result(infilename)
-        val = (float(res["lo"]) + float(res["nlo"]) + float(res["nll"]) + float(res["nllj"]))
-    elif result_type == "prospino":
+        val = (float(res['lo']) + float(res['nlo']) + float(res['nll']) + float(res['nllj']))
+    elif result_type == 'prospino':
         res = read_prospino_result(infilename)
         val = float(res[proc_handle])
     else:
         # TODO: raise error perhaps
         return
 
-    with open(outfilename, "a") as outfile:
-        outfile.write(f"{id}, {val}\n")
+    with open(outfilename, 'a') as outfile:
+        outfile.write(f"{key}, {val}\n")
 
 def read_results(infilename):
     
-    result = dict()
+    result = {}
 
-    with open(infilename, "r") as infile:
+    with open(infilename, 'r') as infile:
         for line in infile.readlines():
-            key, val = line.split(", ")
+            key, val = line.split(', ')
             try:
                 key = float(key)
             except ValueError:

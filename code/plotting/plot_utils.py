@@ -4,13 +4,13 @@ import seaborn as sns
 from matplotlib import rc
 from cycler import cycler
 
-rc("text", usetex=True) # set plots to use latex rendering
+rc('text', usetex=True) # set plots to use latex rendering
 
-plt.style.use("seaborn-v0_8-darkgrid")
+plt.style.use('seaborn-v0_8-darkgrid')
 
 
-MARKERS = ["o", "D", "v", "+"]
-LINESTYLES = ["solid", "dotted", "dashed", "dashdot"]
+MARKERS = ['o', 'D', 'v', '+']
+LINESTYLES = ['solid', 'dotted', 'dashed', 'dashdot']
 COLORS = [
     sns.color_palette('husl')[-3],
     sns.color_palette('husl')[-2],
@@ -24,28 +24,40 @@ pid2sym = { # Translation for PDG code to symbol
     1000022 : r"$\tilde{\chi}_1^0$",
     1000023 : r"$\tilde{\chi}_2^0$",
     1000025 : r"$\tilde{\chi}_3^0$",
-    1000035 : r"$\tilde{\chi}_4^0$"
+    1000035 : r"$\tilde{\chi}_4^0$",
+    1000001 : r"$\tilde{d}_L$",
+    1000003 : r"$\tilde{s}_L$",
+    1000005 : r"$\tilde{b}_L$",
+    2000001 : r"$\tilde{d}_R$",
+    2000003 : r"$\tilde{s}_R$",
+    2000005 : r"$\tilde{b}_R$",
+    1000002 : r"$\tilde{u}_L$",
+    1000004 : r"$\tilde{c}_L$",
+    1000006 : r"$\tilde{t}_L$",
+    2000002 : r"$\tilde{u}_R$",
+    2000004 : r"$\tilde{c}_R$",
+    2000006 : r"$\tilde{t}_R$"
 }
 
 # Saving parameters
-plt.rcParams["savefig.dpi"] = 300
+plt.rcParams['savefig.dpi'] = 300
 
 # Figure options, set tight layout
-plt.rc("figure", autolayout=True)
+plt.rc('figure', autolayout=True)
 
 # Font sizes
-plt.rc("axes", titlesize=18, labelsize=16, prop_cycle=cycler('color', COLORS))
-plt.rc("legend", fontsize=14, shadow=True)
+plt.rc('axes', titlesize=18, labelsize=16, prop_cycle=cycler('color', COLORS))
+plt.rc('legend', fontsize=14, shadow=True)
 
 # Tick parameters
 _ticks_default_parameters = {
-    "labelsize": 12
+    'labelsize': 12
 }
-plt.rc("xtick", **_ticks_default_parameters)
-plt.rc("ytick", **_ticks_default_parameters)
+plt.rc('xtick', **_ticks_default_parameters)
+plt.rc('ytick', **_ticks_default_parameters)
 
 # Line options
-plt.rc("lines", linewidth=2)
+plt.rc('lines', linewidth=2)
 
 
 # To see more paramteres, print the possible options:
@@ -65,13 +77,13 @@ def plot_xsec_with_relerrs(own_results, other_results, axes = None, labels = Non
 
     rel_errs = [None] * len(other_results)
     for idx in range(len(other_results)):
-        rel_errs[idx] = dict()
-        for key in own_results.keys():
+        rel_errs[idx] = {}
+        for key in own_results:
             ownres = own_results[key]
             othres = other_results[idx][key]
 
             try:
-                rel_errs[idx][key] = abs(othres - ownres) / othres
+                rel_errs[idx][key] = (othres - ownres) / othres
             except ZeroDivisionError:
                 continue
 
@@ -87,7 +99,7 @@ def plot_xsec_with_relerrs(own_results, other_results, axes = None, labels = Non
             axes[1].plot(rel_errs[idx].keys(), rel_errs[idx].values(), color=COLORS[idx+1], linestyle=LINESTYLES[idx+1], label=labels[idx+1] if labels is not None else None)
 
 
-    axes[0].set_yscale("log")
+    axes[0].set_yscale('log')
 
     if labels is not None:
         # fig.legend()
