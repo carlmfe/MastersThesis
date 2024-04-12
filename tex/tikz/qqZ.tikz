@@ -1,0 +1,12 @@
+\begin{feynman}[every blob={/tikz/fill=gray!30,/tikz/inner sep=2pt}]
+    \vertex[label=above left:\(q\)] at (-1, 1) (q);
+    \vertex[label=below left:\(\bar{q}\)] at (-1,-1) (qbar);
+    \vertex[blob] at ( 0 , 0  ) (blob) {\contour{black}{}};
+    \vertex[label=right:\(Z^\ast\)] at ( 1.4, 0  ) (Z);
+
+    \diagram*{
+        (q) -- [fermion] (blob)
+            -- [fermion] (qbar),
+        (blob) -- [boson] (Z)
+    };
+\end{feynman}

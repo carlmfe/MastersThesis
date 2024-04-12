@@ -1,0 +1,11 @@
+\begin{feynman}[every blob={/tikz/fill=gray!30,/tikz/inner sep=2pt}]
+  \vertex[label=left:\(Z^\ast\)] at (-1.4, 0) (Z);
+  \vertex[label=above right:\(\tilde{\chi}_i^0\)] at (1, 1) (ni);
+  \vertex[label=below right:\(\tilde{\chi}_j^0\)] at (1,-1) (nj);
+  \vertex[blob] at (0, 0) (blob) {\contour{black}{}};
+
+  \diagram*{
+  (Z) -- [boson] (blob),
+  (nj) -- (blob) -- (ni)
+  };
+\end{feynman}

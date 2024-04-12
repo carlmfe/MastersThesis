@@ -7,31 +7,52 @@
 
 \begin{document}
 \uiomasterfp[author=Carl Martin Fevang,
-    colour=green,
-    date=\today,
-    dept=Department of Physics,
-    fac=Faculty of Mathematics and Natural Sciences,
-    long,
-    subtitle=With Subtitle,
-    supervisor=Are Raklev,
-    title=My Master's Thesis]
+  colour=green,
+  date=\today,
+  dept=Department of Physics,
+  fac=Faculty of Mathematics and Natural Sciences,
+  long,
+  subtitle=With Subtitle,
+  supervisor=Are Raklev,
+  title=My Master's Thesis]
 
 \begin{draft}
-    \tableofcontents
+  \tableofcontents
 
+  %%%%%%%%%%%%%%%%%%%%
+  %%% Introduction %%%
+  %%%%%%%%%%%%%%%%%%%%
+  \begin{donotread}
     \chapter{Introduction}
     \include{chapters/introduction}
+  \end{donotread}
 
-    %%% Quantum Field Theory %%%
-    \subfile{chapters/QFT}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%% Quantum Field Theory %%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \subfile{chapters/QFT}
 
-    %%% Supersymmetry %%%
-    \subfile{chapters/SUSY}
+  %%%%%%%%%%%%%%%%%%%%%
+  %%% Supersymmetry %%%
+  %%%%%%%%%%%%%%%%%%%%%
+  \subfile{chapters/SUSY}
 
-    %%% Neutralino Pair Production at Parton Level %%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%% Neutralino Pair Production at Parton Level %%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{donotread}
     \subfile{chapters/parton_calculation}
 
     \chapter{Proton---Proton Neutralino Pair Production}
+
+  \end{donotread}
+
+  %%%%%%%%%%%%%%%%%%
+  %%% References %%%
+  %%%%%%%%%%%%%%%%%%
+  \bibliography{references}{}
+  \bibliographystyle{style/JHEP}
+
 \end{draft}
 
 \end{document}
