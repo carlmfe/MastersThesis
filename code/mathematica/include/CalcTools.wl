@@ -17,19 +17,22 @@ tIntegralSubs={
 	t^2*Den[t,m1_]*Den[t,m2_] -> tIntegral[2,m1,m2\[Conjugate]],
 	t*Den[t,m1_]*Den[t,m2_] -> tIntegral[1,m1,m2\[Conjugate]],
 	Den[t,m1_]*Den[t,m2_] -> tIntegral[0,m1,m2\[Conjugate]],
-	t^2*Den[t,m1_]*Den[s,m2_] -> tIntegral[2,m1]*Den[s,m2],
-	t*Den[t,m1_]*Den[s,m2_] -> tIntegral[1,m1]*Den[s,m2],
-	Den[t,m1_]*Den[s,m2_] -> tIntegral[0,m1]*Den[s,m2],
-	t^2*Den[s,m1_]*Den[s,m2_] -> tIntegral[2]*Den[s,m1]*Den[s,m2],
-	t*Den[s,m1_]*Den[s,m2_] -> tIntegral[1]*Den[s,m1]*Den[s,m2],
-	Den[s,m1_]*Den[s,m2_] -> tIntegral[0]*Den[s,m1]*Den[s,m2]
+
+	t^2*Den[t,m1_] -> tIntegral[2,m1],
+	t*Den[t,m1_] -> tIntegral[1,m1],
+	Den[t,m1_] -> tIntegral[0,m1],
+
+	t^2 -> tIntegral[2],
+	t -> tIntegral[1]
 }
-ToTIntegrals[expr_]:=(Collect[#1,tIntegral[__],(Isolate[#//Simplify]&)]&)[
-	(Collect[
-		Expand[expr],
-		t,
-		(Collect[#1,{Den[t,m1_]Den[t,m2_],Den[t,m1_]Den[s,m2_],Den[s,m1_]Den[s,m2_]}]&)
-	]//Expand)/.tIntegralSubs
+ToTIntegrals[expr_] := (Collect2[#, tIntegral[__], Factoring -> (Simplify[#]//Isolate&)]&)[
+	((SelectFree2[#, tIntegral[__]]*tIntegral[0] + SelectNotFree2[#, tIntegral[__]])&)[
+		(Collect2[
+			expr,
+			t,
+			Factoring -> (Collect2[#,{Den[t,m1_]Den[t,m2_], Den[t,m1_]}]&)
+		] // Expand) /. tIntegralSubs
+	]
 ]
 
 
@@ -49,35 +52,39 @@ ReduceTIntegrals[expr_]:=Collect[
 
 tIntegralDict={
 	tIntegral[0]->2 p Sqrt[s],
-	tIntegral[1]->-p Sqrt[s] (s-MNeu[i]^2-MNeu[j]^2),
-	tIntegral[2]->2/3 p (MNeu[i]^4+MNeu[i]^2 (MNeu[j]^2-2 s)+(MNeu[j]^2-s)^2) Sqrt[s],
-	tIntegral[0,\[CapitalDelta]_]->dLog[(MNeu[i]^2+MNeu[j]^2-s)/2+ p Sqrt[s] - \[CapitalDelta], (MNeu[i]^2+MNeu[j]^2-s)/2 - p Sqrt[s] - \[CapitalDelta]],
-	tIntegral[1,\[CapitalDelta]_]->2 p Sqrt[s]+\[CapitalDelta] dLog[(MNeu[i]^2+MNeu[j]^2-s)/2+ p Sqrt[s] - \[CapitalDelta], (MNeu[i]^2+MNeu[j]^2-s)/2 - p Sqrt[s] - \[CapitalDelta]],
-	tIntegral[2,\[CapitalDelta]_]->2 p Sqrt[s] \[CapitalDelta]+\[CapitalDelta]^2 dLog[(MNeu[i]^2+MNeu[j]^2-s)/2+ p Sqrt[s] - \[CapitalDelta], (MNeu[i]^2+MNeu[j]^2-s)/2 - p Sqrt[s] - \[CapitalDelta]] - p Sqrt[s] (s-MNeu[i]^2-MNeu[j]^2),
-	tIntegral[0,\[CapitalDelta]1_,\[CapitalDelta]2_]->1/(\[CapitalDelta]1-Conjugate[\[CapitalDelta]2]) (dLog[(MNeu[i]^2+MNeu[j]^2-s)/2+ p Sqrt[s] - \[CapitalDelta]1, (MNeu[i]^2+MNeu[j]^2-s)/2 - p Sqrt[s] - \[CapitalDelta]1] - dLog[(MNeu[i]^2+MNeu[j]^2-s)/2+ p Sqrt[s] - Conjugate[\[CapitalDelta]2], (MNeu[i]^2+MNeu[j]^2-s)/2 - p Sqrt[s] - Conjugate[\[CapitalDelta]2]]),
-	tIntegral[1,\[CapitalDelta]1_,\[CapitalDelta]2_]->1/(\[CapitalDelta]1-Conjugate[\[CapitalDelta]2]) (\[CapitalDelta]1 dLog[(MNeu[i]^2+MNeu[j]^2-s)/2+ p Sqrt[s] - \[CapitalDelta]1, (MNeu[i]^2+MNeu[j]^2-s)/2 - p Sqrt[s] - \[CapitalDelta]1] - Conjugate[\[CapitalDelta]2] dLog[(MNeu[i]^2+MNeu[j]^2-s)/2+ p Sqrt[s] - Conjugate[\[CapitalDelta]2], (MNeu[i]^2+MNeu[j]^2-s)/2 - p Sqrt[s] - Conjugate[\[CapitalDelta]2]]),
-	tIntegral[2,\[CapitalDelta]1_,\[CapitalDelta]2_]->1/(\[CapitalDelta]1-Conjugate[\[CapitalDelta]2]) (2 p Sqrt[s] (\[CapitalDelta]1 - Conjugate[\[CapitalDelta]2])+\[CapitalDelta]1^2 dLog[(MNeu[i]^2+MNeu[j]^2-s)/2+ p Sqrt[s] - \[CapitalDelta]1, (MNeu[i]^2+MNeu[j]^2-s)/2 - p Sqrt[s] - \[CapitalDelta]1] - Conjugate[\[CapitalDelta]2]^2 dLog[(MNeu[i]^2+MNeu[j]^2-s)/2+ p Sqrt[s] - Conjugate[\[CapitalDelta]2], (MNeu[i]^2+MNeu[j]^2-s)/2 - p Sqrt[s] - Conjugate[\[CapitalDelta]2]])
+	tIntegral[1]->-p Sqrt[s] (s-MEW[i]^2-MEW[j]^2),
+	tIntegral[2]->2/3 p (MEW[i]^4+MEW[i]^2 (MEW[j]^2-2 s)+(MEW[j]^2-s)^2) Sqrt[s],
+	tIntegral[0,\[CapitalDelta]_]->dLog[(MEW[i]^2+MEW[j]^2-s)/2+ p Sqrt[s] - \[CapitalDelta], (MEW[i]^2+MEW[j]^2-s)/2 - p Sqrt[s] - \[CapitalDelta]],
+	tIntegral[1,\[CapitalDelta]_]->2 p Sqrt[s]+\[CapitalDelta] dLog[(MEW[i]^2+MEW[j]^2-s)/2+ p Sqrt[s] - \[CapitalDelta], (MEW[i]^2+MEW[j]^2-s)/2 - p Sqrt[s] - \[CapitalDelta]],
+	tIntegral[2,\[CapitalDelta]_]->2 p Sqrt[s] \[CapitalDelta]+\[CapitalDelta]^2 dLog[(MEW[i]^2+MEW[j]^2-s)/2+ p Sqrt[s] - \[CapitalDelta], (MEW[i]^2+MEW[j]^2-s)/2 - p Sqrt[s] - \[CapitalDelta]] - p Sqrt[s] (s-MEW[i]^2-MEW[j]^2),
+	tIntegral[0,\[CapitalDelta]1_,\[CapitalDelta]2_]->1/(\[CapitalDelta]1-Conjugate[\[CapitalDelta]2]) (dLog[(MEW[i]^2+MEW[j]^2-s)/2+ p Sqrt[s] - \[CapitalDelta]1, (MEW[i]^2+MEW[j]^2-s)/2 - p Sqrt[s] - \[CapitalDelta]1] - dLog[(MEW[i]^2+MEW[j]^2-s)/2+ p Sqrt[s] - Conjugate[\[CapitalDelta]2], (MEW[i]^2+MEW[j]^2-s)/2 - p Sqrt[s] - Conjugate[\[CapitalDelta]2]]),
+	tIntegral[1,\[CapitalDelta]1_,\[CapitalDelta]2_]->1/(\[CapitalDelta]1-Conjugate[\[CapitalDelta]2]) (\[CapitalDelta]1 dLog[(MEW[i]^2+MEW[j]^2-s)/2+ p Sqrt[s] - \[CapitalDelta]1, (MEW[i]^2+MEW[j]^2-s)/2 - p Sqrt[s] - \[CapitalDelta]1] - Conjugate[\[CapitalDelta]2] dLog[(MEW[i]^2+MEW[j]^2-s)/2+ p Sqrt[s] - Conjugate[\[CapitalDelta]2], (MEW[i]^2+MEW[j]^2-s)/2 - p Sqrt[s] - Conjugate[\[CapitalDelta]2]]),
+	tIntegral[2,\[CapitalDelta]1_,\[CapitalDelta]2_]->1/(\[CapitalDelta]1-Conjugate[\[CapitalDelta]2]) (2 p Sqrt[s] (\[CapitalDelta]1 - Conjugate[\[CapitalDelta]2])+\[CapitalDelta]1^2 dLog[(MEW[i]^2+MEW[j]^2-s)/2+ p Sqrt[s] - \[CapitalDelta]1, (MEW[i]^2+MEW[j]^2-s)/2 - p Sqrt[s] - \[CapitalDelta]1] - Conjugate[\[CapitalDelta]2]^2 dLog[(MEW[i]^2+MEW[j]^2-s)/2+ p Sqrt[s] - Conjugate[\[CapitalDelta]2], (MEW[i]^2+MEW[j]^2-s)/2 - p Sqrt[s] - Conjugate[\[CapitalDelta]2]])
 }
 FreeTIntegrals[expr_]:=Collect[expr, tIntegral[__]]/.tIntegralDict
 
 
+tIntegralNBWLMDict = {
+	tIntegral[0,m2_,m2_] -> (2 p Sqrt[s])/(m2^2+MEW[i]^2 MEW[j]^2+m2 (s-MEW[i]^2-MEW[j]^2)),
+	tIntegral[1,m2_,m2_] -> (2 m2 p Sqrt[s])/(m2^2+MEW[i]^2 MEW[j]^2-m2 (MEW[i]^2+MEW[j]^2-s))-Log[(m2+(s-MEW[i]^2-MEW[j]^2)/2+p Sqrt[s])/(m2+(s-MEW[i]^2-MEW[j]^2)/2-p Sqrt[s])],
+	tIntegral[2,m2_,m2_] -> (2 p (2 m2^2+MEW[i]^2 MEW[j]^2-m2 (MEW[i]^2+MEW[j]^2-s)) Sqrt[s])/(m2^2+MEW[i]^2 MEW[j]^2-m2 (MEW[i]^2+MEW[j]^2-s))-2 m2 Log[(m2+(s-MEW[i]^2-MEW[j]^2)/2+p Sqrt[s])/(m2+(s-MEW[i]^2-MEW[j]^2)/2-p Sqrt[s])]
+}
 tIntegralNBWDict = {
 	tIntegral[0] -> 2 p Sqrt[s],
-	tIntegral[1] -> -p Sqrt[s] (s-MNeu[i]^2-MNeu[j]^2),
-	tIntegral[2] -> 2/3 p (MNeu[i]^4+MNeu[i]^2 (MNeu[j]^2-2 s)+(MNeu[j]^2-s)^2) Sqrt[s],
-	(*tIntegral[0,m2_] -> -2ArcTanh[(2p Sqrt[s])/(2m2-MNeu[i]^2-MNeu[j]^2+s)],*)
-	tIntegral[0,m2_] -> Log[(-2m2+MNeu[i]^2+MNeu[j]^2+2p Sqrt[s]-s)/(-2m2+MNeu[i]^2+MNeu[j]^2-2p Sqrt[s]-s)],
-	tIntegral[1,m2_] -> 2p Sqrt[s] + m2 Log[(-2m2+MNeu[i]^2+MNeu[j]^2+2p Sqrt[s]-s)/(-2m2+MNeu[i]^2+MNeu[j]^2-2p Sqrt[s]-s)],
-	tIntegral[2,m2_] -> p Sqrt[s](2m2+MNeu[i]^2+MNeu[j]^2-s) + m2^2 Log[(-2m2+MNeu[i]^2+MNeu[j]^2+2p Sqrt[s]-s)/(-2m2+MNeu[i]^2+MNeu[j]^2-2p Sqrt[s]-s)],
-	tIntegral[0,m12_,m22_] -> 1/(m12-m22) (Log[(-2m12+MNeu[i]^2+MNeu[j]^2+2p Sqrt[s]-s)/(-2m12+MNeu[i]^2+MNeu[j]^2-2p Sqrt[s]-s)]-Log[(-2m22+MNeu[i]^2+MNeu[j]^2+2p Sqrt[s]-s)/(-2m22+MNeu[i]^2+MNeu[j]^2-2p Sqrt[s]-s)]),
-	tIntegral[1,m12_,m22_] -> 1/(m12-m22) (m12 Log[(-2m12+MNeu[i]^2+MNeu[j]^2+2p Sqrt[s]-s)/(-2m12+MNeu[i]^2+MNeu[j]^2-2p Sqrt[s]-s)]-m22 Log[(-2m22+MNeu[i]^2+MNeu[j]^2+2p Sqrt[s]-s)/(-2m22+MNeu[i]^2+MNeu[j]^2-2p Sqrt[s]-s)]),
-	tIntegral[2,m12_,m22_] -> 2p Sqrt[s] + 1/(m12-m22) (m12^2 Log[(-2m12+MNeu[i]^2+MNeu[j]^2+2p Sqrt[s]-s)/(-2m12+MNeu[i]^2+MNeu[j]^2-2p Sqrt[s]-s)]-m22^2 Log[(-2m22+MNeu[i]^2+MNeu[j]^2+2p Sqrt[s]-s)/(-2m22+MNeu[i]^2+MNeu[j]^2-2p Sqrt[s]-s)])
+	tIntegral[1] -> -p Sqrt[s] (s-MEW[i]^2-MEW[j]^2),
+	tIntegral[2] -> 2/3 p (MEW[i]^4+MEW[i]^2 (MEW[j]^2-2 s)+(MEW[j]^2-s)^2) Sqrt[s],
+	tIntegral[0,m2_] -> -Log[(m2+(s-MEW[i]^2-MEW[j]^2)/2+p Sqrt[s])/(m2+(s-MEW[i]^2-MEW[j]^2)/2-p Sqrt[s])],
+	tIntegral[1,m2_] -> 2p Sqrt[s] - m2 Log[(m2+(s-MEW[i]^2-MEW[j]^2)/2+p Sqrt[s])/(m2+(s-MEW[i]^2-MEW[j]^2)/2-p Sqrt[s])],
+	tIntegral[2,m2_] -> p Sqrt[s](2m2+MEW[i]^2+MEW[j]^2-s) - m2^2 Log[(m2+(s-MEW[i]^2-MEW[j]^2)/2+p Sqrt[s])/(m2+(s-MEW[i]^2-MEW[j]^2)/2-p Sqrt[s])],
+	tIntegral[0,m12_,m22_] -> 1/(m22-m12) (Log[(m12+(s-MEW[i]^2-MEW[j]^2)/2+p Sqrt[s])/(m12+(s-MEW[i]^2-MEW[j]^2)/2-p Sqrt[s])]-Log[(m22+(s-MEW[i]^2-MEW[j]^2)/2+p Sqrt[s])/(m22+(s-MEW[i]^2-MEW[j]^2)/2-p Sqrt[s])]),
+	tIntegral[1,m12_,m22_] -> 1/(m22-m12) (m12 Log[(m12+(s-MEW[i]^2-MEW[j]^2)/2+p Sqrt[s])/(m12+(s-MEW[i]^2-MEW[j]^2)/2-p Sqrt[s])]-m22 Log[(m22+(s-MEW[i]^2-MEW[j]^2)/2+p Sqrt[s])/(m22+(s-MEW[i]^2-MEW[j]^2)/2-p Sqrt[s])]),
+	tIntegral[2,m12_,m22_] -> 2p Sqrt[s] + 1/(m22-m12) (m12^2 Log[(m12+(s-MEW[i]^2-MEW[j]^2)/2+p Sqrt[s])/(m12+(s-MEW[i]^2-MEW[j]^2)/2-p Sqrt[s])]-m22^2 Log[(m22+(s-MEW[i]^2-MEW[j]^2)/2+p Sqrt[s])/(m22+(s-MEW[i]^2-MEW[j]^2)/2-p Sqrt[s])])
 }
-FreeTIntegralsNBW[expr_]:=Collect[expr, tIntegral[__]]/.tIntegralNBWDict
+FreeTIntegralsNBW[expr_]:=Collect[expr, tIntegral[__]]/.tIntegralNBWLMDict/.tIntegralNBWDict
 
 
 PossibleKinTerms={
-s,MNeu[i]^2,MNeu[j]^2,MNeu[i]MNeu[j],s^2,s MNeu[i]^2,s MNeu[j]^2,s MNeu[i]MNeu[j],MNeu[i]^4,MNeu[i]^2 MNeu[j]^2,MNeu[i]^3 MNeu[j],MNeu[j]^4,MNeu[i]MNeu[j]^3
+s,MEW[i]^2,MEW[j]^2,MEW[i]MEW[j],s^2,s MEW[i]^2,s MEW[j]^2,s MEW[i]MEW[j],MEW[i]^4,MEW[i]^2 MEW[j]^2,MEW[i]^3 MEW[j],MEW[j]^4,MEW[i]MEW[j]^3
 }
 GetKinematicCoefficients[expr_]:=Collect[FRH[expr],Den[__],((Collect[Expand[#1],PossibleKinTerms,(ReplaceAll[#1,{x_*Conjugate[y_]+Conjugate[x_]*y_->2Re[x*Conjugate[y]],x_*y_+Conjugate[x_]*Conjugate[y_]->2Re[x*y],x_*Conjugate[x_]->Abs[x]^2}]&)])&)]
 
@@ -85,6 +92,4 @@ GetKinematicCoefficients[expr_]:=Collect[FRH[expr],Den[__],((Collect[Expand[#1],
 Begin["`Private`"]
 End[]
 EndPackage[]
-
-
 
