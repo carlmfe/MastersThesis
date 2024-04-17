@@ -1,0 +1,21 @@
+\begin{feynman}
+  \vertex at ( 0  , 0.75) (v1);
+  \vertex at ( 0  ,-0.75) (v2);
+  \vertex at (-1.5, 0.75) (q) {\(q\)};
+  \vertex at (-1.5,-0.75) (qbar) {\(\bar{q}^\prime\)};
+  \vertex at ( 1.5, 0.75) (chii) {\(\nino[i]\)};
+  \vertex at ( 1.5,-0.75) (chij) {\(\chino[j]\)};
+  \vertex at (-0.5, 1   ) (a);
+  \vertex at ( 0.5, 1   ) (b);
+  \vertex at (-0.5,-1   ) (c);
+  \vertex at ( 0.5,-1   ) (d);
+  \diagram*{
+  (q)    -- [fermion] (v1)
+  -- [charged scalar, edge label'=\(\tilde{q}_A\)] (v2)
+  -- [fermion] (qbar),
+  (v1)    -- (chii),
+  (chij) -- (v2),
+  (a)    -- [-stealth] (b),
+  (d)    -- [-stealth] (c)
+  };
+\end{feynman}
