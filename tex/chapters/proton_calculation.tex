@@ -1,0 +1,104 @@
+\documentclass[../main.tex]{subfiles}
+
+
+\begin{document}
+\chapter{Proton--Proton Neutralino Pair Production}
+
+\begin{TODO}
+  \item Describe parton model.
+\end{TODO}
+
+\section{The Parton Model and pdf's}
+So far, we have worked with the parton level cross-section, figuring out the contribution of the individual constituents of a proton to the cross-section for our final state.
+Now these do not individually result in any observable, as the partons are confined to the proton, and can therefore not be singled out in an experiment.
+To get an observable quantity comparable to experiment, we must sew the individual contributions together.
+This is done with the \emph{parton model}, where scattering interactions with the proton is modelled with the interaction of free constituent particles inside.
+The parton model builds on the concept of \emph{factorisation} which, owing to the weakening of the QCD coupling at high-energies, divides interactions with colour-neutral particles into a high-energy and a low-energy regime that are treated separately.
+The low-energy regime dictates that partons each carry a fraction of the total momentum of the proton, and the probability of encountering a given parton with said momentum fraction.
+
+\subsection{Hadronic kinematics}
+Consider the scattering of two protons with momenta \(P_1^\mu\) and \(P_2^\mu\) respectively into a set of final state particles \(\chi, \chi^\prime, X\) where \(X\) is some collection of unlabelled particles.
+\cref{had:tab:had_kinematic_variables} lists the definitions of kinematic variables at the hadronic level and their relation of the partonic kinematic variables defined in \cref{chap:part}.
+I define the centre-of-mass energy \(S \equiv (P_1 + P_2)^2\).
+The cross-section for a given process is then given in terms of the cross-section of two partons \(i, j\) with momenta \(k_i = x_1 P_1\) and \(k_j = x_2 P_2\) where \(x_1, x_2 \in [0, 1]\) are the respective fractions of the proton momenta the partons carry.
+The \emph{hadronic cross-section} differential in the squared mass \(Q^2\) of two final state particles \(\chi\) and \(\chi^\prime\) is then given by
+\begin{align}
+  \label{had:eq:dsigma_dQ2}
+  \nonumber
+  \d[Q^2]{\sigma}(PP \to \chi \chi^\prime + X) = \sum_ {ij} \integral[_0^1]{x_1}\!\integral[_0^1]{x_2} \theta\pclosed{\hat{s} - Q^2} f_i(x_1) f_j(x_2) \d[Q^2]{\hat\sigma}(ij \to \chi\chi^\prime + X) \\
+  = \sum_ {ij} \integral[_\tau^1]{x_1}\!\integral[_{\tau/x_1}^1]{x_2} f_i(x_1) f_j(x_2) \d[Q^2]{\hat\sigma}(ij \to \chi\chi^\prime + X).
+\end{align}
+The Heaviside function \(\theta\pclosed{\hat{s}-Q^2} = \theta\pclosed{x_1 x_2 - \tau}\) ensures that there is enough energy between the scattering partons to produce the final state \(\chi \chi^\prime\)-pair with centre-of-mass energy \(Q^2 = \tau S\).
+
+\begin{table}[ht!]
+  \centering
+  \begin{tabular}{|c|c|}
+    \hline
+    Partonic variable & Definition in terms of hadronic variables \\
+    \hline
+    \(k_i^\mu\)       & \(x_1 P_1^\mu\)                           \\
+    \(k_j^\mu\)       & \(x_2 P_2^\mu\)                           \\
+    \(\hat{s}\)       & \(x_1 x_2 S\)                             \\
+    \(z\)             & \(\frac{\tau}{x_1x_2}\)                   \\
+    \hline
+  \end{tabular}
+  \caption{List of relations between hadronic and partonic kinematic variables.}
+  \label{had:tab:had_kinematic_variables}
+\end{table}
+
+
+
+\subsection{Integration over pdf's}
+Practically, the two-dimensional integration over the parton momentum fractions \(x_1, x_2\) can be alleviated by the fact that partonic cross-section contains terms proportional to either \(\delta(1-z)\) or plus distributions \(f_+(z)\) as we have seen in \cref{chap:part}.
+Let us consider these types of integrals in some generality.
+Let \(g(x_1, x_2)\) be some function of \(x_1, x_2\), consider the integral
+\begin{equation}
+  \int_{\tau/x_1}^1 \! \frac{\mathrm{d}x_2}{x_2} g(x_1, x_2) \delta(1-z).
+\end{equation}
+Switching variables to \(z = \frac{\tau}{x_1 x_2}\) and keeping \(x_1\) constant yields
+\begin{align}
+  \int_{\tau/x_1}^1 \! \frac{\mathrm{d}z}{z}  g(x_1, \frac{\tau}{x_1 z}) \delta(1-z) = g(x_1, \frac{\tau}{x_1}).
+\end{align}
+
+The plus-distributions are somewhat more complicated.
+Keeping in mind their definition
+\begin{equation}
+  \integral[_0^1]{z} g(z) f_+(z) = \integral[_0^1]{z} (g(z)-g(1)) f(z),
+\end{equation}
+we have that
+\begin{align}
+  \label{had:eq:plus_integral}
+  \nonumber
+  \int_{\tau/x_1}^1 \! \frac{\mathrm{d}x_2}{x_2} g(x_1, x_2) f_+(z) = \int_{\tau/x_1}^1 \! \frac{\mathrm{d}z}{z} g(x_1, \frac{\tau}{x_1z}) f_+(z)                                           \\
+  \nonumber
+  = \int_0^1 \! \frac{\mathrm{d}z}{z} g(x_1, \frac{\tau}{x_1 z}) f_+(z) - \int_0^{\tau/x_1} \! \frac{\mathrm{d}z}{z} g(x_1, \frac{\tau}{x_1 z}) f_+(z)                                      \\
+  \nonumber
+  = \int_0^1 \! \mathrm{d}z\, \pclosed{\frac{1}{z} g(x_1, \frac{\tau}{x_1 z}) - g(x_1, \frac{\tau}{x_1})} f(z) - \int_0^{\tau/x_1} \! \frac{\mathrm{d}z}{z} g(x_1, \frac{\tau}{x_1 z}) f(z) \\
+  = \int_{\tau/x_1}^1 \! \frac{\mathrm{d}z}{z} \pclosed{g(x_1, \frac{\tau}{x_1 z}) - zg(x_1, \frac{\tau}{x_1})} f(z) - g(x_1, \frac{\tau}{x_1}) \integral[_0^{\tau/x_1}]{z} f(z),
+\end{align}
+where in the third line we have used that \(f_+(z) = f(z)\) for \(z < 1\).
+Now, the only plus distribution that have cropped up thus far have been \(\plusdist{\frac{1}{1-z}}\) and \(\plusdist{\frac{\ln(1-z)}{1-z}}\), so the last integral in \cref{had:eq:plus_integral} can be done analytically.
+\begin{temporary}
+  \margincomment{Should I define this like Tore?}
+  Defining
+  \begin{equation}
+    F(x_1) \equiv \integral[_0^{\tau/x_1}]{z} f(z) = \begin{cases}
+      -\ln(1-\frac{\tau}{x_1})              & \text{if } f(z) = \frac{1}{1-z}        \\
+      -\frac{1}{2}\ln^2(1-\frac{\tau}{x_1}) & \text{if } f(z) = \frac{\ln(1-z)}{1-z}
+    \end{cases}
+  \end{equation}
+\end{temporary}
+
+Together, this reduces the integration over the parton momentum fractions into a 1-dimensional and a 2-dimensional integral, easing on the computational power necessary to compute it numerically.
+Writing the parton level differential cross-sections as
+\begin{equation}
+  \d[Q^2]{\hat\sigma_{ij}}(x_1, x_2) = \frac{1}{x_1 x_2} \cclosed{w_{ij}^\text{rad}(z) + w_{ij}^\text{soft}(z) \delta(1-z) + \sum_{f} w_{ij}^{f_+}(z) f_+(z)},
+\end{equation}
+we can factor the \(x_1, x_2\) integrals into
+\begin{align}
+  \nonumber
+  \d[Q^2]{\sigma}(Q^2) = \int_{\tau}^1 \! \frac{\mathrm{d}x_1}{x_1} f_i(x_1) \Bigg\{ f_j(\frac{\tau}{x_1})w^\text{soft}_{ij}(1) + \sum_f w^{f_+}_{ij}(1) F(x_1) \\
+  + \int_{\tau/x_1}^1\!\frac{\mathrm{d}x_2}{x_2}\, \cclosed{f_j(x_2) w^\text{rad}_{ij}(\frac{\tau}{x_1 x_2}) +  \sum_f \pclosed{f_j(x_2) w^{f_+}_{ij}(\frac{\tau}{x_1 x_2}) - f_j(\frac{\tau}{x_1}) \frac{\tau}{x_1 x_2} w^{f_+}_{ij}(1)} f(\frac{\tau}{x_1 x_2})} \bigg\}
+\end{align}
+
+\end{document}

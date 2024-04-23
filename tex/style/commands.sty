@@ -52,8 +52,8 @@
 \newcommand*{\abs}[1]{\ensuremath{\vclosed{#1}}}
 
 % Functional Analysis
-\newcommand*{\commutator}[2]{\bclosed{#1,#2}}
-\newcommand*{\anticommutator}[2]{\cclosed{#1,#2}}
+\newcommand*{\commutator}[2]{[#1,#2]}
+\newcommand*{\anticommutator}[2]{\{#1,#2\}}
 \newcommand*{\floor}[1]{\lfloor #1 \rfloor}
 \newcommand*{\ceil}[1]{\lceil #1 \rceil}
 
@@ -69,6 +69,10 @@
 \newcommand*{\loopintegral}[2][4]{\int\!\frac{\mathrm{d}^{#1}#2}{(2\pi)^{#1}}\,}
 \newcommand*{\MSbar}{\ensuremath{\widebar{\text{MS}}}}
 \newcommand*{\DRbar}{\ensuremath{\widebar{\text{DR}}}}
+\newcommand*{\bra}[1]{\left\langle #1 \right|}
+\newcommand*{\ket}[1]{\left| #1 \right\rangle}
+\newcommand*{\braket}[2]{\left\langle #1 \middle| #2 \right\rangle}
+\newcommand*{\plusdist}[1]{\lfloor #1 \rfloor_+}
 
 % SUSY notation
 \newcommand*{\bino}{\wtilde{B}^0}
