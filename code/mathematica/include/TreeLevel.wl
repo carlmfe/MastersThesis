@@ -93,7 +93,8 @@ ComplexParameterRules={
 	DSfC[args__] -> DSf[args],
 	DZ -> DZ\[Conjugate],
 	DW -> DW\[Conjugate],
-	CqW[arg_] -> CqW[arg]\[Conjugate]
+	CqW[arg_] -> CqW[arg]\[Conjugate],
+	(h:B0|B1|C0|PaVe)[args__] -> h[args]\[Conjugate]
 }
 
 
