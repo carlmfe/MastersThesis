@@ -395,7 +395,7 @@ This way, an SM vector boson \(V\^\mu\) is embedded in a vector superfield \(V\)
 Lastly, and perhaps the most intricate, is the extension of the Higgs sector in the MSSM.
 As it turns out\needcite, the MSSM requires two Higgs doublets for anomaly cancellation within the \(U(1)_Y\) gauge group sector.
 This means that there are two scalar Higgs doublets \(H_u, H_d\) before electroweak symmetry breaking (EWSB), giving mass to fermions in the upper/lower part of \(SU(2)_L\) fermion doublets respectively.
-For the cancellation to work out, we must require hypercharge \(+1\) for \(H_u\) and \(-1\) for \(H_d\).
+For the cancellation to work out, we must require hypercharge \(\sfrac{+1}{2}\) for \(H_u\) and \(\sfrac{-1}{2}\) for \(H_d\).
 These scalar Higgs field doublets are embedded in left-handed chiral superfields \(H_{u/d}\) together with fermion superpartners.
 The superfield doublet components are named according to \(H_u = (H_u^+, H_u^0)^T\) and \(H_d = (H_d^0, H_d^-)^T\), where the superscript indicates the QED charge of the superfields after EWSB.
 The fermion partners to both the vector bosons and the Higgs bosons are called \emph{bosinos} collectively.
@@ -405,64 +405,136 @@ For reference all the superfields, their names and their component fields are ta
 \renewcommand{\arraystretch}{1.5}
 \begin{table}[ht!]
   \centering
-  \begin{tabular}{|l|l|ccc|}
+  \begin{tabular}{|l|c|c|ccc|}
     \hline
-                                             & Superfield     & Boson field              & Fermion field          &
-    Auxiliary field
-    \\
+                                             & \multicolumn{2}{|c|}{Superfield} & Boson field    & Fermion field            & Auxiliary field                                  \\
     \hline
-    \multirow{3}{*}{\rotatebox{90}{Higgs}}   & \(H_{u/d}^0\)  & \(H_{u/d}^0\)            & \(\wtilde{H}_{u/d}^0\) &
-    \(F_{H^0_{u/d}}\)
-    \\
-                                             & \(H_{u}^{+}\)  & \(H_{u}^{+}\)            & \(\wtilde{H}_{u}^{+}\) &
-    \(F_{H^+_{u}}\)
-    \\
-                                             & \(H_{d}^{-}\)  & \(H_{d}^{-}\)            & \(\wtilde{H}_{d}^{-}\) &
-    \(F_{H^-_{d}}\)
-    \\
+    \multirow{4}{*}{\rotatebox{90}{Higgs}}   & \multirow{2}{*}{\(H_u\)}         & \(H_{u}^{+}\)  & \(H_{u}^{+}\)            & \(\wtilde{H}_{u}^{+}\) & \(F_{H^+_{u}}\)         \\
+                                             &                                  & \(H_u^0\)      & \(H_u^0\)                & \(\wtilde{H}_u^0\)     & \(F_{H^0_u}\)           \\
+    \cline{2-6}
+                                             & \multirow{2}{*}{\(H_d\)}         & \(H_d^0\)      & \(H_d^0\)                & \(\wtilde{H}_d^0\)     & \(F_{H^0_d}\)           \\
+                                             &                                  & \(H_{d}^{-}\)  & \(H_{d}^{-}\)            & \(\wtilde{H}_{d}^{-}\) & \(F_{H^-_{d}}\)         \\
     \hline
-    \multirow{3}{*}{\rotatebox{90}{Leptons}} & \(l_i\)        & \(\wtilde{l}_{iL}\)      & \(l_i\)                &
-    \(F_{l_i}\)
-    \\
-                                             & \(\wbar{E}_i\) & \(\wtilde{l}_{iR}^\ast\) & \(\wbar{e}_{i}\)       &
-    \(F_{\wbar{E}_i}^\ast\)
-    \\
-                                             & \(\nu_i\)      & \(\wtilde{\nu}_{iL}\)    & \(\nu_i\)              &
-    \(F_{\nu_i}\)
-    \\
+    \multirow{3}{*}{\rotatebox{90}{Leptons}} & \multirow{2}{*}{\(L_i\)}         & \(\nu_i\)      & \(\wtilde{\nu}_{iL}\)    & \(\nu_i\)              & \(F_{\nu_i}\)           \\
+                                             &                                  & \(l_i\)        & \(\wtilde{l}_{iL}\)      & \(l_i\)                & \(F_{l_i}\)             \\
+    \cline{2-6}
+                                             & -                                & \(\wbar{E}_i\) & \(\wtilde{l}_{iR}^\ast\) & \(\wbar{e}_{i}\)       & \(F_{\wbar{E}_i}^\ast\) \\
     \hline
-    \multirow{3}{*}{\rotatebox{90}{Quarks}}  & \(u_i\)        & \(\wtilde{u}_{iL}\)      & \(u_i\)                &
-    \(F_{u_i}\)
-    \\
-                                             & \(\wbar{U}_i\) & \(\wtilde{u}_{iR}^\ast\) & \(\wbar{u}_i\)         &
-    \(F_{\wbar{U}_i}^\ast\)
-    \\
-                                             & \(d_i\)        & \(\wtilde{d}_{iL}\)      & \(d_i\)                &
-    \(F_{d_i}\)
-    \\
-                                             & \(\wbar{D}_i\) & \(\wtilde{d}_{iR}^\ast\) & \(\wbar{d}_i\)         &
-    \(F_{\wbar{D}_i}^\ast\)
-    \\
+    \multirow{4}{*}{\rotatebox{90}{Quarks}}  & \multirow{2}{*}{\(Q_i\)}         & \(u_i\)        & \(\wtilde{u}_{iL}\)      & \(u_i\)                & \(F_{u_i}\)             \\
+                                             &                                  & \(d_i\)        & \(\wtilde{d}_{iL}\)      & \(d_i\)                & \(F_{d_i}\)             \\
+    \cline{2-6}
+                                             & -                                & \(\wbar{U}_i\) & \(\wtilde{u}_{iR}^\ast\) & \(\wbar{u}_i\)         & \(F_{\wbar{U}_i}^\ast\) \\
+                                             & -                                & \(\wbar{D}_i\) & \(\wtilde{d}_{iR}^\ast\) & \(\wbar{d}_i\)         & \(F_{\wbar{D}_i}^\ast\) \\
     \hline
-    \multirow{3}{*}{\rotatebox{90}{Bosons}}
-                                             & \(B^0\)        & \(B^0_\mu\)              & \(\bino\)              &
-    \(D_{B^0}\)
-    \\
-                                             & \(W^0\)        & \(W^0_\mu\)              & \(\wino\)              &
-    \(D_{W^0}\)
-    \\
-                                             & \(W^\pm\)      & \(W^\pm_\mu\)            & \(\wtilde{W}^\pm\)     &
-    \(D_{W^\pm}\)
-    \\
+    \multirow{4}{*}{\rotatebox{90}{Bosons}}
+                                             & -                                & \(B^0\)        & \(B^0_\mu\)              & \(\bino\)              & \(D_{B^0}\)             \\
+    \cline{2-6}
+                                             & \multirow{2}{*}{\(W^{k}\)}       & \(W^0\)        & \(W^0_\mu\)              & \(\wino\)              & \(D_{W^0}\)             \\
+                                             &                                  & \(W^\pm\)      & \(W^\pm_\mu\)            & \(\wtilde{W}^\pm\)     & \(D_{W^\pm}\)           \\
+    \cline{2-6}
+                                             & -                                & \(C^a\)        & \(C^a_\mu\)              & \(\wtilde{g}\)         & \(D_C\)                 \\
     \hline
   \end{tabular}
-  \caption{Table of superfields of the electroweak part of the MSSM, and their component field names.
+  \caption{Table of superfields of the MSSM, and their component field names.
     Note that the fermion fields are left-handed Weyl spinors, in spite of any \(L\) or \(R\) in the subscript.
     The conjugate superfields changes these to right-handed Weyl spinors.
-    The indices \(i\) enumerate the three generations of leptons/quarks.}
+    The indices \(i\) enumerate the three generations of leptons/quarks, \(k\) the three \(SU(2)_L\) gauge fields and \(a\) the eight \(SU(3)_C\) gauge fields.}
   \label{susy:tab:MSSM-fields}
 \end{table}
 }
+
+
+
+\subsection{Superlagrangian and Supersymmetry Breaking}
+Now that we have defined the field content of the MSSM, we need to define the interaction between them through the superlagrangian.
+As has already been noted, the gauge groups of the MSSM are the same as for the SM, and all kinetic terms are defined according to the super Yang-Mills theory of \cref{susy:ssec:susy_yang_mills}.
+A summary of the gauge numbers of the scalar superfields is given in \cref{susy:tab:mssm_quantum_numbers}.
+
+The superpotential up to gauge invariant and \(R\)-parity invariant terms is given by
+\begin{equation}
+  W_\text{MSSM} = \mu H_u^T i\sigma_2 H_d + y^e_{ij} (L_i^T i\sigma_2 H_d) \wbar{E}_j + y^u_{ij} (Q_i^T i\sigma_2 H_u) \wbar{U}_j + y^d_{ij} (Q_i^T i\sigma_2 H_d) \wbar{D}_j,
+\end{equation}
+where \(\mu\) is some complex, massive parameters and \(y^{e/u/d}_{ij}\) are the ordinary SM Yukawa couplings.
+The \(\mu\)-parameter is involved in the EWSB in the Higgs sector, and so its magnitude \(\abs{\mu}\) is determined from the EW boson masses and the Weinberg angle.
+This leaves one new degree of freedom in the MSSM superpotential beyond what is in the SM.
+
+Seeing as we have not discovered any particles with the same mass but opposite spin-statistics to the SM particles we have already discovered, we must conclude that supersymmetry is broken at low energy.
+A mechanism for spontaneous symmetry breaking of supersymmetry would therefore be necessary.
+Constructing such a mechanism in a way as to not \needcite{reintroduce the hierarchy problem} leads to what we call \emph{soft} breaking of supersymmetry.
+Disregarding the high-energy completion of the theory, we can parametrise the terms that can arise in the low-energy superlagrangian up to gauge invariant and \(R\)-parity invariant terms, as
+\begin{align}
+  \nonumber
+  \L_\text{soft} = & (\theta\theta)(\theta\theta)^\dagger \bigg\{ -\frac{1}{4}M_1 B\^\alpha B\_\alpha - \frac{1}{2}M_2 \tr\{\mathcal{W}\^\alpha \mathcal{W}\_\alpha\} - \frac{1}{2}M_3 \tr\{\mathcal{G}\^\alpha \mathcal{G}\_\alpha\} + \cc \\
+  \nonumber
+                   & -\frac{1}{6}a^{e}_{ij} L_i^T i\sigma_2 H_d \wbar{E}_j - \frac{1}{6}a^{u}_{ij} Q_i^T i\sigma_2 H_u \wbar{U}_j - \frac{1}{6}a^{d}_{ij} Q_i^T i\sigma_2 H_d \wbar{D}_j + \cc                                              \\
+  \nonumber
+                   & -\frac{1}{2} b H_u^T i\sigma_2 H_d + \cc                                                                                                                                                                               \\
+  \nonumber
+                   & -(m_{ij}^L)^2 L_i^\dagger L_j - (m_{ij}^e)^2 \wbar{E}_i^\dagger \wbar{E}_j - (m_{ij}^Q)^2 Q_i^\dagger Q_j - (m_{ij}^u)^2 \wbar{U}_i^\dagger \wbar{U}_j - (m_{ij}^d)^2 \wbar{D}_i^\dagger \wbar{D}_j                    \\
+                   & - m_{H_u}^2 H_u^\dagger H_u - m_{H_d}^2 H_d^\dagger H_d\bigg\},
+\end{align}
+where \(B\^\alpha, \mathcal{W}\^\alpha, \mathcal{C}\^\alpha\) are the supersymmetric field strengths of the gauge superfields \(B\), \(\mathcal{W} = W^k \frac{1}{2}\sigma^k\) and \(\mathcal{C} = C^a \frac{1}{2}\lambda^a\) respectively. The matrices \(\lambda^a\) are the \needcite{Gell-Mann matrices} --- (2 times) the generators of \(SU(3)\).
+All the parameters are potentially complex numbers, although all the mass terms \(m_{ij}^2\) must be hermitian in the that \(m_{ij}^2 = (m_{ji}^2)^\ast\), which leads to \(m_{ii}^2\) having to be real.
+This is the source of the great many parameters of the MSSM, as these soft-breaking parameters alone amount to 109 degrees of freedom!
+For this reason, most searches of the MSSM focus on various simplified models\needcite.
+These can be based simplifications like assuming all parameters to be real or assuming no flavour-violation, or by making theoretical assumptions on the specific mechanism for symmetry breaking, as in \needcite[Constrained MSSM] or \needcite[mSUGRA].
+In this thesis, I will not make any such assumptions and work with the general form of the MSSM, unless otherwise stated.
+
+
+\begin{table}[ht!]
+  \centering
+  \begin{tabular}{|l|c|c|c|c|c|c|}
+    \hline
+                                             & \multicolumn{2}{|c|}{Superfield} & Hypercharge \(Y\) & Isospin \(I^3\)   & Electric Charge \(Q_e\) & Colour                  \\
+    \hline
+    \multirow{4}{*}{\rotatebox{90}{Higgs}}   & \multirow{2}{*}{\(H_u\)}         & \(H_u^+\)         & \(\sfrac{+1}{2}\) & \(\sfrac{+1}{2}\)       & \(+1\)            & -   \\
+                                             &                                  & \(H_{u}^{0}\)     & \(\sfrac{+1}{2}\) & \(\sfrac{-1}{2}\)       & \(0\)             & -   \\
+    \cline{2-7}
+                                             & \multirow{2}{*}{\(H_d\)}         & \(H_d^0\)         & \(\sfrac{-1}{2}\) & \(\sfrac{+1}{2}\)       & \(0\)             & -   \\
+                                             &                                  & \(H_{d}^{-}\)     & \(\sfrac{-1}{2}\) & \(\sfrac{-1}{2}\)       & \(-1\)            & -   \\
+    \hline
+    \multirow{3}{*}{\rotatebox{90}{Leptons}} & \multirow{2}{*}{\(L_i\)}         & \(\nu_i\)         & \(\sfrac{-1}{2}\) & \(\sfrac{+1}{2}\)       & \(0\)             & -   \\
+                                             &                                  & \(l_i\)           & \(\sfrac{-1}{2}\) & \(\sfrac{-1}{2}\)       & \(-1\)            & -   \\
+    \cline{2-7}
+                                             & -                                & \(\wbar{E}_i\)    & \(+1\)            & -                       & \(+1\)            & -   \\
+    \hline
+    \multirow{4}{*}{\rotatebox{90}{Quarks}}  & \multirow{2}{*}{\(Q_i\)}         & \(u_i\)           & \(\sfrac{+1}{6}\) & \(\sfrac{+1}{2}\)       & \(\sfrac{+2}{3}\) & yes \\
+                                             &                                  & \(d_i\)           & \(\sfrac{+1}{6}\) & \(\sfrac{-1}{2}\)       & \(\sfrac{-1}{3}\) & yes \\
+    \cline{2-7}
+                                             & -                                & \(\wbar{U}_i\)    & \(\sfrac{-2}{3}\) & -                       & \(\sfrac{-2}{3}\) & yes \\
+                                             & -                                & \(\wbar{D}_i\)    & \(\sfrac{+1}{3}\) & -                       & \(\sfrac{+1}{3}\) & yes \\
+    \hline
+  \end{tabular}
+  % \begin{tabular}{|l|c|c|c|c|}
+  %   \hline
+  %                                            & Superfield     & Hypercharge     & Isospin         & Colour \\
+  %   \hline
+  %   \multirow{3}{*}{\rotatebox{90}{Higgs}}   & \(H_{u/d}^0\)  & \sfrac{\pm1}{2} & \sfrac{\mp1}{2} & -      \\
+  %                                            & \(H_{u}^{+}\)  & \sfrac{+1}{2}   & \sfrac{+1}{2}   & -      \\
+  %                                            & \(H_{d}^{-}\)  & \sfrac{-1}{2}   & \sfrac{-1}{2}   & -      \\
+  %   \hline
+  %   \multirow{3}{*}{\rotatebox{90}{Leptons}} & \(l_i\)        & \sfrac{-1}{2}   & \sfrac{-1}{2}   & -      \\
+  %                                            & \(\wbar{E}_i\) & 1               & -               & -      \\
+  %                                            & \(\nu_i\)      & \sfrac{-1}{2}   & \sfrac{+1}{2}   & -      \\
+  %   \hline
+  %   \multirow{3}{*}{\rotatebox{90}{Quarks}}  & \(u_i\)        & \sfrac{+1}{6}   & \sfrac{+1}{2}   & yes    \\
+  %                                            & \(\wbar{U}_i\) & \sfrac{-2}{3}   & -               & yes    \\
+  %                                            & \(d_i\)        & \sfrac{+1}{6}   & \sfrac{-1}{2}   & yes    \\
+  %                                            & \(\wbar{D}_i\) & \sfrac{+1}{3}   & -               & yes    \\
+  %   \hline
+  %   % \multirow{3}{*}{\rotatebox{90}{Bosons}}
+  %   %                                          & \(B^0\)        & +1            & -               & -          \\
+  %   %                                          & \(W^0\)        & 0             & -               & -          \\
+  %   %                                          & \(W^\pm\)      & 0             & \pm\sfrac{1}{2} & -          \\
+  %   % \hline
+  % \end{tabular}
+  \caption{Summary of quantum numbers for the MSSM superfields.
+    The charges of barred fields \(\wbar{F}\) supplying the right-handed part of SM fermions are defined such that the charges \(\wbar{F}^\dagger\) match those of its left-handed compliment.
+    I note that the convention for the hypercharge differs from some sources, seeing as I use \(1\) as the generator of \(U(1)_Y\) instead of \(\frac{1}{2}\) used elsewhere.
+    This amounts to shuffling some factors of \(\frac{1}{2}\) around.
+    The indices \(i\) enumerate the three generations of leptons/quarks, \(k\) the three \(SU(2)_L\) gauge fields and \(a\) the eight \(SU(3)_C\) gauge fields.}
+  \label{susy:tab:mssm_quantum_numbers}
+\end{table}
 
 
 
