@@ -23,21 +23,28 @@ def set_centre_of_mass_energy(s):
     global S
     S = s
 
-def run_cross_section(slha_filepath, outfilepath, pid1, pid2, tnum = False):
+def run_cross_section(slha_filepath, outfilepath, pid1, pid2, tnum = False, NLO = False):
     clargs = [
         BIN_ROOT+'cross_section',
         '--pid1', str(pid1),
         '--pid2', str(pid2),
-        '-o', '0',
         '-S', str(S),
         '-r', slha_filepath,
         '-w', outfilepath,
-        '-P', PDF_SET
+        '-P', PDF_SET,
+        '--scale_scheme', '1',
+        '--central_scale', '4.66491036E+02'
     ]
     if tnum: clargs.append('--tnum')
+    if NLO: clargs.extend(['-o', '1'])
+    else: clargs.extend(['-o', '0'])
+
+    # print(clargs)
+    # exit(1)
+
     output = subprocess.run(clargs, capture_output=not VERBOSE)
 
-def run_resummino(slha_filepath, processes, outfilepath=None, tempstem=None):
+def run_resummino(slha_filepath, processes, outfilepath = None, tempstem = None, NLO = False):
     try:
         _ = iter(processes[0])
     except TypeError:
@@ -49,8 +56,10 @@ def run_resummino(slha_filepath, processes, outfilepath=None, tempstem=None):
         write_ressumino_infile(tmpinfile, particle1 = proc[0], particle2 = proc[1], slha=slha_filepath)
         clargs = [
             'resummino',
+            # '/home/carlmfe/Documents/master/resummino_ckmdiag/bin/resummino',
             tmpinfile,
-            '-l',
+            '-n' if NLO else '-l',
+            # '-l',
         ]
         if outfilepath is not None:
             clargs.append('-o')
@@ -68,6 +77,8 @@ def write_ressumino_infile(filename, **contents):
         contents['result'] = 'total'
     if 'pdf_lo' not in contents:
         contents['pdf_lo'] = PDF_SET
+        contents['pdf_nlo'] = PDF_SET
+        contents['pdf_nnll'] = PDF_SET
     if 'mu_f' not in contents:
         contents['mu_f'] = 1.0
     if 'mu_r' not in contents:
@@ -87,8 +98,6 @@ def read_resummino_result(filepath):
             entry = entry.replace(r'"', '')
             key, value = entry.split(': ')
             results[key] = value
-        # print(entries)
-        # results = eval(''.join(infile.readlines()))
     return results
 
 def id_result_file(result_filepath):
@@ -107,7 +116,10 @@ def id_result_file(result_filepath):
             # TODO: perhaps raise error
             return
         
-def write_results(infilename, outfilename, process, key=None):
+def write_results(infilename, outfilename, process, key = None, order = 0):
+
+    print("Reading result file ", infilename, " and outputing to ", outfilename)
+
     result_type = id_result_file(infilename)
 
     pid1, pid2 = process
@@ -115,11 +127,12 @@ def write_results(infilename, outfilename, process, key=None):
     if key is None: key = proc_handle
 
     if result_type == 'smoking':
-        res = read_smoking_result(infilename)
+        res = read_smoking_result(infilename, order = order)
         val = float(res[proc_handle])
     elif result_type == 'resummino':
         res = read_resummino_result(infilename)
-        val = (float(res['lo']) + float(res['nlo']) + float(res['nll']) + float(res['nllj']))
+        order_strings = ['lo', 'nlo', 'nll', 'nllj']
+        val = float(res[order_strings[order]])
     elif result_type == 'prospino':
         res = read_prospino_result(infilename)
         val = float(res[proc_handle])

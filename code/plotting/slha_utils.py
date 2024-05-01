@@ -64,18 +64,20 @@ def cleartmpfiles(extension="", stem=None, rootpath = None):
         except FileNotFoundError:
             continue
 
-def read_smoking_result(filepath):
+def read_smoking_result(filepath, order = 0):
     results = {}
 
     with open(filepath, "r") as results_file:
         is_result = False
         for line in results_file.readlines():
+
             if is_result:
-                results[pid1+"+"+pid2] = float(line[31:44])
-                is_result = False
+                if int(line.split()[1]) == order:
+                    results[pid1+"+"+pid2] = float(line.split()[6])
+                    is_result = False
             if line[:8] == "XSECTION":
-                pid1 = line[32:34]
-                pid2 = line[40:42]
+                pid1 = line.split()[5][-2:]
+                pid2 = line.split()[6][-2:]
                 is_result = True
     return results
 
