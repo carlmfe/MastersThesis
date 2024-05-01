@@ -168,7 +168,7 @@ if __name__ == '__main__':
     from math import cos, sin, pi
     import pyslha
 
-    test_root = 'flextest/'
+    test_root = 'slha//muCPV/'
 
     slha_filename = 'csps1a.in.MSSMCPV'
 

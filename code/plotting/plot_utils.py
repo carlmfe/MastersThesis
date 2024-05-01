@@ -39,6 +39,21 @@ pid2sym = { # Translation for PDG code to symbol
     2000006 : r"$\tilde{t}_R$"
 }
 
+mass_squark_pid2sym = { # Translation for PDG code to symbol for squark mass eigenstates
+    1000001 : r"$\tilde{d}_1$",
+    1000003 : r"$\tilde{d}_2$",
+    1000005 : r"$\tilde{d}_3$",
+    2000001 : r"$\tilde{d}_4$",
+    2000003 : r"$\tilde{d}_5$",
+    2000005 : r"$\tilde{d}_6$",
+    1000002 : r"$\tilde{u}_1$",
+    1000004 : r"$\tilde{u}_2$",
+    1000006 : r"$\tilde{u}_3$",
+    2000002 : r"$\tilde{u}_4$",
+    2000004 : r"$\tilde{u}_5$",
+    2000006 : r"$\tilde{u}_6$"
+}
+
 # Saving parameters
 plt.rcParams['savefig.dpi'] = 300
 

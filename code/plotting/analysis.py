@@ -2,7 +2,7 @@
 from math import pi, atan2
 import numpy as np
 import matplotlib.pyplot as plt
-from plot_utils import process2latex, pid2sym, plot_xsec_with_relerrs
+from plot_utils import process2latex, pid2sym, mass_squark_pid2sym, plot_xsec_with_relerrs
 from compare import run4slha, savefig_with_info
 
 import pyslha
@@ -118,7 +118,7 @@ def squark_mass_plot(slha_dir, plotname = None):
         phimus_sorted = sorted(phimus[pid])
         masses_sorted = [mass for _, mass in sorted(zip(phimus[pid], masses[pid]), key = lambda pair: pair[0])]
 
-        ax.plot(phimus_sorted, masses_sorted, label=pid)
+        ax.plot(phimus_sorted, masses_sorted, label=mass_squark_pid2sym[pid])
 
     ax.legend()
     ax.set_xlabel(r'phase of $\mu$')
@@ -234,24 +234,133 @@ def mu_plot(slha_dir, processes, plotname = None):
             phimu_list[proc_handle].append(phimu if phimu >= 0 else 2*pi+phimu)
             xsec_list[proc_handle].append(value)
 
-    fig, ax = plt.subplots()
+    fig, axes = plt.subplots(nrows=2, height_ratios=(2, 1), sharex=True)
     for proc_handle, phimus in phimu_list.items():
         phimus_sorted = sorted(phimus)
         xsecs_sorted = [xsec for _, xsec in sorted(zip(phimus, xsec_list[proc_handle]), key=lambda pair: pair[0])]
+        axes[0].plot(phimus_sorted, xsecs_sorted, label=proc_handle)
 
         benchmark = xsecs_sorted[0]
         rel_dev = [(xsec-benchmark)/benchmark for xsec in xsecs_sorted]
+        axes[1].plot(phimus_sorted, rel_dev, label=proc_handle)
 
-        ax.plot(phimus_sorted, rel_dev, label=proc_handle)
-
-        # ax.plot(phimus_sorted, xsecs_sorted, label=proc_handle)
-
+    axes[0].legend()
     # ax.set_yscale('log')
-    ax.legend()
-    ax.set_xlabel('phase of $\mu$')
-    ax.set_ylabel('relative deviance')
+    axes[0].set_ylabel(r'$\sigma$ [fb]')
+    axes[1].set_xlabel('phase of $\mu$')
+    axes[1].set_ylabel('relative deviation')
+    axes[0].set_xticks([i*pi/3 for i in range(7)], ['0', r'$\frac{1}{3}\pi$', r'$\frac{2}{3}\pi$', r'$\pi$', r'$\frac{4}{3}\pi$', r'$\frac{5}{3}\pi$', r'$2\pi$'])
+
+    if plotname is not None:
+        savefig_with_info(plotname)
+    else:
+        plt.show()
+
+def susy_scale_plot(slha_dir, plotname = None):
+    slha_paths = [ slha_dir+f.name for f in os.scandir(slha_dir) if f.is_file() ]
+
+    phimus = []
+    susy_scales = []
+    for slha_path in slha_paths:
+        cphi, sphi, phi = slha_path.split('_')[-3:]
+        if cphi[0] == '0': cphi = '0.' + cphi[1:]
+        elif cphi[:2] == '-0': cphi = '-0.' + cphi[2:]
+        if sphi[0] == '0': sphi = '0.' + sphi[1:]
+        elif sphi[:2] == '-0': sphi = '-0.' + sphi[2:]
+        phimu = atan2(float(sphi), float(cphi))
+
+        phimus.append(phimu if phimu >= 0 else 2*pi+phimu)
+
+        slha = pyslha.read(slha_path)
+        susy_scales.append(slha.blocks['FLEXIBLESUSYOUTPUT'][1])
+
+    phimus_sorted = sorted(phimus)
+    susy_scales_sorted = [susy_scale for _, susy_scale in sorted(zip(phimus, susy_scales), key=lambda pair: pair[0])]
+
+
+    fig, ax = plt.subplots()
+    ax.plot(phimus_sorted, susy_scales_sorted)
+    ax.set_xlabel(r'phase of $\mu$')
+    ax.set_ylabel(r'SUSY scale')
+
+    if plotname is not None:
+        savefig_with_info(plotname)
+    else:
+        plt.show()
+
+def plot_slha_parameter(slha_dir, block, idcs, plotname = None, ylims=None):
+    slha_paths = [ slha_dir+f.name for f in os.scandir(slha_dir) if f.is_file() ]
+
+    phimus = []
+    param_vals = []
+    for slha_path in slha_paths:
+        cphi, sphi, phi = slha_path.split('_')[-3:]
+        if cphi[0] == '0': cphi = '0.' + cphi[1:]
+        elif cphi[:2] == '-0': cphi = '-0.' + cphi[2:]
+        if sphi[0] == '0': sphi = '0.' + sphi[1:]
+        elif sphi[:2] == '-0': sphi = '-0.' + sphi[2:]
+        phimu = atan2(float(sphi), float(cphi))
+
+        phimus.append(phimu if phimu >= 0 else 2*pi+phimu)
+
+        slha = pyslha.read(slha_path)
+        param_vals.append(slha.blocks[block][idcs])
+
+    phimus_sorted = sorted(phimus)
+    param_vals_sorted = [susy_scale for _, susy_scale in sorted(zip(phimus, param_vals), key=lambda pair: pair[0])]
+
+
+    fig, ax = plt.subplots()
+    ax.plot(phimus_sorted, param_vals_sorted)
+    ax.set_xlabel(r'phase of $\mu$')
+    ax.set_ylabel(f'{block} {idcs}')
     ax.set_xticks([i*pi/3 for i in range(7)], ['0', r'$\frac{1}{3}\pi$', r'$\frac{2}{3}\pi$', r'$\pi$', r'$\frac{4}{3}\pi$', r'$\frac{5}{3}\pi$', r'$2\pi$'])
 
+    if ylims is not None:
+        ymin, ymax = [
+            eval(lim.replace('min', str(ax.get_ylim()[0])).replace('max', str(ax.get_ylim()[1])))
+            for lim in ylims
+        ]
+        ax.set_ylim(bottom=ymin, top=ymax)
+    if plotname is not None:
+        savefig_with_info(plotname)
+    else:
+        plt.show()
+
+def charge_plot(slha_dir, charge, plotname = None, ylims = None):
+    slha_paths = [ slha_dir+f.name for f in os.scandir(slha_dir) if f.is_file() ]
+
+    phimus = []
+    charge_vals = []
+    for slha_path in slha_paths:
+        cphi, sphi, phi = slha_path.split('_')[-3:]
+        if cphi[0] == '0': cphi = '0.' + cphi[1:]
+        elif cphi[:2] == '-0': cphi = '-0.' + cphi[2:]
+        if sphi[0] == '0': sphi = '0.' + sphi[1:]
+        elif sphi[:2] == '-0': sphi = '-0.' + sphi[2:]
+        phimu = atan2(float(sphi), float(cphi))
+
+        phimus.append(phimu if phimu >= 0 else 2*pi+phimu)
+
+        slha = pyslha.read(slha_path)
+        charge_vals.append(charge(slha.blocks))
+
+    phimus_sorted = sorted(phimus)
+    charge_vals_sorted = [susy_scale for _, susy_scale in sorted(zip(phimus, charge_vals), key=lambda pair: pair[0])]
+
+
+    fig, ax = plt.subplots()
+    ax.plot(phimus_sorted, charge_vals_sorted)
+    ax.set_xlabel(r'phase of $\mu$')
+    ax.set_ylabel('charge')
+    ax.set_xticks([i*pi/3 for i in range(7)], ['0', r'$\frac{1}{3}\pi$', r'$\frac{2}{3}\pi$', r'$\pi$', r'$\frac{4}{3}\pi$', r'$\frac{5}{3}\pi$', r'$2\pi$'])
+
+    if ylims is not None:
+        ymin, ymax = [
+            eval(lim.replace('min', str(ax.get_ylim()[0])).replace('max', str(ax.get_ylim()[1])))
+            for lim in ylims
+        ]
+        ax.set_ylim(bottom=ymin, top=ymax)
     if plotname is not None:
         savefig_with_info(plotname)
     else:
@@ -289,6 +398,9 @@ if __name__ == '__main__':
     parser.add_argument('--sq-unitarity-plot', dest='sq_unitary', action='store_true')
     parser.add_argument('--usqmixplot', dest='usqmixplot', action='store_true')
     parser.add_argument('--usqmassplot', dest='usqmassplot', action='store_true')
+    parser.add_argument('--susy-scale-plot', dest='susy_scale', action='store_true')
+    parser.add_argument('--slha-param-plot', dest='slha_param', nargs='+')
+    parser.add_argument('--ylims', dest='ylims', nargs='+', type=str, default=['min', 'max'])
     clargs = parser.parse_args()
     plot_info = clargs.__dict__
 
@@ -297,16 +409,17 @@ if __name__ == '__main__':
     sutils.set_centre_of_mass_energy(clargs.S)
 
     if clargs.plot_mu_phase:
-        process_queue = [
-            [(1000022, 1000022), (1000023, 1000023), (1000025, 1000025), (1000035, 1000035)],
-            [(1000022, 1000022), (1000022, 1000023), (1000022, 1000025), (1000022, 1000035)],
-            [(1000023, 1000022), (1000023, 1000023), (1000023, 1000025), (1000023, 1000035)],
-            [(1000025, 1000022), (1000025, 1000023), (1000025, 1000025), (1000025, 1000035)],
-            [(1000035, 1000022), (1000035, 1000023), (1000035, 1000025), (1000035, 1000035)]
-        ]
-        for idx, processes in enumerate(process_queue):
-            mu_plot(clargs.indir, [sorted(proc) for proc in processes], clargs.plotname+str(idx))
-            plt.clf()
+        # process_queue = [
+        #     [(1000022, 1000022), (1000023, 1000023), (1000025, 1000025), (1000035, 1000035)],
+        #     [(1000022, 1000022), (1000022, 1000023), (1000022, 1000025), (1000022, 1000035)],
+        #     [(1000023, 1000022), (1000023, 1000023), (1000023, 1000025), (1000023, 1000035)],
+        #     [(1000025, 1000022), (1000025, 1000023), (1000025, 1000025), (1000025, 1000035)],
+        #     [(1000035, 1000022), (1000035, 1000023), (1000035, 1000025), (1000035, 1000035)]
+        # ]
+        # for idx, processes in enumerate(process_queue):
+        #     mu_plot(clargs.indir, [sorted(proc) for proc in processes], clargs.plotname+str(idx))
+        #     plt.clf()
+        mu_plot(clargs.indir, [(1000022, 1000022), (1000023, 1000023), (1000023, 1000025), (1000025, 1000035)], clargs.plotname)
 
     if clargs.mixplot:
         mixing_plot(clargs.indir, clargs.pid, clargs.plotname)
@@ -322,3 +435,25 @@ if __name__ == '__main__':
 
     if clargs.usqmassplot:
         squark_mass_plot(clargs.indir, clargs.plotname)
+
+    if clargs.susy_scale:
+        susy_scale_plot(clargs.indir, clargs.plotname)
+
+    if clargs.slha_param:
+        block = clargs.slha_param[0]
+        idcs = [int(idx) for idx in clargs.slha_param[1:]]
+        plot_slha_parameter(clargs.indir, block, idcs, clargs.plotname, clargs.ylims)
+
+    exit(1)
+
+    import supercharge as sc
+    def foo(slha_blocks):
+        sc.set_weinberg(slha_blocks['SMINPUTS'][4], slha_blocks['MASS'][24], 0)
+        sc.set_nmix(slha_blocks['NMIX'], slha_blocks['IMNMIX'])
+        sc.set_sqmix(slha_blocks['USQMIX'], slha_blocks['IMUSQMIX'], slha_blocks['DSQMIX'], slha_blocks['IMDSQMIX'])
+
+        # return sc.ZXYnorm(4, 4, 2/3, 0.5)
+        # return sc.Z2re(4, 4, 2/3, 0.5)
+        return sc.QXYsum(1, 4, 4, 2, 2, 2/3, 0.5)
+        
+    charge_plot(clargs.indir, foo, clargs.plotname, clargs.ylims)
