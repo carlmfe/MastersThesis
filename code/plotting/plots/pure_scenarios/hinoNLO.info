@@ -1,11 +1,11 @@
-###This file lists info to recreate plot 'plots/pure_scenarios/hino.pdf'.###
+###This file lists info to recreate plot 'plots/pure_scenarios/hinoNLO.pdf'.###
 
 pid1, 1000022
 pid2, 1000023
 pdf_set, PDF4LHC21_40_pdfas
 S, 13600
 VERBOSE, False
-NLO, False
+NLO, True
 slha, pure_scenarios/hino.slha
 param, Neutralino mass [GeV]
 param_range, [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500]

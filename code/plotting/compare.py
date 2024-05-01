@@ -130,8 +130,7 @@ def compare_pdf_sets(slha_filepath, pdf_sets, processes, code=['smoking']):
 
     return results
 
-
-def compare2resummino(slha_filepath: str, proc: tuple[int], param_points: list[dict], tnum: bool=False) -> dict[str, dict[any, float]]:
+def compare2resummino(slha_filepath: str, proc: tuple[int], param_points: list[dict], tnum: bool=False, NLO: bool=False) -> dict[str, dict[any, float]]:
     '''Runs smoking and resummino for given proc using slha file located at slha_filepath replacing
     any '@a' in slha file with values listed in param_vals and returns results in dictionary ordered
     as
@@ -168,20 +167,22 @@ def compare2resummino(slha_filepath: str, proc: tuple[int], param_points: list[d
         # queue smoking job
         queue.append(f'-c smoking --pid1 {pid1} --pid2 {pid2} -r {tmpslhafile} -o {tmpresfile_smoking} -l {param_label} --tempstem smkng{param_label}_ -P {sutils.PDF_SET} -S {sutils.S}')
         if sutils.VERBOSE: queue[-1] += ' -v'
+        if NLO: queue[-1] += ' --nlo'
         if tnum: queue[-1] += ' --tnum'
         # queue resummino job
         queue.append(f'-c resummino --pid1 {pid1} --pid2 {pid2} -r {tmpslhafile} -o {tmpresfile_resummino} -l {param_label} --tempstem rsmmn{param_label}_ -P {sutils.PDF_SET} -S {sutils.S}')
         if sutils.VERBOSE: queue[-1] += ' -v'
+        if NLO: queue[-1] += ' --nlo'
 
     # Now we can loop over all processes to be run
     # run_proc.py makes the correct smoking/resummino calls and writes results in common file format
     subprocs = [ Popen(('python run_proc.py ' + query).split(), stdout=PIPE, stderr=PIPE) for query in queue ]
     for subproc in subprocs:
         # This ensures all subprocesses are done before continuing
-        subproc.wait()
         if sutils.VERBOSE:
             print(subproc.stdout.read().decode(), end='')
             print(subproc.stderr.read().decode(), end='')
+        subproc.wait()
 
 
     # Clearing temporary .slha and .out files
@@ -392,6 +393,8 @@ if __name__ == '__main__':
     parser.add_argument('-P', '--PDF', dest='pdf_set', default='PDF4LHC21_40_pdfas', choices=available_pdf_sets)
     parser.add_argument('-S', '--center-of-mass-energy', dest='S', default=13600, type=float)
     parser.add_argument('-v', '--VERBOSE', dest='VERBOSE', action='store_true')
+    parser.add_argument('--nlo', dest='NLO', action='store_true')
+
     clargs = parser.parse_args()
     plot_info = clargs.__dict__
 
@@ -405,16 +408,16 @@ if __name__ == '__main__':
 
     '''
     '''
-    slha_filename = 'wino.slha'
-    # slha_filename = 'hino.slha'
+    # slha_filename = 'pure_scenarios/wino.slha'
+    slha_filename = 'pure_scenarios/hino.slha'
     param_range = [n*100 for n in range(1, 16)]
-    res = compare2resummino(SLHA_ROOT+slha_filename, (pid1, pid2), [{'@a' : str(param_val)} for param_val in param_range], tnum=False)
+    res = compare2resummino(SLHA_ROOT+slha_filename, (pid1, pid2), [{'@a' : str(param_val)} for param_val in param_range], tnum=False, NLO=clargs.NLO)
     xlabel = r'$\tilde{\chi}^0$ mass [GeV]'
     plot_info['slha'] = slha_filename
     plot_info['param'] = 'Neutralino mass [GeV]'
     plot_info['param_range'] = param_range
 
-    # slha_filename = 'wino_sqmass.slha'
+    # slha_filename = 'pure_scenarios/wino_sqmass.slha'
     # param_range = [1e3 + (1e5-1e3)*(n-1)/14 for n in range(1, 16)]
     # res = compare2resummino(SLHA_ROOT+slha_filename, (pid1, pid2), [{'@a' : str(param_val)} for param_val in param_range], tnum=False)
     # xlabel = 'Squark mass [GeV]'
@@ -425,8 +428,8 @@ if __name__ == '__main__':
     Z_mass = 9.11870000E+01
     W_mass = 8.04961219E+01
 
-    # # slha_filename = 'wino_Zmass.slha'
-    # slha_filename = 'hino_Zmass.slha'
+    # # slha_filename = 'pure_scenarios/wino_Zmass.slha'
+    # slha_filename = 'pure_scenarios/hino_Zmass.slha'
     # param_range = [(W_mass/Z_mass + (1.3-W_mass/Z_mass)*n/14)*Z_mass for n in range(15)]
     # res = compare2resummino(SLHA_ROOT+slha_filename, (pid1, pid2), [{'@a' : str(param_val)} for param_val in param_range], tnum=False)
     # xlabel = r'$m_Z$ [GeV]'
@@ -434,8 +437,8 @@ if __name__ == '__main__':
     # plot_info['param'] = 'Z-mass [GeV]'
     # plot_info['param_range'] = param_range
 
-    # # slha_filename = 'wino_Wmass.slha'
-    # slha_filename = 'hino_Wmass.slha'
+    # # slha_filename = 'pure_scenarios/wino_Wmass.slha'
+    # slha_filename = 'pure_scenarios/hino_Wmass.slha'
     # param_range = [(0.7 + (Z_mass/W_mass-0.7)*n/14)*W_mass for n in range(15)]
     # res = compare2resummino(SLHA_ROOT+slha_filename, (pid1, pid2), [{'@a' : str(param_val)} for param_val in param_range], tnum=False)
     # xlabel = r'$m_W$ [GeV]'
@@ -457,13 +460,14 @@ if __name__ == '__main__':
     axes[1].set_ylabel(r'relative error')
     axes[1].set_xlabel(xlabel)
     axes[1].set_ylim(bottom=max([axes[1].get_ylim()[0], -1.0]), top=min([axes[1].get_ylim()[1], 1.0]))
+    # axes[1].set_ylim(bottom=-1, top=1)
 
-    savefig_with_info(PLOT_ROOT+slha_filename.replace('.slha', ''), info=plot_info)
+    savefig_with_info(PLOT_ROOT+slha_filename.replace('.slha', '') + ('NLO' if clargs.NLO else ''), info=plot_info)
     plt.show()
 
     '''
-    slha_filepath = SMOKING_ROOT + 'EW/1_1_15.slha'
-    # slha_filepath = SMOKING_ROOT + 'EW/11_111_3.slha'
+    # slha_filepath = SMOKING_ROOT + 'EW/1_1_15.slha'
+    slha_filepath = SMOKING_ROOT + 'EW/11_111_3.slha'
     # slha_filepath = SMOKING_ROOT + 'example/sps1a.slha'
     # slha_filepath = 'slha/csps1a.slha'
 

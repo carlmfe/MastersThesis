@@ -1,0 +1,9 @@
+###This file lists info to recreate plot 'plots/compare_prospino_1_1_15.pdf'.###
+
+pid1, 1000022
+pid2, 1000023
+pdf_set, PDF4LHC21_40_pdfas
+S, 13600
+VERBOSE, False
+slha, /home/carlmfe/Documents/master/smoking/EW/1_1_15.slha
+processes, [(1000022, 1000022), (1000022, 1000023), (1000022, 1000025), (1000022, 1000035), (1000023, 1000023), (1000023, 1000025), (1000023, 1000035), (1000025, 1000025), (1000025, 1000035), (1000035, 1000035)]

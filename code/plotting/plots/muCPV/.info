@@ -2,5 +2,7 @@
 These plots explore neutralino pair production cross-sections for a complex phase rotation of mu in the sps1a MSSM benchmark point.
 All input slha-files are generated using the FlexibleSUSY CMSSMCPV model spectrum calculator.
 All cross-sections are calculated to LO using smoking library without BW squark masses.
+Renormalisation, factorisation of SUSY scales are all set to 4.66491036E+02 GeV for both the generation of the slha-files and all cross-section calculations.
+This corresponds with the SUSY scale of the sps1a parameter point in the CMSSMCPV model.
 *_reldevI.pdf plot the relative deviance (xsec0-xsec)/xsec0, where xsec0 is the cross-section for mu = |mu|.
 *_xsecsI.pdf are logplots of the actual cross-sections.

@@ -1,10 +1,10 @@
-###This file lists info to recreate plot 'plots/wino_Zmass.pdf'.###
+###This file lists info to recreate plot 'plots/pure_scenarios/wino_Zmass.pdf'.###
 
 pid1, 1000022
 pid2, 1000023
 pdf_set, PDF4LHC21_40_pdfas
 S, 13600
-verbose, False
-slha, wino_Zmass.slha
+VERBOSE, False
+slha, pure_scenarios/wino_Zmass.slha
 param, Z-mass [GeV]
 param_range, [80.4961219, 83.21376319285714, 85.9314044857143, 88.64904577857143, 91.36668707142857, 94.08432836428572, 96.80196965714286, 99.51961095, 102.23725224285715, 104.95489353571429, 107.67253482857143, 110.39017612142857, 113.10781741428572, 115.82545870714286, 118.5431]
