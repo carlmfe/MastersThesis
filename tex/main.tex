@@ -22,10 +22,8 @@
   %%%%%%%%%%%%%%%%%%%%
   %%% Introduction %%%
   %%%%%%%%%%%%%%%%%%%%
-  \begin{donotread}
-    \chapter{Introduction}
-    \include{chapters/introduction}
-  \end{donotread}
+  \chapter{Introduction}
+  \include{chapters/introduction}
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %%% Quantum Field Theory %%%
@@ -38,16 +36,29 @@
   \subfile{chapters/SUSY}
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  %%% Neutralino Pair Production at Parton Level %%%
+  %%% Electroweakino Pair Production at Parton Level %%%
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \subfile{chapters/parton_calculation}
 
-  \subfile{chapters/proton_calculation}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%% Electroweakino Pair Production at Hadron Level %%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \subfile{chapters/hadron_calculation}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%
+  %%% Numerical Results %%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%
+  \subfile{chapters/numerical_results}
+
   %%%%%%%%%%%%%%%%%%
   %%% References %%%
   %%%%%%%%%%%%%%%%%%
   \bibliography{references}{}
   \bibliographystyle{style/JHEP}
+
+
+  \appendix
+  \subfile{chapters/appendix}
 
 \end{draft}
 

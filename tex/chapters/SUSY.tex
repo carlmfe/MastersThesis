@@ -6,11 +6,13 @@
 
 \section{Introduction to Supersymmetry}
 \label{susy:sec:introduction}
-\phpar[Introduce supersymmetry, what the symmetry is and how it transforms fermionic and bosonic fields through each other.
-  Introduce superspace, Grassmann calculus, superfields and superlagrangians.]
+In this chapter, I introduce the basic ideas behind supersymmetry, what it is, and how to construct field theories that are \emph{supersymmetric}.
+I will discuss the Super-Poincaré group as an extension of the Poincaré group, and introduce superspace as a vessel for supersymmetric field theories.
+I go on to describe the Minimal Supersymmetric Standard Model (MSSM), the minimal (broken) supersymmetric QFT containing the Standard Model (SM) particles as a subset.
+The electroweakinos, the main focus of this thesis, are introduced, including general mixing of fields into mass eigenstates, and I go into some depth to derive the interaction Feynman rules of these particles from the MSSM \emph{superlagrangian}.
 
-Introductory passage\ldots\\
-In this section, I will make extensive use of Weyl spinor notation and Grassmann calculcus for which I go in depth in Appendix \needcite.
+This chapter makes extensive use of Weyl spinor notation and Grassmann calculus. For more details on this and the specific notation I use, I refer to \cref{app:chap:weyl_grassmann}.
+Some background in group theory is necessary to follow certain parts of the chapter, but is not necessary to understand the broader ideas.
 
 \subsection*{A Simple Supersymmetric Theory}
 To illustrate what supersymmetry looks like in practice, it can be helpful to
@@ -110,8 +112,6 @@ up to renormalisable interactions.
 
 
 \section{The Super-Poincaré Group}
-\phpar[Introduce the super-Poincaré algebra, and superspace as a vessel for manifestly supersymmetric theories. Lead into superfields, and general supersymmetric superlagrangians.]
-
 To introduce more involved supersymmetric QFTs than our simple example from \cref{susy:sec:introduction}, it will be useful to first introduce a framework that will manifestly carry the supersymmetry.
 This will alleviate the need to figure out the correct transformation laws, and the constraints they may carry to the parameters of the theory.
 To this end, I will outline a common way of introducing supersymmetric theories -- extending our fields from representations of the Poincaré group of cooridinate transformations to the super-Poincaré group.
@@ -139,7 +139,7 @@ For completeness, the semi-direct product is defined such that the product of tw
 where we understand \(\circ_{O/T}\) as the group multiplication operations of \(O(1,3)\) and \(T(1,3)\) respectively.\footnote{We see also that \(O(1,3)\) must also be a map \(T(1,3) \to T(1,3)\).
   We will later see that this means that the generators of translations are in a representation of the Lorentz group.}
 
-For our purposes, it will suffice to work simply with the local structure of the Poincaré group, \needcite[and being Lie groups], this can be reproduced with the exponential map we have used already in \cref{qft:eq:exponential_map} \(\text{exp} : \mathfrak{g} \to G\), where \(\mathfrak{g}\) is the \emph{Lie algebra} of the Lie group \(G\).
+For our purposes, it will suffice to work simply with the local structure of the Poincaré group, and being Lie groups, this can be reproduced with the exponential map we have used already in \cref{qft:eq:exponential_map} \(\text{exp} : \mathfrak{g} \to G\), where \(\mathfrak{g}\) is the \emph{Lie algebra} of the Lie group \(G\).
 In this way, the algebra is said to \emph{generate} the group, and a basis set \(\cclosed{T^a}\) of the algebra \(\mathfrak{g}\) is said to be the \emph{generators} of the group.\footnote{The algebra of a Lie group can be shown to be a vector space, and as such there exists a basis set spanning the algebra.}
 Accordingly, the local behaviour of the group can be inferred simply from the properties of the generators \(T^a\).
 The generators of the Poincaré group can be structured by an antisymmetric Lorentz tensor \(M^{\mu\nu}\), and a four-vector \(P\^\mu\).
@@ -201,7 +201,7 @@ Applying a super-Poincaré group element without the Lorentz generators \(\bar{g
 \begin{equation}
   F(z^\prime) = \exptext{i{z^\prime}\^\pi K\_\pi} F(0) = \exptext{ia\^\mu P\_\mu + i (\eta Q) + i (\eta Q)^\dagger} \exptext{iz\^\pi K\_\pi} F(0),
 \end{equation}
-which by the \needcite[Baker-Campbell-Hausdorff] formula (BCH) gives to first order in the commutators
+which by the Baker-Campbell-Hausdorff formula (BCH) gives to first order in the commutators
 \begin{equation}
   \label{susy:eq:supersymmetry_transformation}
   {z^\prime}\^\pi K\_\pi = (x\^\mu + a\^\mu) P\_\mu + (\theta\^\alpha + \eta\^\alpha)Q\_\alpha + (\theta\indices*{^\dagger_{\dot\alpha}} + \eta\indices*{^\dagger_{\dot\alpha}})Q\indices*{^\dagger^{\dot\alpha}} + \frac{i}{2}\bclosed{a\^\mu P\_\mu + (\eta Q) + (\eta Q)^\dagger, z\^\pi K\_\pi} + \ldots
@@ -235,7 +235,7 @@ This limits a general such function of superspace to be written as
 \end{align}
 
 \begin{temporary}
-  For future reference, a supersymmetry transformation \(\bar{g(0, \epsilon)}\) from some infinitesimal Weyl spinor \(\epsilon\_\alpha\) transforms the component fields of the general superfield \(F(z)\) according to\footnote{The transformations parameters \(a\^\mu\) are set to zero, which we can do without loss of generality, as the \(P\_\mu\) generators commute with the rest of the generators.}\needcite
+  For future reference, a supersymmetry transformation \(\bar{g}(0, \epsilon)\) from some infinitesimal Weyl spinor \(\epsilon\_\alpha\) transforms the component fields of the general superfield \(F(z)\) according to\footnote{The transformations parameters \(a\^\mu\) are set to zero, which we can do without loss of generality, as the \(P\_\mu\) generators commute with the rest of the generators.}\needcite
   \begin{subequations}
     \begin{align}
       \delta f(x) =                         & (\epsilon\phi(x)) + (\epsilon \chi(x))^\dagger                                                                                                                                                                                                               \\
@@ -262,7 +262,7 @@ This seems like an ideal vessel for constructing supersymmetric fields theories.
 We define the \emph{superfield} \(\Phi\) as an operator-valued function on
 superspace.\footnote{For our purposes, it suffices to look at them simply as complex valued functions, but strictly speaking, they are operator-valued in a quantised field theory.} The general superfield from \cref{susy:eq:superspace_function} is in a
 reducible representation space of the super-Poincaré group, so we define three
-\emph{irreducible} representations that will be useful going forward:\footnote{I will not prove that these in fact are irreducible representations.}
+\emph{irreducible} representations that will be useful going forward:\footnote{I will not prove here that these in fact are irreducible representations.}
 \begin{align}
   \textit{Left-handed scalar superfield:}  &  & \bar{D}\_{\dot\alpha}\Phi & = 0,    \\
   \textit{Right-handed scalar superfield:} &  & D\_{\alpha}\Phi^\dagger   & = 0,    \\
@@ -279,74 +279,88 @@ Here the dagger operation refers to complex conjugation, and the differential op
 These differential operators are covariant differentials in the sense that the commute with supersymmetry transformations, i.e. \(D\_\alpha F(z) \to {D^\prime}\_\alpha (\bar{g} F(z)) = \bar{g} \pclosed{D\_\alpha F(z)}\)
 Collectively, the left- and right-handed scalar superfields are referred to as \emph{chiral superfields}.
 
-For future reference, the general forms of a left-handed scalar superfield \(\Phi\), a right-handed scalar superfield \(\Phi^\dagger\) and a Vector superfield \(V_\text{WZ}\) in Wess-Zumino gauge is\needcite:\margincomment{Define Wess-Zumino gauge here?}
+For future reference, the general forms of a left-handed scalar superfield \(\Phi\), a right-handed scalar superfield \(\Phi^\dagger\) and a vector superfield \(V_\text{WZ}\) in the so-called Wess-Zumino gauge is~\cite{Muller-Kirsten}:
 \begin{subequations}
   \begin{align}
-    \Phi =         & A + i(\theta\sigma\^\mu\theta^\dagger) \partial_\mu A - \frac{1}{4} (\theta\theta)(\theta\theta)^\dagger \dA A +
-    \sqrt{2} (\theta\psi) - \frac{i}{\sqrt{2}} (\theta\theta) (\partial_\mu \psi \sigma\^\mu \theta^\dagger) + (\theta\theta) F,                     \\
-    \Phi^\dag =    & A^\ast - i(\theta\sigma\^\mu\theta^\dagger) \partial_\mu A^\ast - \frac{1}{4} (\theta\theta)(\theta\theta)^\dagger \dA A^\ast +
-    \sqrt{2} (\theta\psi)^\dagger + \frac{i}{\sqrt{2}} (\theta\theta)^\dagger
-    (\theta \sigma\^\mu \partial_\mu \psi^\dagger) + (\theta\theta)^\dagger F^\ast,                                                                  \\
-    \msub{V}{WZ} = & (\theta\sigma\^\mu\theta^\dagger) V\_\mu + (\theta\theta) (\theta\lambda)^\dagger +
-    (\theta\theta)^\dagger(\theta\lambda) + \frac{1}{2}
-    (\theta\theta)(\theta\theta)^\dagger D,
+    \label{susy:eq:lh_superfield}
+    \nonumber
+    \Phi(x, \theta, \theta^\dagger) =         & A(x) + i(\theta\sigma\^\mu\theta^\dagger) \partial_\mu A(x) - \frac{1}{4} (\theta\theta)(\theta\theta)^\dagger \dA A(x)                 \\
+                                              & + \sqrt{2} (\theta\psi(x)) - \frac{i}{\sqrt{2}} (\theta\theta) (\partial_\mu \psi(x) \sigma\^\mu \theta^\dagger) + (\theta\theta) F(x), \\
+    \label{susy:eq:rh_superfield}
+    \nonumber
+    \Phi^\dag(x, \theta, \theta^\dagger) =    & A^\ast(x) - i(\theta\sigma\^\mu\theta^\dagger) \partial_\mu A^\ast(x) - \frac{1}{4} (\theta\theta)(\theta\theta)^\dagger \dA A^\ast(x)  \\
+                                              & + \sqrt{2} (\theta\psi(x))^\dagger + \frac{i}{\sqrt{2}} (\theta\theta)^\dagger
+    (\theta \sigma\^\mu \partial_\mu \psi^\dagger(x)) + (\theta\theta)^\dagger F^\ast(x),                                                                                               \\
+    \label{susy:eq:vector_superfield}
+    \msub{V}{WZ}(x, \theta, \theta^\dagger) = & (\theta\sigma\^\mu\theta^\dagger) V\_\mu(x) + (\theta\theta) (\theta\lambda(x))^\dagger +
+    (\theta\theta)^\dagger(\theta\lambda(x)) + \frac{1}{2}
+    (\theta\theta)(\theta\theta)^\dagger D(x).
   \end{align}
 \end{subequations}
 
 
 \subsection{Superlagrangian}
-We are now ready to define the action of a quantum field theory on superspace.
-Viewing the superlagrangian as a function on superspace, the Grassmann integration projects out the \(d\)-field of \cref{susy:eq:superspace_function}.
-Under a supersymmetry transformation \cref{susy:eq:supersymmetry_transformation} this can be shown to transform as total derivative, leaving the action \cref{susy:eq:susy_action} invariant.
-Likewise, the auxiliary \(F\)-field of a chiral superfield can be shown to not transform at all, so projecting out this term from chiral superfield term would also constitute a supersymmetry invariant action.
-This means a supersymmetry invariant action of a set of superfields \(\Phi_i\) can be achieved with a Lagrangian
+We are now ready to define the action of a supersymmetric quantum field theory on superspace.
+Given a set of superfields \(\cclosed{\Phi_i}\), we want to define an action through a Lagrangian density comprised of the component fields in \(\Phi_i\).
+A function of the superfields will still be a superfield, and will therefore take the form from \cref{susy:eq:superspace_function}.
+To get a supersymmetry invariant Lagrangian density, we can therefore look to extract some part of such a superspace function that at most transforms as a total derivative under a supersymmetry transformation according to \cref{susy:eq:supersymmetry_transformation}.
+It can be show that the \(d(x)\) component field of \cref{susy:eq:superspace_function} transforms in such a way, and likewise for the \(F(x)\) component field of a chiral superfield \cref{susy:eq:lh_superfield,susy:eq:rh_superfield}, so projecting out these would constitute a valid Lagrangian density for a supersymmetry invariant action.
+Keeping in mind that the Lagrangian density must be real, we can then get a supersymmetry invariant action through a Lagrangian density on the form\footnote{To clarify potential confusion on the capitalisation of the \(D\)-projection here -- for a vector superfield \cref{susy:eq:vector_superfield} the \(d(x)\) component field is the \(D(x)\) auxiliary component field.}
 \begin{align}
-  \L = \operatorname{proj}_d \{\L_\text{general}[\Phi_i]\} + \operatorname{proj}_F \{\L_\text{L}[\Phi_i] + \L_\text{R}[\Phi_i]\},
+  \label{susy:eq:projection_lagragnian}
+  \L = \operatorname{proj}_D (V[\Phi_i]) + \operatorname{proj}_F (W[\Phi_i]) + \operatorname{proj}_{F^\dagger}(W^\dagger[\Phi_i]),
 \end{align}
-where \(\L_\text{general}\) is a general superspace functional of the superfields and \(\L_L[\Phi_i]\) (\(\L_R[\Phi_i]\)) is some left-handed (right-handed) scalar superfield functional of the superfields \(\Phi_i\).
-Requiring the Lagrangian to be real means that \(\L_\text{general}^\dagger = \L_\text{general} \equiv \L_V\), i.e. it must be a vector superfield, and that \(\L_R = \L_L^\dagger \equiv \L_C^\dagger\).
-Grassmann integration functions as projection, and so the projection operators can be realised by
+where \(V[\Phi_i]\) is a vector superfield and \(W[\Phi_i]\) (\(W^\dagger[\Phi_i]\)) is some left-handed (right-handed) scalar superfield.
+
+The projection operators can be realised using Grassmann integration:\footnote{As a reminder, I detail how the calculus of Grassmann coordinates is defined in \cref{app:chap:weyl_grassmann}.}
 \begin{subequations}
   \begin{align}
-    \operatorname{proj}_d \L_V =         & \integral{^4\theta} \L_V,                        \\
-    \operatorname{proj}_F \L_C =         & \integral{^4\theta} (\theta\theta)^\dagger \L_C, \\
-    \operatorname{proj}_F \L_C^\dagger = & \integral{^4\theta} (\theta\theta) \L_C^\dagger.
+    \operatorname{proj}_D V[\Phi_i] =                   & \integral{^4\theta} V[\Phi_i],                        \\
+    \operatorname{proj}_F W[\Phi_i] =                   & \integral{^4\theta} (\theta\theta)^\dagger W[\Phi_i], \\
+    \operatorname{proj}_{F^\dagger} W^\dagger[\Phi_i] = & \integral{^4\theta} (\theta\theta) W^\dagger[\Phi_i].
   \end{align}
 \end{subequations}
-
-Accordingly, we can write down the general supersymmetry invariant action of as set of \emph{scalar} superfields \(\Phi_i\) up to renormalisable interactions using a Lagrangian on the form
+Accordingly, we can write down the general supersymmetry invariant action, letting \(\cclosed{\bar\Phi_i}\) be the subset of chiral superfields in \(\{\Phi_i\}\) using a Lagrangian density on the form
 \begin{align}
   \label{susy:eq:general_susy_lagrangian}
-  \L = \integral{^4\theta} \cclosed{\sum_i \Phi_i^\dagger \Phi_i + \cclosed{(\theta\theta)^\dagger W[\Phi_i] + (\theta\theta) W[\Phi_i^\dagger]}},
+  \L = \integral{^4\theta} \cclosed{V[\Phi_i] + (\theta\theta)^\dagger W[\bar\Phi_i] + (\theta\theta) W[\bar\Phi_i^\dagger]},
 \end{align}
-where \(W[\Phi_i]\) is a holonomic functional of its argument superfield called the \emph{superpotential}.
-\(W\) being holonomic simplify means that \(W[\Phi_i]\) will be a left-handed scalar superfield and \(W[\Phi_i^\dagger]\) a right-handed scalar superfield.
-
-The action of a general supersymmetric theory can accordingly be written as a functional of a set of superfields \(\cclosed{\Phi_i}\)
+where we restrict \(W\) to be holonomic function of its argument superfields called the \emph{superpotential}.
+\(W\) being holonomic in this context simply means that \(W[\bar\Phi_i]\) will be a left-handed scalar superfield and \(W[\bar\Phi_i^\dagger]\) a right-handed scalar superfield.
+This leads to defining the \emph{superlagrangian} \(\tilde\L\) as a Lagrangian density analogue on superspace, where we can recognise
+\begin{equation}
+  \label{susy:eq:superlagrangian}
+  \tilde\L = V[\Phi_i] + (\theta\theta)^\dagger W[\bar\Phi_i] + (\theta\theta) W[\bar\Phi_i^\dagger],
+\end{equation}
+and subsequently the action as
 \begin{equation}
   \label{susy:eq:susy_action}
-  S\bclosed{\cclosed{\Phi_i}} = \integral{^4x \mathrm{d}^4\theta} \L\pclosed{\cclosed{\Phi}, \cclosed{\pd[z^\pi]{\Phi}}, z},
+  S\bclosed{\cclosed{\Phi_i}} = \integral{^4x\,\mathrm{d}^4\theta} \tilde\L\pclosed{\cclosed{\Phi_i}, \cclosed{\pd[z^\pi]{\Phi_i}}, z}.
 \end{equation}
-where we define the \emph{superlagrangian} \(\L\) be a function superfields \(\cclosed{\Phi}\), their derivatives and of superspace coordinates \(z^\pi\) to the reals.
-The ordinary Lagrangian density as a function of the component fields \(\phi\) of the superfields is recovered simply by integrating over the Grassmann coordinates:
+
+Renormalisability puts severe restrictions on the form of the superlagrangian by imposing that any parameter of the theory cannot have a negative mass dimension.
+Recognising that \(1 = \integral{^4\theta} (\theta\theta)(\theta\theta)^\dagger\), we must have that \([\integral{^4\theta}] = M^2\) for some mass reference scale \(M\).
+Consequently, for the ordinary Lagrangian density to have mass dimension four, we must have that \([\tilde\L] = M^2\).
+From \cref{susy:eq:lh_superfield} we recognise that the scalar superfield contains a scalar field term, and consequently has mass dimension \([\Phi] = M^1\).
+Thus, the general form of the superpotential is
 \begin{equation}
-  \L_\text{ordinary}\pclosed{\cclosed{\phi}, \cclosed{\pd[x^\mu]{\phi}}, x} = \integral{^4\theta} \L\pclosed{\cclosed{\Phi}, \cclosed{\pd[z^\pi]{\Phi}}, x, \theta, \theta^\dagger}
+  W[\Phi_i] = \sum_i \lambda_i\Phi_i + \sum_{ij} m_{ij}\Phi_i \Phi_j + \sum_{ijk} y_{ijk} \Phi_i \Phi_j \Phi_k,
 \end{equation}
-
-
-For details on how the calculus of Grassmann coordinates is defined, I refer to Appendix \needcite.
-\\\comment{Perhaps this is the place for a superspace calculus interlude?}
+and the only possible form of \(V[\Phi_i]\) only containing scalar superfields is
+\begin{equation}
+  V[\Phi_i] = \sum_i \Phi_i \Phi_i^\dagger,
+\end{equation}
+where the prefactor of the terms are set to 1, which can be done without loss of generality by rescaling the fields.
 
 
 \subsection{Revisiting our Simple Supersymmetric Theory}
-Now that we have developed a structure for creating manifestly supersymmetric theories, we can take a moment to revisit our simple theory from \cref{susy:eq:simple_thoery} to see what it would look like within the superspace framework.
+Now that we have developed a structure for creating manifestly supersymmetric theories using superfields, we can take a moment to revisit our simple theory from \cref{susy:eq:simple_thoery} to see what it would look like within the superspace framework.
 We can use a left-handed scalar superfield \(\Phi\) as the vessel for our scalar field \(\phi\), fermionic field \(\psi\) and auxiliary field \(F\):
 \begin{align}
   \nonumber
   \Phi(\theta, \theta^\dagger, x) = & \phi(x) + i(\theta\sigma\^\mu \theta^\dagger) \partial_\mu \phi(x) - \frac{1}{4} (\theta\theta)(\theta\theta)^\dagger \dA \phi(x)      \\
                                     & + \sqrt{2}(\theta \psi(x)) - \frac{i}{\sqrt{2}} (\theta\theta) (\partial_\mu \psi(x) \sigma\^\mu \theta^\dagger) + (\theta\theta)F(x).
 \end{align}
-\todo{Derive or cite the field content of chiral superfields (and perhaps vector superfields too).}
 The kinetic terms are reproduced through the first term in \cref{susy:eq:general_susy_lagrangian}:
 \begin{align}
   \nonumber
@@ -361,22 +375,20 @@ The remaining mass term can be recreated by the superlagrangian term \(\frac{m}{
   \L_\text{mass} = & \integral{^4\theta} \cclosed{\frac{m}{2} (\theta\theta)^\dagger \Phi\Phi + \cc} = \integral{^4\theta} \cclosed{\frac{m}{2} (\theta\theta)^\dagger \pclosed{2\phi (\theta\theta) F + 2(\theta\psi)(\theta\psi)} + \cc} \\
   =                & m \phi F + m^\ast \phi^\ast F^\ast + \frac{m}{2}(\psi\psi) + \frac{m^\ast}{2} (\psi\psi)^\dagger.
 \end{align}
+So our simple supersymmetric theory is encapsulated simply by the superlagrangian
+\begin{equation}
+  \tilde\L = \Phi \Phi^\dagger + \frac{m}{2} (\theta\theta)^\dagger \Phi\Phi + \frac{m^\ast}{2} (\theta\theta) \Phi^\dagger \Phi^\dagger,
+\end{equation}
+showing how superspace simplifies the model building considerably.
 
 
 
 
 \section{Minimal Supersymmetric Standard Model}
-\phpar[Introduce the field content of the MSSM and explain conventions and names.
-  Talk about the relevant parts of the superlagrangian.]
-
-\begin{TODO}
-  \item Talk about Wess-Zumino gauge.
-\end{TODO}
-
 Up to this point, the building blocks for the MSSM have been introduced, and I will now shift focus how these are put together to create the minimal supersymmetric extension of the SM.
-In particular, I will focus on the electroweak sector, which will be the focus of this thesis.
+I will also outline the process of spontaneous symmetry breaking, and state a general parametrisation of how this is done in the MSSM.
 
-\subsection{Superymmetric Yang-Mills Theory}
+\subsection{Supersymmetric Yang-Mills Theory}
 \label{susy:ssec:susy_yang_mills}
 Before getting into the MSSM content, we must introduce what Yang-Mills theory
 looks like at a superlagangian level. We define a \emph{supergauge
@@ -393,7 +405,7 @@ To get a sense of what these parameters are, we can require the transformed supe
   =                                                  & i\pclosed{D_{\dot{\alpha}}^\dagger \Lambda^a} T^a \exptext{i\Lambda^a T^a} \Phi \mbeq 0,
 \end{align*}
 which means that we must require \(D_{\dot{\alpha}}^\dagger \Lambda^a = 0\), meaning that the parameters are themselves left-handed scalar superfields.
-Examining how the kinetic term \(\Phi^\dagger \Phi\) does under this transformation we can see that\footnote{Using the \needcite[Baker-Campell-Hausdorff formula] (BCH) to combine the exponentials.}
+Examining how the kinetic term \(\Phi^\dagger \Phi\) does under this transformation we can see that\footnote{Using the Baker-Campell-Hausdorff formula (BCH) to combine the exponentials.}
 \begin{equation}
   \Phi^\dagger \Phi \to \Phi^\dagger \exp{-i\Lambda^\dagger} \exp{i\Lambda} \Phi = \Phi^\dagger \exp{i\pclosed{\Lambda - \Lambda^\dagger} - \frac{1}{2} \commutator{\Lambda}{\Lambda^\dagger} + \ldots} \Phi,
 \end{equation}
@@ -427,7 +439,6 @@ The gauge invariant superlagrangian kinetic term for the supergauge field become
   \L_{\mathcal{V}\text{-kin}} = \frac{1}{4 T(R)} \tr\cclosed{ \mathcal{W}\^\alpha \mathcal{W}\_\alpha }
 \end{equation}
 analogously to \cref{qft:eq:Akin}.
-\\\comment{Why is it that the coupling \(q\) sometimes is included in the exponentials \cref{susy:eq:superfield_strength} to be cancelled \cref{susy:eq:Vkin}?}
 
 
 
@@ -443,23 +454,24 @@ Consider an SM Dirac fermion
   \end{pmatrix},
 \end{equation}
 where \(f\) and \(\bar{f}^\dagger\) are two \emph{different} left-handed and right-handed Weyl spinors respectively.
-The left-handed Weyl spinor part \(f\) is embedded into a superfield \(f\) wherein it receives a scalar \emph{superpartner} \(\tilde{f}_L\).\footnote{The subscript \(L\) on the scalar fields carries no indication of any chirality, but rather to the origin of the field as a superpartner to the left-handed chiral part of the fermion field \(f_D\).}
+The left-handed Weyl spinor part \(f\) is embedded into a superfield \(f\) wherein it receives a scalar \emph{superpartner} \(\tilde{f}_L\).\footnote{The subscript \(L\) on the scalar fields carries no indication of any chirality, but rather alludes to the origin of the field as a superpartner to the left-handed chiral part of the fermion field \(f_D\).}
 The superfield and Weyl spinor have the exact same name, which might seem needlessly confusing. However, it does lead to less cluttered notation, and context should clarify which is meant.
 The right-handed Weyl spinor part \(\bar{f}^\dagger\) is likewise embedded into a right-handed scalar superfield \(\bar{F}^\dagger\), with a scalar superfield partner \(\tilde{f}_R\).
 Furthermore, the left-handed scalar superfield \(f\) is part of an \(SU(2)_L\) doublet of superfields \(F\), matching the uppercase naming of the right-handed superfield \(\bar{F}^\dagger\).
-The bar on superfields and right-handed Weyl spinors and signify that they are \(SU(2)_L\) singlets, i.e.\ they do not transform under such symmetry transformations, and to clarify that they are separate variables belonging to the same SM fermion field.
+The bar on superfields and right-handed Weyl spinors signify that they are \(SU(2)_L\) singlets, i.e.\ they do not transform under such symmetry transformations, and makes it clear that the two Weyl spinors \(f\) and \(\bar{f}^\dagger\) are separate variables belonging to the same SM fermion field.
 Collectively, the scalar superpartners to the SM fermions are referred to as \emph{sfermions}.
 
 The gauge groups of the MSSM are the same as in the SM, but the gauge fields are replaced by vector superfield gauge fields as detailed in \cref{susy:ssec:susy_yang_mills}.
 This way, an SM vector boson \(V\^\mu\) is embedded in a vector superfield \(V\) where it receives a left-handed Weyl spinor superpartner \(\tilde{V}\) with its right-handed compliment \(\tilde{V}^\dagger\).
+
 Lastly, and perhaps the most intricate, is the extension of the Higgs sector in the MSSM.
-As it turns out\needcite, the MSSM requires two Higgs doublets for anomaly cancellation within the \(U(1)_Y\) gauge group sector.
+As it turns out, the MSSM requires two Higgs doublets for anomaly cancellation within the \(U(1)_Y\) gauge group sector, and to construct the Yukawa terms giving mass to particles with both positive and negative weak isospin.\footnote{For a more detailed explanation, I will refer the reader to \cite{Martin:1997ns}.}
 This means that there are two scalar Higgs doublets \(H_u, H_d\) before electroweak symmetry breaking (EWSB), giving mass to fermions in the upper/lower part of \(SU(2)_L\) fermion doublets respectively.
-For the cancellation to work out, we must require hypercharge \(\sfrac{+1}{2}\) for \(H_u\) and \(\sfrac{-1}{2}\) for \(H_d\).
+For the anomaly cancellation to work out, we must require hypercharge \(\sfrac{+1}{2}\) for \(H_u\) and \(\sfrac{-1}{2}\) for \(H_d\).
 These scalar Higgs field doublets are embedded in left-handed chiral superfields \(H_{u/d}\) together with fermion superpartners.
-The superfield doublet components are named according to \(H_u = (H_u^+, H_u^0)^T\) and \(H_d = (H_d^0, H_d^-)^T\), where the superscript indicates the post EWSB electric charge of the superfields after EWSB.
+The superfield doublet components are named according to \(H_u = (H_u^+, H_u^0)^T\) and \(H_d = (H_d^0, H_d^-)^T\), where the superscript indicates the post EWSB electric charge of the superfields.
 The fermion partners to both the vector bosons and the Higgs bosons are called \emph{bosinos} collectively.
-For reference all the superfields, their names and their component fields are tabulated in \cref{susy:tab:MSSM-fields}.
+For reference all the superfields in the MSSM, their symbols and their component fields are tabulated in \cref{susy:tab:MSSM-fields}.
 
 {
 \renewcommand{\arraystretch}{1.5}
@@ -467,36 +479,36 @@ For reference all the superfields, their names and their component fields are ta
   \centering
   \begin{tabular}{|l|c|c|ccc|}
     \hline
-                                             & \multicolumn{2}{|c|}{Superfield} & Boson field    & Fermion field            & Auxiliary field                                  \\
+                                             & \multicolumn{2}{|c|}{Superfield} & Boson field    & Fermion field           & Auxiliary field                                 \\
     \hline
-    \multirow{4}{*}{\rotatebox{90}{Higgs}}   & \multirow{2}{*}{\(H_u\)}         & \(H_{u}^{+}\)  & \(H_{u}^{+}\)            & \(\wtilde{H}_{u}^{+}\) & \(F_{H^+_{u}}\)         \\
-                                             &                                  & \(H_u^0\)      & \(H_u^0\)                & \(\wtilde{H}_u^0\)     & \(F_{H^0_u}\)           \\
+    \multirow{4}{*}{\rotatebox{90}{Higgs}}   & \multirow{2}{*}{\(H_u\)}         & \(H_{u}^{+}\)  & \(H_{u}^{+}\)           & \(\tilde{H}_{u}^{+}\) & \(F_{H^+_{u}}\)         \\
+                                             &                                  & \(H_u^0\)      & \(H_u^0\)               & \(\tilde{H}_u^0\)     & \(F_{H^0_u}\)           \\
     \cline{2-6}
-                                             & \multirow{2}{*}{\(H_d\)}         & \(H_d^0\)      & \(H_d^0\)                & \(\wtilde{H}_d^0\)     & \(F_{H^0_d}\)           \\
-                                             &                                  & \(H_{d}^{-}\)  & \(H_{d}^{-}\)            & \(\wtilde{H}_{d}^{-}\) & \(F_{H^-_{d}}\)         \\
+                                             & \multirow{2}{*}{\(H_d\)}         & \(H_d^0\)      & \(H_d^0\)               & \(\tilde{H}_d^0\)     & \(F_{H^0_d}\)           \\
+                                             &                                  & \(H_{d}^{-}\)  & \(H_{d}^{-}\)           & \(\tilde{H}_{d}^{-}\) & \(F_{H^-_{d}}\)         \\
     \hline
-    \multirow{3}{*}{\rotatebox{90}{Leptons}} & \multirow{2}{*}{\(L_i\)}         & \(\nu_i\)      & \(\wtilde{\nu}_{iL}\)    & \(\nu_i\)              & \(F_{\nu_i}\)           \\
-                                             &                                  & \(l_i\)        & \(\wtilde{l}_{iL}\)      & \(l_i\)                & \(F_{l_i}\)             \\
+    \multirow{3}{*}{\rotatebox{90}{Leptons}} & \multirow{2}{*}{\(L_i\)}         & \(\nu_i\)      & \(\tilde{\nu}_{iL}\)    & \(\nu_i\)             & \(F_{\nu_i}\)           \\
+                                             &                                  & \(l_i\)        & \(\tilde{l}_{iL}\)      & \(l_i\)               & \(F_{l_i}\)             \\
     \cline{2-6}
-                                             & -                                & \(\wbar{E}_i\) & \(\wtilde{l}_{iR}^\ast\) & \(\wbar{e}_{i}\)       & \(F_{\wbar{E}_i}^\ast\) \\
+                                             & -                                & \(\wbar{E}_i\) & \(\tilde{l}_{iR}^\ast\) & \(\wbar{e}_{i}\)      & \(F_{\wbar{E}_i}^\ast\) \\
     \hline
-    \multirow{4}{*}{\rotatebox{90}{Quarks}}  & \multirow{2}{*}{\(Q_i\)}         & \(u_i\)        & \(\wtilde{u}_{iL}\)      & \(u_i\)                & \(F_{u_i}\)             \\
-                                             &                                  & \(d_i\)        & \(\wtilde{d}_{iL}\)      & \(d_i\)                & \(F_{d_i}\)             \\
+    \multirow{4}{*}{\rotatebox{90}{Quarks}}  & \multirow{2}{*}{\(Q_i\)}         & \(u_i\)        & \(\tilde{u}_{iL}\)      & \(u_i\)               & \(F_{u_i}\)             \\
+                                             &                                  & \(d_i\)        & \(\tilde{d}_{iL}\)      & \(d_i\)               & \(F_{d_i}\)             \\
     \cline{2-6}
-                                             & -                                & \(\wbar{U}_i\) & \(\wtilde{u}_{iR}^\ast\) & \(\wbar{u}_i\)         & \(F_{\wbar{U}_i}^\ast\) \\
-                                             & -                                & \(\wbar{D}_i\) & \(\wtilde{d}_{iR}^\ast\) & \(\wbar{d}_i\)         & \(F_{\wbar{D}_i}^\ast\) \\
+                                             & -                                & \(\wbar{U}_i\) & \(\tilde{u}_{iR}^\ast\) & \(\wbar{u}_i\)        & \(F_{\wbar{U}_i}^\ast\) \\
+                                             & -                                & \(\wbar{D}_i\) & \(\tilde{d}_{iR}^\ast\) & \(\wbar{d}_i\)        & \(F_{\wbar{D}_i}^\ast\) \\
     \hline
     \multirow{4}{*}{\rotatebox{90}{Bosons}}
-                                             & -                                & \(B^0\)        & \(B^0_\mu\)              & \(\bino\)              & \(D_{B^0}\)             \\
+                                             & -                                & \(B^0\)        & \(B^0_\mu\)             & \(\bino\)             & \(D_{B^0}\)             \\
     \cline{2-6}
-                                             & \multirow{2}{*}{\(W^{k}\)}       & \(W^0\)        & \(W^0_\mu\)              & \(\wino\)              & \(D_{W^0}\)             \\
-                                             &                                  & \(W^\pm\)      & \(W^\pm_\mu\)            & \(\wtilde{W}^\pm\)     & \(D_{W^\pm}\)           \\
+                                             & \multirow{2}{*}{\(W^{k}\)}       & \(W^0\)        & \(W^0_\mu\)             & \(\wino\)             & \(D_{W^0}\)             \\
+                                             &                                  & \(W^\pm\)      & \(W^\pm_\mu\)           & \(\tilde{W}^\pm\)     & \(D_{W^\pm}\)           \\
     \cline{2-6}
-                                             & -                                & \(C^a\)        & \(C^a_\mu\)              & \(\wtilde{g}\)         & \(D_C\)                 \\
+                                             & -                                & \(C^a\)        & \(C^a_\mu\)             & \(\tilde{g}\)         & \(D_C\)                 \\
     \hline
   \end{tabular}
   \caption{Table of superfields of the MSSM, and their component field names.
-    Note that the fermion fields are left-handed Weyl spinors, in spite of any \(L\) or \(R\) in the subscript.
+    Note that the fermion fields are left-handed Weyl spinors, in spite of any \(L\) or \(R\) in the boson field subscript.
     The conjugate superfields changes these to right-handed Weyl spinors.
     The indices \(i\) enumerate the three generations of leptons/quarks, \(k\) the three \(SU(2)_L\) gauge fields and \(a\) the eight \(SU(3)_C\) gauge fields.}
   \label{susy:tab:MSSM-fields}
@@ -515,41 +527,40 @@ This results in the kinetic part of the MSSM superlagrangian being
   \L^\text{MSSM}_\text{kin} = & H_u^\dagger \exp{g^\prime B + 2g\mathcal{W}} H_u + H_d^\dagger \exp{-g^\prime B + 2g\mathcal{W}} H_d + L_i^\dagger \exp{-g^\prime B + 2g\mathcal{W}} L_i + \wbar{E}_i^\dagger \exp{2g^\prime B} \wbar{E}_i             \\
   \nonumber
                               & + Q_i^\dagger \exp{\frac{1}{3}g^\prime + 2g\mathcal{W} + 2g_s \mathcal{C}} Q_i + \wbar{U}_i^\dagger \exp{-\frac{4}{3}g^\prime + 2g_s \mathcal{C}} \wbar{D}_i + \exp{\frac{2}{3}g^\prime + 2g_s \mathcal{C}} \wbar{D}_i \\
-                              & \frac{1}{4} B\^\alpha B\_\alpha + \frac{1}{2} \tr\{\mathcal{W}\^\alpha \mathcal{W}\_\alpha\} + \frac{1}{2} \tr\{\mathcal{C}\^\alpha \mathcal{C}\_\alpha\}
+                              & \frac{1}{4} B\^\alpha B\_\alpha + \frac{1}{2} \tr\{\mathcal{W}\^\alpha \mathcal{W}\_\alpha\} + \frac{1}{2} \tr\{\mathcal{C}\^\alpha \mathcal{C}\_\alpha\},
 \end{align}
+where \(B\^\alpha, \mathcal{W}\^\alpha, \mathcal{C}\^\alpha\) are the supersymmetric field strengths of the gauge superfields \(B\), \(\mathcal{W} = W^k \frac{1}{2}\sigma\^k\) and \(\mathcal{C} = C^a \frac{1}{2}\lambda^a\) respectively. The matrices \(\lambda^a\) are the Gell-Mann matrices --- the generators of \(SU(3)\).
 
-The superpotential up to gauge invariant and \(R\)-parity invariant terms is given by
+The superpotential up to gauge invariant and \(R\)-parity conserving terms is given by
 \begin{equation}
   W_\text{MSSM} = \mu H_u^T i\sigma_2 H_d + y^e_{ij} (L_i^T i\sigma_2 H_d) \wbar{E}_j + y^u_{ij} (Q_i^T i\sigma_2 H_u) \wbar{U}_j + y^d_{ij} (Q_i^T i\sigma_2 H_d) \wbar{D}_j,
 \end{equation}
 where \(\mu\) is some complex, massive parameters and \(y^{e/u/d}_{ij}\) are the ordinary SM Yukawa couplings.
-The \(\mu\)-parameter is involved in the EWSB in the Higgs sector, and so its magnitude \(\abs{\mu}\) is determined from the EW boson masses and the Weinberg angle.
-This leaves one new degree of freedom in the MSSM superpotential beyond what is in the SM.
+This leaves two new degrees of freedom in the MSSM superpotential beyond what is in the SM -- the phase and magnitude of \(\mu\).
 
-Seeing as we have not discovered any particles with the same mass but opposite spin-statistics to the SM particles we have already discovered, we must conclude that supersymmetry is broken at low energy.
+Seeing as we have not discovered any particles with the same mass but opposite spin-statistics to the SM particles we know, we must conclude that supersymmetry is broken at low energy.
 A mechanism for spontaneous symmetry breaking of supersymmetry would therefore be necessary.
-Constructing such a mechanism in a way as to not \needcite{reintroduce the hierarchy problem} leads to what we call \emph{soft} breaking of supersymmetry.
-Disregarding the high-energy completion of the theory, we can parametrise the terms that can arise in the low-energy superlagrangian up to gauge invariant and \(R\)-parity invariant terms, as
+Constructing such a mechanism in a way as to not reintroduce the hierarchy problem leads to what we call \emph{soft} breaking of supersymmetry~\cite{Martin:1997ns}.
+Disregarding the high-energy completion of the theory, we can parametrise the terms that can arise in the low-energy MSSM superlagrangian up to gauge invariant and \(R\)-parity conserving terms, as
 \begin{align}
   \nonumber
-  \L_\text{soft}^\text{MSSM} = & (\theta\theta)(\theta\theta)^\dagger \bigg\{ -\frac{1}{4}M_1 B\^\alpha B\_\alpha - \frac{1}{2}M_2 \tr\{\mathcal{W}\^\alpha \mathcal{W}\_\alpha\} - \frac{1}{2}M_3 \tr\{\mathcal{G}\^\alpha \mathcal{G}\_\alpha\} + \cc \\
+  \L_\text{soft}^\text{MSSM} = & (\theta\theta)(\theta\theta)^\dagger \bigg\{ -\frac{1}{4}M_1 B\^\alpha B\_\alpha - \frac{1}{2}M_2 \tr\{\mathcal{W}\^\alpha \mathcal{W}\_\alpha\} - \frac{1}{2}M_3 \tr\{\mathcal{C}\^\alpha \mathcal{C}\_\alpha\} + \cc \\
   \nonumber
                                & -\frac{1}{6}a^{e}_{ij} L_i^T i\sigma_2 H_d \wbar{E}_j - \frac{1}{6}a^{u}_{ij} Q_i^T i\sigma_2 H_u \wbar{U}_j - \frac{1}{6}a^{d}_{ij} Q_i^T i\sigma_2 H_d \wbar{D}_j + \cc                                              \\
   \nonumber
                                & -\frac{1}{2} b H_u^T i\sigma_2 H_d + \cc                                                                                                                                                                               \\
   \nonumber
                                & -(m_{ij}^L)^2 L_i^\dagger L_j - (m_{ij}^e)^2 \wbar{E}_i^\dagger \wbar{E}_j - (m_{ij}^Q)^2 Q_i^\dagger Q_j - (m_{ij}^u)^2 \wbar{U}_i^\dagger \wbar{U}_j - (m_{ij}^d)^2 \wbar{D}_i^\dagger \wbar{D}_j                    \\
-                               & - m_{H_u}^2 H_u^\dagger H_u - m_{H_d}^2 H_d^\dagger H_d\bigg\},
+                               & - m_{H_u}^2 H_u^\dagger H_u - m_{H_d}^2 H_d^\dagger H_d\bigg\}.
 \end{align}
-where \(B\^\alpha, \mathcal{W}\^\alpha, \mathcal{C}\^\alpha\) are the supersymmetric field strengths of the gauge superfields \(B\), \(\mathcal{W} = W^k \frac{1}{2}\sigma\^k\) and \(\mathcal{C} = C^a \frac{1}{2}\lambda^a\) respectively. The matrices \(\lambda^a\) are the \needcite{Gell-Mann matrices} --- (2 times) the generators of \(SU(3)\).
 All the parameters are potentially complex numbers, although all the mass terms \(m_{ij}^2\) must be hermitian in the that \(m_{ij}^2 = (m_{ji}^2)^\ast\), which leads to \(m_{ii}^2\) having to be real.
 This is the source of the great many parameters of the MSSM, as these soft-breaking parameters alone amount to 109 degrees of freedom!\footnote{A few of these can be eliminated through field redefinitions, however.}
 For this reason, most searches of the MSSM focus on various simplified models\needcite.
-These can be based simplifications like assuming all parameters to be real or assuming no flavour-violation, or by making theoretical assumptions on the specific mechanism for symmetry breaking, as in \needcite[Constrained MSSM] or \needcite[mSUGRA].
+These can be based on simplifications like assuming all parameters to be real or assuming no flavour-violation, or by making theoretical assumptions on the specific mechanism for symmetry breaking, as in \needcite[Constrained MSSM] or \needcite[mSUGRA], and combinations of these.
 In this thesis, I will not make any such assumptions and work with the general form of the MSSM, unless otherwise stated.
 The full MSSM superlagrangian is then
 \begin{equation}
-  \L_\text{MSSM} = \L^\text{MSSM}_\text{kin} + (\theta\theta)^\dagger W_\text{MSSM} + (\theta\theta) W_\text{MSSM}^\dagger + \L^\text{MSSM}_\text{soft}
+  \L_\text{MSSM} = \L^\text{MSSM}_\text{kin} + (\theta\theta)^\dagger W_\text{MSSM} + (\theta\theta) W_\text{MSSM}^\dagger + \L^\text{MSSM}_\text{soft}.
 \end{equation}
 {
 \renewcommand{\arraystretch}{1.4}
@@ -577,34 +588,11 @@ The full MSSM superlagrangian is then
                                              & -                                & \(\wbar{D}_i\)    & \(\sfrac{+1}{3}\) & -                       & \(\sfrac{+1}{3}\) & yes \\
     \hline
   \end{tabular}
-  % \begin{tabular}{|l|c|c|c|c|}
-  %   \hline
-  %                                            & Superfield     & Hypercharge     & Isospin         & Colour \\
-  %   \hline
-  %   \multirow{3}{*}{\rotatebox{90}{Higgs}}   & \(H_{u/d}^0\)  & \sfrac{\pm1}{2} & \sfrac{\mp1}{2} & -      \\
-  %                                            & \(H_{u}^{+}\)  & \sfrac{+1}{2}   & \sfrac{+1}{2}   & -      \\
-  %                                            & \(H_{d}^{-}\)  & \sfrac{-1}{2}   & \sfrac{-1}{2}   & -      \\
-  %   \hline
-  %   \multirow{3}{*}{\rotatebox{90}{Leptons}} & \(l_i\)        & \sfrac{-1}{2}   & \sfrac{-1}{2}   & -      \\
-  %                                            & \(\wbar{E}_i\) & 1               & -               & -      \\
-  %                                            & \(\nu_i\)      & \sfrac{-1}{2}   & \sfrac{+1}{2}   & -      \\
-  %   \hline
-  %   \multirow{3}{*}{\rotatebox{90}{Quarks}}  & \(u_i\)        & \sfrac{+1}{6}   & \sfrac{+1}{2}   & yes    \\
-  %                                            & \(\wbar{U}_i\) & \sfrac{-2}{3}   & -               & yes    \\
-  %                                            & \(d_i\)        & \sfrac{+1}{6}   & \sfrac{-1}{2}   & yes    \\
-  %                                            & \(\wbar{D}_i\) & \sfrac{+1}{3}   & -               & yes    \\
-  %   \hline
-  %   % \multirow{3}{*}{\rotatebox{90}{Bosons}}
-  %   %                                          & \(B^0\)        & +1            & -               & -          \\
-  %   %                                          & \(W^0\)        & 0             & -               & -          \\
-  %   %                                          & \(W^\pm\)      & 0             & \pm\sfrac{1}{2} & -          \\
-  %   % \hline
-  % \end{tabular}
-  \caption{Summary of quantum numbers for the MSSM superfields.
+  \caption{Summary of quantum numbers for the MSSM scalar superfields.
     The charges of barred fields \(\wbar{F}\) supplying the right-handed part of SM fermions are defined such that the charge of \(\wbar{F}^\dagger\) matches that of its left-handed compliment.
     I note that the convention for the hypercharge differs from some sources, seeing as I use \(1\) as the generator of \(U(1)_Y\) instead of \(\frac{1}{2}\) used elsewhere.
     This amounts to shuffling some factors of \(\frac{1}{2}\) around.
-    The indices \(i\) enumerate the three generations of leptons/quarks, \(k\) the three \(SU(2)_L\) gauge fields and \(a\) the eight \(SU(3)_C\) gauge fields.}
+    The indices \(i\) enumerate the three generations of leptons/quarks.}
   \label{susy:tab:mssm_quantum_numbers}
 \end{table}
 }
@@ -613,9 +601,6 @@ The full MSSM superlagrangian is then
 
 
 \section{Electroweakinos}
-\phpar[Introduce the electroweakinos and how they are derived from the various fermions partners of electroweak bosons.
-  Talk about mass matrices and mass eigenstates]
-
 The focus in this thesis we be on a particular set of superpartners, namely the \emph{electroweakinos}.
 These are fermion superpartners to the electroweak bosons, i.e. the photon, \(Z\) and \(W\) bosons and the Higgs bosons.
 These are subdivided into the vector boson superpartners, the \emph{gauginos}, and the Higgs boson partners, the \emph{higgsinos}.
@@ -623,8 +608,8 @@ Before EWSB, the gauge fields naturally occurring in the Lagrangian are the \(B\
 These are naturally called the \emph{binos} and \emph{winos} respectively.
 
 \subsection{Mass mixing}
-After EWSB, we get two oppositely charged winos, a neutral bino and a neutral wino, mirroring the electroweak gauge bosons.
-However, the higgsinos come in an oppositely charged pair and two neutral ones, so the gauginos and higgsinos can mix in generality.
+After EWSB, we get two oppositely charged winos, and two mixed bino/wino states, mirroring the electroweak gauge bosons.
+However, the higgsinos come in an oppositely charged pair and two neutral ones, so the gauginos and higgsinos can further mix.
 So the general electroweak fermionic sector in the MSSM includes two particle-antiparticle pairs of charged Dirac fermions, and four neutral Majorana fermions, respectively referred to as \emph{charginos} and \emph{neutralinos}.
 The two chargino fields are denoted with the Weyl spinors \(\tilde\chi_{i=1,2}^\pm\), and the four neutralinos are denoted with the Weyl spinors \(\tilde\chi_{i=1,2,3,4}^0\).
 The indices \(i\) are numbered according to the mass hierarchy, with 1 being the lightest chargino/neutralino and 2/4 being the heaviest.
@@ -646,16 +631,18 @@ They are given by
                            0                   & 0                   & M_2                 & \sqrt{2}c_\beta m_W \\
                            0                   & 0                   & \sqrt{2}s_\beta m_W & \mu                 \\
                            M_2                 & \sqrt{2}s_\beta m_W & 0                   & 0                   \\
-                           \sqrt{2}c_\beta m_W & M_2                 & 0                   & 0
+                           \sqrt{2}c_\beta m_W & \mu                 & 0                   & 0
                          \end{bmatrix}.
 \end{align}
 
-These mass matrices can be diagonalised to get the mass eigenstate \emph{neutralinos} \(\tilde\chi^0_i\) and \emph{charginos} \(\tilde\chi^\pm_i\) respectively.
+These mass matrices can be diagonalised to get the mass eigenstate \emph{neutralinos} \(\tilde\chi^0_i\) and \emph{charginos} \(\tilde\chi^\pm_i\), respectively.
 Both the matrices are symmetric, but we will diagonalise them slightly differently.
 The neutralino mass matrix can be diagonalised by a unitary matrix \(N\) such that
-\begin{equation}
-  \L_{\tilde\chi^0\text{-mass}} = -\frac{1}{2}(\psi^0)^T M_{\tilde\chi^0} \psi^0 + \cc = -\frac{1}{2} \underbrace{(\psi^0)^T N^T}_{\equiv (\tilde{\chi}^{0})^T} \underbrace{N^\ast M_{\tilde\chi^0} N^\dagger}_{= \operatorname{diag}(m_{\tilde\chi^0_1}, \ldots, m_{\tilde\chi^0_4})} \underbrace{N \psi^0}_{\equiv \tilde\chi^0} + \cc
-\end{equation}
+\begin{align}
+  \nonumber
+  \L_{\tilde\chi^0\text{-mass}} = & -\frac{1}{2}(\psi^0)^T M_{\tilde\chi^0} \psi^0 + \cc = -\frac{1}{2} \underbrace{(\psi^0)^T N^T}_{\equiv (\tilde{\chi}^{0})^T} \underbrace{N^\ast M_{\tilde\chi^0} N^\dagger}_{= \operatorname{diag}(m_{\tilde\chi^0_1}, \ldots, m_{\tilde\chi^0_4})} \underbrace{N \psi^0}_{\equiv \tilde\chi^0} + \cc \\
+  =                               & -\frac{1}{2} (\tilde\chi^0)^T \operatorname{diag}(m_{\tilde\chi^0_1}, \ldots, m_{\tilde\chi^0_4}) \tilde\chi^0 + \cc
+\end{align}
 The chargino mass matrix is handled slightly differently, seeing as it has the structure \(M_{\tilde\chi^\pm} = \begin{bmatrix}
   0 & X \\ X^T & 0
 \end{bmatrix}\).
@@ -692,27 +679,23 @@ This results in
   % \end{pmatrix} + \cc
 \end{align}
 This tells us that there are two doubly degenerate mass eigenvalues of the chargino mass matrix, constituting two massive Dirac fermion particle-antiparticle pairs.
-\begin{temporary}
-  Allude to Takagi algorithm for diagonalising neutralino mass matrix.
-\end{temporary}
+
+Proof of Takagi factorisation and an algorithm for realising it are done in \cref{app:chap:takagi}.
 
 
 
 
+\subsection{Feynman Rules for Neutralinos}
+\label{susy:sec:feynman_rules}
+To calculate the cross-section for electroweakino production later on, we will need the Feynman rules of the relevant particle interactions.
+I will not explicitly derive the Feynman rules for all the electroweakinos, but rather exemplify how they can be derived by deriving all the relevant neutralino interactions from the MSSM superlagrangian.
+The relevant Feynman rules for the remaining electroweakino processes follow in much the same manner, and are listed in the end.
 
-\section{Feynman Rules of Neutralinos}
-\phpar[Derive the ordinary Lagrangian for neutralinos from the superlagrangian.]
-
-\todo{Make sure the component form of the superfields is introduced somewhere}
-
-\subsection{Fermion Interactions in Supersymmetric Yang-Mills Theory}
-\comment{This subsection might be best suited for an appendix?}
-
-Considering a superlagrangian kinetic term \(\L = \sum_{ij} \Phi^\dagger_i
-\pclosed{\exp{2q \mathcal{V}}}_{ij} \Phi_j\), I will extract the interaction
-terms containing either the fermion field multiplets \(\psi\) (\(\psi^\dagger\)) from the left-handed (right-handed) scalar superfield multiplets \(\Phi\) (\(\Phi^\dagger\)),
-and the fermion fields \(\lambda \equiv \lambda^a T^a\) from vector superfields \(\mathcal{V} \equiv V^a T^a\).
-Up to terms with the appropriate amount of \(\theta\)s, we have
+\subsubsection*{Fermion Interactions in Super Yang-Mills and Yukawa Theory}
+I will start by deriving the interactions of fermions in the chiral superfields and vector superfields of a supersymmetric Yang-Mills superlagrangian.
+As a reminder, the super Yang-Mills superlagrangian kinetic term is \(\Phi^\dagger_i \pclosed{\exp{2q \mathcal{V}}}_{ij}\Phi_j\).
+Extracting the interaction terms containing either the fermion field multiplets \(\psi\) (\(\psi^\dagger\)) from the left-handed (right-handed) scalar superfield multiplets \(\Phi\) (\(\Phi^\dagger\)),
+and the fermion fields \(\lambda \equiv \lambda^a T^a\) from vector superfields \(\mathcal{V} \equiv V^a T^a\) from terms with the appropriate amount of \(\theta\)'s to survive the projection of \cref{susy:eq:projection_lagragnian}, we have
 \begin{align}
   \label{susy:eq:psi_kin_int}
   \nonumber
@@ -721,12 +704,12 @@ Up to terms with the appropriate amount of \(\theta\)s, we have
                                                      & + \sqrt{2} (\theta\psi_i)^\dagger (\theta\theta) (\theta\lambda_{ij})^\dagger A_j \bigg\}                                                                                                                                    \\
   =                                                  & q(\theta\theta)(\theta\theta)^\dagger \sum_{ij} \cclosed{ -\sqrt{2} A^\ast_i (\lambda_{ij}\psi_j) + (\psi_i \sigma\^\mu \pclosed{\mathcal{V}_\mu}_{ij} \psi^\dagger_j) - \sqrt{2} (\psi_i\lambda_{ij})^\dagger A_j },
 \end{align}
-where I have used \needcite[Weyl spinor relations]. \comment{Perhaps it should be clarified that these are all the \(\psi\)- \emph{and} \(\lambda\)-interactions.}
+where I have used \needcite[Weyl spinor relations].
 \medskip
 
-There are also Yukawa terms coming from the superpotential of the form \(\L =
-y_{ij} (\theta\theta)^\dagger \Phi_i \Phi \Phi_j + \cc\) Extracting the
-interaction terms of fermion field \(\psi\) from \(\Phi\), we find
+There are also Yukawa terms coming from the superpotential terms of the form \(y_{ij} (\theta\theta)^\dagger \Phi_i \Phi \Phi_j + \cc\)
+Here \(\Phi\) will later represent one of the Higgs superfields.
+Extracting the interaction terms of fermion field \(\psi\) from \(\Phi\), we find
 \begin{align}
   \label{susy:eq:psi_yuk_int}
   \nonumber
@@ -734,17 +717,17 @@ interaction terms of fermion field \(\psi\) from \(\Phi\), we find
      & = -y_{ij} (\theta\theta)(\theta\theta)^\dagger \cclosed{ A_i(\psi\psi_j) + (\psi_i\psi)A_j + \cc }
 \end{align}
 
-\subsection{Wino and Bino Interactions}
-First, I will look at the bino and wino interactions. Writing out the \(W^a\)
-vector superfields in the basis \(W^\pm, W^0\), we are only interested in the
-electrically neutral \(W^0\) bit. The interactions will come from kinetic terms
-of scalar superfields \(\Phi\), whose relevant part can be written as
+
+\subsubsection*{Wino and Bino Interactions}
+First, I will look at the bino and wino interactions coming from the kinetic terms.
+Writing out the \(W^a\) vector superfields in the basis \(W^\pm, W^0\), we are now only interested in the electrically neutral \(W^0\) bit.
+The interactions will come from kinetic terms of scalar superfields \(\Phi\), whose relevant part can be written as
 \begin{equation}
   \L = \Phi^\dagger \exp{2g\cclosed{Y t_W B^0 \pclosed{+ \frac{1}{2}\sigma_3 W^0}}} \Phi,
 \end{equation}
-where \(t_W \equiv \tan\theta_W\) is the tangent of the Weinberg angle and \(Y\) is the hypercharge of \(\Phi\).
+where \(t_W \equiv \tan\theta_W\) is the tangent of the Weinberg angle, \(Y\) is the hypercharge of \(\Phi\) and the term in parentheses only appears for fields in \(SU(2)_L\) superfield doublets.
 To generalise this, I will use the isospin \(I^3\), which is \(+\frac{1}{2}\) for fields in the upper part of an SU(2) doublet, \(-\frac{1}{2}\) for fields in the lower part and 0 for SU(2) singlet fields.
-Then the kinetic term can compactly be written as
+Then the kinetic term can be written compactly as
 \begin{equation}
   \L = \Phi^\dagger \exp{2g\cclosed{(Q_e - I^3) t_W B^0 + I^3 W^0}} \Phi,
 \end{equation}
@@ -753,45 +736,42 @@ where \(Q_e\) is the electric charge of \(\Phi\).
 
 Extracting the interactions of the fermion fields \(\bino, \wino\) in \(B^0,
 W^0\) using \cref{susy:eq:psi_kin_int}, we are left with (up to appropriate
-\(\theta\)s)
+\(\theta\)'s)
 \begin{equation}
   \L \stackrel{\bino, \wino}{\supset} -\sqrt{2}g (\theta\theta)(\theta\theta)^\dagger \Big\{ (Q_e - I^3)t_W (\bino \psi) A^\ast + I^3 (\wino \psi) A^\ast + \cc \Big\}.
 \end{equation}
 
-\begin{temporary}
-  \(q, \tilde{q}_L \in Q\), \(\bar{q}, \tilde{q}_R^\ast \in \bar{Q}\)
-\end{temporary}
-
-Considering an SM quark \(q_g\) of generation \(g\), derived from the superfields \(Q_g\) and \(\bar{Q}_g\), with
-electric charge \(Q_e\) and isospins \(I^3\) and 0 respectively, we can write out the interaction as
+Consider an SM quark \(q_g\) of generation \(g\), from the scalar superfield components \(A\) and \(\psi\) contained in the superfields \(Q_g\) and \(\bar{Q}_g\), with
+electric charge \(Q_e\) and weak isospins \(I^3\) and 0 respectively, we can write out the interaction as
 \begin{equation}
-  \L = -\sqrt{2}g \Big\{ (Q_e - I^3)t_W (\bino q_g) \tilde{q}_{gL}^\ast + I^3 (\wino q_g) \tilde{q}_{gL}^\ast + Q_e t_W (\bino \bar{q}_i) \tilde{q}_{gR}^\ast + \cc \Big\}.
+  \L = -\sqrt{2}g \Big\{ (Q_e - I^3)t_W (\bino q_g) \tilde{q}_{gL}^\ast + I^3 (\wino q_g) \tilde{q}_{gL}^\ast + Q_e t_W (\bino \bar{q}_g) \tilde{q}_{gR}^\ast + \cc \Big\}.
 \end{equation}
 Changing to the \(\nino\)-basis, we have that \(\bino = \sum_i N_{i1}^\ast \nino[i]\), \(\wino = \sum_i N_{i2}^\ast \nino[i]\), which together with writing out the Weyl products on Dirac spinor form yields
 \begin{equation}
   \label{susy:eq:nino_sf_f_int}
-  \L_{\tilde{\chi}^0 \tilde{q}q} = -\sqrt{2} g \sum_{i} \barnino[i] \Big\{ \big[ \underbrace{\pclosed{Q_e - I^3}t_W N_{i1}^\ast  + I^3 N_{i2}^\ast}_{\equiv \Big(C_{\tilde{\chi}^0_i \tilde{q} q_g}^{L}\Big)^{\!\ast}} \big] \wtilde{q}_{gL}^\ast P_L \underbrace{- Q_f t_W N_{i1}}_{\equiv \Big(C_{\tilde{\chi}^0_i \tilde{q} q_g}^{R}\Big)^{\!\ast}} \wtilde{q}_{gR}^\ast P_R \Big\} q_{gD} + \cc
+  \L_{\tilde{q}q\tilde{\chi}^0} = -\sqrt{2} g \sum_{i} \barnino[i] \Big\{ \big[ \underbrace{\pclosed{Q_e - I^3}t_W N_{i1}^\ast  + I^3 N_{i2}^\ast}_{\equiv \Big(C_{\tilde{q} q_g \tilde{\chi}_i^0}^{L}\Big)^{\!\ast}} \big] \tilde{q}_{gL}^\ast P_L \underbrace{- Q_f t_W N_{i1}}_{\equiv \Big(C_{\tilde{q} q_g \tilde{\chi}_i^0}^{R}\Big)^{\!\ast}} \tilde{q}_{gR}^\ast P_R \Big\} q_g + \cc,
 \end{equation}
+where we understand \(\tilde\chi^0_i\) and \(q_g\) as Dirac spinors.
 
 Generalising this further to include squark mixing between the left- and
-right-handed squarks in a generation \(g\), we have
+right-handed squarks of the same flavour in a generation \(g\),\margincomment{Mention that this is typical in the third generation and perhaps because of the larger Yukawa couplings.} we have
 \begin{equation}
   \tilde{q}_{gA} = R_{A1}^{\tilde{q}_g} \tilde{q}_{gL} + R_{A2}^{\tilde{q}_g} \tilde{q}_{gR},
 \end{equation}
-where \(R^{\tilde{q}_g}\) is a \(2\times 2\) unitary matrix transforming the quarks of type \(q = u, d\) in generation \(g\) to their mass eigenstates.
+where \(R^{\tilde{q}_g}\) is a \(2\times 2\) unitary matrix transforming the squarks of the same flavour and generation \(g\) to their mass eigenstates.
 As such, we can write \(\tilde{q}_{gL} = \sum_A \pclosed{R^{\tilde{q}_g}_{A1}}^{\!\ast} \tilde{q}_{gA}\), \(\tilde{q}_{gR} = \sum_A \pclosed{R^{\tilde{q}_g}_{A2}}^{\!\ast} \tilde{q}_{gA}\) to get
 \begin{equation}
-  \label{susy:eq:nino_sqA_f_int}
-  \L_{\tilde{\chi}^0 \tilde{q} q_g} = -\sqrt{2} g \sum_{i} \sum_A \barnino[i] \Big\{ \underbrace{\pclosed{R^{\tilde{q}_g}_{A1}}^{\!\ast} \pclosed{C_{\tilde{\chi}^0_i \tilde{q} q_g}^{L}}^{\!\ast}}_{\equiv \Big(C_{\tilde{\chi}^0_i \tilde{q}_A q_g}^{L}\Big)^{\!\ast}} P_L + \underbrace{\pclosed{R^{\tilde{q}_g}_{A2}}^{\!\ast} \pclosed{C_{\tilde{\chi}^0_i \tilde{q} q_g}^{R}}^{\!\ast}}_{\equiv \Big(C_{\tilde{\chi}^0_i \tilde{q}_A q_g}^{R}\Big)^{\!\ast}} P_R \Big\} \wtilde{q}_{gA}^\ast q_{gD} + \cc
+  \label{susy:eq:sqqneu-interaction-L}
+  \L_{\tilde{q} q_g \tilde{\chi}^0} = -\sqrt{2} g \sum_{i} \sum_A \barnino[i] \Big\{ \underbrace{R^{\tilde{q}_g}_{A1} \pclosed{C_{\tilde{q} q_g \tilde{\chi}_i^0}^{L}}^{\!\ast}}_{\equiv \Big(C_{\tilde{q}_A q_g \tilde{\chi}_i^0}^{L}\Big)^{\!\ast}} P_L + \underbrace{R^{\tilde{q}_g}_{A2} \pclosed{C_{\tilde{q} q_g \tilde{\chi}_i^0}^{R}}^{\!\ast}}_{\equiv \Big(C_{\tilde{q}_A q_g \tilde{\chi}_i^0}^{R}\Big)^{\!\ast}} P_R \Big\} \tilde{q}_{gA}^\ast q_{gD} + \cc
 \end{equation}
 
 
 
 \subsubsection*{Flavour-Violating Squark Sector}
-This last part was done under the assumption that squarks do not mix between fermion generations.
-However, this can happen if supersymmetry-breaking parameters coupling squarks between generations or loop corrections are added to the squark sector.
-The generalisation is fairly straight forward: Instead of three \(2 \by 2\) mixing matrices \(R^{\tilde{q}_i}\) for each quark type (up or down), there is one \(6 \by 6\) mixing matrix \(R^{\tilde{q}}\).
-This mixing matrix can be defined using different conventions, but in this thesis, I will use that it fulfils
+The previous derivation was done under the assumption that squarks do not mix between fermion generations.
+However, this can happen if there are non-zero supersymmetry-breaking parameters coupling squarks between generations or if loop corrections are added to the squark sector.
+The generalisation is fairly straight forward: Instead of one unitary, \(2 \by 2\) mixing matrix \(R^{\tilde{q}_g}\) for each of the six quark flavours, there is one \(6 \by 6\) mixing matrix \(R^{\tilde{q}}\) for each of the two quark types (either up or down).
+These mixing matrices can be defined using different conventions, but in this thesis I will follow the SLHA2 standard~\cite{SLHA2}
 \begin{equation}
   \begin{pmatrix}
     \tilde{q}_1 \\ \tilde{q}_2 \\ \tilde{q}_3 \\ \tilde{q}_4 \\ \tilde{q}_5 \\ \tilde{q}_6
@@ -803,91 +783,112 @@ This mixing matrix can be defined using different conventions, but in this thesi
 This means that the chiral squarks in generation \(g = 1,2,3\) will rather be given by
 \begin{subequations}
   \begin{align}
-    \tilde{q}_{gL} = \sum_A R^{\tilde{q}}_{A,g} \tilde{q}_A, \\
-    \tilde{q}_{gR} = \sum_A R^{\tilde{q}}_{A,g+3} \tilde{q}_A.
+    \tilde{q}_{gL} = \sum_A (R^{\tilde{q}}_{A,g})^\ast \tilde{q}_A, \\
+    \tilde{q}_{gR} = \sum_A (R^{\tilde{q}}_{A,g+3})^\ast \tilde{q}_A.
   \end{align}
 \end{subequations}
 What this means for the interaction Lagrangian in \cref{susy:eq:nino_sqA_f_int} is that the sum over \(A\) changes to go from 1 to 6 and the definition of the coupling parameter changes slightly to
 \begin{subequations}
   \begin{align}
-    C^{L}_{\tilde\chi_i^0 \tilde{q}_A q_g} = & R^{\tilde{q}}_{A,g} \bclosed{\pclosed{Q_e-I^3}t_W N_{i1} + I^3 N_{i2}} \\
-    C^{R}_{\tilde\chi_i^0 \tilde{q}_A q_g} = & -R^{\tilde{q}}_{A,g+3} Q_e t_W N_{i1}^\ast
+    C_{\tilde{q}_A q_g \tilde{\chi}_i^0}^{L} = & \pclosed{R^{\tilde{q}}_{A,g}}^{\!\ast} \bclosed{\pclosed{Q_e-I^3}t_W N_{i1} + I^3 N_{i2}}, \\
+    C_{\tilde{q}_A q_g \tilde{\chi}_i^0}^{R} = & -\pclosed{R^{\tilde{q}}_{A,g+3}}^{\!\ast} Q_e t_W N_{i1}^\ast.
   \end{align}
 \end{subequations}
 
 
-
-\subsection{Higgsino Interactions}
-The Higgsino interaction with the (s)quarks comes from the Yukawa terms of the
+\subsubsection*{Higgsino Interactions}
+The higgsino interaction with the (s)quarks comes from the Yukawa terms of the
 superpotential, but seeing that this interaction is proportional to the quark
-mass, it will be ignored at the centre-of-mass energies we are interested in.
+mass, it is safe to ignore them at the centre-of-mass energies we are interested in.
+\comment{Talk about sbottom and stop squarks with large Yukawas.}
 
 The relevant interaction that remains is that with the \(Z\)-boson. This
-interaction again comes from the kinetic term, but this time of the neutral
+interaction again comes from the kinetic term, but this time for the neutral
 Higgs superfields in the superfield multiplets \(H_u = \pclosed{H_u^+,
   H_u^0}^T\), \(H_d = \pclosed{H_d^0, H_d^-}^T\). The Lagrangian is of the form
 \begin{equation}
   \L = \pclosed{H_{u/d}^0}^\dagger \exp{\mp g\pclosed{W^0 - t_W B^0}} H_{u/d}^0.
 \end{equation}
-Integrating over the Grassman variables and using equation \cref{susy:eq:psi_kin_int} we get
+Integrating over the Grassmann variables and using equation \cref{susy:eq:psi_kin_int} we get
 \begin{equation}
-  \integral{^4\theta} \L \stackrel{\tilde{H}_{u/d}^0, W^0_\mu, B^0_\mu}{=} \mp \frac{g}{2} \pclosed{\tilde{H}_{u/d}^0 \sigma\^\mu \pclosed{\tilde{H}_{u/d}^0}^\dagger}\pclosed{W^0_\mu - t_W B_\mu^0}.
+  \integral{^4\theta} \L \stackrel{\tilde{H}_{u/d}^0, W^0_\mu, B^0_\mu}{=} \mp \frac{g}{2} (\tilde{H}_{u/d}^0 \sigma\^\mu (\tilde{H}_{u/d}^0)^\dagger) (W^0_\mu - t_W B_\mu^0).
 \end{equation}
 Switching to Dirac spinors, the mass eigenbasis for the neutralinos and the \(Z\) boson \(Z_\mu = c_W W^0_\mu - s_W B^0_\mu\), we end up with\margincomment{Mention Weyl/Dirac identities necessary for this.}
 \begin{align}
+  \label{susy:eq:Zneuneu-interaction-L}
   \nonumber
-  \L_{Z \tilde{\chi}^0} = \frac{g}{2c_W} Z_\mu \sum_{ij}\pclosed{N_{i4}N_{j4}^\ast - N_{i3}N_{j3}^\ast} \barnino[i] \gamma^\mu P_L \nino[j] \\
-  = \frac{g}{2} Z_\mu \sum_{ij}\barnino[i] \gamma^\mu \bigg[ \underbrace{\frac{1}{2c_W}\pclosed{N_{i4}N_{j4}^\ast - N_{i3}N_{j3}^\ast}}_{\equiv O^{\prime\prime L}_{ij}} P_L \underbrace{-\frac{1}{2c_W}\pclosed{N_{i4}^\ast N_{j4} - N_{i3}^\ast N_{j3}}}_{\equiv O^{\prime\prime R}_{ij}} P_R \bigg] \nino[j]
+  \L_{Z \tilde\chi^0_i \tilde\chi^0_j} = \frac{g}{2c_W} Z_\mu \sum_{ij}\pclosed{-N_{i4}N_{j4}^\ast + N_{i3}N_{j3}^\ast} \barnino[i] \gamma^\mu P_L \nino[j] \\
+  = -\frac{g}{2} Z_\mu \sum_{ij}\barnino[i] \gamma^\mu \bigg[ \underbrace{\frac{1}{2c_W}\pclosed{N_{i4}N_{j4}^\ast - N_{i3}N_{j3}^\ast}}_{\equiv O^{\prime\prime L}_{ij}} P_L \underbrace{-\frac{1}{2c_W}\pclosed{N_{i4}^\ast N_{j4} - N_{i3}^\ast N_{j3}}}_{\equiv O^{\prime\prime R}_{ij}} P_R \bigg] \nino[j]
 \end{align}
 
 
-
-
-\subsection{Summary of Coupling Definitions}
-
+\subsubsection*{Summary of Coupling Definitions}
+In summary, the Feynman rules for the interactions of neutralinos with the electroweak bosons and (s)quarks are given by the interaction Lagrangians in \cref{susy:eq:Zneuneu-interaction-L,susy:eq:sqqneu-interaction-L} as
+\begin{subequations}
+  \begin{align}
+    % \vcenter{\hbox{
+    %     \inputtikz{qqZ_vertex}
+    %   }}
+    %  & = -ig \gamma^\mu \bclosed{C_{qqZ}^L P_L + C_{qqZ}^R P_R}                                \\
+    \vcenter{\hbox{
+        \inputtikz{chii-chij-Z_vertex}
+      }}
+     & = -ig \gamma^\mu \bclosed{O_{ij}^{\prime\prime L} P_L +
+      O_{ij}^{\prime\prime R} P_R},
+    \\
+    \vcenter{\hbox{
+        \inputtikz{q-chi-sq_vertex}
+      }}
+     & = -i\sqrt{2}g \bclosed{ \pclosed{C_{\tilde{q}_A q_g \tilde{\chi}_i^0}^{L}}^{\!\ast} P_L
+      +
+      \pclosed{C_{\tilde{q}_A q_g \tilde{\chi}_i^0}^{R}}^{\!\ast} P_R }.
+  \end{align}
+\end{subequations}
+In fact, the interactions of all electroweakinos  with \(W/Z\)-bosons and (s)quarks take the same form, and we can generalise by replacing \(O_{ij}^{\prime\prime X}\) or \(C_{\tilde{q}_A q_g \tilde\chi^0_i}^X\) with the appropriate definitions in \cref{susy:tab:variable_definitions}. \comment{Add citation for this.}
 {\renewcommand{\arraystretch}{2}
-  \begin{table}[ht!]
-    \centering
-    \begin{tabular}{|c|c|}
-      \hline
-      Coupling                                            & Definition
-      \\
-      \hline
-      \(C_{\tilde{q}_A q_g \tilde{\chi}_i^0}^{L}\)        & \(\pclosed{R^{\tilde{q}}_{A,g}}^\ast \bclosed{\pclosed{Q_e-I^3_q} t_W N_{i1} + I^3_q N_{i2}}\)           \\
-      \(C_{\tilde{q}_A q_g \tilde{\chi}_i^0}^{R}\)        & \(-\pclosed{R^{\tilde{q}}_{A,g+3}}^\ast Q_e t_W N_{i1}^\ast\)                                            \\
-      \hline
-      \(O_{ij}^L\)                                        & \(\frac{1}{\sqrt{2}} N_{i4} V_{j2}^\ast - N_{i2}V_{j1}^\ast\)                                            \\
-      \(O_{ij}^R\)                                        & \(-\frac{1}{\sqrt{2}} N_{i3}^\ast U_{j2} - N_{i2}^\ast U_{j1}\)                                          \\
-      \hline
-      \(O_{ij}^{\prime L}\)                               & \(\frac{1}{c_W} \pclosed{V_{i1} V_{j1}^\ast + \frac{1}{2} V_{i2}V_{j2}^\ast - \delta_{ij} s_W^2}\)       \\
-      \(O_{ij}^{\prime R}\)                               & \(\frac{1}{c_W} \pclosed{U_{i1}U_{j1}^\ast + \frac{1}{2} U_{i2}U_{j2}^\ast - \delta_{ij} s_W^2}\)        \\
-      \hline
-      \(O^{\prime\prime L}_{ij}\)                         & \(\frac{1}{2c_W} \pclosed{N_{i4} N_{j4}^\ast - N_{i3} N_{j3}^\ast}\)                                     \\
-      \(O^{\prime\prime R}_{ij}\)                         & \(-\frac{1}{2c_W} \pclosed{N_{i4}^\ast N_{j4} - N_{i3}^\ast N_{j3}}\)                                    \\
-      \hline
-      \(C_{\tilde{d}_A u_g \tilde{\chi}^\pm_i}^L\)        & \(\frac{1}{\sqrt{2}} U_{i1} \pclosed{R^{\tilde{d}}_{A,g}}^\ast V_{u_g d_g}^\text{CKM}\)                  \\
-      \(C_{\tilde{u}_A d_g \tilde{\chi}^\pm_i}^L\)        & \(\frac{1}{\sqrt{2}} V_{i1} \pclosed{R^{\tilde{u}}_{A,g}}^\ast \pclosed{V_{u_g d_g}^\text{CKM}}^\ast\)   \\
-      \(C_{\tilde{q}_A q^\prime_g \tilde{\chi}^\pm_i}^R\) & 0                                                                                                        \\
-      \hline
-      \(C_{qqZ}^L\)                                       & \(-\frac{I^3_q - Q_e s_W^2}{c_W}\)                                                                       \\
-      \(C_{qqZ}^R\)                                       & \(\frac{Q_e s_W^2}{c_W}\)                                                                                \\
-      \(C_{qq^\prime W}^L\)                               & \(-\frac{V^\text{CKM}_{q q^\prime}}{c_W}\)                                                               \\
-      \(C_{qq^\prime W}^R\)                               & 0                                                                                                        \\
-      \hline
-      \(C_{\tilde{q}_A \tilde{q}_B Z}^L\)                 & \(-\frac{I^3_q - Q_e s_W^2}{c_W} R^{\tilde{q}}_{A,g} \pclosed{R^{\tilde{q}}_{B,g}}^\ast\)                \\
-      \(C_{\tilde{q}_A \tilde{q}_B Z}^R\)                 & \(\frac{Q_e s_W^2}{c_W} R^{\tilde{q}}_{A,g+3} \pclosed{R^{\tilde{q}}_{B,g+3}}^\ast\)                     \\
-      \(C_{\tilde{q}_A \tilde{q}_B^\prime W}^L\)          & \(-\frac{V^\text{CKM}_{q q^\prime}}{c_W} R^{\tilde{q}}_{A,g} \pclosed{R^{\tilde{q}^\prime}_{B,g}}^\ast\) \\
-      \(C_{\tilde{q}_A \tilde{q}_B^\prime W}^R\)          & 0                                                                                                        \\
-      \hline
-    \end{tabular}
-    \caption{A summary of the variables used in the derived Feynman rules
-      and
-      their definitions.}
-    \label[tab]{tab:variable_definitions}
-  \end{table}
+\begin{table}[ht!]
+  \centering
+  \begin{tabular}{|c|c|c|}
+    \hline
+    Interaction                                            & Coupling                                            & Definition
+    \\
+    \hline
+    \multirow{2}{*}{\(\tilde{q} q \tilde\chi^0\)}          & \(C_{\tilde{q}_A q_g \tilde{\chi}_i^0}^{L}\)        & \(\pclosed{R^{\tilde{q}}_{A,g}}^\ast \bclosed{\pclosed{Q_e-I^3_q} t_W N_{i1} + I^3_q N_{i2}}\)           \\
+                                                           & \(C_{\tilde{q}_A q_g \tilde{\chi}_i^0}^{R}\)        & \(-\pclosed{R^{\tilde{q}}_{A,g+3}}^\ast Q_e t_W N_{i1}^\ast\)                                            \\
+    \hline
+    \multirow{2}{*}{\(W \tilde\chi^0 \tilde\chi^\pm\)}     & \(O_{ij}^L\)                                        & \(\frac{1}{\sqrt{2}} N_{i4} V_{j2}^\ast - N_{i2}V_{j1}^\ast\)                                            \\
+                                                           & \(O_{ij}^R\)                                        & \(-\frac{1}{\sqrt{2}} N_{i3}^\ast U_{j2} - N_{i2}^\ast U_{j1}\)                                          \\
+    \hline
+    \multirow{2}{*}{\(Z \tilde\chi^\pm \tilde\chi^\mp\)}   & \(O_{ij}^{\prime L}\)                               & \(\frac{1}{c_W} \pclosed{V_{i1} V_{j1}^\ast + \frac{1}{2} V_{i2}V_{j2}^\ast - \delta_{ij} s_W^2}\)       \\
+                                                           & \(O_{ij}^{\prime R}\)                               & \(\frac{1}{c_W} \pclosed{U_{i1}U_{j1}^\ast + \frac{1}{2} U_{i2}U_{j2}^\ast - \delta_{ij} s_W^2}\)        \\
+    \hline
+    \multirow{2}{*}{\(Z \tilde\chi^0 \tilde\chi^0\)}       & \(O^{\prime\prime L}_{ij}\)                         & \(\frac{1}{2c_W} \pclosed{N_{i4} N_{j4}^\ast - N_{i3} N_{j3}^\ast}\)                                     \\
+                                                           & \(O^{\prime\prime R}_{ij}\)                         & \(-\frac{1}{2c_W} \pclosed{N_{i4}^\ast N_{j4} - N_{i3}^\ast N_{j3}}\)                                    \\
+    \hline
+    \multirow{3}{*}{\(\tilde{q} q^\prime \tilde\chi^\pm\)} & \(C_{\tilde{d}_A u_g \tilde{\chi}^\pm_i}^L\)        & \(\frac{1}{\sqrt{2}} U_{i1} \pclosed{R^{\tilde{d}}_{A,g}}^\ast V_{u_g d_g}^\text{CKM}\)                  \\
+                                                           & \(C_{\tilde{u}_A d_g \tilde{\chi}^\pm_i}^L\)        & \(\frac{1}{\sqrt{2}} V_{i1} \pclosed{R^{\tilde{u}}_{A,g}}^\ast \pclosed{V_{u_g d_g}^\text{CKM}}^\ast\)   \\
+                                                           & \(C_{\tilde{q}_A q^\prime_g \tilde{\chi}^\pm_i}^R\) & 0                                                                                                        \\
+    \hline
+    \multirow{2}{*}{\(q q Z\)}                             & \(C_{qqZ}^L\)                                       & \(-\frac{I^3_q - Q_e s_W^2}{c_W}\)                                                                       \\
+                                                           & \(C_{qqZ}^R\)                                       & \(\frac{Q_e s_W^2}{c_W}\)                                                                                \\
+    \hline
+    \multirow{2}{*}{\(q q^\prime W\)}                      & \(C_{qq^\prime W}^L\)                               & \(-\frac{V^\text{CKM}_{q q^\prime}}{c_W}\)                                                               \\
+                                                           & \(C_{qq^\prime W}^R\)                               & 0                                                                                                        \\
+    \hline
+    \multirow{2}{*}{\(\tilde{q} \tilde{q} Z\)}             & \(C_{\tilde{q}_A \tilde{q}_B Z}^L\)                 & \(-\frac{I^3_q - Q_e s_W^2}{c_W} R^{\tilde{q}}_{A,g} \pclosed{R^{\tilde{q}}_{B,g}}^\ast\)                \\
+                                                           & \(C_{\tilde{q}_A \tilde{q}_B Z}^R\)                 & \(\frac{Q_e s_W^2}{c_W} R^{\tilde{q}}_{A,g+3} \pclosed{R^{\tilde{q}}_{B,g+3}}^\ast\)                     \\
+    \hline
+    \multirow{2}{*}{\(\tilde{q} \tilde{q} W\)}             & \(C_{\tilde{q}_A \tilde{q}_B^\prime W}^L\)          & \(-\frac{V^\text{CKM}_{q q^\prime}}{c_W} R^{\tilde{q}}_{A,g} \pclosed{R^{\tilde{q}^\prime}_{B,g}}^\ast\) \\
+                                                           & \(C_{\tilde{q}_A \tilde{q}_B^\prime W}^R\)          & 0                                                                                                        \\
+    \hline
+  \end{tabular}
+  \caption{A summary of the variables used in the derived Feynman rules and their definitions.}
+  \label{susy:tab:variable_definitions}
+\end{table}
 }
 
 
+\section{Diagonalisation and Takagi Factorisation}
 
 
 \end{document}
