@@ -2,29 +2,17 @@
 
 \begin{document}
 
-
-\begin{temporary}
-  \inputtikz{NC_s_channel_W}
-  \inputtikz{NC_t_channel}
-  \inputtikz{NC_u_channel}
-  \\
-  \inputtikz{CC_s_channel_Z}
-  \inputtikz{CC_s_channel_A}
-  \inputtikz{CC_t_channel}
-\end{temporary}
-
-\chapter{Neutralino Pair Production at Parton Level}
+\chapter{Electroweakino Pair Production at Parton Level}
 \label{chap:part}
 
 \begin{TODO}
-  \item Formulate a section on the dipole formalism used in Debove et al.
-  and make a
-  comparison.
+  \item Formulate a section on the dipole formalism used in Debove et al.\ and make a comparison.
+  \item Mention Mathematica scripts.
 \end{TODO}
 
-\section{Kinematics}
+\section{Phase Space and Kinematics in Scattering Processes}
 To start off, it will be useful to introduce some procedure for going forward
-in the phase space of an inclusive \(2\to 2(+1)\) cross-section process.
+in the phase space of an inclusive \(2\to 2(+1)\) scattering process.
 The phase space of 2-body and 3-body final states are quite different as there are
 more degrees of freedom in the 3-body final state.
 In the end, these extra degrees of freedom will be need to be integrated over to make an additive
@@ -32,13 +20,19 @@ comparison between the 2-body and 3-body processes, however, exactly how we
 choose to parametrise and subsequently integrate over the extra degrees of
 freedom can matter quite a bit.
 \medskip
+
+\todo{Quickly go over shorthand notation, and neutralino pair production etc.}
+Furthermore, I will use the shorthand \(m_{i,j}\) for the neutralino masses \(p_{i,j}^2\) and \(m_A\) for squark masses \(m_{\tilde{q}_A}\).
+
 To start out, let us count the degrees
 of freedom of a scattering problem involving \(N\) four-momenta
 \(p_{i=1,\ldots,N}\).
 Assuming our end result to be Lorentz invariant, there are \(N(N+1)/2\) different scalar products that can be produced using \(N\) different four-momenta.
 Momentum conservation allows us to eliminate one momentum, such that we have \(N(N-1)/2\) possible scalar products.
 Denoting the scalar products by \(m^2_{ij} \equiv (p_i + p_j)^2\) for \(j \neq i\), and \(m^2_i \equiv p_i^2\), we can find a relation between scalar products by using momentum conservation.
-\begin{align} \nonumber
+\begin{align}
+  \label{part:eq:generalised_mandelstam_relation}
+  \nonumber
   m^2_{ij} & = \pclosed{p_i - \sum_{k\neq j} p_k}^2 =
   \pclosed{\sum_{k\neq i,j} p_k}^2 = \sum_{k\neq i,j} \sum_{l\neq i,j}
   p_k\cdot
@@ -59,20 +53,28 @@ Denoting the scalar products by \(m^2_{ij} \equiv (p_i + p_j)^2\) for \(j \neq i
   \\l>k}} m^2_{kl}
   - (N-4) \sum_{k\neq i, j} m^2_k.
 \end{align}
-\comment{This little generalised relation might not be immediately
-necessary\ldots}
-Furthermore, we assign the \(N\) scalar products \(m^2_i\) to the invariant
-masses of the incoming and outgoing particles, thus not counting them as
-degrees of freedom, leaving us with
-\(n_\text{dof} = \frac{N(N-3)}{2}\) degrees of freedom.\footnote{I note that we
-  often consider the invariant mass of the incoming bodies to be fixed,
-  which
-  would reduce our degrees of freedom by one.}
-This means that in a \(2\to 2\) process, we have 2 degrees of freedom, and in a
-\(2\to 3\) process we have 5.
+\comment{This little generalised relation might not be immediately necessary\ldots}
+
+To count the degrees of freedom in an \(N\)-body final state, we need to classify how many scalar products need to be specified for every scalar product to be defined.
+We assign the \(N\) scalar products \(m^2_i\) to the invariant masses of the incoming and outgoing particles, thereby not counting them as kinematic degrees of freedom, which leaves us with \(n_\text{dof} = \frac{N(N-3)}{2}\) degrees of freedom.\footnote{I note that we
+  often consider the invariant mass of the incoming bodies to be fixed, which would reduce our degrees of freedom by one.}
+This means that in a \(2\to 2\) process, we must specify 2 kinematic variables, and in a \(2\to 3\) process we must specify 5.
+For instance, in the \(2\to 2\) case, the canonical Mandelstam variables \(s, t, u\) can be used together with the restriction that \(s+t+u = \sum_i m_i^2\).
+
+For reference, I give the general formula for the Lorentz invariant differential phase space for a process of \(n_i\) particles with four-momenta \(k_i\) going to \(n_f\) particles with four-momenta \(p_j\) in \(d\) space-time dimensions~\cite{Schwartz:2014sze}:
+\begin{equation}
+  \label{part:eq:dPi_d}
+  \mathrm{d}\Pi_{n_i \to n_f} =  (2\pi)^d \delta^d(\sum_{i=1}^{n_i} k_i - \sum_{j=1}^{n_f} p_j) \prod_{j=1}^{n_f} \frac{\mathrm{d}^{d-1}\vec{p}_j}{(2\pi)^{d-1}} \frac{1}{2E_j},
+\end{equation}
+where the particles with four-momenta \(p_j\) are understood to be  on-shell, i.e. \(E_j^2 = m_j^2 + \vec{p}_j^2\), where \(m_j\) is the mass of the particle.
+In the case of four space-time dimensions, this reduces to
+\begin{equation}
+  \label{part:eq:dPi_4}
+  \mathrm{d}\Pi_{n_i \to n_f} =  (2\pi)^4 \delta^4(\sum_{i=1}^{n_i} k_i - \sum_{j=1}^{n_f} p_j) \prod_{j=1}^{n_f} \frac{\mathrm{d}^{3}\vec{p}_j}{(2\pi)^{3}} \frac{1}{2E_j}.
+\end{equation}
 
 \subsection{2-body Phase Space}
-The Lorentz invariant phase space differential for a 2-body final state with
+From \cref{part:eq:dPi_d} above, the Lorentz invariant phase space differential for a 2-body final state with
 four-momenta \(p_i, p_j\) in \(d\) dimensions is
 \begin{equation}
   \mathrm{d}\Pi_{2\to 2} = \pclosed{2\pi}^d \delta^d\pclosed{P - p_i -
@@ -80,9 +82,9 @@ four-momenta \(p_i, p_j\) in \(d\) dimensions is
   \frac{1}{2E_i}
   \frac{\mathrm{d}^{d-1} \vec{p}_j}{\pclosed{2\pi}^{d-1}} \frac{1}{2E_j}.
 \end{equation}
-Going to the centre-of-mass frame of the incoming partons, we have \(P\^\mu =
-\pclosed{\sqrt{s}, 0, 0, 0}\), allowing us to integrate over the spatial part
-of Dirac delta-function to arrive at
+Going to the centre-of-mass frame of the incoming particles, we have \(P\^\mu =
+\pclosed{\sqrt{s}, 0, 0, 0}\), where \(s \equiv P^2\).
+This allows us to integrate over the spatial part of Dirac delta-function to arrive at
 \begin{equation}
   \mathrm{d}\Pi_{2\to 2} = \frac{1}{\pclosed{2\pi}^{d-2}}
   \mathrm{d}^{d-1} \vec{p} \frac{1}{4E_i E_j} \delta\pclosed{\sqrt{s} -
@@ -100,20 +102,30 @@ on the spatial angles \(\mathrm{d} \Omega_{d-2}\), allowing us to integrate
 over them using that \(\integral{\Omega_{d-2}} = 2 \pi^{\frac{d-2}{2}}
 \frac{1}{\Gamma\pclosed{\frac{d-2}{2}}}\) to get
 \begin{equation}
+  \label{part:eq:dPi_dtheta}
   \mathrm{d}\Pi_{2\to 2} = \frac{1}{\pclosed{4\pi}^{\frac{d-2}{2}}}
   \frac{1}{\Gamma\pclosed{\frac{d-2}{2}}} \frac{p^{d-3}}{2 \sqrt{s}}
   \sin^{d-3}\theta \,\mathrm{d}\theta,
 \end{equation}
-where we understand the momentum to be given by \(p = \frac{\sqrt{\lambda(s,
-    m_i^2, m_j^2)}}{2\sqrt{s}}\).
+where we understand the momentum to be given by
+\begin{equation}
+  \label{part:eq:p}
+  p = \frac{\sqrt{\lambda(s, m_i^2, m_j^2)}}{2\sqrt{s}}
+\end{equation}
+The \(\lambda\) function is known as the Källén function and is defined as
+\begin{equation}
+  \label{part:eq:kallen}
+  \lambda(x, y, z) = x^2 + y^2 + z^2  - 2xy - 2xz - 2yz.
+\end{equation}
 In \(d=4\) dimensions, it is often convenient to change to the Mandelstam
 variable \(t\), which for massless initial state particles becomes
-\(t=\frac{1}{2}
-\pclosed{-s+m_i^2+m_j^2+\sqrt{\lambda(s,m_i^2,m_j^2)}\cos\theta}\).
+\(t=\frac{1}{2}\pclosed{-s+m_i^2+m_j^2+\sqrt{\lambda(s,m_i^2,m_j^2)}\cos\theta}\).
 Making the change of variable, the differential phase space reduces to
 \begin{equation}
+  \label{part:eq:dPi_dt}
   \evalat{\mathrm{d}\Pi_{2\to 2}}{d=4} = \frac{1}{8\pi s} \,\mathrm{d}t
 \end{equation}
+
 
 \subsection{3-body Phase Space}
 \todo{Fill out an introduction here.}\\
@@ -142,7 +154,7 @@ This leaves
 where the stars denote quantities calculated in the aforementioned reference
 frame.
 Integrating trivially over \(\vec{p}_j^\star\) using the delta-function, and
-writing using polar coordinates \(\mathrm{d}^{d-1}\vec{p}_i =
+using polar coordinates \(\mathrm{d}^{d-1}\vec{p}_i =
 \mathrm{d}\Omega_{d-1}^\star \, \mathrm{d}\!\abs{\vec{p}_i^\star}
 \abs{\vec{p}_i^\star}^{d-2}\) to integrate over \(\delta\pclosed{Q - E_i^\star
   - E_j^\star}\), we get
@@ -340,32 +352,48 @@ transformations on \({p_{i,j}^\ast}\^\mu\) using that
   \caption{}
 \end{figure}
 
+
 \subsection{Differential Cross-Section}
+Consider a scattering process of set of two initial state particles \(\cclosed{i}\) going to a set of \(n\) final particles \(\cclosed{f}\).
+Given a transition amplitude \(\M(\cclosed{i} \to \cclosed{f})\), the differential cross-section is given by~\cite{Schwartz:2014sze}
 \begin{equation}
-  \label{par:eq:diff_xsec_formula}
-  \mathrm{d}\sigma = \frac{1}{2\pi} \abs{\M}^2 \mathrm{d}\Pi
+  \mathrm{d}\sigma = \frac{1}{4|E_2 \vec{k}_1 - E_1\vec{k}_2|} \abs{\M(\cclosed{i} \to \cclosed{f})}^2 \mathrm{d}\Pi_{2 \to n},
 \end{equation}
+where \(k_{1/2}^\mu = \pclosed{E_{1/2}, \vec{k}_{1/2}}\) are the four-momenta of the initial particles and \(\mathrm{d}\Pi_{2 \to n}\) is the differential phase space of the final state particles as given by \cref{part:eq:dPi_d}.
+In the case where the initial particles are massless, this simplifies to
+\begin{equation}
+  \label{part:eq:diff_xsec_formula}
+  \mathrm{d}\sigma = \frac{1}{2s} \abs{\M(\cclosed{i} \to \cclosed{f})}^2 \mathrm{d}\Pi_{2 \to n},
+\end{equation}
+where \(s = (k_1 + k_2)^2\).
 
+For future reference, the differential cross-section in four dimensions for a \(2\to 2\) scattering process with massless initial state particles using \cref{part:eq:dPi_dt} is
 \begin{equation}
-  \mathrm{d}\hat{\sigma}^d = \frac{1}{\pclosed{4\pi}^{\frac{d-2}{2}}}
-  \frac{1}{\Gamma\pclosed{\frac{d-2}{2}}}
-  \frac{p^{d-3}}{4\hat{s}\sqrt{\hat{s}}}
-  \abs{\M}^2 \sin^{d-3}\theta\, \mathrm{d}\theta
+  \d[t]{\sigma} = \frac{1}{16\pi} \frac{1}{s^2} \abs{\M}^2.
 \end{equation}
+In \(d\) dimension, switching to the variable \(y = \frac{1}{2}(1+\cos\theta)\) from \cref{part:eq:dPi_dtheta}, the differential cross-section is given by\footnote{The seemingly arbitrary change of variable is a pre-emptive change anticipating some integrals that will arise later on.}
+\begin{equation}
+  \d[y]{\sigma^d} = \frac{1}{\pclosed{4\pi}^{\frac{d-2}{2}}} \frac{1}{\Gamma\pclosed{\frac{d-2}{2}}} \frac{p^{d-3}}{8s\sqrt{s}} \abs{\M}^2 (y(1-y))^{d-4},
+\end{equation}
+where the momentum \(p\) is given by \cref{part:eq:p}.
+The limits on the integration variables are
+\begin{subequations}
+  \begin{align}
+    -p\sqrt{s} - \frac{1}{2}\pclosed{s - m_i^2 - m_j^2} \leq & t \leq p\sqrt{s} - \frac{1}{2}\pclosed{s - m_i^2 - m_j^2}, \\
+    0 \leq                                                   & y \leq 1.
+  \end{align}
+\end{subequations}
 
-\begin{equation}
-  \mathrm{d}\hat{\sigma} = \frac{1}{16\pi} \frac{1}{\hat{s}^2} \abs{\M}^2
-  \mathrm{d}\hat{t}
-\end{equation}
 
-Averaged over spin and colour, and taking account of symmetry if the particles
-are identical, the differential cross-section in \(d=4\) dimensions is.
-\begin{equation}
-  \mathrm{d}\hat{\sigma} = \pclosed{\frac{1}{2}}^{\delta_{ij}}
-  \frac{1}{64 N_C^2 \pi} \frac{1}{\hat{s}^2}
-  \sum_{\substack{\text{spin}\\\text{colour}}} \abs{\M}^2
-  \mathrm{d}\hat{t}
-\end{equation}
+% Averaged over spin and colour, and taking account of symmetry if the particles
+% are identical, the differential cross-section in \(d=4\) dimensions is.
+% \begin{equation}
+%   \label{part:eq:dxsec}
+%   \mathrm{d}\hat{\sigma} = \pclosed{\frac{1}{2}}^{\delta_{ij}}
+%   \frac{1}{64 N_C^2 \pi} \frac{1}{\hat{s}^2}
+%   \sum_{\substack{\text{spin}\\\text{colour}}} \abs{\M}^2
+%   \mathrm{d}\hat{t}
+% \end{equation}
 % \clearpage
 % \begin{equation}
 %     \lambda(x, y, z) = x^2 + y^2 + z^2 - 2xy - 2xz - 2yz
@@ -387,11 +415,32 @@ are identical, the differential cross-section in \(d=4\) dimensions is.
 %     \abs{\M}^2 \supset \frac{\pclosed{t_{ii}(z, y, \theta^\ast, \phi^\ast) - m_i^2} \pclosed{m^2_{gi}(z, \theta^\ast) - m_i^2 - (1-z)s}}{s y (1-z) \pclosed{t_{ii}(z, y, \theta^\ast, \phi^\ast) - m_A^2} \pclosed{t_{ii}(z, y, \theta^\ast, \phi^\ast) - m_B^2}}
 % \end{align}
 
+
+
 \section{Leading Order Cross-Section}
 
 \begin{TODO}
   \item Comment on reason for using Breit-Wigner approximation.
 \end{TODO}
+
+For the leading order contributions, there are no divergences that need regulating, so we will use \(d=4\).
+
+\subsection{Kinematic Definitions}
+Before getting into the details of the calculation, it will be helpful to present some definitions of the variables we will need.
+I will make use of the shorthand notation for the spinors \(w_{i/j} = w(p_{i/j}), w_{1,2} = w(k_{i/j})\) where \(w\) is either \(u\) or \(v\).
+We will also need to define an appropriate set of kinematic variables.
+Seeing as the inclusive scattering cross-section is only a \(2 \to 2\) process to leading order, I will make use of the Mandelstam variables, which in this case will be defined as
+\begin{subequations}
+  \begin{align}
+    \hat{s} \equiv & (k_i+k_j)^2 = (p_i+p_j)^2, \\
+    \hat{t} \equiv & (k_i-p_i)^2 = (k_j-p_j)^2, \\
+    \hat{u} \equiv & (k_i-p_j)^2 = (k_j-p_i)^2,
+  \end{align}
+\end{subequations}
+which by \cref{part:eq:generalised_mandelstam_relation} is constrained by \(\hat{s} + \hat{t} + \hat{u} = m_i^2 + m_j^2\).
+For clarity later on when we will be working with hadron-level kinematics in the next chapter, I will put a hat on variables that are defined at parton level which have an unhatted, hadron-level counterparts.
+This includes the Mandelstam variables above and the cross-sections.
+
 
 \subsection{The Matrix Elements}
 \begin{figure} [ht!]
@@ -416,43 +465,36 @@ are identical, the differential cross-section in \(d=4\) dimensions is.
   \label{pc:fig:tree_level_diagrams}
 \end{figure}
 
-At leading order the contributing diagrams to the parton-level process are
-shown in \cref{pc:fig:tree_level_diagrams}. In the following, I will make use
-of the shorthand notation for the spinors \(w_{i/j} = w(p_{i/j}), w_{1,2} =
-w(k_{i/j})\) where \(w\) is either \(u\) or \(v\). The resulting amplitudes,
-using the Feynman rules in \needcite[Feynman rules section], are then
+At leading order the contributing diagrams to the parton-level process are shown in \cref{pc:fig:tree_level_diagrams}.
+The resulting amplitudes, using the Feynman rules in \needcite[Feynman rules section], are then
 \begin{subequations}
   \begin{align}
     \nonumber
-    \M_{\hat{s}} = -\frac{g^2}{2} D_Z(\hat{s})           & \bclosed{ \bar{u}_i\gamma^\mu\pclosed{O^{\prime\prime L}_{ij}P_L + O^{\prime\prime R}_{ij}P_R} v_j }
-    \\
-    \label{par:eq:Ms}
-                                                         & \times \bclosed{ \bar{v}_2 \gamma_\mu \pclosed{C^L_{Zqq}P_L + C^R_{Zqq}P_R} u_1 },
-    \\
+    \M_{\hat{s}} = -g^2 D_Z(\hat{s})                         & \bclosed{ \bar{u}_i\gamma^\mu\pclosed{O^{\prime\prime L}_{ij}P_L + O^{\prime\prime R}_{ij}P_R} v_j }                                              \\
+    \label{part:eq:Ms}
+                                                             & \times \bclosed{ \bar{v}_2 \gamma_\mu \pclosed{C^L_{qqZ}P_L + C^R_{qqZ}P_R} u_1 },                                                                \\
     \nonumber
-    \M_{\hat{t}} = -\sum_A 2g^2 D_{\tilde{q}_A}(\hat{t}) & \bclosed{ \bar{u}_i \pclosed{C_{\nino[i]\tilde{q}_Aq}^{L\ast}P_L + C_{\nino[i]\tilde{q}_Aq}^{R\ast} P_R} u_1 }
-    \\
-    \label{par:eq:Mt}
-                                                         & \times \bclosed{ \bar{v}_2 \pclosed{C^R_{\nino[j]\tilde{q}_Aq}P_L + C^L_{\nino[j]\tilde{q}_Aq}P_R} v_j },
-    \\
+    \M_{\hat{t}} = -\sum_A 2g^2 D_{\tilde{q}_A}(\hat{t})     & \bclosed{ \bar{u}_i \pclosed{\pclosed{C_{q_g \tilde{q}_A \nino[i]}^L}^{\!\ast} P_L + \pclosed{C_{q_g \tilde{q}_A \nino[i]}^R}^{\!\ast} P_R} u_1 } \\
+    \label{part:eq:Mt}
+                                                             & \times \bclosed{ \bar{v}_2 \pclosed{C_{q_g \tilde{q}_A \nino[j]}^R P_L + C_{q_g \tilde{q}_A \nino[j]}^L P_R} v_j },                               \\
     \nonumber
-    \M_{\hat{u}} = -\sum_B 2g^2 D_{\tilde{q}_B}(\hat{u}) & \bclosed{ \bar{u}_j \pclosed{C_{\nino[j]\tilde{q}_Bq}^{L\ast}P_L + C_{\nino[j]\tilde{q}_Bq}^{R\ast} P_R} u_1 }
-    \\
-    \label{par:eq:Mu}
-                                                         & \times \bclosed{ \bar{v}_2 \pclosed{C^R_{\nino[i]\tilde{q}_Bq}P_L + C^L_{\nino[i]\tilde{q}_Bq}P_R} v_i },
+    \M_{\hat{u}} = (-1)-\sum_A 2g^2 D_{\tilde{q}_A}(\hat{u}) & \bclosed{ \bar{u}_j \pclosed{\pclosed{C_{q_g \tilde{q}_A \nino[j]}^L}^{\!\ast} P_L + \pclosed{C_{q_g \tilde{q}_A \nino[j]}^R}^{\!\ast} P_R} u_1 } \\
+    \label{part:eq:Mu}
+                                                             & \times \bclosed{ \bar{v}_2 \pclosed{C_{q_g \tilde{q}_A \nino[i]}^R P_L + C_{q_g \tilde{q}_A \nino[i]}^L P_R} v_i },
   \end{align}
 \end{subequations}
 where \(D_p(q^2) = \frac{1}{q^2 - m_p^2 + i\Gamma_p m_p}\) is the
 \needcite[Breit-Wigner propagator] of a particle with mass \(m_p\) and decay
-width \(\Gamma_p\).
+width \(\Gamma_p\) and the extra minus sign in \(\mathcal{M}_{\hat{u}}\) comes from it being an odd permutation of the external spinors to the other two amplitudes.
+\todo{Cite/reference this.}
+\\\todo{Discuss lack of Breit-Wigner for squarks and perhaps touch on non-gauge invariance with BW \(Z\)-boson.}
 
-These matrix elements can be expanded using the \textit{supercharges}
+These matrix elements can be expanded using the \textit{effective charges} defined by
 \begin{subequations}
+  \label{part:eq:eff_charges}
   \begin{align}
-    Z^X      & = C_{qqZ}^X O_{ij}^{\prime\prime X},
-    \\
-    Q_A^{XY} & = C_{\nino[i] \tilde{q}_A q}^{X}
-    \pclosed{C_{\nino[j] \tilde{q}_A q}^{Y}}^\ast,
+    Z^{XY}   & = D_Z(\hat{s}) C_{qqZ}^X O_{ij}^{\prime\prime Y},                                   \\
+    Q_A^{XY} & = C_{q_g \tilde{q}_A \nino[i]}^{X} \pclosed{C_{q_g \tilde{q}_A \nino[j]}^{Y}}^\ast,
   \end{align}
 \end{subequations}
 % and the Dirac quadrilinears
@@ -471,28 +513,24 @@ and the Dirac bilinears
 \end{subequations}
 to arrive at
 \begin{subequations}
+  \label{part:eq:MLO}
   \begin{align}
     \nonumber
-    \M_{\hat{s}} = -\frac{g^2}{2} D_Z(\hat{s}) \Big[           &
-      Z^L b_L^\mu(u_i, v_j){b_L}\_{\mu}(v_2, u_1) -
-      \pclosed{Z^R}^\ast b_L^\mu(u_i,
-    v_j){b_R}\_{\mu}(v_2, u_1)                                   \\
-    -                                                          &
-      \pclosed{Z^L}^\ast b_{R}^\mu(u_i, v_j){b_L}\_{\mu}(v_2,
-      u_1) +
-      Z^R b_R^\mu(u_i,
-    v_j){b_R}\_{\mu}(v_2, u_1) \Big]                             \\
+    \M_{\hat{s}} = -g^2 \Big[                                  &
+    Z^{LL} b_L^\mu(v_2, u_1){b_L}\_{\mu}(u_i, v_j) + Z^{LR} b_L^\mu(v_2, u_1){b_R}\_{\mu}(u_i, v_j)                 \\
+    +                                                          & Z^{LR} b_{R}^\mu(v_2, u_1){b_L}\_{\mu}(u_i, v_j) +
+    Z^{RR} b_R^\mu(v_2, u_1){b_R}\_{\mu}(u_i, v_j) \Big],                                                           \\
     \nonumber
     \M_{\hat{t}} = -\sum_A 2g^2 D_{\tilde{q}_A}(\hat{t}) \Big[ &
     \pclosed{Q_A^{LR}}^\ast b_L(u_i, u_1) b_L(v_2, v_j) +
     \pclosed{Q_A^{LL}}^\ast
-    b_L(u_i, u_1) b_R(v_2, v_j)                                  \\
+    b_L(u_i, u_1) b_R(v_2, v_j)                                                                                     \\
     +                                                          &
     \pclosed{Q_A^{RR}}^\ast b_R(u_i, u_1) b_L(v_2, v_j) +
     \pclosed{Q_A^{RL}}^\ast
-    b_R(u_i, u_1) b_R(v_2, v_j) \Big]                            \\
+    b_R(u_i, u_1) b_R(v_2, v_j) \Big],                                                                              \\
     \nonumber
-    \M_{\hat{u}} = -\sum_A 2g^2 D_{\tilde{q}_A}(\hat{u}) \Big[ &
+    \M_{\hat{u}} = \sum_A 2g^2 D_{\tilde{q}_A}(\hat{u}) \Big[  &
     Q_A^{RL} b_L(v_2, v_i) b_L(u_j, u_1) + Q_A^{RR} b_L(v_2, v_i)
     b_R(u_j, u_1)
     \\
@@ -503,8 +541,7 @@ to arrive at
   \end{align}
 \end{subequations}
 
-To get the matrix element squared we can use that the complex conjugate of the
-Dirac bilinears is given by
+To square the amplitudes we will need to use that the complex conjugate of the Dirac bilinears is
 \begin{subequations}
   \begin{align}
     \pclosed{b_{L/R}(w_a, w_b)}^\dagger =     & b_{R/L}(w_b, w_a),
@@ -526,7 +563,7 @@ bilinears, they have the sum identities
     \delta_{XY}\pclosed{p_a^\mu p_b^\nu - \g (p_a \cdot p_b) +
       p_a^\nu
       p_b^\mu +
-      (-1)^{\delta_{XY}} i \epsilon^{\mu\nu\alpha\beta}
+      (-1)^{\delta_{XL}} i \epsilon^{\mu\nu\alpha\beta}
       \tensor{(p_a)}{_\alpha}
   \tensor{(p_b)}{_\beta}}                                             \\
                                                             & +
@@ -535,82 +572,44 @@ bilinears, they have the sum identities
 where \(\operatorname{rsgn}\) is 1 if \(w_a, w_b\) are spinors of the same
 type, e.g. both are \(u\)-spinors, and -1 otherwise.
 
-\begin{temporary}
-
-  \begin{subequations}
-    \begin{align}
-      \nonumber
-      \M^\dagger_{\hat{s}} = -\frac{g^2}{2} D_Z^\ast(\hat{s})
-      \Big[                               &
-        \pclosed{Z^L}^\ast b_L^\mu(v_j,
-        u_i){b_L}\_{\mu}(u_1,
-        v_2) -
-        Z^R b_L^\mu(v_j, u_i){b_R}\_{\mu}(u_1, v_2)
-      \\
-        -
-                                          & Z^L b_R^\mu(v_j,
-        u_i){b_L}\_{\mu}(u_1, v_2) +
-        \pclosed{Z^R}^\ast b_R^\mu(v_j,
-        u_i){b_R}\_{\mu}(u_1,
-        v_2) \Big]
-      \\
-      \nonumber
-      \M^\dagger_{\hat{t}} = -\sum_A 2g^2
-      D^\ast_{\tilde{q}_A}(\hat{t}) \Big[ & Q_A^{RL} b_L(u_1,
-      u_i) b_L(v_j, v_2) +
-      Q_A^{RR} b_L(u_1, u_i) b_R(v_j, v_2)
-      \\
-      +
-                                          & Q_A^{LL} b_R(u_1,
-      u_i) b_L(v_j, v_2) + Q_A^{LR} b_R(u_1, u_i)
-      b_R(v_j, v_2) \Big]
-      \\
-      \nonumber
-      \M^\dagger_{\hat{u}} = -\sum_B 2g^2
-      D^\ast_{\tilde{q}_B}(\hat{u}) \Big[ &
-      \pclosed{Q_A^{LR}}^\ast b_L(v_i, v_2)
-      b_L(u_1, u_j) + \pclosed{Q_A^{LL}}^\ast b_L(v_i, v_2)
-      b_R(u_1, u_j)
-      \\
-      +
-                                          &
-      \pclosed{Q_A^{RR}}^\ast b_R(v_i, v_2) b_L(u_1, u_j) +
-      \pclosed{Q_A^{RL}}^\ast b_R(v_i, v_2) b_R(u_1, u_j)
-      \Big].
-    \end{align}
-  \end{subequations}
-
-\end{temporary}
 
 \subsection{Differential Result}
+Now, using \cref{part:eq:dxsec}, the partonic cross-section differential in \(\hat{t}\) can be shown to be
 \begin{align}
   \nonumber
-  \d[\hat{t}]{\hat{\sigma}_0} = & \frac{\pi \alpha_W^2}{N_C \hat{s}^2}
+  \d[\hat{t}]{\hat{\sigma}^0} = & \frac{\pi \alpha_W^2}{N_C \hat{s}^2}
   \pclosed{\frac{1}{2}}^{\delta_{ij}} \Bigg\{ \sum_{X,Y}
-  \bclosed{\abs{Q^{XY}_{\hat{t}}}^2
+  \bclosed{\abs{C^{XY}_{\hat{t}}}^2
     \pclosed{\hat{t}-m_i^2}\pclosed{\hat{t}-m_j^2} +
-    \abs{Q^{XY}_{\hat{u}}}^2
+    \abs{C^{XY}_{\hat{u}}}^2
   \pclosed{\hat{u}-m_i^2}\pclosed{\hat{u}-m_j^2}}                      \\
                                 & - \sum_X
-  \bclosed{2\Re{\pclosed{Q_{u}^{XX}}^\ast Q_{t}^{XX}} m_i m_j \hat{s} -
-    2\Re{\pclosed{Q_{u}^{XX^\prime}}^\ast Q_{t}^{XX^\prime}}
-    \pclosed{\hat{t}\hat{u} - m_i^2m_j^2}} \Bigg\}
+  \bclosed{2\Re{\pclosed{C_{u}^{XX}}^\ast C_{t}^{XX}} m_i m_j \hat{s} -
+    2\Re{\pclosed{C_{u}^{XX^\prime}}^\ast C_{t}^{XX^\prime}}
+    \pclosed{\hat{t}\hat{u} - m_i^2m_j^2}} \Bigg\},
 \end{align}
+where I have defined
+\begin{subequations}
+  \begin{align}
+    C_{\hat{t}}^{XY} = & -\delta^{XY} (Z^{XX^\prime})^\ast + \sum_{A}\frac{Q_A^{XY}}{t-m_A^2}, \\
+    C_{\hat{u}}^{XY} = & \delta^{XY} (Z^{XX})^\ast + \sum_{A}\frac{(Q_A^{XY})^\ast}{t-m_A^2}.  \\
+  \end{align}
+\end{subequations}
+Adding another layer of abstraction in the effective charges on the cross-section might make things a little less clear now, but it will become useful when generalising the cross-section to other electroweakino processes later on.
+
 
 \subsection{Phase Space Integral}
-To integrate over the variable \(\hat{t}\), we can classify the types of
-integrals that will arise. All the integrals take the form
+To get the full cross-section, we will need to integrate over the \(\hat{t}\)-variable.
+To do this, we can classify the types of integrals that will arise.
+All the integrals take the form
 \begin{equation}
   T^p(\Delta_1, \Delta_2) \equiv \int_{t_-}^{t_+} \!\mathrm{d}\hat{t}\,
-  \frac{\hat{t}^p}{(\hat{t}-\Delta_1)(\hat{t}-\Delta_2^\ast)}
+  \frac{\hat{t}^p}{(\hat{t}-\Delta_1)(\hat{t}-\Delta_2)}
 \end{equation}
 for some \(\Delta_{1,2}\) dependent on \(\hat{s}\), the neutralino masses and
-the squark masses and decay rates, and \(p\) is some integer.
+the squark masses, and \(p\) is some non-negative integer.
 
-\todo{Talk about complex logarithms and define log-difference function.}\\
-\todo{Maybe substitute in \(p\).}\\
-Using the the integral limits are \(t_\pm = \frac{\hat{s} - m_i^2 - m_j^2}{2}
-\pm p\sqrt{\hat{s}}\), we get that the possible integrals evaluate to
+Using the integral limits are \(t_\pm = -\frac{\hat{s} - m_i^2 - m_j^2}{2} \pm p\sqrt{\hat{s}}\), we get that the possible integrals evaluate to
 % \begin{subequations}
 %   \begin{align}
 %     T^2(0, 0) =                         & 2p\sqrt{\hat{s}}
@@ -629,7 +628,7 @@ Using the the integral limits are \(t_\pm = \frac{\hat{s} - m_i^2 - m_j^2}{2}
 %     \\
 %     T^3\!\pclosed{\Delta, 0} =          &
 %     \frac{p\sqrt{\hat{s}}}{2}\pclosed{\hat{s} - m_i^2 - m_j^2} +
-%     2\Deltap\sqrt{\hat{s}}	+ \Delta^2
+%     2\Delta p\sqrt{\hat{s}}	+ \Delta^2
 %     \operatorname{dLog}\pclosed{t_+ - \Delta,
 %       t_- - \Delta}
 %     \\
@@ -661,59 +660,293 @@ Using the the integral limits are \(t_\pm = \frac{\hat{s} - m_i^2 - m_j^2}{2}
 % \end{subequations}
 \begin{subequations}
   \begin{align}
-    T^2(0, 0) =                   & 2p\sqrt{\hat{s}}
+    T^2(0, 0) =                         & 2p\sqrt{\hat{s}},
     \\
-    T^3(0, 0) =                   &
-    -p\sqrt{\hat{s}}\pclosed{\hat{s} - m_i^2 - m_j^2}
+    T^3(0, 0) =                         &
+    -p\sqrt{\hat{s}}\pclosed{\hat{s} - m_i^2 - m_j^2},
     \\
-    T^4(0, 0) =                   & p\sqrt{\hat{s}}
-    \pclosed{\frac{8}{3}\hat{s}p^2 + 2m_i^2m_j^2}
+    T^4(0, 0) =                         & p\sqrt{\hat{s}}
+    \pclosed{\frac{8}{3}\hat{s}p^2 + 2m_i^2m_j^2},
     \\
-    T^1\!\pclosed{m^2, 0} =       & -L(m^2)
+    T^1\!\pclosed{\Delta, 0} =          & -L(\Delta),
     \\
-    T^2\!\pclosed{m^2, 0} =       & 2p\sqrt{\hat{s}} - m^2 L(m^2)
+    T^2\!\pclosed{\Delta, 0} =          & 2p\sqrt{\hat{s}} - \Delta L(\Delta),
     \\
-    T^3\!\pclosed{m^2, 0} =       &
-    -p\sqrt{\hat{s}}\pclosed{\hat{s}
-      - m_i^2 - m_j^2} +
-    2m^2p\sqrt{\hat{s}}	- m^4 L(m^2)
+    T^3\!\pclosed{\Delta, 0} =          &
+    p\sqrt{\hat{s}} \pclosed{2\Delta - (\hat{s}-m_i^2-m_j^2)} - \Delta^2 L(\Delta),
     \\
-    T^0\!\pclosed{m^2_1, m^2_2} = & \frac{1}{m^2_2 - m^2_1}
-    \cclosed{L(m_1^2) - L(m_2^2)}
+    T^0\!\pclosed{\Delta_1, \Delta_2} = & \begin{cases} \frac{1}{\Delta_2 - \Delta_1}
+                                            \cclosed{L(\Delta_1) - L(\Delta_2)}                                           & \text{if } \Delta_1\neq \Delta_2             \\
+                                            \frac{2p \sqrt{\hat{s}}}{\Delta^2 + \Delta(\hat{s}-m_i^2-m_j^2) + m_i^2m_j^2} & \text{if } \Delta_1 = \Delta_2 \equiv \Delta\end{cases},
     \\
-    T^1\!\pclosed{m^2_1, m^2_2} = & \frac{1}{m^2_2 - m^2_1}
-    \cclosed{m^2_1 L(m_1^2) - m^2_2 L(m_2^2)}
+    T^1\!\pclosed{\Delta_1, \Delta_2} = & \begin{cases} \frac{1}{\Delta_2 - \Delta_1}
+                                            \cclosed{\Delta_1 L(\Delta_1) - \Delta_2 L(\Delta_2)}                                            & \text{if } \Delta_1 \neq \Delta_2            \\
+                                            \frac{2\Delta p \sqrt{\hat{s}}}{\Delta^2 + \Delta(\hat{s}-m_i^2-m_j^2) + m_i^2m_j^2} - L(\Delta) & \text{if } \Delta_1 = \Delta_2 \equiv \Delta\end{cases},
     \\
     \nonumber
-    T^2\!\pclosed{m^2_1, m^2_2} = & 2p\sqrt{\hat{s}} +
-    \frac{1}{m^2_2 - m^2_1} \cclosed{m^4_1 L(m_1^2) -
-      m^4_2 L(m_2^2)}
+    T^2\!\pclosed{\Delta_1, \Delta_2} = & \begin{cases} 2p\sqrt{\hat{s}} +
+                                            \frac{1}{\Delta_2 - \Delta_1} \cclosed{\Delta_1^2 L(\Delta_1) -
+                                            \Delta_2^2 L(\Delta_2)}                                                                                                                                  & \text{if } \Delta_1 \neq \Delta_2            \\
+                                            \frac{2(2\Delta^2 + \Delta(\hat{s}-m_i^2-m_j^2) + m_i^2m_j^2) p \sqrt{\hat{s}}}{\Delta^2 + \Delta(\hat{s}-m_i^2-m_j^2) + m_i^2m_j^2} - 2\Delta L(\Delta) & \text{if } \Delta_1 = \Delta_2 \equiv \Delta\end{cases},
   \end{align}
 \end{subequations}
-\(L(m^2) = \log\frac{m^2 + \frac{1}{2}(s-m_i^2-m_j^2) + p\sqrt{s}}{m^2 +
-  \frac{1}{2}(s-m_i^2-m_j^2) - p\sqrt{s}}\)
-
-In here, I have defined \(\operatorname{dLog}(z, w)\) to be the log-difference
-between to complex number \(z, w\) such that
-\begin{equation}
-  \operatorname{dLog}(z, w) \equiv \ln\abs{\frac{z}{w}} +
-  i\pclosed{\arctan\frac{\Im{z}}{\Re{z}} - \arctan\frac{\Im{w}}{\Re{w}}}.
-\end{equation}
-The only non-zero arguments that will appear in these integrals are
-\(\Delta^{\hat{t}}_A = m_{\tilde{q}_A}^2 - i\Gamma_{\tilde{q}_A}
-m_{\tilde{q}_A}\) and \(\Delta^{\hat{u}}_A = m_i^2 + m_j^2 - \hat{s} -
-m_{\tilde{q}_A}^2 + i\Gamma_{\tilde{q}_A} m_{\tilde{q}_A}\).
-
-\begin{temporary}
+where I have defined \(L(\Delta) = \log\frac{\Delta + \frac{1}{2}(\hat{s}-m_i^2-m_j^2) + p\sqrt{\hat{s}}}{\Delta + \frac{1}{2}(\hat{s}-m_i^2-m_j^2) - p\sqrt{\hat{s}}}\).
+The two non-zero arguments to these functions that will arise are \(\Delta^{\hat{t}}_A = m_A^2\) and \(\Delta^{\hat{u}}_A = -(\hat{s}-m_i^2-m_j^2) - m_A^2\), and I note that \(L(\Delta^{\hat{u}}_A) = -L(\Delta^{\hat{t}}_A)\).
+This lets us write the total cross-section
+% \begin{align}
+%   \hat\sigma^0 = & \frac{\pi p \alpha_W^2}{\hat{s}^{\sfrac{3}{2}} N_C} \pclosed{\frac{1}{2}}^{\delta_{ij}} \Bigg\{
+%   -4\hat{s}m_im_j \sum_X \bigg[ \frac{\Re{(Z^{XX})^2}}{\vclosed{\hat{s}-\Delta_Z}^2} + \sum_{A,B}\frac{\Re{Q_A^{XX}Q_B^{XX}}}{p\sqrt{\hat{s}} (m_A^2+m_B^2 + s - m_i^2-m_j^2)}L(m_A^2)         \\
+%                  & - \sum_A \Re{\frac{1}{\hat{s}-\Delta_Z}} \frac{\Re{Q_A^{XX} Z^{XX}}}{p \sqrt{\hat{s}}} L(m_A^2) \bigg] +                                                                    \\
+%                  & + \frac{2}{3}(2\hat{s}(\hat{s}-m_i^2-m_j^2) + m_i^4 + m_j^4) \sum_X\bigg[ \frac{|Z^{XX}|^2}{|s-\Delta_Z|^2} \bigg]                                                          \\
+%                  & + 4\pclosed{1 - \frac{(m_A^2-m_i^2)(m_A^2-m_j^2)L(m_A^2)}{p\sqrt{\hat{s}}(m_A^2-m_B^2)}} \Re{Q_A^{XY} (Q_B^{XY})^\ast}                                                      \\
+%                  & + 4\pclosed{1 - \frac{(m_A^4 + m_A^2(s - m_i^2 + m_j^2) + m_i^2 + m_j^2)L(m_A^2)}{p\sqrt{\hat{s}(m_A^2 + m_B^2 + s - m_i^2 - m_j^2)}}} \Re{Q_A^{XX^\prime}Q_B^{X^\prime X}} \\
+%                  & - 4\Re{\frac{1}{\hat{s}-\Delta_Z}} \pclosed{\hat{s}+m_i^2+m_j^2-2m_A^2 + \frac{(m_A^2-m_i^2)(m_A^2-m_j^2)}{p\sqrt{\hat{s}}} L(m_A^2)} \Re{Q_A^{XX} (Z^{XX})^\ast}
+%   \Bigg\}
+% \end{align}
+\begin{align}
+  \label{part:eq:born}
+  \hat\sigma^0 = & \frac{4 \pi p \alpha_W^2}{\hat{s}^{\sfrac{3}{2}} N_C} \pclosed{\frac{1}{2}}^{\delta_{ij}} \pclosed{F^{\prime\prime}_{\tilde{q}} + F^{\prime\prime}_Z + F^{\prime\prime}_{\tilde{q}Z}},
+\end{align}
+with effective couplings defined as
+\begin{align}
+  \label{part:eq:eff_coupling_Fq}
+  \nonumber
+  F^{\prime\prime}_{\tilde{q}} = \sum_{A,B,X,Y} & \biggl\{\Re{Q_A^{XY} (Q_B^{XY})^\ast} \pclosed{1 - L_2^{AB}} + \delta_{XY}\Re{Q_A^{XX} Q_B^{XX}} L_1^{AB} \\
+                                                & + \delta_{XY} \Re{Q_A^{XX^\prime} Q_B^{X^\prime X}} \pclosed{1 - L_3^{AB}} \biggr\},
+\end{align}
+\begin{align}
+  \label{part:eq:eff_coupling_FZ}
+  F^{\prime\prime}_{Z} = & \sum_{X,Y} \cclosed{\frac{1}{12} \pclosed{\hat{s}(\hat{s}-m_i^2-m_j^2) + \hat{s} - (m_i^2-m_j^2)^2} |Z^{XY}|^2 + \delta_{XY} \hat{s}m_i m_j \Re{Z^{XX} (Z^{XX^\prime})^\ast}},
+\end{align}
+and
+\begin{align}
+  \label{part:eq:eff_coupling_FqZ}
+  \nonumber
+  F^{\prime\prime}_{\tilde{q}Z} = & \frac{1}{2} \sum_{A, X} \biggl\{
+  \Bigl[\hat{s} m_i m_j \Re{Q_A^{XX} \bigl(Z^{XX} - (Z^{XX^\prime})^\ast\bigr)}                                                                                       \\
+  \nonumber
+                                  & \quad - (m_A^2-m_i^2)(m_A^2-m_j^2) \Re{Q_A^{XX}\bigl((Z^{XX})^\ast - Z^{XX^\prime}\bigr)}\Bigr] \frac{L(m_A^2)}{p \sqrt{\hat{s}}} \\
+                                  & - (\hat{s} + m_i^2 + m_j^2 - 2m_A^2) \Re{Q_A^{XX}\bigl((Z^{XX})^\ast - Z^{XX^\prime}\bigr)}
+  \biggr\},
+\end{align}
+where \(X,Y \in L,R\), \(L^\prime/R^\prime = R/L\) and I have defined the shorthands for some functions of the kinematics
+\begin{subequations}
   \begin{align}
-    \hat{\sigma}^0 = & \frac{\pi \alpha^2}{\hat{s}^2 c_W^4 N_C} \pclosed{\frac{1}{2}}^{\delta_{ij}}                                                                                                                           \\
-    \times           & \Bigg\{n\frac{2p\sqrt{\hat{s}} \pclosed{\abs{Z^L}^2+\abs{Z^R}^2} \pclosed{\frac{32}{3}\hat{s}p^2-(m_i^2-m_j^2)^2+8m_i^2m_j^2+\hat{s}(m_i^2+m_j^2)}}{\abs{\hat{s} - \Delta_Z}^2}                        \\
-                     & - \frac{4p\sqrt{\hat{s}}\Re{(Z^L)^2 + (Z^R)^2} \hat{s} m_i m_j}{\abs{s-\Delta_Z}^2}                                                                                                                    \\
-                     & \sum_{X,Y} 4\operatorname{Re}\Bigg\{\operatorname{dLog}(t_+ - \Delta_A, t_- - \Delta_A) \bigg[\frac{\delta_{XY}\Re{Q_A^{XX}Q_B^{XX}}\hat{s}m_im_j}{\Delta_A + \Delta_B^\ast + \hat{s} - m_i^2 - m_j^2} \\
-                     & \frac{(1-\delta_{XY})\Re{Q_A^{XY}Q_B^{YX}} \pclosed{\Delta_A(\Delta_A-\hat{s}+m_i^2+m_j^2) + m_i^2m_j^2}}{\Delta_A + \Delta_B^\ast + \hat{s} - m_i^2 - m_j^2}                                          \\
-                     & + \frac{\Re{Q_A^{XY} \pclosed{Q_B^{XY}}^\ast} (\Delta_A - m_i^2)(\Delta_A - m_j^2)}{\Delta_A - \Delta_B^\ast} \bigg] \Bigg\}\Bigg\}
+    L_1^{AB} = & \frac{\hat{s}m_i m_j}{m_A^2+m_B^2 + \hat{s} - m_i^2 - m_j^2} \frac{L(m_A^2)}{p \sqrt{\hat{s}}},                                                                                                                                                         \\
+    L_2^{AB} = & \begin{cases}\frac{(m_A^2-m_i^2)(m_A^2-m_j^2)}{m_A^2-m_B^2} \frac{L(m_A^2)}{p \sqrt{\hat{s}}} & \text{if } m_A \neq m_B \\ \frac{1}{2}(2 m_A^2 - m_i^2 - m_j^2) \frac{L(m_A^2)}{p \sqrt{\hat{s}}} & \text{if } m_A = m_B \end{cases}, \\
+    L_3^{AB} = & \frac{m_A^4 + m_A^2(\hat{s}-m_i^2-m_j^2) + m_i^2 m_j^2}{m_A^2+m_B^2 + \hat{s} + m_i^2 - m_j^2} \frac{L(m_A^2)}{p \sqrt{\hat{s}}}.
   \end{align}
-\end{temporary}
+\end{subequations}
+The sums over the squark mass eigenstates with indices \(A, B\) go to two for the non-flavour violating case, and from one to 6 in the flavour violating SLHA2 case.
+
+% \begin{align*}
+%   -4\operatorname{Re}\bigg\{
+%   \frac{\hat{s}m_im_j}{m_A^2+m_B^2 + \hat{s} + m_i^2 - m_j^2}Q_A^{XX} Q_B^{XX} + \frac{(m_A^2-m_i^2)(m_A^2-m_j^2)}{m_A^2-m_B^2} Q_A^{XY}(Q_B^{XY})^\ast \\
+%   + \frac{(m_A^4 + m_A^2(\hat{s} - m_i^2 + m_j^2) + m_i^2 + m_j^2)}{m_A^2 + m_B^2 + s - m_i^2 - m_j^2} Q_A^{XX^\prime} Q_B^{X^\prime X}                 \\
+%   + \Re{\frac{1}{\hat{s}-\Delta_Z}} \bclosed{(m_A^2-m_i^2)(m_A^2-m_j^2) Q_A^{XX} (Z^{XX})^\ast + \hat{s} m_i m_j Q_A^{XX} Z^{XX}}
+%   \bigg\}\frac{L(m_A^2)}{p \sqrt{\hat{s}}}                                                                                                              \\
+% \end{align*}
+% \begin{align*}
+%   \frac{2}{3} \frac{2\hat{s}(\hat{s}-m_i^2-m_j^2) + m_i^4 + m_j^4}{|\hat{s}-\Delta_Z|^2} |Z^{XX}|^2 - \frac{4\hat{s}m_i m_j}{|\hat{s}-\Delta_Z|^2} \Re{(Z^{XX})^2} \\
+%   +4\operatorname{Re} \bigg\{ Q_A^{XY} (Q_B^{XY})^\ast + Q_A^{XX^\prime} Q_B^{X^\prime X} \bigg\}                                                                  \\
+%   -4\Re{\frac{1}{\hat{s}-\Delta_Z}} (\hat{s} + m_i^2 + m_j^2 - 2m_A^2) \Re{Q_A^{XX} (Z^{XX})^\ast}
+% \end{align*}
+
+% In here, I have defined \(\operatorname{dLog}(z, w)\) to be the log-difference
+% between to complex number \(z, w\) such that
+% \begin{equation}
+%   \operatorname{dLog}(z, w) \equiv \ln\abs{\frac{z}{w}} +
+%   i\pclosed{\arctan\frac{\Im{z}}{\Re{z}} - \arctan\frac{\Im{w}}{\Re{w}}}.
+% \end{equation}
+% The only non-zero arguments that will appear in these integrals are
+% \(\Delta^{\hat{t}}_A = m_{\tilde{q}_A}^2 - i\Gamma_{\tilde{q}_A}
+% m_{\tilde{q}_A}\) and \(\Delta^{\hat{u}}_A = m_i^2 + m_j^2 - \hat{s} -
+% m_{\tilde{q}_A}^2 + i\Gamma_{\tilde{q}_A} m_{\tilde{q}_A}\).
+
+% \begin{temporary}
+%   \begin{align}
+%     \hat{\sigma}^0 = & \frac{\pi \alpha^2}{\hat{s}^2 c_W^4 N_C} \pclosed{\frac{1}{2}}^{\delta_{ij}}                                                                                                                           \\
+%     \times           & \Bigg\{n\frac{2p\sqrt{\hat{s}} \pclosed{\abs{Z^L}^2+\abs{Z^R}^2} \pclosed{\frac{32}{3}\hat{s}p^2-(m_i^2-m_j^2)^2+8m_i^2m_j^2+\hat{s}(m_i^2+m_j^2)}}{\abs{\hat{s} - \Delta_Z}^2}                        \\
+%                      & - \frac{4p\sqrt{\hat{s}}\Re{(Z^L)^2 + (Z^R)^2} \hat{s} m_i m_j}{\abs{s-\Delta_Z}^2}                                                                                                                    \\
+%                      & \sum_{X,Y} 4\operatorname{Re}\Bigg\{\operatorname{dLog}(t_+ - \Delta_A, t_- - \Delta_A) \bigg[\frac{\delta_{XY}\Re{Q_A^{XX}Q_B^{XX}}\hat{s}m_im_j}{\Delta_A + \Delta_B^\ast + \hat{s} - m_i^2 - m_j^2} \\
+%                      & \frac{(1-\delta_{XY})\Re{Q_A^{XY}Q_B^{YX}} \pclosed{\Delta_A(\Delta_A-\hat{s}+m_i^2+m_j^2) + m_i^2m_j^2}}{\Delta_A + \Delta_B^\ast + \hat{s} - m_i^2 - m_j^2}                                          \\
+%                      & + \frac{\Re{Q_A^{XY} \pclosed{Q_B^{XY}}^\ast} (\Delta_A - m_i^2)(\Delta_A - m_j^2)}{\Delta_A - \Delta_B^\ast} \bigg] \Bigg\}\Bigg\}
+%   \end{align}
+% \end{temporary}
+
+
+\subsection{Generalising to all Electroweakinos}
+So far, we have only calculated the cross-section for production of a pair of neutralinos.
+However, the amplitude structure is very similar both for pair production of charginos and production of a neutralino with a chargino.
+With a few modifications, we can thus generalise the result from \cref{part:eq:born} to any electroweakino pair.
+The LO diagrams for the other electroweakino processes at parton level are shown in \cref{part:fig:NC_diagrams,part:fig:CC_diagrams}.
+
+\begin{figure}[ht!]
+  \centering
+  \inputtikz{NC_s_channel_W}
+  \inputtikz{NC_t_channel}
+  \inputtikz{NC_u_channel}
+  \caption{}
+  \label{part:fig:NC_diagrams}
+\end{figure}
+
+\begin{figure}[ht!]
+  \centering
+  \inputtikz{CC_s_channel_Z}
+  \inputtikz{CC_s_channel_A}
+  \inputtikz{CC_t_channel}
+  \caption{}
+  \label{part:fig:CC_diagrams}
+\end{figure}
+
+\subsubsection*{Neutralino and Chargino production}
+Using the Feynman rules from \cref{susy:sec:feynman_rules} we get the amplitudes
+\begin{subequations}
+  \begin{align}
+    \nonumber
+    \M_{\hat{s}} = -g^2 D_W(\hat{s})                                & \bclosed{ \bar{u}_i\gamma^\mu\pclosed{O^{L}_{ij}P_L + O^{R}_{ij}P_R} v_j }
+    \\
+    \label{part:eq:NC_Ms}
+                                                                    & \times \bclosed{ \bar{v}_2 \gamma_\mu C^L_{qq^\prime W}P_L u_1 },
+    \\
+    \nonumber
+    \M_{\hat{t}} = -\sum_A 2g^2 D_{\tilde{q}_A}(\hat{t})            & \bclosed{ \bar{u}_i \pclosed{\pclosed{C_{q_g \tilde{q}_A \nino[i]}^L}^{\!\ast} P_L + \pclosed{C_{q_g \tilde{q}_A \nino[i]}^R}^{\!\ast} P_R} u_1 }
+    \\
+    \label{part:eq:NC_Mt}
+                                                                    & \times \bclosed{ \bar{v}_2 C_{q^\prime_g \tilde{q}_A \tilde\chi^\pm_j}^L P_R v_j },
+    \\
+    \nonumber
+    \M_{\hat{u}} = (-1)-\sum_A 2g^2 D_{\tilde{q}_A^\prime}(\hat{u}) & \bclosed{ \bar{u}_j \pclosed{C_{q_g \tilde{q}_A^\prime \tilde\chi^\pm_j}^L}^{\!\ast} P_L u_1 }
+    \\
+    \label{part:eq:NC_Mu}
+                                                                    & \times \bclosed{ \bar{v}_2 \pclosed{C_{q_g^\prime \tilde{q}_A^\prime \nino[i]}^R P_L + C_{q_g^\prime \tilde{q}_A^\prime \nino[i]}^L P_R} v_i },
+  \end{align}
+\end{subequations}
+from the diagrams in \cref{part:fig:NC_diagrams}.
+Redefining the effective charges in \cref{part:eq:eff_charges} to
+\begin{subequations}
+  \begin{align*}
+    W^{XY} =      & D_W(\hat{s}) C_{qq^\prime W}^X O_{ij}^Y,                                            \\
+    Q_{qA}^{XY} = & C_{q_g \tilde{q}_A \tilde\chi^0_i}^X C_{q_g^\prime \tilde{q}_A \tilde\chi^\pm_j}^Y,
+  \end{align*}
+\end{subequations}
+we can rewrite the amplitudes to
+\begin{subequations}
+  \begin{align}
+    \M_{\hat{s}} = -g^2 \Big[                                        &
+      W^{LL} b_L^\mu(v_2, u_1){b_L}\_{\mu}(u_i, v_j) + W^{LR} b_L^\mu{(v_2, u_1)b_R}\_{\mu}(u_i, v_j)
+    \Big],                                                             \\
+    \M_{\hat{t}} = -\sum_A 2g^2 D_{\tilde{q}_A}(\hat{t}) \Big[       &
+      \pclosed{Q_{qA}^{LL}}^\ast b_L(u_i, u_1) b_R(v_2, v_j) + \pclosed{Q_{qA}^{RL}}^\ast b_R(u_i, u_1) b_R(v_2, v_j)
+    \Big],                                                             \\
+    \M_{\hat{u}} = \sum_A 2g^2 D_{\tilde{q}_A^\prime}(\hat{u}) \Big[ &
+      Q_{q^\prime A}^{RL} b_L(v_2, v_i) b_L(u_j, u_1) + Q_{q^\prime A}^{LL} b_R(v_2, v_i) b_L(u_j, u_1)
+      \Big],
+  \end{align}
+\end{subequations}
+mimicking the structure of \cref{part:eq:MLO}.
+It is worth noting that the structure is not entirely the same, as the charges and propagator in \(\M_{\hat{t}}\) and \(\M_{\hat{u}}\) are not the same, owing to a different squark type being mediated.
+Nevertheless, we can follow the calculation for the neutralinos to arrive at a similar cross-section to the one in \cref{part:eq:born}, but altering the effective couplings slightly.
+We get
+\begin{equation}
+  \hat\sigma^0(q\bar{q}^\prime \to \tilde\chi^0_i \tilde\chi^\pm_j) = \frac{4 \pi p \alpha_W^2}{\hat{s}^{\sfrac{3}{2}} N_C} \pclosed{F_{\tilde{u}} + F_{\tilde{d}} + F_W + F_{\tilde{u}W} + F_{\tilde{d}W}},
+\end{equation}
+where I note that the identical particle factor from \cref{part:eq:born} is no longer necessary, and with the effective couplings defined as\footnote{The observant reader will notice that there is one term missing from the definitions of \(F_{\tilde{u/d}}\) as compared to \cref{part:eq:eff_coupling_Fq} --- this term disappears due to \(Q_{qA}^{XR} = 0\) for \(X = L/R\).}
+\\\comment{Should I combine these two to one?}
+\begin{subequations}
+  \begin{align}
+    F_{\tilde{u}} = & \frac{1}{2} \sum_{A,B,X,Y} (1 - L_{u2}^{AB}) \Re{Q_{uA}^{XY} (Q_{uB}^{XY})^\ast} + \delta_{XY} L_{u1}^{AB} \Re{Q_{uA}^{XX} Q_{dB}^{XX}}, \\
+    F_{\tilde{d}} = & \frac{1}{2} \sum_{A,B,X,Y} (1 - L_{d2}^{AB}) \Re{Q_{dA}^{XY} (Q_{dB}^{XY})^\ast} + \delta_{XY} L_{d1}^{AB} \Re{Q_{dA}^{XX} Q_{uB}^{XX}},
+  \end{align}
+\end{subequations}
+\begin{align}
+  F_{W} = & \sum_{X,Y} \cclosed{\frac{1}{12} \pclosed{2\hat{s}(\hat{s}-m_i^2-m_j^2) + m_i^4 + m_j^4} |W^{XY}|^2 + \delta_{XY} \hat{s}m_i m_j \Re{W^{XX} (W^{XX^\prime})^\ast}},
+\end{align}
+and
+\\\comment{Should I combine these two to one too?}
+\begin{subequations}
+  \begin{align}
+    \nonumber
+    F_{\tilde{u}W} = & \frac{1}{2} \sum_{A,X} \biggl\{
+    \hat{s} m_i m_j \Re{Q_{uA}^{XX} (W^{XX^\prime})^\ast}\frac{L(m_{\tilde{u}_A}^2)}{p \sqrt{\hat{s}}}                                                                                                                              \\
+                     & \hspace{-1cm}+ \Bigl[(m_{\tilde{u}_A}^2-m_i^2)(m_{\tilde{u}_A}^2-m_j^2) \frac{L(m_{\tilde{u}_A}^2)}{p \sqrt{\hat{s}}} + (\hat{s} + m_i^2 + m_j^2 - 2m_{\tilde{u}_A}^2)\Bigr] \Re{Q_{uA}^{XX}(W^{XX})^\ast}
+    \biggr\},                                                                                                                                                                                                                       \\
+    \nonumber
+    F_{\tilde{d}W} = & -\frac{1}{2} \sum_{A,X} \biggl\{
+    \hat{s} m_i m_j \Re{Q_{dA}^{XX} W^{XX}}                                                                                                                                                                                         \\
+                     & \hspace{-1cm} + \Bigl[(m_{\tilde{d}_A}^2-m_i^2)(m_{\tilde{d}_A}^2-m_j^2) \frac{L(m_{\tilde{d}_A}^2)}{p \sqrt{\hat{s}}} + (\hat{s} + m_i^2 + m_j^2 - 2m_{\tilde{d}_A}^2) \Bigr]\Re{Q_{dA}^{XX} W^{XX^\prime}}
+    \biggr\},
+  \end{align}
+\end{subequations}
+and where I have defined slightly altered kinematic functions\footnote{The only difference in these definitions is that the squark type is specified. Make note that both squark types (up and down) are used in \(L_{q1}^{AB}\).}
+\begin{align}
+  L_{q1}^{AB} = & \frac{\hat{s} m_i m_j}{m_{\tilde{q}_A}^2 + m_{\tilde{q}^\prime_B}^2 + \hat{s} - m_i^2 - m_j^2} \frac{L(m_{\tilde{q}_A}^2)}{p \sqrt{\hat{s}}},                                                                                                                                                                                                                                                                                                                                                                                      \\
+  L_{q2}^{AB} = & \begin{cases}\frac{(m_{\tilde{q}_A}^2-m_i^2)(m_{\tilde{q}_A}^2-m_j^2)}{m_{\tilde{q}_A}^2-m_{\tilde{q}_B}^2} \frac{L(m_{\tilde{q}_A}^2)}{p \sqrt{\hat{s}}} & \text{if } m_{\tilde{q}_A} \neq m_B \\ \frac{1}{2}(2 m_{\tilde{q}_A}^2 - m_i^2 - m_j^2) \frac{L(m_{\tilde{q}_A}^2)}{p \sqrt{\hat{s}}} & \text{if } m_{\tilde{q}_A} = m_{\tilde{q}_B} \end{cases}.
+\end{align}
+
+
+\subsubsection*{Chargino Pair Production}
+The above derivation can be repeated for the chargino pair production process.
+From the diagrams in \cref{part:fig:CC_diagrams} and the Feynman rules from \cref{susy:sec:feynman_rules} we get the amplitudes
+\begin{subequations}
+  \begin{align}
+    \nonumber
+    \M_{\hat{s}} = -g^2 D_Z(\hat{s})                     & \bclosed{ \bar{u}_i\gamma^\mu\pclosed{O^{\prime L}_{ij}P_L + O^{\prime R}_{ij}P_R} v_j } \bclosed{ \bar{v}_2 \gamma_\mu \pclosed{C^L_{qqZ}P_L + C^R_{qqZ}P_R} u_1 }
+    \\
+    \label{part:eq:CC_Ms}
+    -\frac{g^2}{\hat{s}}                                 & \bclosed{ \bar{u}_i\gamma^\mu \delta_{ij} s_W v_j } \bclosed{ \bar{v}_2 \gamma_\mu Q_e s_W u_1 },                                                                          \\
+    \label{part:eq:CC_Mt}
+    \M_{\hat{t}} = -\sum_A 2g^2 D_{\tilde{q}_A}(\hat{t}) & \bclosed{ \bar{u}_i \pclosed{C_{q_g \tilde{q}_A^\prime \tilde\chi^\pm_i}^L}^{\!\ast} P_L u_1 } \bclosed{ \bar{v}_2 C_{q_g \tilde{q}_A^\prime \tilde\chi^\pm_j}^L P_R v_j}, \\
+    \label{part:eq:CC_Mu}
+    \M_{\hat{u}} = 0,                                    &
+  \end{align}
+\end{subequations}
+again mimicking the same structure of \cref{part:eq:Ms,part:eq:Mt}.
+However, this time there is no \(\hat{u}\)-channel analogue.
+Redefining the effective charges from \cref{part:eq:eff_charges} to be
+\begin{subequations}
+  \begin{align*}
+    Z^{XY} =   & D_Z(\hat{s}) C_{qqZ}^X O_{ij}^{\prime Y} + \frac{1}{\hat{s}} Q_e s_W^2 \delta_{ij}          \\
+    Q_A^{XY} = & C_{q_g \tilde{q}_A^\prime \tilde\chi^\pm_i}^X C_{q_g \tilde{q}_A^\prime \tilde\chi^\pm_j}^Y
+  \end{align*}
+\end{subequations}
+we can rewrite the amplitudes to
+\begin{subequations}
+  \begin{align}
+    \nonumber
+    \M_{\hat{s}} = -g^2 \Big[ &
+    Z^{LL} b_L^\mu(v_2, u_1){b_L}\_{\mu}(u_i, v_j) + Z^{LR} b_L^\mu(v_2, u_1){b_R}\_{\mu}(u_i, v_j)                  \\
+    +                         & Z^{LR} b_{R}^\mu(v_2, u_1){b_L}\_{\mu}(u_i, v_j) +
+    Z^{RR} b_R^\mu(v_2, u_1){b_R}\_{\mu}(u_i, v_j) \Big],                                                            \\
+    \M_{\hat{t}} = -2g^2      & \sum_A D_{\tilde{q}_A}(\hat{t}) \pclosed{Q_A^{LL}}^\ast b_L(u_i, u_1) b_R(v_2, v_j), \\
+    \M_{\hat{u}} =            & 0.
+  \end{align}
+\end{subequations}
+
+Following the procedure for calculating the total cross-section again, we find that it can be written as
+\begin{equation}
+  \hat\sigma^0(q\bar{q} \to \tilde\chi^\pm_i \tilde\chi^\mp_j) = \frac{4 \pi p \alpha_W^2}{\hat{s}^{\sfrac{3}{2}} N_C} \pclosed{F^\prime_{\tilde{q}^\prime} + F^\prime_Z + F^\prime_{\tilde{q}^\prime Z}},
+\end{equation}
+where the effective couplings are defined as\footnote{Again, two terms are missing from \(F^{\prime}_{\tilde{q}^\prime}\) as compared to \cref{part:eq:eff_coupling_Fq}, this time due to lack of any interference between \(\hat{t}\) and \(\hat{u}\) channels.}
+\begin{align}
+  \label{part:eq:CC_eff_coupling_Fq}
+  F^{\prime}_{\tilde{q}^\prime} = \frac{1}{2} \sum_{A,B,X,Y} & \Re{Q_A^{XY} (Q_B^{XY})^\ast} \pclosed{1 - L_2^{AB}},
+\end{align}
+\begin{align}
+  \label{part:eq:CC_eff_coupling_FZ}
+  F^{\prime}_{Z} = & \sum_{X,Y} \cclosed{\frac{1}{12} \pclosed{\hat{s}(\hat{s}-m_i^2-m_j^2) + \hat{s} - (m_i^2-m_j^2)^2} |Z^{XY}|^2 + \delta_{XY} \hat{s}m_i m_j \Re{Z^{XX} (Z^{XX^\prime})^\ast}},
+\end{align}
+and
+\begin{align}
+  \label{part:eq:CC_eff_coupling_FqZ}
+  \nonumber
+  F^\prime_{\tilde{q}^\prime Z} = & -\frac{1}{2} \sum_{A,X} \biggl\{
+  \hat{s} m_i m_j \Re{Q_{A}^{XX} Z^{XX}}\frac{L(m_{\tilde{q}^\prime_A}^2)}{p \sqrt{\hat{s}}}                                                                                                                                                                               \\
+                                  & \hspace{-1cm}+ \Bigl[(m_{\tilde{q}^\prime_A}^2-m_i^2)(m_{\tilde{q}^\prime_A}^2-m_j^2) \frac{L(m_{\tilde{q}^\prime_A}^2)}{p \sqrt{\hat{s}}} + (\hat{s} + m_i^2 + m_j^2 - 2m_{\tilde{q}^\prime_A}^2)\Bigr] \Re{Q_{A}^{XX} Z^{XX^\prime}}
+  \biggr\}.
+\end{align}
+
+
 
 \section{NLO Corrections}
 \begin{TODO}
@@ -748,15 +981,15 @@ where
 which are recognisable as differential phase spaces for a \(2\to 2\) processes going from momenta \(k_i+k_j \to q+k\) and a \(1\to 2\) phase space going from \(q\ \to p_i+p_j\).
 The total phase space integrates over all possible off-shell masses \(Q^2\) for the intermediate momentum \(q\).
 
-So, we have factorised the differential phase space of the differential cross-section \cref{par:eq:diff_xsec_formula}, but it remains to factorise the amplitude part \(\abs{\M}^2\) into part only dependent on either \(q, k\) or \(p_i, p_j\).
-Looking at the tree-level amplitudes \cref{par:eq:Ms,par:eq:Mt,par:eq:Mu} that this happens neatly with the \(s\)-channel contribution \cref{par:eq:Ms}.
-It has the Lorentz structure \(\M_s = D_Z(\hat{s}) g_{\mu\nu} \bclosed{\bar{v}(k_j)\Gamma_{Zqq}^\mu u(k_i)} \bclosed{\bar{u}(p_i)\Gamma_{Z\tilde{\chi}_i^0 \tilde{\chi}_j^0}^\nu v(p_j)}\).
+So, we have factorised the differential phase space of the differential cross-section \cref{part:eq:diff_xsec_formula}, but it remains to factorise the amplitude part \(\abs{\M}^2\) into part only dependent on either \(q, k\) or \(p_i, p_j\).
+Looking at the tree-level amplitudes \cref{part:eq:Ms,part:eq:Mt,part:eq:Mu} that this happens neatly with the \(s\)-channel contribution \cref{part:eq:Ms}.
+It has the Lorentz structure \(\M_s = D_Z(\hat{s}) g_{\mu\nu} \bclosed{\bar{v}(k_j)\Gamma_{qqZ}^\mu u(k_i)} \bclosed{\bar{u}(p_i)\Gamma_{Z\tilde{\chi}_i^0 \tilde{\chi}_j^0}^\nu v(p_j)}\).
 The two terms in brackets are individually only dependent on couplings and the momenta of either the initial partons or the final neutralinos.
 In fact, they individually take the form of the processes
 
 \begin{subequations}
   \begin{align}
-    \inputtikz[baseline=(blob.base)]{qqZ}   & = \bclosed{\bar{v}(k_j) i\Gamma_{Zqq}^\mu u(k_i)} \epsilon^\ast_\mu(q)                           \\
+    \inputtikz[baseline=(blob.base)]{qqZ}   & = \bclosed{\bar{v}(k_j) i\Gamma_{qqZ}^\mu u(k_i)} \epsilon^\ast_\mu(q)                           \\
     \inputtikz[baseline=(blob.base)]{chijZ} & = \bclosed{\bar{u}(p_i) i\Gamma_{Z\tilde{\chi}_i^0 \tilde{\chi}_j^0}^\mu v(p_j)} \epsilon_\mu(q)
   \end{align}
 \end{subequations}
@@ -778,20 +1011,24 @@ where
 
 
 
-\subsection{Self-Energy Contributions}
+\subsection{Higgsino Corrections/Quark Tensor Renormalisation}
 
-\begin{figure}
-  \centering
-  \inputtikz{s_channel_se_1}
-  \inputtikz{s_channel_se_2}
-  \caption{}
-  \label{pc:fig:s_channel_se}
-\end{figure}
+% \begin{figure}
+%   \centering
+%   \inputtikz{s_channel_se_1}
+%   \inputtikz{s_channel_se_2}
+%   \caption{}
+%   \label{pc:fig:s_channel_se}
+% \end{figure}
 
-\subsection{Vertex Corrections}
-
-\subsection{Box Diagrams}
 
 \subsection{Real Emission}
+
+
+\subsection{Wino/Bino Corrections}
+
+
+\subsection{Catani-Seymour Dipole Formalism}
+
 
 \end{document}

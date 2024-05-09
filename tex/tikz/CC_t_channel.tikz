@@ -11,7 +11,7 @@
   \vertex at ( 0.5,-1   ) (d);
   \diagram*{
   (q)    -- [fermion] (v1)
-  -- [charged scalar, edge label'=\(\tilde{q}_A\)] (v2)
+  -- [charged scalar, edge label'=\(\tilde{q}^\prime_A\)] (v2)
   -- [fermion] (qbar),
   (v1)    -- (chii),
   (chij) -- (v2),
