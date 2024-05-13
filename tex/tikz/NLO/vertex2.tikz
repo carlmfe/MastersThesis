@@ -1,0 +1,17 @@
+\begin{feynman}
+  \vertex[label=left:\(q\)] (q);
+  \vertex[right=of q] (v1);
+  \vertex[above right=of v1] (v2);
+  \vertex[below right=of v1] (v3);
+  \vertex[right=of v2, label=right:\(\tilde\chi^0_i\)] (chii);
+  \vertex[right=of v3, label=right:\(\tilde{q}_A\)] (sq);
+  \diagram*{
+  (q) -- [fermion] (v1)
+  -- [charged scalar, edge label=\(\tilde{q}_B\)] (v2)
+  -- [fermion, edge label=\(q\)] (v3)
+  -- [gluon, edge label=\(\tilde{g}\)] (v1),
+  (v1) -- (v3),
+  (v2) -- (chii),
+  (v3) -- [charged scalar] (sq)
+  };
+\end{feynman}

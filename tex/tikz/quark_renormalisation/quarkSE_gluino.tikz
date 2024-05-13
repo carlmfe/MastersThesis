@@ -1,0 +1,14 @@
+\begin{feynman}
+  \vertex[] (in) {\(q\)};
+  \vertex[right = of q] (v1);
+  \vertex[right = of v1] (v2);
+  \vertex[right = of v2] (out) {\(q\)};
+
+  \diagram*{
+  (in) -- [fermion] (v1)
+  -- [charged scalar, edge label'=\(\tilde{q}_A\)] (v2)
+  -- [fermion] (out),
+  (v2) -- [gluon, half right, edge label'=\(\tilde{g}\)] (v1)
+  -- [half left] (v2),
+  };
+\end{feynman}

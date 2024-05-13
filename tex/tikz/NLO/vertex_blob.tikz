@@ -1,0 +1,11 @@
+\begin{feynman}[every blob={/tikz/fill=gray!30,/tikz/inner sep=2pt}]
+  \vertex[label=left: \(q\)] (q);
+  \vertex[right=of q, blob, fill=n@terracotta] (blob) {\contour{black}{}};
+  \vertex[above right=of blob, label=right:\(\tilde\chi^0_i\)] (chii);
+  \vertex[below right=of blob, label=right:\(\tilde{q}_A\)] (sq);
+  \diagram*{
+  (q) -- [fermion] (blob)
+  -- (chii),
+  (blob) -- [charged scalar] (sq)
+  };
+\end{feynman}

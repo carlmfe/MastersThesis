@@ -1,0 +1,18 @@
+\begin{feynman}
+  \vertex[] (q) {\(q\)};
+  \vertex[below=2cm of q] (qbar) {\(\bar{q}\)};
+  \vertex[right=of q] (v1);
+  \vertex[right=of qbar] (v2);
+  \vertex[below right=of v1] (v3);
+  \vertex[right = of v3] (Z) {\(Z^\ast\)};
+
+  \diagram*{
+  (q) -- [fermion] (v1)
+  -- [gluon, edge label' = \(\tilde{g}\)] (v2)
+  -- [fermion] (qbar),
+  (v2) -- (v1),
+  (v1) -- [charged scalar, edge label = \(\tilde{q}_A\)] (v3)
+  -- [charged scalar, edge label = \(\tilde{q}_A\)] (v2),
+  (v3) -- [boson] (Z)
+  };
+\end{feynman}

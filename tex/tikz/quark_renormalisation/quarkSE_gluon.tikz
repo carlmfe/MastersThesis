@@ -1,0 +1,13 @@
+\begin{feynman}
+  \vertex[] (in) {\(q\)};
+  \vertex[right = of q] (v1);
+  \vertex[right = of v1] (v2);
+  \vertex[right = of v2] (out) {\(q\)};
+
+  \diagram*{
+  (in) -- [fermion] (v1)
+  -- [fermion, edge label'=\(q\)] (v2)
+  -- [fermion] (out),
+  (v2) -- [gluon, half right, edge label'=\(g\)] (v1)
+  };
+\end{feynman}

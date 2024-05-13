@@ -19,7 +19,7 @@
 \usepackage{transparent} % Gives option for transparent text
 \usepackage{multirow}
 
-% Referecing sections, equations etc
+% Referencing sections, equations etc
 \usepackage[capitalize]{cleveref}
 \crefdefaultlabelformat{\textbf{#2}}
 \crefname{eq}{Eq.}{Eq.}
@@ -36,6 +36,7 @@
 \usepackage[compat=1.1.0]{tikz-feynman}
 \newcommand{\inputtikz}[2][]{\begin{tikzpicture}[#1] \input{tikz/#2.tikz} \end{tikzpicture}}
 \usetikzlibrary{backgrounds}
+\usetikzlibrary{positioning}
 
 % Math
 \usepackage{tensor}
@@ -43,3 +44,5 @@
 
 % Misc
 \usepackage{subfiles} % Allows for chapters to be compiled as standalone documents
+\usepackage{algorithm} % For captioning pseudocode
+\usepackage{algpseudocode} % Provides algorithmic

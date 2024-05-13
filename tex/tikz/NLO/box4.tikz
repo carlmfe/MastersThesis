@@ -1,0 +1,24 @@
+\begin{feynman}
+  \begin{scope}[node distance = 1.1cm]
+    \vertex[label=left: \(q\)] (q);
+    \vertex[below=2.66cm of q, label=left: \(\bar{q}\)] (qbar);
+    \vertex[below right= of q,] (v1);
+    \vertex[above right= of qbar] (v2);
+    \vertex[right=of v1] (v3);
+    \vertex[right=of v2] (v4);
+    \vertex[above right=of v3, label=right:\(\tilde\chi^0_i\)] (chii);
+    \vertex[below right=of v4, label=right:\(\tilde\chi^0_j\)] (chij);
+  \end{scope}
+
+  \diagram*{
+  (q) -- [fermion] (v1)
+  -- [gluon, edge label'=\(\tilde{g}\)] (v2)
+  -- [fermion] (qbar),
+  (v2) -- (v1),
+  (v1) -- [charged scalar, edge label=\(\tilde{q}_A\)] (v3)
+  -- [fermion, edge label=\(q\)] (v4)
+  -- [charged scalar, edge label=\(\tilde{q}_B\)] (v2),
+  (v3) -- (chij),
+  (v4) -- (chii)
+  };
+\end{feynman}

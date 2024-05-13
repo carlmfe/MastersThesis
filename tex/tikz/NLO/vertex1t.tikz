@@ -1,0 +1,17 @@
+\begin{feynman}[every blob={/tikz/fill=gray!30,/tikz/inner sep=2pt}]
+  \begin{scope}[node distance = 1.1cm]
+    \vertex[label=left:\(q\)] (q);
+    \vertex[below=of q, label=left:\(\bar{q}\)] (qbar);
+    \vertex[right=of q, blob, fill=n@terracotta] (v1) {\contour{black}{}};
+    \vertex[below=of v1] (v2);
+    \vertex[right=of v1, label=right:\(\tilde\chi^0_i\)] (chii);
+    \vertex[right=of v2, label=right:\(\tilde\chi^0_j\)] (chij);
+  \end{scope}
+  \diagram*{
+  (q) -- [fermion] (v1)
+  -- [charged scalar, edge label=\(\tilde{q}_A\)] (v2)
+  -- [fermion] (qbar),
+  (v1) -- (chii),
+  (v2) -- (chij)
+  };
+\end{feynman}

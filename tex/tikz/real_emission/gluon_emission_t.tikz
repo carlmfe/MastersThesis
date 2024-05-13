@@ -1,0 +1,16 @@
+\begin{feynman}
+  \vertex[] (q) {\(q\)};
+  \vertex[below = of q] (qbar) {\(\bar{q}\)};
+  \vertex[right = of q] (v1);
+  \vertex[right = of qbar] (v2);
+  \vertex[right = of v1] (g) {\(g\)};
+  \vertex[right = of v2] (Z) {\(Z^\ast\)};
+
+  \diagram*{
+  (q) -- [fermion] (v1)
+  -- [fermion, edge label = \(q\)] (v2)
+  -- [fermion] (qbar),
+  (v1) -- [gluon] (g),
+  (v2) -- [boson] (Z)
+  };
+\end{feynman}
