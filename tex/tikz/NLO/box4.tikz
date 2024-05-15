@@ -16,7 +16,7 @@
   -- [fermion] (qbar),
   (v2) -- (v1),
   (v1) -- [charged scalar, edge label=\(\tilde{q}_A\)] (v3)
-  -- [fermion, edge label=\(q\)] (v4)
+  -- [fermion, edge label'=\(q\)] (v4)
   -- [charged scalar, edge label=\(\tilde{q}_B\)] (v2),
   (v3) -- (chij),
   (v4) -- (chii)

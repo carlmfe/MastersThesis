@@ -1,0 +1,11 @@
+\begin{feynman}[every blob={/tikz/fill=gray!30,/tikz/inner sep=2pt}]
+  \begin{scope}[node distance = 1cm]
+    \vertex[label=left:\(\tilde{q}_A\)] (in);
+    \vertex[right=of in, blob, label=center:1PI, fill=n@terracotta] (blob) {\contour{black}{}};
+    \vertex[right=of blob, label=right:\(\tilde{q}_B\)] (out);
+  \end{scope}
+  \diagram*{
+  (in) -- [charged scalar] (blob)
+  -- [charged scalar] (out)
+  };
+\end{feynman}

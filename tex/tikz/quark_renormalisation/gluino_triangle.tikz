@@ -12,7 +12,7 @@
   -- [fermion] (qbar),
   (v2) -- (v1),
   (v1) -- [charged scalar, edge label = \(\tilde{q}_A\)] (v3)
-  -- [charged scalar, edge label = \(\tilde{q}_A\)] (v2),
+  -- [charged scalar, edge label = \(\tilde{q}_B\)] (v2),
   (v3) -- [boson] (Z)
   };
 \end{feynman}

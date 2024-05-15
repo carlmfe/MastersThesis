@@ -1,0 +1,15 @@
+\begin{feynman}
+  \begin{scope}[node distance=1cm]
+    \vertex[label=left:\(\tilde{q}_A\)] (in);
+    \vertex[right=of in] (v1);
+    \vertex[right=of v1] (v2);
+    \vertex[right=of v2, label=right:\(\tilde{q}_B\)] (out);
+  \end{scope}
+  \diagram*{
+  (in) -- [charged scalar] (v1)
+  -- [gluon, half left, edge label=\(\tilde{g}\)] (v2)
+  -- [charged scalar] (out),
+  (v1) -- [half left] (v2),
+  (v1) -- [fermion, half right, edge label'=\(q\)] (v2)
+  };
+\end{feynman}

@@ -9,7 +9,7 @@
   \end{scope}
   \diagram*{
   (q) -- [fermion] (v1)
-  -- [charged scalar, edge label=\(\tilde{q}_A\)] (v2)
+  -- [charged scalar, edge label'=\(\tilde{q}_A\)] (v2)
   -- [fermion] (qbar),
   (v1) -- (chij),
   (v2) -- (chii)

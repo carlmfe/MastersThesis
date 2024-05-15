@@ -15,7 +15,7 @@
   -- [gluon, edge label'=\(g\)] (v2)
   -- [fermion] (qbar),
   (v1) -- [fermion, edge label=\(q\)] (v3)
-  -- [charged scalar, edge label=\(\tilde{q}_A\)] (v4)
+  -- [charged scalar, edge label'=\(\tilde{q}_A\)] (v4)
   -- [fermion, edge label=\(q\)] (v2),
   (v3) -- (chij),
   (v4) -- (chii)

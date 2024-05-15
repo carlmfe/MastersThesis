@@ -1,7 +1,7 @@
 \begin{feynman}
-  \vertex[label=left:\(g\)] (g);
-  \vertex[below right = 1cm of g] (v1);
-  \vertex[label=left:\(q\), below left = 1cm of v1] (q);
+  \vertex[label=left:\(q\)] (q);
+  \vertex[below right = 1cm of q] (v1);
+  \vertex[label=left:\(q\), below left = 1cm of v1] (g);
   \vertex[right = of v1] (v2);
   \vertex[label=right:\(q\), above right = 1cm of v2] (qout);
   \vertex[label=right:\(Z^\ast\), below right = 1cm of v2] (Z);

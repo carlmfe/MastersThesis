@@ -6,7 +6,7 @@
 
   \diagram*{
   (in) -- [fermion] (v1)
-  -- [charged scalar, edge label'=\(\tilde{q}_A\)] (v2)
+  -- [charged scalar, half right, edge label'=\(\tilde{q}_A\)] (v2)
   -- [fermion] (out),
   (v2) -- [gluon, half right, edge label'=\(\tilde{g}\)] (v1)
   -- [half left] (v2),

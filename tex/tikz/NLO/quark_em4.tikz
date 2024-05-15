@@ -1,0 +1,21 @@
+\begin{feynman}
+  \begin{scope}[node distance=1.4cm]
+    \vertex[label=left:\(q\)] (q);
+    \vertex[below=of q, label=left:\(g\)] (g);
+    \vertex[below right=0.7cm and 0.7cm of q] (v1);
+    \vertex[right=0.7cm of v1] (v2);
+    \vertex[above right=0.7cm of v2] (v3);
+    \vertex[above right=of v2, label=right:\(q\)] (qout);
+    \vertex[below right=0.7cm of v3, label=right:\(\tilde\chi_i^0\)] (chii);
+    \vertex[below right=0.7cm and 0.7cm of v2, label=right:\(\tilde\chi_j^0\)] (chij);
+  \end{scope}
+  \diagram*{
+  (q) -- [fermion] (v1)
+  -- [fermion, edge label'=\(q\)] (v2)
+  -- [charged scalar, edge label=\(\tilde{q}_A\)] (v3)
+  -- [fermion] (qout),
+  (v1) -- [gluon] (g),
+  (v2) -- (chij),
+  (v3) -- (chii)
+  };
+\end{feynman}

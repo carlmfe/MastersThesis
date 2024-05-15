@@ -1,10 +1,10 @@
 \begin{feynman}
-  \vertex[] (g) {\(g\)};
-  \vertex[below = of g] (q) {\(q\)};
-  \vertex[right = of g] (v1);
+  \vertex[] (q) {\(q\)};
+  \vertex[below = of q] (g) {\(g\)};
   \vertex[right = of q] (v2);
-  \vertex[right = of v1] (qout) {\(q\)};
-  \vertex[right = of v2] (Z) {\(Z^\ast\)};
+  \vertex[right = of g] (v1);
+  \vertex[right = of v2] (qout) {\(q\)};
+  \vertex[right = of v1] (Z) {\(Z^\ast\)};
 
   \diagram*{
   (q) -- [fermion] (v2)

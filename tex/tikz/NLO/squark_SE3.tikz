@@ -1,0 +1,14 @@
+\begin{feynman}
+  \begin{scope}[node distance=1cm]
+    \vertex[label=left:\(\tilde{q}_A\)] (in);
+    \vertex[right=of in] (v1);
+    \vertex[above=of v1, label=above:\(\tilde{q}_C\)] (v2);
+    \vertex[right=of v1, label=right:\(\tilde{q}_B\)] (out);
+  \end{scope}
+  \diagram*{
+  (in) -- [charged scalar] (v1)
+  -- [charged scalar, half left] (v2)
+  -- [charged scalar, half left] (v1)
+  -- [charged scalar] (out)
+  };
+\end{feynman}
