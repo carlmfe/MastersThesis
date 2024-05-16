@@ -7,9 +7,12 @@
     \vertex at ( 0.1180,-2.4142) (pc);
 
     \diagram*{
-        (c) -- [momentum=\(q\), edge label'=\(m_0^2\)] (a)
-            -- [momentum=\(q+p_1\), edge label'=\(m_1^2\)] (b)
-            -- [momentum=\(q+p_2\), edge label'=\(m_2^2\)] (c),
+        (c) -- [edge label=\(m_0^2\), sloped, pos=0.55] (a)
+            -- [edge label'=\(m_1^2\)] (b)
+            -- [edge label=\(m_2^2\), sloped, pos=0.55] (c),
+        (c) -- [momentum=\(q\)] (a)
+            -- [momentum=\(q+p_1\)] (b)
+            -- [momentum=\(q+p_2\)] (c),
         (pa) -- [momentum=\(p_1\)] (a),
         (pb) -- [momentum'=\(p_2-p_1\)] (b),
         (pc) -- [momentum=\(p_2\)] (c),

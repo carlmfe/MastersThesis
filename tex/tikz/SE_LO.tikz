@@ -5,5 +5,4 @@
     \diagram*{
     (in) -- [scalar] (out)
     };
-
 \end{feynman}

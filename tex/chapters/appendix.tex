@@ -119,6 +119,16 @@ must also be symmetric, and thus must have the form
 \[V^\dagger A V^\ast = \begin{pmatrix} \sigma & \vec{0} \\ \vec{0} & A_2 \end{pmatrix},\]
 for a symmetric \(A_2 \in M_{n-1}(\mathbb{C})\).
 
+\begin{algorithm}
+  \begin{algorithmic}
+    \If{isLinearlyDependent(A conjugate(x), x)}
+    \State v1 = x / norm(x)
+    \ElsIf{isLinearlyDependent(A)}
+    \EndIf
+  \end{algorithmic}
+  \caption{}
+  \label{app:alg:takagi}
+\end{algorithm}
 
 % \bibliography{references}{}
 % \bibliographystyle{style/JHEP}

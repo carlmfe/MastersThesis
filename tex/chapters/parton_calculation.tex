@@ -3,12 +3,13 @@
 \begin{document}
 
 \chapter{Electroweakino Pair Production at Parton Level}
-\label{chap:part}
+\label{chap:part:parton_calculation}
+In this chapter, I will go through the details of the calculation of the leading order (LO) contributions to the cross-section of production of pairs of electroweakinos at the level of partons.
+The next chapter will complete the calculations at hadron level for proton--proton collisions.
+The possible electroweakino pairs includes neutralino pair production \(\tilde\chi^0_i \tilde\chi^0_j\), a neutralino with a chargino \(\tilde\chi^0_i \tilde\chi^\pm_j\) or a chargino pair \(\tilde\chi^\pm_i \tilde\chi^\mp_j\).
+Furthermore, I will compute the next-to-leading order (NLO) QCD corrections to higgsino-like part of neutralino pair production.
+Finally, I outline how the computation of the gaugino-like NLO contributions can proceed.
 
-\begin{TODO}
-  \item Formulate a section on the dipole formalism used in Debove et al.\ and make a comparison.
-  \item Mention Mathematica scripts.
-\end{TODO}
 
 \section{Phase Space and Kinematics in Scattering Processes}
 To start off, it will be useful to introduce some procedure for going forward
@@ -74,14 +75,17 @@ In the case of four space-time dimensions, this reduces to
 \end{equation}
 
 \subsection{2-body Phase Space}
+Two phase spaces in particular will be useful for this thesis.
+First, let us go over the phase space of a 2-body final state in \(d\) dimensions.
 From \cref{pc:eq:dPi_d} above, the Lorentz invariant phase space differential for a 2-body final state with
-four-momenta \(p_i, p_j\) in \(d\) dimensions is
+four-momenta \(p_i, p_j\) is
 \begin{equation}
   \mathrm{d}\Pi_{2\to 2} = \pclosed{2\pi}^d \delta^d\pclosed{P - p_i -
     p_j} \frac{\mathrm{d}^{d-1} \vec{p}_i}{\pclosed{2\pi}^{d-1}}
   \frac{1}{2E_i}
-  \frac{\mathrm{d}^{d-1} \vec{p}_j}{\pclosed{2\pi}^{d-1}} \frac{1}{2E_j}.
+  \frac{\mathrm{d}^{d-1} \vec{p}_j}{\pclosed{2\pi}^{d-1}} \frac{1}{2E_j},
 \end{equation}
+where \(P\^\mu\) is the sum of four-momenta of the incomoming particles.
 Going to the centre-of-mass frame of the incoming particles, we have \(P\^\mu =
 \pclosed{\sqrt{s}, 0, 0, 0}\), where \(s \equiv P^2\).
 This allows us to integrate over the spatial part of Dirac delta-function to arrive at
@@ -128,7 +132,12 @@ Making the change of variable, the differential phase space reduces to
 
 
 \subsection{3-body Phase Space}
-\todo{Fill out an introduction here.}\\
+A bit more complicated is the phase space of a 3-body final state.
+When taking into account the inclusive cross-section, as we will, where we also consider the production of additional particles in addition to our electroweakino pair, the 3-body phase space will becomes relevant.
+We will later see that this can be factorised into two 2-body phase spaces for some parts of the calculations, but to get the full NLO contributions, the 3-body phase space is necessary.
+Here I will outline a method for parametrising the degrees of freedom in the full 3-body case, although the phase space integration will be beyond the scope of this thesis.
+\medskip
+
 The differential Lorentz invariant phase space for a 3-body final state with
 four-momenta \(p_i, p_j, k\), where \(k^2=0\) in \(d\) dimensions is
 \begin{equation}
@@ -174,11 +183,10 @@ leaving us finally with
   \frac{\omega^{d-3} \abs{\vec{p}_i^\star}^{d-3}}{16Q\sqrt{s}}
   \mathrm{d}\Omega_{d-1}^\star\, \mathrm{d}\Omega_{d-1}\, \mathrm{d}Q^2.
 \end{equation}
-
-\todo{Comment on integration boundaries.}\\
-\begin{temporary}
-  \[(m_i + m_j)^2 \leq Q^2 \leq s\]
-\end{temporary}
+I note that kinematically, \(s\) is restricted by \(s > (m_i+m_j)^2\), which in turn gives boundaries on \(Q^2\) ensuring
+\begin{equation}
+  (m_i + m_j)^2 \leq Q^2 \leq s
+\end{equation}
 
 With two initial state momenta, the amplitude will be independent of the
 azimuthal angle in the centre-of-mass frame of the initial partons. This lets
@@ -469,7 +477,7 @@ This includes the Mandelstam variables above and the cross-sections.
 \end{figure}
 
 At leading order the contributing diagrams to the parton-level process are shown in \cref{pc:fig:tree_level_diagrams}.
-The resulting amplitudes, using the Feynman rules in \needcite[Feynman rules section], are then
+The resulting amplitudes, using the Feynman rules in \cref{susy:sec:feynman_rules}, are then
 \begin{subequations}
   \begin{align}
     \nonumber
@@ -489,7 +497,7 @@ The resulting amplitudes, using the Feynman rules in \needcite[Feynman rules sec
 where \(D_p(q^2) = \frac{1}{q^2 - m_p^2 (+ i\Gamma_p m_p)}\) is the
 Breit-Wigner propagator~\cite{Schwartz:2014sze} of a particle with mass \(m_p\) and decay
 width \(\Gamma_p\) and the extra minus sign in \(\mathcal{M}_{\hat{u}}\) comes from it being an odd permutation of the external spinors to the other two amplitudes.
-Among other things, the Breit-Wigner propagator regularises divergences near the resonance where an intermediate particle goes on-shell, e.g. when \(hat{s} \to m_Z^2\).
+Among other things, the Breit-Wigner propagator regularises divergences near the resonance where an intermediate particle goes on-shell, e.g. when \(\hat{s} \to m_Z^2\).
 As it turns out, such divergences will not appear in the integrated cross-section for the \(\hat{t}\)- and \(\hat{u}\)-channels, and so I will use \(\Gamma_{\tilde{q}_A} = 0\) for the remainder of this thesis.
 \\\comment{Maybe point to somewhere for further explanation/details?}
 
@@ -1255,9 +1263,9 @@ The production of a gluon with four-momentum \(k\^\mu\) together with an off-she
 The matrix element for this is
 \begin{align}
   \nonumber
-  \M_r = & g_s g T_{ab}^k \bar{v}_2 \biggl\{
-  \gamma^\mu \bigl(C_{qqZ}^L P_L + C_{qqZ}^R P_R\bigr) \frac{\slashed{q}-\slashed{k}_j}{(q-k_j)^2} \gamma^\nu            \\
-         & + \gamma^\nu \frac{\slashed{k}-\slashed{k}_j}{(k-k_j)^2} \gamma^\mu \bigl(C_{qqZ}^L P_L + C_{qqZ}^R P_R\bigr)
+  \M_{r,g} = & g_s g T_{ab}^k \bar{v}_2 \biggl\{
+  \gamma^\mu \bigl(C_{qqZ}^L P_L + C_{qqZ}^R P_R\bigr) \frac{\slashed{q}-\slashed{k}_j}{(q-k_j)^2} \gamma^\nu                \\
+             & + \gamma^\nu \frac{\slashed{k}-\slashed{k}_j}{(k-k_j)^2} \gamma^\mu \bigl(C_{qqZ}^L P_L + C_{qqZ}^R P_R\bigr)
   \biggr\} u_1 \epsilon_\mu^\ast(q) \epsilon_\nu^\ast(k),
 \end{align}
 where \(a,b\) are the colour indices of the quark and antiquark respectively and \(k\) is the gluon index.
@@ -1273,7 +1281,7 @@ Now, defining the Mandelstam variables
 where I note that \(\hat{t}\) and \(\hat{u}\) are \emph{not} the same as the definitions \cref{pc:eq:mandelstam_LO}.
 Squaring the matrix element and summing over spins, external polarisations and colours, we get
 \begin{align}
-  |\M_r|^2 = & (d-2) N_C C_F g_s^2 g_W^2 ((C_{qqZ}^L)^2 + (C_{qqZ}^R)^2) \pclosed{2(d-4) + (d-2)\left(\frac{\hat{t}}{\hat{u}}+\frac{\hat{u}}{\hat{t}}\right) + \frac{4Q^2\hat{s}}{\hat{t}\hat{u}}}.
+  |\M_{r,g}|^2 = & (d-2) N_C C_F g_s^2 g_W^2 ((C_{qqZ}^L)^2 + (C_{qqZ}^R)^2) \pclosed{2(d-4) + (d-2)\left(\frac{\hat{t}}{\hat{u}}+\frac{\hat{u}}{\hat{t}}\right) + \frac{4Q^2\hat{s}}{\hat{t}\hat{u}}}.
 \end{align}
 The phase space is a \(2\to 2\) process as in the LO case, so we can use the differential cross-section definition from \cref{pc:eq:dsigma_dy}.
 Defining the variable \(z\) such that \(Q^2 = z \hat{s}\) and using the \(y\) variable, we can express the Mandelstam variables as
@@ -1287,13 +1295,13 @@ Defining the variable \(z\) such that \(Q^2 = z \hat{s}\) and using the \(y\) va
 The phase space integral then looks like
 \begin{align}
   \nonumber
-  \integral{\Pi_H} \sum_{\substack{\text{spin} \\\text{colour}}} |\M_r|^2 = \frac{N_C C_F \mu^{4-d} g_s^2 g_W^2}{\pclosed{4\pi}^{\frac{d-2}{2}}} \frac{1}{\Gamma\pclosed{\frac{d-2}{2}}} \frac{p^{d-3}}{8\hat{s}\sqrt{\hat{s}}} (d-2) ((C_{qqZ}^L)^2 + (C_{qqZ}^R)^2) \\
+  \integral{\Pi_H} \sum_{\substack{\text{spin} \\\text{colour}}} |\M_{r,g}|^2 = \frac{N_C C_F \mu^{4-d} g_s^2 g_W^2}{\pclosed{4\pi}^{\frac{d-2}{2}}} \frac{1}{\Gamma\pclosed{\frac{d-2}{2}}} \frac{p^{d-3}}{8\hat{s}\sqrt{\hat{s}}} (d-2) ((C_{qqZ}^L)^2 + (C_{qqZ}^R)^2) \\
   \times \integral[_0^1]{y} (y(1-y))^{d-4} \pclosed{2(d-4) + (d-2)\pclosed{\frac{1-y}{y} + \frac{y}{1-y}} + \frac{4z}{(1-z)^2 y(1-y)}},
 \end{align}
 which evaluated in \(d=4-2\epsilon\) spacetime dimensions becomes
 \begin{align}
   \nonumber
-  \integral{\Pi_H} \sum_{\substack{\text{spin} \\\text{colour}}} |\M_r|^2 = (1-\epsilon) \frac{2 \pi^{\sfrac{3}{2}} N_C C_F \alpha_s \alpha_W}{\Gamma(1-\epsilon) \Gamma(\frac{3}{2}-\epsilon)} ((C_{qqZ}^L)^2 + (C_{qqZ}^R)^2) \pclosed{\frac{4\pi \mu^2}{Q^2}}^{\epsilon} \pclosed{\frac{4z}{(1-z)^2}}^\epsilon \\
+  \integral{\Pi_H} \sum_{\substack{\text{spin} \\\text{colour}}} |\M_{r,g}|^2 = (1-\epsilon) \frac{2 \pi^{\sfrac{3}{2}} N_C C_F \alpha_s \alpha_W}{\Gamma(1-\epsilon) \Gamma(\frac{3}{2}-\epsilon)} ((C_{qqZ}^L)^2 + (C_{qqZ}^R)^2) \pclosed{\frac{4\pi \mu^2}{Q^2}}^{\epsilon} \pclosed{\frac{4z}{(1-z)^2}}^\epsilon \\
   \times \Gamma(-\epsilon) \pclosed{(1+z)^2 \epsilon^2 - (5z^2-6z+7)\epsilon - 4z(1-z) + 2},
 \end{align}
 where we have used the integral definition of the Euler-Beta function
@@ -1310,14 +1318,14 @@ Expanding \(z^{\epsilon} = 1 + \epsilon \ln z + O(\epsilon^2)\) and using the de
 we can rewrite to
 \begin{align}
   \nonumber
-  \integral{\Pi_H} \sum_{\substack{\text{spin} \\\text{colour}}} |\M_r|^2 = 16 \pi N_C C_F \alpha_s \alpha_W ((C_{qqZ}^L)^2 + (C_{qqZ}^R)^2) \pclosed{\frac{4\pi \mu^2}{Q^2}}^{\epsilon} (1-\epsilon) \frac{\Gamma(1-\epsilon)}{\Gamma(1-2\epsilon)} \\
+  \integral{\Pi_H} \sum_{\substack{\text{spin} \\\text{colour}}} |\M_{r,g}|^2 = 16 \pi N_C C_F \alpha_s \alpha_W ((C_{qqZ}^L)^2 + (C_{qqZ}^R)^2) \pclosed{\frac{4\pi \mu^2}{Q^2}}^{\epsilon} (1-\epsilon) \frac{\Gamma(1-\epsilon)}{\Gamma(1-2\epsilon)} \\
   \times \pclosed{\frac{1}{\epsilon^2} \delta(1-z) - \frac{1}{\epsilon} (1+z^2)\plusdist{\frac{1}{1-z}} - \frac{(1+z^2)\ln z}{1-z} + 2(1+z^2)\plusdist{\frac{\ln(1-z)}{1-z}}}.
 \end{align}
 This yields a total contribution to the cross-section
 \begin{align}
   \nonumber
-  \d[Q^2]{\hat\sigma_{qq}} = & \frac{\hat\sigma_B}{\hat{\sigma}} \frac{\alpha_s C_F}{\pi} \pclosed{\frac{4\pi \mu^2}{Q^2}}^{\epsilon} (1-\epsilon) \frac{\Gamma(1-\epsilon)}{\Gamma(1-2\epsilon)} F^{\prime\prime}_Z \\
-                             & \times \pclosed{\frac{1}{\epsilon^2} \delta(1-z) - \frac{1}{\epsilon} (1+z^2)\plusdist{\frac{1}{1-z}} - \frac{(1+z^2)\ln z}{1-z} + 2(1+z^2)\plusdist{\frac{\ln(1-z)}{1-z}}}.
+  \d[Q^2]{\hat\sigma_{r,g}} = & \frac{\hat\sigma_B}{\hat{\sigma}} \frac{\alpha_s C_F}{\pi} \pclosed{\frac{4\pi \mu^2}{Q^2}}^{\epsilon} (1-\epsilon) \frac{\Gamma(1-\epsilon)}{\Gamma(1-2\epsilon)} F^{\prime\prime}_Z \\
+                              & \times \pclosed{\frac{1}{\epsilon^2} \delta(1-z) - \frac{1}{\epsilon} (1+z^2)\plusdist{\frac{1}{1-z}} - \frac{(1+z^2)\ln z}{1-z} + 2(1+z^2)\plusdist{\frac{\ln(1-z)}{1-z}}}.
 \end{align}
 
 \subsubsection*{Quark Emission}
@@ -1343,32 +1351,43 @@ This process goes through a gluon and a(n) quark/antiquark, as shown in \cref{pc
 The amplitude for this looks like
 \begin{align}
   \nonumber
-  \M_q = & g g_s T_{ab}^k \epsilon_\mu^\ast(q) \epsilon\_\nu(k_j) \bar{u}(k) \biggl\{
-  \frac{C_{qqZ}^L (\gamma\^\mu \slashed{k}_j \gamma\^\nu + 2k_i^\nu \gamma\^\mu )P_L + C_{qqZ}^R (\gamma\^\mu \slashed{k}_j \gamma\^\nu + 2k_i^\nu \gamma\^\mu )P_R }{\hat{s}}                 \\
-         & \qquad - \frac{C_{qqZ}^L (\gamma\^\nu \slashed{k}_j \gamma\^\mu - 2k\^\nu \gamma\^\mu )P_L + C_{qqZ}^R (\gamma\^\nu \slashed{k}_j \gamma\^\mu - 2k\^\nu \gamma\^\mu )P_R }{\hat{u}}
+  \M_{r,q} = & g g_s T_{ab}^k \epsilon_\mu^\ast(q) \epsilon\_\nu(k_j) \bar{u}(k) \biggl\{
+  \frac{C_{qqZ}^L (\gamma\^\mu \slashed{k}_j \gamma\^\nu + 2k_i^\nu \gamma\^\mu )P_L + C_{qqZ}^R (\gamma\^\mu \slashed{k}_j \gamma\^\nu + 2k_i^\nu \gamma\^\mu )P_R }{\hat{s}}                     \\
+             & \qquad - \frac{C_{qqZ}^L (\gamma\^\nu \slashed{k}_j \gamma\^\mu - 2k\^\nu \gamma\^\mu )P_L + C_{qqZ}^R (\gamma\^\nu \slashed{k}_j \gamma\^\mu - 2k\^\nu \gamma\^\mu )P_R }{\hat{u}}
   \biggr\}u(k_i).
 \end{align}
 Again evaluating in Mathematica, the squared matrix element becomes, after averaging over the 2 initial quark spins and \(N_C\) colours, and 2 initial gluon polarisations and \(N_C^2-1\) gluon states,
 \begin{align}
   \nonumber
-  \frac{1}{4N_C(N_C^2-1)} \sum_{\stackrel{\text{spin/pol.}}{\text{colour}}}|\M_q|^2 = & \frac{g^2 \mu^{2\epsilon} g_s^2 T_F}{N_C} ((C_{qqZ}^L)^2 + (C_{qqZ}^R)^2) (1-\epsilon) \\
-                                                                                      & \times\Bigl\{
+  \frac{1}{4N_C(N_C^2-1)} \sum_{\stackrel{\text{spin/pol.}}{\text{colour}}}|\M_{r,q}|^2 = & \frac{g^2 \mu^{2\epsilon} g_s^2 T_F}{N_C} ((C_{qqZ}^L)^2 + (C_{qqZ}^R)^2) (1-\epsilon) \\
+                                                                                          & \times\Bigl\{
   -\frac{2Q^2 \hat{t}}{\hat{s} \hat{u}} + 2\epsilon - (1-\epsilon)\pclosed{\frac{\hat{s}}{\hat{u}} + \frac{\hat{u}}{\hat{s}}}
   \Bigr\},
 \end{align}
-where \(T_F = \frac{T^k_{ab} T^{k}{ba}}{N_C^2-1}\) is the index of the fundamental representation of \(SU(N_C)\).
+where \(T_F = \frac{T^k_{ab} T^{k}_{ba}}{N_C^2-1}\) is the index of the fundamental representation of \(SU(N_C)\).
 Doing the phase space integral and inserting into \cref{pc:eq:dsigma_dQ2_2} with the averaging factor replacing the colour average \(\frac{1}{N_C^2} \to \frac{1}{N_C(N_C^2-1)}\) we get
 \begin{align}
   \label{pc:eq:sigma_qg}
   \nonumber
-  \d[Q^2]{\hat\sigma_{qg}} = & \frac{\hat\sigma_B}{\hat{s}} \frac{T_F \alpha_s}{2\pi} \pclosed{\frac{4\pi \mu^2}{Q^2}}^\epsilon (1-\epsilon) \frac{\Gamma(1-\epsilon)}{\Gamma(1-2\epsilon)} F^{\prime\prime}_Z \\
-                             & \times \cclosed{-\frac{1-2z(1-z)}{\epsilon} + \frac{1}{2}(1+6z-7z^2) + (1-2z(1-z))\ln\frac{(1-z)^2}{z}}
+  \d[Q^2]{\hat\sigma_{r,q}} = & \frac{\hat\sigma_B}{\hat{s}} \frac{T_F \alpha_s}{2\pi} \pclosed{\frac{4\pi \mu^2}{Q^2}}^\epsilon (1-\epsilon) \frac{\Gamma(1-\epsilon)}{\Gamma(1-2\epsilon)} F^{\prime\prime}_Z \\
+                              & \times \cclosed{-\frac{1-2z(1-z)}{\epsilon} + \frac{1}{2}(1+6z-7z^2) + (1-2z(1-z))\ln\frac{(1-z)^2}{z}}.
 \end{align}
+
+The cross-section contribution for real antiquark emission works out to the same as for real quark emission in the limit that the quark mass is zero.
+This effectively adds another cross-section contribution \(\d[Q^2]{\hat\sigma_{r,\bar{q}}} = \d[Q^2]{\hat\sigma_{r,q}}\)
 
 For further reference, the real emission contribution will be referred to as
 \begin{equation}
-  \d[Q^2]{\hat\sigma_r} = \d[Q^2]{\hat\sigma_{qq}} + \d[Q^2]{\hat\sigma_{qg}}.
+  \d[Q^2]{\hat\sigma_{r,g}} = \d[Q^2]{\hat\sigma_{r,g}} + \d[Q^2]{\hat\sigma_{r,q}} + \d[Q^2]{\hat\sigma_{r,\bar{q}}}.
 \end{equation}
+Furthermore, we can now summarise the parton cross-sections we have at NLO:
+\begin{subequations}
+  \begin{align}
+    \d[Q^2]{\hat\sigma_{q\bar{q}}} = & \hat\sigma^0 \frac{\delta(1-z)}{\hat{s}} + \d[Q^2]{\hat\sigma_v} + \d[Q^2]{\hat\sigma_{c.t.}} + \d[Q^2]{\hat\sigma_{r,g}}, \\
+    \d[Q^2]{\hat\sigma_{qg}} =       & \d[Q^2]{\hat\sigma_{r,q}},                                                                                                 \\
+    \d[Q^2]{\hat\sigma_{\hat{q}g}} = & \d[Q^2]{\hat\sigma_{r,\bar{q}}}.
+  \end{align}
+\end{subequations}
 
 
 \subsection{Gaugino Corrections}
@@ -1386,8 +1405,7 @@ This comes from the fact that the Dirac spinors are generated from the Dirac gam
 \end{equation}
 of which there is no true realisation in fractional dimensions.
 The result is that the degrees of freedom between the SM gauge bosons and their fermion partners are no longer the same --- breaking supersymmetry.
-Others have shown that this can be remedied by introducing a counterterm to the weak coupling of the quark-squark-neutralino interaction \(g \to \hat{g} = g\pclosed{1 - \frac{\alpha_s CF}{8\pi}}\).
-\\\comment{Cite this!}\\
+Others have shown that this can be remedied by introducing a counterterm to the weak coupling of the quark-squark-neutralino interaction \(g \to \hat{g} = g\pclosed{1 - \frac{\alpha_s CF}{8\pi}}\)~\cite{Aguilar-Saavedra:2005zyz}.
 The other subtlety comes from the real quark emission of the leftmost diagrams in \cref{pc:fig:tu_quark_emission}, going through an intermediate squark state.
 This squark can go on-shell if \(m_{i/j} > m_A\) and \(\hat{s} > (m_{i/j} + m_A)^2\), which experimentally coincides with the production of a neutralino and a squark followed by the subsequent decay of the squark into a neutralino and a quark.
 To avoid this double-counting, we must subtract the cross-section for neutralino-squark produciton with the corresponding branching ratio:
@@ -1560,9 +1578,35 @@ To avoid this double-counting, we must subtract the cross-section for neutralino
 The loops in these virtual exchange diagrams will contain dependence on the Mandelstam variables \cref{pc:eq:mandelstam_LO}, which will complicate the phase space integral over \(\hat{t}\) considerably.
 Doing the numerically will require some procedure for regularising and extracting these divergences such that they can cancel.
 For the IR-divergences to cancel, it will require matching between the phase space integrals of the \(2 \to 2\) process of virtual gluon/quark exchange with the \(2 \to 3\) of the real emission.
-The Catani-Seymour Dipole formalism rewrites these integrals such that the divergences cancel at the level of the integrand of the two phase space integrals seperately.
+The Catani-Seymour Dipole formalism~\cite{Catani:1996vz} rewrites these integrals such that the divergences cancel at the level of the integrand of the two phase space integrals seperately.
 This allows for the numerical implementation of the two phase space integrals.
 
+More concretely, given a leading order differential, parton-level cross-section \(\mathrm{d}\hat\sigma_{ij}^{LO}(k_i, k_j)\) for two partons \(i,j\), with a renormalised virtual NLO contribution \(\mathrm{d}\hat\sigma_{ij}^v(k_i, k_j)\) and real emission NLO contribution \(\mathrm{d}\hat\sigma_{ij}^r\), we can divide the phase space integrals for the \(2 \to 2\) and \(2 \to 3\) processes as
+\begin{align}
+  \nonumber
+  \hat\sigma_{ij}^{NLO}(k_i, k_j) = & \integral{\Pi_{2\to 3}} \bclosed{\evalat{\mathrm{d}\hat\sigma_{ij}^r(k_i,k_j)}{\epsilon=0} - \evalat{\mathrm{d}\hat\sigma_{ij}^{r, c.t.}(k_i,k_j)}{{\epsilon=0}}}                                         \\
+                                    & + \integral{\Pi_{2\to 2}} \bclosed{\mathrm{d}\hat\sigma_{ij}^v(k_i,k_j) + \mathrm{d}\hat\sigma_{ij}^{v, c.t.}(k_i,k_j)}_{\epsilon = 0} + \integral{\Pi_{2\to 2}} \mathrm{d}\hat\sigma_{ij}^{F}(k_i, k_j).
+\end{align}
+Effectively what is done is to introduce introduce a counterterm to each of the real and virtual contributions separately, each of which ensure the IR finiteness of the contributions.
+It can be shown that integrating over the extra degrees of freedom in the \(2 \to 3\) phase space integral of real emission counterterm reproduces the virtual counterterm,
+\begin{align}
+  \integral{\Pi_{2\to 3}} \mathrm{d}\hat\sigma_{ij}^{r,c.t.} = \integral{Pi_{2 \to 2}} \hat\sigma_{ij}^{v,c.t.},
+\end{align}
+meaning it is just a rewrite of \(\integral{\Pi_{2 \to 3}} \mathrm{d}\hat\sigma_{ij}^r(k_i,k_j) + \integral{\Pi_{2 \to 2}} \mathrm{d}\hat\sigma_{ij}^v(k_i,k_j)\).
+The final term is a compensation for the definition of the pdf's at a factorisation scale \(\mu_F\), and ensures that any cross-section dependence on this scale is cancelled to NLO.
+
+The extra terms can be shown to be given by
+\begin{subequations}
+  \begin{align}
+    \mathrm{d}\hat\sigma_{ij}^{r, c.t.}(k_i,k_j) = & \sum_{\text{dipoles}} \mathrm{d}\hat\sigma_{ij}^{LO} \otimes \mathrm{d}V_{\text{dipole}},                        \\
+    \mathrm{d}\hat\sigma_{ij}^{v, c.t.}(k_i,k_j) = & \mathrm{d}\hat\sigma_{ij}^{LO}(k_i,k_j) \otimes \vec{I},                                                         \\
+    \nonumber
+    \mathrm{d}\hat\sigma_{ij}^{F}(k_i, k_j) =      & \sum_{k}\integral[_0^1]{x} \Bigl[\mathrm{d}\hat\sigma_{k j}^{LO}(xk_i,k_j) \otimes (\vec{P}+\vec{K})^{i,k}(x)    \\
+                                                   & \hspace{1.2cm} + \mathrm{d}\hat\sigma^{LO}_{ik}(k_i,xk_j) \otimes (\vec{P}+\vec{K})^{j,k}(x)\Bigr]_{\epsilon=0},
+  \end{align}
+\end{subequations}
+where \(\vec{I} = \integral{(\Pi_{2 \to 3-2})} \sum_{\text{dipoles}} \mathrm{d}V_{\text{dipole}}\),\footnote{The integration measure \(\Pi_{2\to 3-2}\) is meant to indicate an integral over the extra momentum of the \(2 \to 3\) process as compared to the \(2 \to 2\) one.} \(\mathrm{d}V_{\text{dipole}}\) is a function extracting the soft/collinear limits (\(k_{i/j} \cdot k \to 0\)) of the real emission contributions, and \(\vec{P}\) and \(\vec{K}\) are insertion functions related to the Altarelli-Parisi splitting functions~\cite{Altarelli:1977zs}.
+Explicit realisations of these functions are given in~\cite{Catani:1996vz}.
 
 
 \end{document}
