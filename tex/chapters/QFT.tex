@@ -125,8 +125,11 @@ limit that the deformation disappears. An intuitive deformation would be to cap
 the momentum integral at some \(\Lambda\), recovering our original theory in
 the limit \(\Lambda \to \infty\). To illustrate the procedure of regularisation
 and subsequently renormalisation, it will be useful to have an example, for
-which I choose a scalar Lagrangian \(\L = \frac{1}{2} \pclosed{\partial_\mu
-  \phi}^2 - \frac{1}{2}m_\phi^2 \phi^2 - \frac{\lambda}{3!} \phi^3\).
+which I choose a scalar Lagrangian
+\begin{equation}
+  \label{qft:eq:example_lagrangian}
+  \L = \frac{1}{2} \pclosed{\partial_\mu\phi}^2 - \frac{1}{2}m_\phi^2 \phi^2 - \frac{\lambda}{3!} \phi^3.
+\end{equation}
 \comment{Perhaps introduce this model earlier?} Regularising the IR divergence
 in \cref{qft:eq:example_loop} by giving our scalar a mass \(m\), and the UV
 divergence with a momentum cap \(\Lambda\), we are left with
@@ -146,7 +149,7 @@ where now evidently the divergences manifest as a logarithm.
 Another popular choice of regularisation, which I will use in this thesis, is
 \emph{dimensional regularisation}. It entails analytically continuing the
 number of space-time dimension from the ordinary 4 dimensions to \(d
-= 4-2\epsilon\) dimensions for some small \(\epsilon\).\footnote{The reason for choosing \(2\epsilon\) is purely aesthetical, making some expressions neater.} This removes much of
+= 4-2\epsilon\) dimensions for some small \(\epsilon\).\footnote{The reason for choosing \(2\epsilon\) is purely aesthetical, making some expressions neater later on.} This removes much of
 the intuition for what we are doing, but turns out to be computationally very
 efficient. Our loop integral \cref{qft:eq:example_loop} will then turn into
 \begin{align}
@@ -161,13 +164,11 @@ efficient. Our loop integral \cref{qft:eq:example_loop} will then turn into
   \pclosed{\frac{1}{\epsilon_\text{IR}} - \frac{1}{\epsilon_\text{UV}}} +
   O(\epsilon),
 \end{align}
-where in the second equality, the momentum integral is split into a low-energy
-and high-energy part with some scale \(\mu\). Here a trick was performed, as
-the low-energy part requires \(\epsilon < 0\) to be convergent, whereas the
-high-energy part requires \(\epsilon>0\). The two different divergences thus
-require different deformations of the theory to be finite, and should be
-handled separately, hence the subscripts. In the end, the divergences when using
-dimensional regularisation come out as \(\frac{1}{\epsilon}\)-terms.
+where in the second equality, the momentum integral is split into a low-energy and high-energy part at some scale \(\mu\).
+Here a trick was performed, as the low-energy part requires \(\epsilon < 0\) to be convergent, whereas the high-energy part requires \(\epsilon>0\).
+The two different divergences thus require different deformations of the theory to be finite, and should be handled separately, hence the subscripts.
+It is a general result that divergences coming from the low-energy parts of momentum integrals require \(\epsilon_{\text{IR}} < 0\), whereas high-energy divergences require \(\epsilon_{\text{UV}} > 0\), and this can be used to identify the source of divergences when using dimensional regularisation.
+In the end divergences when using dimensional regularisation come out as \(\frac{1}{\epsilon^p}\)-terms, for some power \(p\).
 
 
 
@@ -176,39 +177,24 @@ dimensional regularisation come out as \(\frac{1}{\epsilon}\)-terms.
 
 \subsection{Counterterm Renormalisation}
 \label{qft:subsec:counterterms}
-To take care of UV divergences, we note that there is freedom in how we define
-the contents of our Lagrangian. We should be able to rescale our fields like \(\phi_0 =
-\sqrt{Z_\phi} \phi\), and rescale our couplings like \(m_{\phi,0}^2 = Z_m
-m_\phi^2\) and \(\lambda_0 = Z_\lambda \lambda\). Although suggestively naming
-terms such as \emph{mass term} with mass \(m_\phi^0\) implies a connection to
-the mass of a particle, we have yet to define what that would mean
-experimentally. Thus, rescaling our parameters and fields parametrises the way
-in which we can tune our theory, allowing us freedom in choosing the way our
-theory connects to experiments.
+To take care of UV divergences, we note that there is freedom in how we define the contents of our Lagrangian.
+We should be able to rescale our fields \(\phi_0 = \sqrt{Z_\phi} \phi\), and rescale our couplings like \(m_{\phi,0}^2 = Z_m m_\phi^2\) and \(\lambda_0 = Z_\lambda \lambda\).
+Although suggestively naming terms such as \emph{mass term} with mass \(m_\phi^0\) implies a connection to the mass of a particle, we have yet to define what that would mean experimentally.
+Thus, rescaling our parameters and fields parametrises the way in which we can tune our theory, allowing us freedom in choosing the way our theory connects to experiments.
 
-This approach actually allows us to make a perturbative scheme for fixing our
-(re)normalisations of the fields and couplings. There are many choices for how
-to connect theory to experiment, but one common approach for field and mass
-renormalisation is to identify the pole of the two-point correlation function
-\(\mathcal{G}(x, y)\) of a particle to the mass resonance measurable in
-experiment.\margincomment{Is there a better explanation for this experiment
-  than `mass resonance'?} This allows us to perturbatively calculate the
-two-point correlator, and then fix our normalisations accordingly, such that
-our imposed condition on it holds at every order in the perturbation series. We
-achieve this systematically with \emph{counterterms}, which in essence are
-additional Feynman rules added to the theory. By expanding the renormalisation
-parameters as \(Z = 1 + \delta\), the \(\delta\) will carry the correction to
-the normalisation to any given order in a coupling constant. To one-loop order,
-the self-energy of our \needcite[scalar theory] is diagrammatically given by
+This approach of rescaling actually allows us to make a perturbative scheme for fixing our (re)normalisations of the fields and couplings.
+There are many choices for how to connect theory to experiment, but one common approach for field and mass renormalisation is to identify the pole in momentum space of the two-point correlation function \(\mathcal{G}(x, y)\) of a particle to the mass resonance  associated with the on-shell production of a particle in scattering experiments.
+This allows us to perturbatively calculate the two-point correlator, and then fix our normalisations accordingly, such that our imposed condition on it holds at every order in the perturbation series.
+We achieve this systematically with \emph{counterterms}, which in essence are additional Feynman rules added to the theory. By expanding the renormalisation parameters as \(Z = 1 + \delta\), the \(\delta\) will carry the correction to the normalisation to any given order in a coupling constant.
+To one-loop order, the self-energy of our scalar theory from \cref{qft:eq:example_lagrangian} is diagrammatically given by
 \begin{equation*}
   \inputtikz[baseline=(in.base)]{SE_LO} +
   \inputtikz[baseline=(in.base)]{SE_NLO} +
   \inputtikz[baseline=(in.base)]{SE_cnt},
 \end{equation*}
-where the crossed dot represents an insertion of the \(\delta\) into the LO
-amplitude. \cringe{Since the \(\delta\) carries corrections proportional to the
-  NLO amplitudes, it should be seen as coming in at NLO}.
-
+where the crossed dot represents an insertion of the \(\delta\) into the LO amplitude.
+Since the free theory is divergence free, the counterterms only needs to carry corrections from the first order in the coupling constant that loops arise.
+They are therefore understood to be of one-loop order, or NLO.
 
 
 
@@ -288,9 +274,24 @@ relations
             m_\phi^2}\).
   \end{itemize}
 \end{center}
-\provethis{}
+\medskip
 
-\todo{Outline chiral mass renormalisation.}
+Later on, I will make use of \emph{chiral} on-shell renormalisation.
+This happens in chiral theories where the left-handed and right-handed degrees of freedom i fermion fields are treated differently in the Lagrangian.
+This means that divergent corrections to the two-point correlator can be different between the fermion chiralities.
+Still using Dirac spinor notation, we can then rescale a fermion \(\psi\)
+\begin{equation}
+  \psi^0 = \sqrt{Z_L} P_L \psi + \sqrt{Z_R} P_R \psi,
+\end{equation}
+where \(P_{L/R} = \frac{1}{2}(1 \mp \gamma^5)\) are the chiral projection operators, and work out and renormalise the two-point correlators separately.
+Expanding \(Z_{L/R} = 1 + \delta_{L/R}\) and writing the \(\Sigma(\slashed{p}) = \Sigma_L(\slashed{p})P_L + \Sigma_R(\slashed{p})P_R\) we end up with three conditions analogous to the case above:
+\begin{center}
+  \begin{itemize}
+    \item [(I)] \(\delta_m m_\psi = \evalat{\Sigma}{\slashed{p}=m_\psi}\),
+    \item [(II)] \(\delta_L = -\evalat{\d[\slashed{p}]{}\Sigma_L(\slashed{p})}{\slashed{p} = m_\psi}\),
+    \item [(III)] \(\delta_R = -\evalat{\d[\slashed{p}]{}\Sigma_R(\slashed{p})}{\slashed{p} = m_\psi}\).
+  \end{itemize}
+\end{center}
 
 % \feynmandiagram [horizontal=in to out, baseline=(current bounding box.center)] {
 % in -- [scalar] blob1 [label=center:1PI, blob, fill=n@terracotta]

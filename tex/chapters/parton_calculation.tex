@@ -10,6 +10,9 @@ The possible electroweakino pairs includes neutralino pair production \(\tilde\c
 Furthermore, I will compute the next-to-leading order (NLO) QCD corrections to higgsino-like part of neutralino pair production.
 Finally, I outline how the computation of the gaugino-like NLO contributions can proceed.
 
+All the calculations have been done with self-produced Mathematica scripts, with double-checks done with hand-calculations and comparison to existing results~\cite{Debove:2010kf}.
+\\\comment{Should I link to repository here? Should I mention Tore's master's?}
+
 
 \section{Phase Space and Kinematics in Scattering Processes}
 To start off, it will be useful to introduce some procedure for going forward
@@ -460,6 +463,7 @@ This includes the Mandelstam variables above and the cross-sections.
     \centering
     \inputtikz{s_channel}
     \caption{\(\hat{s}\)-channel}
+    \label{pc:subfig:tree_level_s-channel}
   \end{subfigure}
   \begin{subfigure}{0.3\linewidth}
     \centering
@@ -588,7 +592,7 @@ where \(\operatorname{rsgn}\) is 1 if \(w_a, w_b\) are spinors of the same
 type, e.g. both are \(u\)-spinors, and -1 otherwise.
 
 
-\subsection{Differential Result}
+\subsection{Differential Cross-Section}
 Averaging the cross-section over spin the two spins and \(N_C\) colour charges of the initial quark, and taking account of symmetry if the final neutralinos are identical, we get from \cref{pc:eq:dsigma_dt}
 \begin{equation}
   \label{pc:eq:dxsec}
@@ -621,7 +625,7 @@ The sum over \(X, Y\) go over \(L, R\), and \(L^\prime/R^\prime = R/L\).
 The result \cref{pc:eq:dsigma0_dt} has been compared and verified to be equivalent to other results~\cite{Debove:2010kf} in the literature symbolically in Mathematica programs.
 
 
-\subsection{Phase Space Integral}
+\subsection{Integrated Cross-Section}
 To get the full cross-section, we will need to integrate over the \(\hat{t}\)-variable.
 To do this, we can classify the types of integrals that will arise.
 After inserting \(\hat{u} = m_i^2 + m_j^2 - \hat{s} - \hat{t}\), all the integrals take the form
@@ -913,6 +917,7 @@ Lastly, a summary of the effective charges are summarised in \cref{pc:tab:eff_ch
 \section{NLO Corrections}
 In this section, I will take a look at the NLO QCD corrections associated with the production of a pair of neutralinos.
 I will perform the computation of the NLO corrections to the higgsino cross-section, as this goes through an intermediate \(Z\)-boson state, making it kinematically simpler.
+This corresponds at LO to the \(\hat{s}\)-channel diagram \cref{pc:subfig:tree_level_s-channel}.
 The corrections to the gaugino cross-section is beyond the scope of this thesis, but I will comment on a procedure for doing it.
 
 \subsection{Factorisation}
@@ -1044,7 +1049,7 @@ where \(\alpha_W = \frac{g^2}{4\pi}\) and I have defined
 \end{subequations}
 
 
-\subsection{Higgsino Corrections/Quark Tensor Renormalisation}
+\subsection{Virtual Exchange}
 
 % \begin{figure}[ht!]
 %   \centering
@@ -1071,8 +1076,9 @@ where \(\alpha_W = \frac{g^2}{4\pi}\) and I have defined
   \label{pc:fig:NLO_triangles}
 \end{figure}
 
-Let us first look at the amplitude for the exchange of a virtual gluon between the quarks.
-Labelling the quark colours \(a, b\) and the gluon indices \(i\), we get
+Now that we have reduced the NLO QCD contributions to the total cross-section to the NLO QCD contributions to \(Z\)-boson production, we can start with the virtual exchange diagrams in \cref{pc:fig:NLO_triangles}.
+Let us consider first the SM contribution from the exchange of a gluon between the quarks, \cref{pc:subfig:gluon_triangle}.
+Labelling the quark colours \(a, b\) and the gluon indices \(k\), we get
 \begin{align}
   % \M_{g} = & -i g_s g \bar{v}_2 (\gamma^\sigma T^a_{jk}) \loopintegral[d]{q} \frac{1}{q_l^2} \frac{\slashed{q}_l+\slashed{k}_j}{(k_j+q_l)} (C_{qqZ}^L \gamma^\mu P_L + C_{qqZ}^R \gamma^\mu P_R) \frac{\slashed{q} - \slashed{q}_l - \slashed{k}_j}{(q-q_l-k_j)^2} (\gamma^\nu T^a_{ki}) u_1
   \M_g = & -i\delta_{ab} C_F \epsilon_\mu^\ast(q) \mu^{4-d} g_s^2 g \loopintegral[d]{\ell} \frac{\bar{v}_2 \gamma^\nu (\slashed{p}-\slashed{k}_j) \gamma^\mu (\slashed{p}+\slashed{k}_i) \gamma_\nu u_1}{\ell^2(\ell+k_i)^2(\ell-k_j)^2},
@@ -1159,7 +1165,7 @@ For future reference, the total virtual contribution to the cross-section is
 \todo{Mention lack of vertex renormalisation. Why is mass renormalisation the only renormalisation required?}\\
 The UV divergences in the virtual contribution \cref{pc:eq:sigma_v} can be cancelled through renormalisation of the quark field wave functions.
 Renormalisation of the \(Z\)-boson field wave function will not contribute at order \(\alpha_s\), so it will suffice to renormalise the quarks.
-I will follow the on-shell renormalisation procedure of the seciton \cref{qft:subsec:counterterms}, but I will not make use of any mass counterterm.
+I will follow the on-shell renormalisation procedure of the section \cref{qft:subsec:counterterms}, but I will not make use of any mass counterterm.
 Reading off the amplitudes in \cref{pc:fig:quarkSE} and inserting the Passerino-Veltman loop functions we have
 \begin{align}
   \label{pc:eq:quarkSE}
@@ -1348,7 +1354,7 @@ This yields a total contribution to the cross-section
 \end{figure}
 It is also possible for two partons to produce a quark or an antiquark together with an off-shell \(Z\)-boson.
 This process goes through a gluon and a(n) quark/antiquark, as shown in \cref{pc:fig:quark_emission}.
-The amplitude for this looks like
+Assigning the momenta \(q(k_i) g(k_j) \to q(k) g(q)\) and labelling the incoming quark colour \(a\), the outgoing quark colour \(b\) and the incoming gluon index \(k\), the amplitude reads
 \begin{align}
   \nonumber
   \M_{r,q} = & g g_s T_{ab}^k \epsilon_\mu^\ast(q) \epsilon\_\nu(k_j) \bar{u}(k) \biggl\{
@@ -1397,7 +1403,7 @@ These come in the form of a gluon or gluino between the initial quarks, creating
 The IR-divergences from exchanging real gluons in these diagrams are cancelled by taking into account the real gluon emission diagrams in \cref{pc:fig:tu_gluon_emission}. Furthermore, quark emission should be included in the inclusive cross-section with the gaugino-like vertices enabling the diagrams in \cref{pc:fig:tu_quark_emission}.
 \medskip
 
-Two subtleties must be adressed when computing these contributions.
+Two subtleties must be addressed when computing these contributions.
 First, when using dimensional regularisation, the dimensionality of vector fields go from \(4 \to d\), whereas Dirac spinors remain four-dimensional.
 This comes from the fact that the Dirac spinors are generated from the Dirac gamma-matrices defined by the Clifford algebra with the anticommutation relation
 \begin{equation}
@@ -1576,7 +1582,7 @@ To avoid this double-counting, we must subtract the cross-section for neutralino
 
 \subsection{Catani-Seymour Dipole Formalism}
 The loops in these virtual exchange diagrams will contain dependence on the Mandelstam variables \cref{pc:eq:mandelstam_LO}, which will complicate the phase space integral over \(\hat{t}\) considerably.
-Doing the numerically will require some procedure for regularising and extracting these divergences such that they can cancel.
+Doing the phase space integral numerically will require some procedure for regularising and extracting these divergences such that they can cancel.
 For the IR-divergences to cancel, it will require matching between the phase space integrals of the \(2 \to 2\) process of virtual gluon/quark exchange with the \(2 \to 3\) of the real emission.
 The Catani-Seymour Dipole formalism~\cite{Catani:1996vz} rewrites these integrals such that the divergences cancel at the level of the integrand of the two phase space integrals seperately.
 This allows for the numerical implementation of the two phase space integrals.
