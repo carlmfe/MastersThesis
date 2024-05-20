@@ -45,5 +45,9 @@ p2x = p1star_mag*(-h*cphi + sphi*k) + s2*stheta*cphi
 p2y = p1star_mag*(-h*sphi - cphi*k) + s2*stheta*sphi
 p2z = p1star_mag*stheta*stheta_star*cphi_star + s2*ctheta
 
+Ei = sqrt(mi**2 + p1x**2 + p1y**2 + p1z**2)
+pi = np.array([Ei, p1x, p1y, p1z])
+ki = sqrt(s)/2 * np.array([1, 0, 0, 1])
 
-prettyprint(p1z, replace=(Qred, Q_ - mi - mj))
+# prettyprint(Ei, replace=(Qred, Q_ - mi - mj))
+prettyprint(lorentz_contract(ki-pi, ki-pi), replace=(Qred, Q_ - mi - mj))

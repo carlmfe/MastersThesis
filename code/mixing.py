@@ -45,7 +45,6 @@ def diagonalize(mass_matrix, components=None):
         if components is not None:
             print_percentages(get_percentages(eigvec), components)
 
-
 if __name__ == "__main__":
     M1 = 1. * np.exp(1j * 0.3 * np.pi)
     M2 = 5. * np.exp(1j * 0. * np.pi)
