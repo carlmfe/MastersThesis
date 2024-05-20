@@ -62,7 +62,7 @@ Denoting the scalar products by \(m^2_{ij} \equiv (p_i + p_j)^2\) for \(j \neq i
 To count the degrees of freedom in an \(N\)-body final state, we need to classify how many scalar products need to be specified for every scalar product to be defined.
 We assign the \(N\) scalar products \(m^2_i\) to the invariant masses of the incoming and outgoing particles, thereby not counting them as kinematic degrees of freedom, which leaves us with \(n_\text{dof} = \frac{N(N-3)}{2}\) degrees of freedom.\footnote{I note that we
   often consider the invariant mass of the incoming bodies to be fixed, which would reduce our degrees of freedom by one.}
-This means that in a \(2\to 2\) process, we must specify 2 kinematic variables, and in a \(2\to 3\) process we must specify 5.
+This means that in a \(2\to 2\) process, we must specify two kinematic variables, and in a \(2\to 3\) process we must specify five.
 For instance, in the \(2\to 2\) case, the canonical Mandelstam variables \(s, t, u\) can be used together with the restriction that \(s+t+u = \sum_i m_i^2\).
 
 For reference, I give the general formula for the Lorentz invariant differential phase space for a process of \(n_i\) particles with four-momenta \(k_i\) going to \(n_f\) particles with four-momenta \(p_j\) in \(d\) space-time dimensions~\cite{Schwartz:2014sze}:
@@ -136,7 +136,7 @@ Making the change of variable, the differential phase space reduces to
 
 \subsection{3-body Phase Space}
 A bit more complicated is the phase space of a 3-body final state.
-When taking into account the inclusive cross-section, as we will, where we also consider the production of additional particles in addition to our electroweakino pair, the 3-body phase space will becomes relevant.
+When taking into account the inclusive cross-section, as we will, where we also consider the production of additional particles in addition to our electroweakino pair, the 3-body phase space will become relevant.
 We will later see that this can be factorised into two 2-body phase spaces for some parts of the calculations, but to get the full NLO contributions, the 3-body phase space is necessary.
 Here I will outline a method for parametrising the degrees of freedom in the full 3-body case, although the phase space integration will be beyond the scope of this thesis.
 \medskip
@@ -501,7 +501,7 @@ The resulting amplitudes, using the Feynman rules in \cref{susy:sec:feynman_rule
 where \(D_p(q^2) = \frac{1}{q^2 - m_p^2 (+ i\Gamma_p m_p)}\) is the
 Breit-Wigner propagator~\cite{Schwartz:2014sze} of a particle with mass \(m_p\) and decay
 width \(\Gamma_p\) and the extra minus sign in \(\mathcal{M}_{\hat{u}}\) comes from it being an odd permutation of the external spinors to the other two amplitudes.
-Among other things, the Breit-Wigner propagator regularises divergences near the resonance where an intermediate particle goes on-shell, e.g. when \(\hat{s} \to m_Z^2\).
+Among other things, the Breit-Wigner propagator regularises divergences near the resonance where an intermediate particle goes on-shell, e.g.\ when \(\hat{s} \to m_Z^2\).
 As it turns out, such divergences will not appear in the integrated cross-section for the \(\hat{t}\)- and \(\hat{u}\)-channels, and so I will use \(\Gamma_{\tilde{q}_A} = 0\) for the remainder of this thesis.
 \\\comment{Maybe point to somewhere for further explanation/details?}
 
@@ -589,7 +589,7 @@ bilinears, they have the sum identities
     (1-\delta_{XY})\operatorname{rsgn} m_a m_b \g \Big],
 \end{align}
 where \(\operatorname{rsgn}\) is 1 if \(w_a, w_b\) are spinors of the same
-type, e.g. both are \(u\)-spinors, and -1 otherwise.
+type, e.g.\ both are \(u\)-spinors, and -1 otherwise.
 
 
 \subsection{Differential Cross-Section}
@@ -678,7 +678,7 @@ Putting it all together, this lets us write the total cross-section
   \hat\sigma^0 = & \frac{4 \pi p \alpha_W^2}{\hat{s}^{\sfrac{3}{2}} N_C} \pclosed{\frac{1}{2}}^{\delta_{ij}} \pclosed{F^{\prime\prime}_{\tilde{q}} + F^{\prime\prime}_Z + F^{\prime\prime}_{\tilde{q}Z}} \equiv \hat{\sigma}_B \pclosed{F^{\prime\prime}_{\tilde{q}} + F^{\prime\prime}_Z + F^{\prime\prime}_{\tilde{q}Z}},
 \end{align}
 with effective couplings defined as
-\\\comment{Should I perhaps be explicit in the neutralino indices \(i,j\) in these coulpings?}
+\\\comment{Should I perhaps be explicit in the neutralino indices \(i,j\) in these couplings?}
 \begin{align}
   \label{pc:eq:eff_coupling_Fq}
   \nonumber
@@ -932,7 +932,7 @@ We end up with
   \nonumber
   \mathrm{d}q \delta^d\pclosed{k+q-P} \mathrm{d}Q^2 \delta(q^2-Q^2) \mathrm{d}\Pi_{2\to 3} = \frac{1}{(2\pi)^{2d-3}}\mathrm{d}^{d-1}\vec{p}_i\,\mathrm{d}^{d-1}\vec{p}_j\,\mathrm{d}^{d-1}\vec{k}\,\mathrm{d}^{d-1}\vec{q}\,\,\mathrm{d}Q^2 \\
   \nonumber
-  \times \frac{1}{16E_iE_j\omega q^0} \delta^d\pclosed{q+k - k_i-k_j}\delta^d\pclosed{p_i+p_j+k - k_i-k_j}                                                                                                                                  \\
+  \times \frac{1}{16E_i E_j\omega q^0} \delta^d\pclosed{q+k - k_i-k_j}\delta^d\pclosed{p_i+p_j+k - k_i-k_j}                                                                                                                                 \\
   \equiv \frac{1}{2\pi} \mathrm{d}\Pi_H\, \mathrm{d}\Pi_N\, \mathrm{d}Q^2,\hspace{6.7cm}
 \end{align}
 where
@@ -941,7 +941,7 @@ where
     \label{pc:eq:Pi_H}
     \mathrm{d}\Pi_H = & \frac{\mathrm{d}^{d-1}\vec{k}\, \mathrm{d}^{d-1}\vec{q}}{(2\pi)^{d-2}} \frac{1}{4\omega q^0} \delta^d(q+k-k_i-k_j), \\
     \label{pc:eq:Pi_N}
-    \mathrm{d}\Pi_N = & \frac{\mathrm{d}^{d-1}\vec{p}_i\, \mathrm{d}^{d-1}\vec{p}_j}{(2\pi)^{d-2}} \frac{1}{4E_iE_j} \delta^d(p_i+p_j-q),
+    \mathrm{d}\Pi_N = & \frac{\mathrm{d}^{d-1}\vec{p}_i\, \mathrm{d}^{d-1}\vec{p}_j}{(2\pi)^{d-2}} \frac{1}{4E_i E_j} \delta^d(p_i+p_j-q),
   \end{align}
 \end{subequations}
 which are recognisable as differential phase spaces for a \(2\to 2\) processes going from momenta \(k_i+k_j \to q+k\) and a \(1\to 2\) phase space going from \(q\ \to p_i+p_j\).
@@ -974,8 +974,8 @@ where
 \end{subequations}
 Writing it in this way showcases that \(Q^2\) is not a real degree of freedom in the cross-section, but rather put in by hand.
 However, it will become relevant when we look at the \emph{inclusive} cross-section, where we take into account any contributions from processes resulting in the neutralino pair and something else.
-Seeing as at least one more vertex is necessary to produce another particle, these contributions must come in at NLO.
-The NLO QCD contribution from a process producing neutralino pair and a strongly interacting particle can only come from the quark tensor \(H\^{\mu\nu}\), as the neutralino tensor \(N\^{\mu\nu}\) contains no strongly interacting particles at LO.
+Seeing as at least one more vertex is necessary to produce another particle, these contributions must come in at NLO\@.
+The NLO QCD contribution from a process producing neutralino pair and a strongly interacting particle can only come from the quark tensor \(H\^{\mu\nu}\), as the neutralino tensor \(N\^{\mu\nu}\) contains no strongly interacting particles at LO\@.
 \(Q^2\) will then parametrise the extra degree of freedom when going from a \(2\to 1\) phase space to a \(2\to 2\) phase space in the hadronic tensor.
 \medskip
 
@@ -1004,7 +1004,7 @@ From \cref{pc:eq:neutralino_tensor} we can find it is given by
 \begin{equation}
   N_0(Q^2) = \frac{1}{3} \pclosed{g\_{\mu\nu} - \frac{q\_\mu q\_\nu}{Q^2}} N\^{\mu\nu}.
 \end{equation}
-Furthermore \(N\^{\mu\nu} = \integral{\Pi_N} \M\^\mu (\M\^\nu)^\ast\), where \(\epsilon\_\mu(q) \M\^\mu = \M(Z^\ast \to \tilde\chi^0_i \tilde\chi^0_j)\), and is given by
+Furthermore, \(N\^{\mu\nu} = \integral{\Pi_N} \M\^\mu (\M\^\nu)^\ast\), where \(\epsilon\_\mu(q) \M\^\mu = \M(Z^\ast \to \tilde\chi^0_i \tilde\chi^0_j)\), and is given by
 \begin{equation}
   \M\^\mu = g \bclosed{(O_{ij}^{\prime\prime L})^\ast b^\mu_L(u_i, v_j) + (O_{ij}^{\prime\prime R})^\ast b^\mu_R(u_i, v_j)}.
 \end{equation}
@@ -1386,7 +1386,7 @@ For further reference, the real emission contribution will be referred to as
 \begin{equation}
   \d[Q^2]{\hat\sigma_{r,g}} = \d[Q^2]{\hat\sigma_{r,g}} + \d[Q^2]{\hat\sigma_{r,q}} + \d[Q^2]{\hat\sigma_{r,\bar{q}}}.
 \end{equation}
-Furthermore, we can now summarise the parton cross-sections we have at NLO:
+Furthermore, we can now summarise the parton cross-sections we have at NLO\@:
 \begin{subequations}
   \begin{align}
     \d[Q^2]{\hat\sigma_{q\bar{q}}} = & \hat\sigma^0 \frac{\delta(1-z)}{\hat{s}} + \d[Q^2]{\hat\sigma_v} + \d[Q^2]{\hat\sigma_{c.t.}} + \d[Q^2]{\hat\sigma_{r,g}}, \\
@@ -1414,7 +1414,7 @@ The result is that the degrees of freedom between the SM gauge bosons and their 
 Others have shown that this can be remedied by introducing a counterterm to the weak coupling of the quark-squark-neutralino interaction \(g \to \hat{g} = g\pclosed{1 - \frac{\alpha_s CF}{8\pi}}\)~\cite{Aguilar-Saavedra:2005zyz}.
 The other subtlety comes from the real quark emission of the leftmost diagrams in \cref{pc:fig:tu_quark_emission}, going through an intermediate squark state.
 This squark can go on-shell if \(m_{i/j} > m_A\) and \(\hat{s} > (m_{i/j} + m_A)^2\), which experimentally coincides with the production of a neutralino and a squark followed by the subsequent decay of the squark into a neutralino and a quark.
-To avoid this double-counting, we must subtract the cross-section for neutralino-squark produciton with the corresponding branching ratio:
+To avoid this double-counting, we must subtract the cross-section for neutralino-squark production with the corresponding branching ratio:
 \begin{equation}
   \sum_A \cclosed{\d[Q^2]{\hat\sigma}(qg \to \tilde\chi^0_i \tilde{q}_A) \operatorname{BR}(\tilde{q}_A \to \tilde\chi^0_j q) + (i \leftrightarrow j)}.
 \end{equation}
@@ -1584,7 +1584,7 @@ To avoid this double-counting, we must subtract the cross-section for neutralino
 The loops in these virtual exchange diagrams will contain dependence on the Mandelstam variables \cref{pc:eq:mandelstam_LO}, which will complicate the phase space integral over \(\hat{t}\) considerably.
 Doing the phase space integral numerically will require some procedure for regularising and extracting these divergences such that they can cancel.
 For the IR-divergences to cancel, it will require matching between the phase space integrals of the \(2 \to 2\) process of virtual gluon/quark exchange with the \(2 \to 3\) of the real emission.
-The Catani-Seymour Dipole formalism~\cite{Catani:1996vz} rewrites these integrals such that the divergences cancel at the level of the integrand of the two phase space integrals seperately.
+The Catani-Seymour Dipole formalism~\cite{Catani:1996vz} rewrites these integrals such that the divergences cancel at the level of the integrand of the two phase space integrals separately.
 This allows for the numerical implementation of the two phase space integrals.
 
 More concretely, given a leading order differential, parton-level cross-section \(\mathrm{d}\hat\sigma_{ij}^{LO}(k_i, k_j)\) for two partons \(i,j\), with a renormalised virtual NLO contribution \(\mathrm{d}\hat\sigma_{ij}^v(k_i, k_j)\) and real emission NLO contribution \(\mathrm{d}\hat\sigma_{ij}^r\), we can divide the phase space integrals for the \(2 \to 2\) and \(2 \to 3\) processes as
@@ -1593,13 +1593,13 @@ More concretely, given a leading order differential, parton-level cross-section 
   \hat\sigma_{ij}^{NLO}(k_i, k_j) = & \integral{\Pi_{2\to 3}} \bclosed{\evalat{\mathrm{d}\hat\sigma_{ij}^r(k_i,k_j)}{\epsilon=0} - \evalat{\mathrm{d}\hat\sigma_{ij}^{r, c.t.}(k_i,k_j)}{{\epsilon=0}}}                                         \\
                                     & + \integral{\Pi_{2\to 2}} \bclosed{\mathrm{d}\hat\sigma_{ij}^v(k_i,k_j) + \mathrm{d}\hat\sigma_{ij}^{v, c.t.}(k_i,k_j)}_{\epsilon = 0} + \integral{\Pi_{2\to 2}} \mathrm{d}\hat\sigma_{ij}^{F}(k_i, k_j).
 \end{align}
-Effectively what is done is to introduce introduce a counterterm to each of the real and virtual contributions separately, each of which ensure the IR finiteness of the contributions.
+Effectively what is done is to introduce a counterterm to each of the real and virtual contributions separately, each of which ensure the IR finiteness of the contributions.
 It can be shown that integrating over the extra degrees of freedom in the \(2 \to 3\) phase space integral of real emission counterterm reproduces the virtual counterterm,
 \begin{align}
   \integral{\Pi_{2\to 3}} \mathrm{d}\hat\sigma_{ij}^{r,c.t.} = \integral{Pi_{2 \to 2}} \hat\sigma_{ij}^{v,c.t.},
 \end{align}
 meaning it is just a rewrite of \(\integral{\Pi_{2 \to 3}} \mathrm{d}\hat\sigma_{ij}^r(k_i,k_j) + \integral{\Pi_{2 \to 2}} \mathrm{d}\hat\sigma_{ij}^v(k_i,k_j)\).
-The final term is a compensation for the definition of the pdf's at a factorisation scale \(\mu_F\), and ensures that any cross-section dependence on this scale is cancelled to NLO.
+The final term is a compensation for the definition of the pdf's at a factorisation scale \(\mu_F\), and ensures that any cross-section dependence on this scale is cancelled to NLO\@.
 
 The extra terms can be shown to be given by
 \begin{subequations}
