@@ -2,6 +2,7 @@
 from collections.abc import Iterable
 from subprocess import Popen, PIPE
 import matplotlib.pyplot as plt
+import shutil
 
 from slha_utils import mktmpfile, cleartmpfiles, copy_slha_with_replacement
 import smoking_utils as sutils
@@ -307,7 +308,7 @@ def run4parameters(code: str, slha_filepath: str, proc: tuple[int], param_points
 
     return results
 
-def run4slha(code: str, slha_filepaths: list[str], proc: tuple[int], tnum: bool=False) -> dict[str, dict[any, float]]:
+def run4slha(code: str, slha_filepaths: list[str], proc: tuple[int], tnum: bool=False, cache: str=None, order: int=0) -> dict[str, dict[any, float]]:
     '''Runs using specified code for given proc using slha files located at slha_filepath replacing
     any key in dict-elements of param_points in slha file with values of these dicts, and returns results in dictionary ordered
     as
@@ -336,6 +337,7 @@ def run4slha(code: str, slha_filepaths: list[str], proc: tuple[int], tnum: bool=
         queue.append(f'-c {code} --pid1 {pid1} --pid2 {pid2} -r {slha_file} -o {tmpresfile} -l {slha_label} --tempstem temp{slha_label}_ -P {sutils.PDF_SET} -S {sutils.S}')
         if sutils.VERBOSE: queue[-1] += ' -v'
         if tnum: queue[-1] += ' --tnum'
+        if order == 1: queue[-1] += ' --nlo'
 
     # Now we can loop over all processes to be run
     # run_proc.py makes the correct smoking/resummino calls and writes results in common file format
@@ -350,6 +352,8 @@ def run4slha(code: str, slha_filepaths: list[str], proc: tuple[int], tnum: bool=
 
     # Read all results and fill results dictionaries
     results = sutils.read_results(tmpresfile)
+    if cache is not None:
+        shutil.copy2(tmpresfile, cache)
     # Clearing temporary result files
     cleartmpfiles('.out')
 

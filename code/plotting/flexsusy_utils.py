@@ -11,15 +11,23 @@ def generate_infiles(slha_filepath: str, replace_rules: list[dict], outdir: str,
     slha_filestem = slha_filepath.split('.')[0]
     slha_filestem = slha_filestem.split('/')[-1]
 
+    infofile = open(outdir + slha_filestem + '.info', 'w')
+
+    file_counter = 1
     for replace_rule in replace_rules:
-        label = '_'.join(replace_rule.values()).replace('.', '')
-        outfile = open(outdir + slha_filestem + '_' + label + extension, 'w')
+        outfile = open(outdir + slha_filestem + '_' + str(file_counter) + extension, 'w')
         with open(slha_filepath, 'r') as infile:
             contents = infile.read()
         for item in replace_rule.items():
             contents = contents.replace(*item)
         outfile.write(contents)
         outfile.close()
+
+        infofile.write(f"{slha_filestem + '_' + str(file_counter) + extension} : {list(replace_rule.values())}\n")
+
+        file_counter += 1
+
+    infofile.close()
 
 
 def generate_spectra(model: str, infiles: list[str], outdir: str, extension: str = '.slha'):
@@ -30,6 +38,15 @@ def generate_spectra(model: str, infiles: list[str], outdir: str, extension: str
     queue = []
 
     for infile in infiles:
+        if infile.split('.')[-1] == 'info':
+            input_infofilename = infile
+            output_infofilename = outdir + infile.split('/')[-1]
+            break
+
+    for infile in infiles:
+        if infile == input_infofilename:
+            continue
+
         outfilename = infile.split('.')[0]
         outfilename = outfilename.split('/')[-1]
         outfilename += extension
@@ -39,6 +56,14 @@ def generate_spectra(model: str, infiles: list[str], outdir: str, extension: str
             f'--slha-input-file={infile}',
             f'--slha-output-file={outdir+outfilename}'
         ])
+
+        with open(output_infofilename, 'a') as infofile:
+            info = ''
+            with open(input_infofilename, 'r') as input_info:
+                for line in input_info.readlines():
+                    if line.split()[0] == infile.split('/')[-1]:
+                        info = ' '.join(line.split()[2:])
+            infofile.write(f"{outfilename.split('/')[-1]} : {info}\n")
 
     # Now we can loop over all processes to be run
     subprocs = []
@@ -168,25 +193,35 @@ if __name__ == '__main__':
     from math import cos, sin, pi
     import pyslha
 
-    test_root = 'slha//muCPV/'
+    # test_root = 'slha//muCPV/'
+    test_root = 'slha/hinoCPV/'
 
-    slha_filename = 'csps1a.in.MSSMCPV'
+    # slha_filename = 'csps1a.in.CMSSMCPV'
+    slha_filename = 'hino.in.MSSMCPV'
 
-    n = 100
+    n = 50
 
-    param_points = [{'@c' : str(cos((2*i-n)/n*pi)), '@s' : str(sin((2*i-n)/n*pi)), '@p' : str((2*i-n)/n*pi)} for i in range(n)]
+    # param_points = [{'@c' : str(cos((2*i-n)/n*pi)), '@s' : str(sin((2*i-n)/n*pi)), '@p' : str((2*i-n)/n*pi)} for i in range(n)]
+    absMu = 100
+    param_points = [{'@r' : str(absMu*cos((2*i-n)/n*pi)), '@i' : str(absMu*sin((2*i-n)/n*pi))} for i in range(n)]
 
-    generate_infiles(test_root+slha_filename, param_points, test_root+'input', extension='.in.CMSSMCPV')
+    # generate_infiles(test_root+slha_filename, param_points, test_root+'input', extension='.in.CMSSMCPV')
 
+    if not os.path.exists(test_root+'input'):
+        os.mkdir(test_root+'input')
+    if not os.path.exists(test_root+'generated'):
+        os.mkdir(test_root+'generated')
+
+    generate_infiles(test_root+slha_filename, param_points, test_root+'input', extension='.in.MSSMCPV')
 
     infiles = [ test_root+'input/'+f.name for f in os.scandir(test_root+'input') if f.is_file() ]
 
-    generate_spectra('CMSSMCPV', infiles, test_root+'generated')
-
+    # generate_spectra('CMSSMCPV', infiles, test_root+'generated')
+    generate_spectra('MSSMCPV', infiles, test_root+'generated')
 
     for spectrumfile in [ test_root+'generated/'+f.name for f in os.scandir(test_root+'generated/') if f.is_file()]:
         
-        readfile = pyslha.read(spectrumfile)
+        readfile = pyslha.read(spectrumfile, ignorenomass=True)
 
         try:
             readfile.blocks['IMUSQMIX']

@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from plot_utils import process2latex, pid2sym, mass_squark_pid2sym, plot_xsec_with_relerrs
 from compare import run4slha, savefig_with_info
+from smoking_utils import read_results
 
 import pyslha
 
@@ -209,8 +210,17 @@ def mixing_plot(slha_dir, pid, plotname = None):
     else:
         plt.show()
 
-def mu_plot(slha_dir, processes, plotname = None):
-    slha_paths = [ slha_dir+f.name for f in os.scandir(slha_dir) if f.is_file() ]
+def mu_plot(slha_dir, processes, plotname = None, cache = None, order = 0):
+    slha_paths = [ slha_dir+f.name for f in os.scandir(slha_dir) if f.is_file() and f.name[-4:] != 'info' ]
+
+    # Find parameters defining each fiel in slha_dir
+    param_info = {}
+    for f in os.scandir(slha_dir):
+        if f.name[-4:] == 'info':
+            with open(slha_dir + f.name, 'r') as infofile:
+                for line in infofile.readlines():
+                    splitline = line.split(' ')
+                    param_info[splitline[0]] = eval(' '.join(splitline[2:]))
 
     phimu_list = {}
     xsec_list = {}
@@ -221,14 +231,28 @@ def mu_plot(slha_dir, processes, plotname = None):
         phimu_list[proc_handle] = []
         xsec_list[proc_handle] = []
 
-        res = run4slha('smoking', slha_paths, (pid1, pid2), tnum=False)
+        proc_cache = None if cache is None else cache.split('.')[0] + str(proc[0]) + "+" + str(proc[1]) + "." + cache.split('.')[1]
 
+        if cache is None:
+            res = run4slha('smoking', slha_paths, (pid1, pid2), tnum=False, order=order)
+        elif not os.path.isfile(proc_cache):
+            res = run4slha('smoking', slha_paths, (pid1, pid2), tnum=False, cache = proc_cache, order=order)
+        else:
+            res = read_results(proc_cache)
         for key, value in res.items():
-            cphi, sphi, phi = key.split('_')[-3:]
-            if cphi[0] == '0': cphi = '0.' + cphi[1:]
-            elif cphi[:2] == '-0': cphi = '-0.' + cphi[2:]
-            if sphi[0] == '0': sphi = '0.' + sphi[1:]
-            elif sphi[:2] == '-0': sphi = '-0.' + sphi[2:]
+            # cphi, sphi, phi = key.split('_')[-3:]
+            # if cphi[0] == '0': cphi = '0.' + cphi[1:]
+            # elif cphi[:2] == '-0': cphi = '-0.' + cphi[2:]
+            # if sphi[0] == '0': sphi = '0.' + sphi[1:]
+            # elif sphi[:2] == '-0': sphi = '-0.' + sphi[2:]
+
+            mu_cphi, mu_sphi = param_info[key + '.slha']
+            mu_cphi = float(mu_cphi)
+            mu_sphi = float(mu_sphi)
+
+            phi = atan2(float(mu_sphi), float(mu_cphi))
+            cphi = np.cos(phi)
+            sphi = np.sin(phi)
             phimu = atan2(float(sphi), float(cphi))
 
             phimu_list[proc_handle].append(phimu if phimu >= 0 else 2*pi+phimu)
@@ -248,7 +272,7 @@ def mu_plot(slha_dir, processes, plotname = None):
     # ax.set_yscale('log')
     axes[0].set_ylabel(r'$\sigma$ [fb]')
     axes[1].set_xlabel('phase of $\mu$')
-    axes[1].set_ylabel('relative deviation')
+    axes[1].set_ylabel(r'$\frac{\sigma(\phi_\mu) - \sigma(0)}{\sigma(0)}$')
     axes[0].set_xticks([i*pi/3 for i in range(7)], ['0', r'$\frac{1}{3}\pi$', r'$\frac{2}{3}\pi$', r'$\pi$', r'$\frac{4}{3}\pi$', r'$\frac{5}{3}\pi$', r'$2\pi$'])
 
     if plotname is not None:
@@ -401,6 +425,8 @@ if __name__ == '__main__':
     parser.add_argument('--susy-scale-plot', dest='susy_scale', action='store_true')
     parser.add_argument('--slha-param-plot', dest='slha_param', nargs='+')
     parser.add_argument('--ylims', dest='ylims', nargs='+', type=str, default=['min', 'max'])
+    parser.add_argument('-c', '--cache', dest='cache', type=str, default=None)
+    parser.add_argument('-o', '--order', dest='order', type=int, default=0)
     clargs = parser.parse_args()
     plot_info = clargs.__dict__
 
@@ -419,7 +445,9 @@ if __name__ == '__main__':
         # for idx, processes in enumerate(process_queue):
         #     mu_plot(clargs.indir, [sorted(proc) for proc in processes], clargs.plotname+str(idx))
         #     plt.clf()
-        mu_plot(clargs.indir, [(1000022, 1000022), (1000023, 1000023), (1000023, 1000025), (1000025, 1000035)], clargs.plotname)
+        # mu_plot(clargs.indir, [(1000022, 1000022), (1000023, 1000023), (1000023, 1000025), (1000025, 1000035)], clargs.plotname, cache=clargs.cache, order=clargs.order)
+        mu_plot(clargs.indir, [(1000022, 1000023)], clargs.plotname, cache=clargs.cache, order=clargs.order)
+
 
     if clargs.mixplot:
         mixing_plot(clargs.indir, clargs.pid, clargs.plotname)
