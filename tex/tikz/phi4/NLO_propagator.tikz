@@ -1,0 +1,10 @@
+\begin{feynman}
+  \vertex[empty dot, label=left:\(x_1\)] (x1) {\contour{black}{}};
+  \vertex[fill=black, dot, right=of x1, label=below:\(y\)] (y) {\contour{black}{}};
+  \vertex[empty dot, right=of y, label=right:\(x_2\)] (x2) {\contour{black}{}};
+  \diagram*{
+  (x1) -- (y)
+  -- (x2),
+  y -- [out=135, in=45, loop, min distance=2cm] y
+  };
+\end{feynman}

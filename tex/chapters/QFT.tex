@@ -8,73 +8,304 @@
 
 
 \section{Perturbative Quantum Field Theory}
-\phpar[Here I want to introduce the Lagrangian formulation of quantum field
-  theory, and the types of fields we will be working with.
-  Furthermore, I want to introduce the perturbation series through the path
-  integral, and talk about the nature of quantum effects.
-  Also derive Feynman rules from path integral.]
-
-\begin{TODO}
-  \item Introduce perturbative QFT\@.
-  \item Talk about reading Feynman diagrams and special care to take with
-  Majorana fermions.
-\end{TODO}
-
 In this thesis, I will use the Lagrangian framework to formulate QFT\@.
 Here I will introduce the basics of how to formulate a QFT in such a way using the path integral formalism.
 This leads to a perturbative formulation of scattering and computation of correlation functions, which is the basis for the calculations that will be made. \medskip
 
 
 
-
-
-
 \subsection{The Path Integral}
 I will start by introducing some useful shorthands that will be used throughout this section.
-Consider an action \(S[\cclosed{\Phi}]\) as a functional of some fields \(\cclosed{\Phi}\). Let \(\phi_i \equiv \phi(x_i)\) for some arbitrary field \(\phi \in \cclosed{\Phi}\) evaluated at some point in space-time \(x_i\)---the path integral approach to quantum field theory is built on time-ordered correlation functions through the relation\needcite\
+Consider an action \(S[\cclosed{\Phi}]\) as a functional of some classical fields \(\cclosed{\Phi}\). Let \(\phi_i \equiv \phi(x_i)\) for some arbitrary field \(\phi \in \cclosed{\Phi}\) evaluated at some point in space-time \(x_i\)---the path integral approach to quantum field theory is built on time-ordered correlation functions through the relation\needcite\
 \begin{equation}
   \label{qft:eq:path_integral_correlation_function}
   \bra{\Omega} T\cclosed{\hat\phi_1 \cdots \hat\phi_n} \ket{\Omega} = \frac{\int\!\mathcal{D}\phi\, \phi_1 \cdots \phi_n \exp{iS[\cclosed{\Phi}]}}{\int\!\mathcal{D}\phi\, \exp{iS[\cclosed{\Phi}]}},
 \end{equation}
 where \(T\cclosed{.}\) denotes the time-ordering operation and \(\mathcal{D}\phi\) is the measure denoting integration over all possible \emph{field configurations}.
-A field configuration here is understood as a given set of values for the fields \(\cclosed{\Phi}\), one for each point in space-time.
+A field configuration here is understood as a given set of values for each of the fields \(\cclosed{\Phi}\), one for each point in space-time.
 The time-ordering operation will put the fields in chronological order according to the time at which they are evaluated, with the ``first'' field being farthest to the right.
-The left-hand side of \cref{qft:eq:path_integral_correlation_function} the fields are understood as operators on the Hilbert space of states in our interacting theory (denoted by their hats), whereas on the right-hand side they are considered as classical fields.
+The left-hand side of \cref{qft:eq:path_integral_correlation_function} the fields are understood as operators on the Hilbert space of states in our interacting theory (denoted by their hats), and \(\ket{\Omega}\) is the vacuum state.
 In this way quantum effects are encapsulated through the weighted sum of all classical \emph{paths} through configuration space, rather than just whichever one minimises the action.
 
 
 
-
-\subsection{Feynman Rules}
-In interacting theories, correlation functions can be obtained through a \emph{perturbation series} by expanding them around their coupling constant, here denoted \(\lambda\).
-If the Lagrangian of the action can be written on the form \(\L = \L_0 + \lambda\L_\text{int}\), then the exponentiation of the action can be written as
+\subsection{Perturbing the Free Theory}
+In interacting theories, correlation functions can be obtained through a \emph{perturbation series} by expanding them around a coupling constant \(\lambda\), denoting the strength of the interaction.
+To compute time-order correlation functions with \cref{qft:eq:path_integral_correlation_function}, we need to exponentiate the action.
+Assuming that the Lagrangian of the action can be written on the form \(\L = \L_0 - \lambda\L_\text{int}\), this exponentiation can be written as
 \begin{align}
-  \exp{i \integral{^4x} \pclosed{\L_0 + \L_\text{int}}} = \exp{i \integral{^4x} \L_0} \pclosed{1 + \lambda\integral{^4x_1} \L_\text{int}(x_1) + \frac{\lambda^2}{2} \integral{^4x_1}\integral{^4x_2} \L_\text{int}(x_1) \L_\text{int}(x_2) + \ldots}.
+  \exp{i \integral{^4x} \pclosed{\L_0 - \L_\text{int}}} = \exp{i \integral{^4x} \L_0} \pclosed{1 - i\lambda\integral{^4x_1} \L_\text{int}(x_1) - \frac{\lambda^2}{2} \integral{^4x_1}\integral{^4x_2} \L_\text{int}(x_1) \L_\text{int}(x_2) + \ldots}.
 \end{align}
-Now say the interaction Lagrangian \(\L_\text{int}\) is some monomial of degree \(p\) in the fields \(\cclosed{\Phi}\),\footnote{In the more general case where it can be expressed with some polynomial in the fields, we can look at each monomial term separately, without loss of generality.} then the interacting correlation functions can be written in terms of free-theory correlation functions!
+For simplicity, let us consider a theory with just one self-interacting field \(\phi\).
+Now say the interaction Lagrangian \(\L_\text{int}\) is some monomial of degree \(p\) in \(\phi\),\footnote{In the more general case where it can be expressed with some polynomial in the fields, we can look at each monomial term separately, without loss of generality.} then the interacting correlation functions can be written in terms of free-theory correlation functions!
 To see this, we consider the interacting \(n\)-point function \(D^n_\text{int}(1,\ldots, n) = \bra{\Omega} T\cclosed{\hat\phi_1 \cdots \hat\phi_n} \ket{\Omega}\), and write it out in terms of the free and interacting Lagrangians:
 \begin{align}
   \label{qft:eq:n-point_interactive_correlator}
-  D^n_\text{int}(1,\ldots, n) = \frac{1}{\mathcal{N}} \int\!\mathcal{D}\phi\, \phi_1\cdots \phi_n \exp{i\integral{^4x}\L_0}\pclosed{1 + i\lambda \integral{^4y}\L_\text{int} + \mathcal{O}(\lambda^2)},
+  D^n_\text{int}(1,\ldots, n) = \frac{1}{\mathcal{N}} \int\!\mathcal{D}\phi\, \phi_1\cdots \phi_n \exp{i\integral{^4x}\L_0}\pclosed{1 - i\lambda \integral{^4y}\L_\text{int} + \mathcal{O}(\lambda^2)},
 \end{align}
 where the normalisation is given by \(\mathcal{N} = \int\!\mathcal{D}\phi\, \exp{i\integral{^4x}\L}\).
 To relate this to the free-theory, let us take a moment to write this out.
-Given the free-field \(n\)-point correlator \(D^n_0(1,\ldots,n) \equiv \frac{1}{\mathcal{N}_0} \int\!\mathcal{D}\phi\, \phi_i \cdots \phi_n \exp{i\integral{^4x}\L_0}\) with normalisation \(\mathcal{N}_0 = \int\!\mathcal{D}\phi\, \exp{i\integral{^4x}\L_0}\), expand the interacting normalisation as
+Given the free-field \(n\)-point correlator \(D^n_0(1,\ldots,n) \equiv \frac{1}{\mathcal{N}_0} \int\!\mathcal{D}\phi\, \phi_i \cdots \phi_n \exp{i\integral{^4x}\L_0}\) with normalisation \(\mathcal{N}_0 = \int\!\mathcal{D}\phi\, \exp{i\integral{^4x}\L_0}\), expanding the interacting normalisation gives
 \begin{equation}
-  \mathcal{N} = \mathcal{N}_0 \pclosed{1 + i\lambda \integral{^4y} D_0^p(\underbrace{y, \ldots, y}_{p\text{ times}}) - \frac{\lambda^2}{2} \integral{^4y}\!\! \integral{^4z} D_0^{2p}(\underbrace{y,\ldots,y}_{p\text{ times}}, \underbrace{z,\ldots,z}_{p\text{ times}}) + \mathcal{O}(\lambda^3)}.
+  \mathcal{N} = \mathcal{N}_0 \pclosed{1 - i\lambda \integral{^4y} D_0^p(\underbrace{y, \ldots, y}_{p\text{ times}}) - \frac{\lambda^2}{2} \integral{^4y}\!\! \integral{^4z} D_0^{2p}(\underbrace{y,\ldots,y}_{p\text{ times}}, \underbrace{z,\ldots,z}_{p\text{ times}}) + \mathcal{O}(\lambda^3)}.
 \end{equation}
 Inserting this into \cref{qft:eq:n-point_interactive_correlator} and expanding around \(\lambda = 0\) we get
 \begin{align}
+  \label{qft:eq:n-point_interacting_correlator}
   \nonumber
-  D^n_\text{int}(1,\ldots, n) = \frac{D_0^n(1, \ldots, n) + i\lambda \integral{^4y} D_0^{n+p}(1, \ldots, n, \overbrace{y, \ldots, y}^{p\text{ times}}) + \mathcal{O}(\lambda^2)}{1 + i\lambda D_0^p(\underbrace{y, \ldots, y}_{p\text{ times}}) + \mathcal{O}(\lambda^2)} \\
-  = D^n_0(1,\ldots,n) + i\lambda \pclosed{D_0^{n+p}(1, \ldots, n, \underbrace{y, \ldots, y}_{p\text{ times}}) - D_0^n(1, \ldots, n) D_0^p(\underbrace{y, \ldots, y}_{p\text{ times}})} + \mathcal{O}(\lambda^2)
+    & D^n_\text{int}(1,\ldots, n) = \frac{D_0^n(1, \ldots, n) - i\lambda \integral{^4y} D_0^{n+p}(1, \ldots, n, \overbrace{y, \ldots, y}^{p\text{ times}}) + \mathcal{O}(\lambda^2)}{1 - i\lambda D_0^p(\underbrace{y, \ldots, y}_{p\text{ times}}) + \mathcal{O}(\lambda^2)} \\
+  = & D^n_0(1,\ldots,n) - i\lambda \integral{^4y} \pclosed{D_0^{n+p}(1, \ldots, n, \underbrace{y, \ldots, y}_{p\text{ times}}) - D_0^n(1, \ldots, n) D_0^p(\underbrace{y, \ldots, y}_{p\text{ times}})} + \mathcal{O}(\lambda^2).
 \end{align}
+We can see from this that perturbation from \(\lambda = 0\) will give corrections to the free two-point correlator that add correlations with additional space-time points that are integrated over.
+These additional self-correlating points will diagrammatically form loops, as we will see an example of in the next section.
+I note that the role of the second term of order \(\lambda\) is to remove all \emph{disconnected} diagrams that contribute to the first term.
+Disconnected diagrams are diagrams where the self-correlating additional space-time points are not connected to the external space-time points, and as such should not be causally related to them.
 
 
+\subsection{Feynman Rules in Position Space}
+Let us now investigate closer what we can get from the expansion around the free theory \cref{qft:eq:n-point_interacting_correlator}.
+To do this, let us consider a concrete theory, given by the Lagrangian
 \begin{equation}
-  \pclosed{\dA_x - m^2} D^2_0(x,y) = -i \delta^4(x-y)
+  \L = \underbrace{\frac{1}{2}(\partial\^\mu \phi)(\partial\_\mu\phi) - \frac{1}{2}m^2 \phi^2}_{\L_0} - \lambda \underbrace{\phi^4}_{\L_\text{int}}.
+\end{equation}
+Furthermore, I will use the Schwinger-Dyson equations~\cite{Schwartz:2014sze} for the free-theory, which tell us that
+\begin{equation}
+  \label{qft:eq:Schwinger-Dyson_n-point}
+  (\dA_x + m^2) D_0^{n+1}(x, 1, \ldots, n) = -i\sum_{i} \delta^4(x-x_i) D_0^{n-1}(1, \ldots, i-1, i+1, \ldots, n),
+\end{equation}
+from which it follows that
+\begin{equation}
+  \label{qft:eq:Schwinger-Dyson_2-point}
+  (\dA_x + m^2) D^2_0(x,y) = -i \delta^4(x-y).
 \end{equation}
 
+Consider the 2-point correlator \(D_{\text{int}}^2(1,2)\) of the interacting theory.
+By \cref{qft:eq:n-point_interacting_correlator}, this is given to first order in \(\lambda\) by
+\begin{equation}
+  \label{qft:eq:phi4_2-point_correlator}
+  D_{\text{int}}^2(1,2) = D_0^2(1,2) - i\lambda \integral{^4y} \pclosed{D_0^6(1,2,y,y,y,y) - D_0^2(1,2)D_0^4(y,y,y,y)}.
+\end{equation}
+Using a cute trick to insert a Dirac delta-function, we can use \cref{qft:eq:Schwinger-Dyson_2-point} to rewrite to six-point correlator
+\begin{align}
+  \nonumber
+  D_0^6(1,2,y,y,y,y) = & \integral{^4x} \delta^4(x-x_1) D_0^6(x,2,y,y,y,y)            \\
+  \nonumber
+  =                    & i\integral{^4x} (\dA_x + m^2) D^2_0(x,1) D_0^6(x,2,y,y,y,y)  \\
+  =                    & i\integral{^4x} D^2_0(x,1) (\dA_x + m^2) D_0^6(x,2,y,y,y,y),
+\end{align}
+where \(\dA = \partial\^\mu \partial\_\mu\) is the d'Alembertian operator and in the last equality I have used partial integration twice.
+We can then use \cref{qft:eq:Schwinger-Dyson_n-point} to get
+\begin{align}
+  \nonumber
+  D_0^6(1,2,y,y,y,y) = & \integral{^4x} D^2_0(x,1) \cclosed{\delta^4(x-x_2) D_0^4(y,y,y,y) + 4\delta^4(x-y)D_0^4(2,y,y,y)} \\
+  =                    & D_0^2(1,2) D_0^4(y,y,y,y) + 4 D_0^2(1,y)D_0^4(2,y,y,y),
+\end{align}
+where I have used the property of the correlators that they are symmetric in its arguments because of the time-ordering operator.
+Notice that the first term here will cancel the last term in \cref{qft:eq:phi4_2-point_correlator} as promised.
+We can now use the same procedure to write out the four-point correlator
+\begin{align}
+  \nonumber
+  D_0^4(2,y,y,y) = & = i\integral{^4x} (\dA_x + m^2) D_0^2(x,2) D_0^4(x,y,y,y)                      \\
+  =                & \integral{^4x} D_0^2(x,2) 3 \delta^4(x-y) D_0^2(y,y) = 3D_0^2(y,y) D_0^2(y,2).
+\end{align}
+Putting it all together in \cref{qft:eq:phi4_2-point_correlator}, we get that the interacting two-point correlator in this theory is
+\begin{equation}
+  \label{qft:eq:phi4_2-point_correlator}
+  D_{\text{int}}^2(1, 2) = D_0^2(1, 2) - 12 i \lambda \integral{^4y} D_0^2(1, y) D_0^2(y, y) D_0^2(y, 2)
+\end{equation}
+to first order in the coupling constant \(\lambda\).
+
+This procedure can be put together diagrammatically -- associating the free two-point correlators \(D_0^2(x,y)\) with edges between two points \(x, y\), and vertices where multiple edges meet with a factor of \(i k \lambda \integral{^4x}\), where \(k\) is the number of configurations of equal fields in \(\L_\text{int}\).
+Due to this last point, it is therefore common to rescale the Lagrangian parameter \(\lambda \to \frac{\lambda}{k}\), such that the insertions will not contain any numerical factors.
+In the case of our \(\phi^4\) theory, we should have \(k = 4!\), however, comparing to our result in \cref{qft:eq:phi4_2-point_correlator} we see that we only have a numerical factor of \(12 = \frac{4!}{2}\).
+This is a result of the \emph{symmetry factor} of the diagram, as the loop in \(y\) is (trivially) symmetric under exchange of its endpoints.
+By including the factor of \(p!\) in the vertex rule, we must divide by the symmetry factor, which are the number of ways you can change the edges of a diagram and still get the same result.
+Another subtlety relates to the factor of \(\frac{1}{n!}\) associated with the \(\lambda^n\) term in the perturbation expansion \cref{qft:eq:n-point_interacting_correlator}.
+This coincides with the fact that the \(n\)th order term is gives equal contributions under the interchange of its internal vertices.
+There are \(n!\) ways of interchanging these vertices, and so this factor cancels out neatly in the end.
+\medskip
+
+Returning to our example, we can depict \cref{qft:eq:phi4_2-point_correlator} diagrammatically by
+\begin{align}
+  D_{\text{int}}^n(1, 2) = & \inputtikz[baseline=(x1.base)]{phi4/LO_propagator} + \inputtikz[baseline=(x1.base)]{phi4/NLO_propagator}.
+\end{align}
+I have denoted \emph{vertices} associated with the coupling constant insertion with filled dots, and external points with empty dots for clarity.
+This practice will not be kept for the remainder of the thesis.
+\medskip
+
+In summary, the following rules relate a Feynman diagram to the two-point correlators of the free theory:
+\begin{itemize}
+  \item [(I)] A factor of \(D_0^2(x, y)\) for every edge connecting two points \(x, y\).
+  \item [(II)] A factor of \(-i\lambda \integral{^4x}\) for every internal vertex point \(x\).
+  \item [(III)] An overall numerical factor of \(S^{-1}\), where \(S\) the symmetry factor. This is the total number of ways internal lines can be exchanged without changing the diagram.
+\end{itemize}
+To get the full correlator to a given perturbative order, we must sum over all \emph{different}, connected Feynman diagrams to that order.
+
+
+\subsection{The \(S\)-Matrix and LSZ Reduction Formula}
+To relate the correlation functions above to physical experiment, e.g.\ scattering amplitudes.
+Let us for a moment go to the quantum mechanical picture of Hilbert space formalism to formulate a scattering experiment.
+Idealising the scenario, let us consider the amplitude of an \emph{asymptotic} in-state \(\ket{\psi_i}\) of free fields at \(t=-\infty\) evolving into an asymptotic out-state \(\ket{\psi_f}\) of some other fields at \(t=+\infty\).
+The interaction between is captured by the \(S\)-matrix, and the amplitude is given by the inner product
+\begin{equation}
+  \bra{\psi_f} S \ket{\psi_i}.
+\end{equation}
+The LSZ reduction formula due to Lehmann, Symanzik and Zimmermann~\cite{LSZ} relates this amplitude to the correlation functions we have above.
+Given initial fields with momenta \(p_1, \ldots, p_k\) and final fields with momenta \(p_{k+1}, \ldots, p_n\) in our scalar theory, it reads~\cite{Schwartz:2014sze}
+\begin{align}
+  \label{qft:eq:S-matrix}
+  \nonumber
+  \bra{p_{k+1}\cdots p_n} S \ket{p_1 \cdots p_k} = \pclosed{\prod_{i=1}^k i \integral{^4x_i} \exp{-ip_i \cdot x_i} (\dA_{x_i} + m^2)} \\
+  \times \pclosed{\prod_{i=k+1}^n i \integral{^4x_i} \exp{+ip_i \cdot x_i} (\dA_{x_i} + m^2)}
+  \times \bra{\Omega} \operatorname{T}\cclosed{\phi(x_1)\cdots \phi(x_n)} \ket{\Omega}.
+\end{align}
+
+Usually, we encapsulate the information of the \(S\)-matrix in \emph{matrix elements} \(\M\) by writing it on the form
+\begin{equation}
+  S = \eye + i(2\pi)^4 \delta^4(\sum_{i=1}^k p_i - \sum_{i=k+1}^n p_i) \M,
+\end{equation}
+essentially dropping the trivial overlap between the in- and out-states and factoring out momentum conservation.
+\medskip
+
+Let us now put this to use our scalar toy model, computing the transition for a field with momentum \(p_1\) to end up with momentum \(p_2\) using \cref{qft:eq:S-matrix} to first order in \(\lambda\):
+\begin{align}
+  \nonumber
+  \bra{p_2} S \ket{p_1} = & \pclosed{i\integral{^4x_1} \exp{-ip_1 \cdot x_1} (\dA_{x_1} + m^2)} \pclosed{ i \integral{^4x_2} \exp{+ip_2 \cdot x_2} (\dA_{x_2} + m^2)} \times D_{\text{int}}^2(1, 2) \\
+  \nonumber
+  =                       & -\integral{^4x_1} \exp{-ip_1 \cdot x_1} (\dA_{x_1} + m^2) \integral{^4x_2} \exp{+ip_2 \cdot x_2} (\dA_{x_2} + m^2)                                                      \\
+  \nonumber
+                          & \times \cclosed{D_0^2(1,2) - \frac{i\lambda}{2} \integral{^4y} D_0^2(1,y)D_0^2(y,y) D_0^2(y,2) + \mathcal{O}(\lambda)}                                                  \\
+  \nonumber
+  =                       & -\integral{^4x_1} \exp{-ip_1 \cdot x_1} (\dA_{x_1} + m^2) \cclosed{i \exp{ip_2\cdot x_1} - \frac{\lambda}{2}\integral{^4y} \exp{-ip_2\cdot y} D_0^2(1,y) D_0^2(y,y)}    \\
+  =                       & \integral{^4x_1} \cclosed{-i (p^2_2 - m^2)- \frac{i\lambda}{2} D_0^2(x_1,x_1)} \exp{-i(p_1-p_2) \cdot x_1},
+\end{align}
+where in the second equality I inserted \cref{qft:eq:phi4_2-point_correlator}, in the third and fourth equalities I used the Schwinger-Dyson equation \cref{qft:eq:Schwinger-Dyson_2-point}.
+By the on-shell condition on \(p_2\), the first term vanishes.
+For the second term, we can use that the two-point correlator is given by its Fourier transform as
+\begin{equation}
+  D_0^2(x,y) = \loopintegral{k} \tilde{D}_0^2(k) \exp{ik\cdot(x-y)},
+\end{equation}
+to arrive at
+\begin{equation}
+  \bra{p_2} S \ket{p_1} = -i(2\pi)^4 \delta^4(p_1 - p_2) \frac{\lambda}{2} \loopintegral{k} \tilde{D}_0^2(k).
+\end{equation}
+
+We can relate this to the matrix element \(\M\), using the orthogonality relation of the momentum states \(\bra{p^\prime} \eye \ket{p} = (2\pi)^4 \delta^4(p-p^\prime)\), to find that
+\begin{align}
+  \nonumber
+  \bra{p_2} i(2\pi)^4 \delta^4(p_2-p_1) \M \ket{p_1} = \bra{p_2} S \ket{p_1} - (2\pi)^4 \delta^4(p_2-p_1) \\
+  \Rightarrow i\M = -1 - \frac{i \lambda}{2} \loopintegral{k} D_0^2(k).
+\end{align}
+
+This result can also be arrived at diagrammatically, leading us to define Feynman diagrams and Feynman rules in \emph{momentum space}.
+The procedure for drawing diagrams is the same as before, but now every external point is associated with an external momentum, and every line carries momentum with it.
+Momentum flow can be indicated with arrows for clarity.
+The resulting Feynman rules are similar to before, but now give:
+\begin{itemize}
+  \item [(I)] A factor of \(\tilde{D}_0^2(p)\) for every \emph{internal} line associated with momentum a momentum \(p\).
+  \item [(II)] A factor if \(-i\lambda\) for every internal vertex point.
+  \item [(III)] External points are associated with a factor of \(1\).
+  \item [(IV)] Momentum conservation should be enforced through every vertex point.
+  \item [(V)] Any undetermined momentum \(k\) of internal lines must be integrated over with a factor \(\loopintegral{k}\).
+  \item [(VI)] An overall numerical factor of \(S^{-1}\), where \(S\) the symmetry factor. This is the total number of ways internal lines can be exchanged without changing the diagram.
+\end{itemize}
+
+
+\subsection{Feynman Rules for Fermions}
+Later on, we will be considering fermion fields, which have spinor structure.
+I go into more detail on spinors in \cref{app:chap:weyl_grassmann}.
+When considering correlation functions of spinor fields, it is usually most convenient to work with the correlation of Lorentz-invariant contractions of the spinor field components.
+This imposes some additional structure on the terms Feynman rules.
+More generally, external fermion points will be associated with spinors, whereas propagators and vertices can be operators on spinor space.\footnote{In fact, these arguments hold for other Lorentz structures such as four-vectors or tensors of any rank.}
+
+Let us first consider the external fermions.
+Consider a Dirac spinor field \(\psi\) with a conjugate field \(\bar\psi\) with mass \(m\), the general, quantised solution for a free Dirac spinor field is~\cite{Peskin}
+\begin{equation}
+  \psi(x) = \loopintegral[3]{p} \frac{1}{\sqrt{2E_{\vec{p}}}} \sum_s \pclosed{a_s(\vec{p}) u_s(p) \exp{-i p\cdot x} + b_s^\dagger(\vec{p}) v_s(p) \exp{i p\cdot x}},
+\end{equation}
+where \(E_{\vec{p}} = m^2 + \vec{p}^2\), \(u_s(p), v_s(p)\) are particle and antiparticle spinors of spin \(s\), and \(a_s^\dagger(\vec{p}), b_s^\dagger(\vec{p})\) are creation operators creating particle and antiparticle states with momentum \(\vec{p}\) and spin \(s\) respectively.
+Normalisation is chosen such that \(a_s^\dagger(\vec{p}) \ket{0} = \sqrt{2E_{\vec{p}}} \ket{\vec{p}, s}\) and \(\braket{\vec{q}, r}{\vec{p}, s} = 2E_{\vec{p}} (2\pi)^3 \delta^3(\vec{p}-\vec{q}) \delta_{rs}\), where \(\ket{\vec{p}, s}\) denotes a fermionic particle state with momentum \(\vec{p}\) and spin \(s\).
+
+The derivation of the LSZ reduction formula will differ slightly going from scalar theory to the fermionic one.
+Particularly, we need the inner product
+\begin{align}
+  \nonumber
+  \bra{0}\psi(x)\ket{\vec{q},r} = & \loopintegral[3]{p} \frac{1}{\sqrt{2E_{\vec{p}}}} \sum_s \frac{1}{\sqrt{2E_{\vec{p}}}} \bra{\vec{p}, s}  u_s(p) \exp{-i p\cdot x} \ket{\vec{q}, s}                          \\
+  \nonumber
+  =                               & \loopintegral[3]{p} \frac{1}{\sqrt{2E_{\vec{p}}}} \sum_s \frac{1}{\sqrt{2E_{\vec{p}}}} 2E_{\vec{p}} (2\pi)^3 \delta^3(\vec{p}-\vec{q}) \delta_{rs} u_s(p) \exp{-i p\cdot x} \\
+  =                               & u_r(q) \exp{-i q\cdot x},
+\end{align}
+where I have used that \(q^2 = p^2 = m^2\) such that when \(\vec{q} = \vec{p}\) we have \(q^0 = p^0\).
+This differs from the scalar theory where \(\bra{0} \phi(x) \ket{\vec{q}} = \exp{-i q\cdot x}\).
+In the end, the effect this has is that external fermion points of Feynman diagrams will be associated with the corresponding spinors, instead of the trivial factor of \(1\) for the scalar theory.
+\medskip
+
+For a Lorentz-invariant theory, the Lagrangian will only contain Lorentz invariant contractions of the spinors, all of which can be decomposed into Dirac \emph{bilinears} on the form
+\begin{equation}
+  \bar\psi \Gamma\^r \psi,
+\end{equation}
+where \(\Gamma^r\) form a basis for operators on spinor space.
+One realisation of such a basis is \(\Gamma\^r = \cclosed{\eye, \gamma\^\mu, \sigma\^{\mu\nu}, \gamma\^\mu \gamma\^5, \gamma\^5}\), where \(\sigma\^{\mu\nu} = \frac{i}{2} \bclosed{\gamma\^\mu, \gamma\^\nu}\) and we understand \(\nu < \mu\).
+Feynman rules for propagators and vertices will generally contain Lorentz invariant linear combinations of such operators.
+
+With the additional spinor structure in the diagrams, it is important that the spinors and operators on spinor space are ordered correctly, as to produce the intended contractions.
+This is usually done by defining a \emph{fermion flow} in the diagrams, usually denoted by an arrow on the fermion lines.
+The procedure goes like this:
+Starting at the end of a fermion flow, insert spinors associated with external lines and spinor operators associated with internal lines and vertices until you get to the start of the fermion flow.
+Repeat this for all separated fermion flows in the diagram.
+
+Another point of subtelty is that fermionic spinor fields are anticommuting.
+This causes the fermionic correlation functions become antisymmetric under interchange of the fermions, e.g.\ \(D_\psi^2(1, 2) = -D_\psi^2(2, 1)\).
+There are two important consequences of this:
+Firstly, closed fermion loops get an overall factor of \(-1\).
+Secondly, different diagrams get a \emph{relative sign of interfering Feynman diagrams} (RSIF).
+By keeping the order the external spinors consistent between diagrams, a different amount of permutations might happen.
+The overall minus sign of the amplitude will be amigious, depending on how you choose to order the spinors, but relative signs between diagrams that are added together will change.
+It can be resolved by looking at the order in which external spinors come in the amplitude, giving an additional minus sign to spinor orders that are an odd permutation as compared to some arbitrary reference permutation.
+\medskip
+
+Summarised, the additional Feynman rules of fermions are
+\begin{itemize}
+  \item [(I)] External spinors and vertex factors are inserted starting at the end of every fermion flow, moving backwards. Incoming (outgoing) fermion particles of momentum \(p\) and spin \(s\) are associated with a factor \(u_s(p)\) (\(\bar{u}_s(p)\)). Incoming (outgoing) fermion \emph{anti}-particles of momentum \(p\) and spin \(s\) are associated with a factor \(\bar{v}_s(p)\) (\(v_s(p)\)).
+  \item [(II)] A factor of \(-1\) is associated with every closed fermion loop.
+  \item [(III)] A RSIF is assigned to any diagram by evaluating the parity of the order in which spinors arise as compared to some freely chosen reference order. The reference order must be kept consistent throughout all diagrams.
+\end{itemize}
+\medskip
+
+Lastly, I will note a point of complexity when dealing with Majorana fermions, i.e.\ fermions that are their own anti-particles.
+Fermion flows as we have defined them can lead to amiguities when dealing such fermions.
+This is because the fermion flows can be defined to go both ways, as the same operators are used to create both particle and anti-particle spinors \(u_s(p)/v_s(p)\), creating amiguity in the RSIF of specific diagrams.
+To alleviate this, I will follow a prescription due to Denner et al.~\cite{Denner:1992vza}.
+Arrows on lines will be used \emph{particle number flow}, used both for Dirac fermions and particle number conserving scalar fields.
+Fermion flows, however, will be denoted with an additional arrow along fermion lines.
+These flows can be defined arbirtarily, but the Feynman rules will be amended by whether the flow goes with/against the particle number flow, and into/out of vertices.
+By using the approriate, amended Feynman rules proposed in~\cite{Denner:1992vza}, the fermion flows can be defined any way we would like, and the RSIF due to the parity of the spinor permutation can be inserted naively.
+The amended Feynman rules make sure that the RSIF will be correct, even though fermion flows are not defined consistently between the diagrams.
+In fermion lines with only Majorana particles, Feynman rules are the same regardless of fermion flow, however, for Dirac fermions, the following amendments are made:
+\begin{itemize}
+  \item [(I)] Momentum space propagators \(\tilde{D}_0^2(p)\) for a fermion propagator is replaced by \(\tilde{D}_0^2(-p)\) if the particle number flow goes against the fermion flow. Otherwise, the ordinary propagator is used.
+  \item [(II)] For vertex rules including Dirac fermions, the spinor operator \(\Gamma\) associated with the vertex must be replace by \(C\Gamma^T C^{-1}\) if the fermion flow is defined contrary to the particle number flow. Here \(C\) is the charge conjugation matrix, which I detail in \cref{app:chap:weyl_grassmann}.
+\end{itemize}
+The charge conjugation matrices are defined such that their effect on the basis operators on spinor space is
+\begin{equation}
+  C \Gamma_r^T C^{-1} = \eta_r \Gamma_r, \qquad \eta_r = \begin{cases}
+    1  & \text{for }\eye, \gamma\^5, \gamma\_\mu \gamma\^5 \\
+    -1 & \text{for }\gamma\_\mu, \sigma\_{\mu\nu}
+  \end{cases}.
+\end{equation}
+
+I exemplify this use of arrows indicating particle number flow and fermion flow in \cref{qft:fig:feynman_flow}.
+
+\begin{figure}[ht!]
+  \centering
+  \inputtikz{fermion_flow_example}
+  \caption{Example of the arrow usage that will be used in this thesis.
+    There is an incoming Dirac fermion \(\psi\) with a particle number flow indicated with the arrow on its line.
+    Likewise, a complex scalar \(\phi\) has an arrow on its line indicating particle number flow.
+    A Majorana fermion \(\chi\) has no such particle number flow indication.
+    The arrow above the vertex indicates the defined fermion flow for this diagram.}
+  \label{qft:fig:feynman_flow}
+\end{figure}
 
 
 
@@ -90,13 +321,14 @@ categorised into \emph{ultraviolet} (UV) divergences and \emph{infrared} (IR)
 divergences. They are so named after which region of momentum space they
 originate from --- high momentum for UV and low momentum for IR\@. The two types
 of divergences are dealt with entirely differently, and here I will lay out how
-to deal with UV divergences through \emph{renormalisation}. \medskip
+to deal with UV divergences through \emph{renormalisation}.
+\medskip
 
-Consider a loop like the one in \cref{qft:fig:example_loop}: If we consider a
-massless particle in the loop, the loop integral will take the form
+Consider a loop like the one in \cref{qft:fig:example_loop}:
+If we consider a massless particle in the loop, and massless external particles \(p^2 = 0\), the loop integral will take the form\footnote{The first equality here is in fact somewhat subtle. One can see it by introducing Feynman parametrisation like in \cref{app:sec:feynman_parametrisation} and shifting the integration variable.}
 \begin{equation}
   \label{qft:eq:example_loop}
-  \loopintegral[4]{q} \frac{1}{\pclosed{q^2 + i\epsilon}^2} =
+  \loopintegral[4]{q} \frac{1}{(q^2+i\epsilon)((q-p)^2+i\epsilon)} = \loopintegral[4]{q} \frac{1}{\pclosed{q^2 + i\epsilon}^2} =
   \frac{i}{(2\pi)^4} \integral{\Omega_4} \integral[_0^\infty]{q_E}
   \frac{1}{q_E},
 \end{equation}
@@ -303,11 +535,6 @@ Expanding \(Z_{L/R} = 1 + \delta_{L/R}\) and writing the \(\Sigma(\slashed{p}) =
 
 
 
-\subsection{Renormalised Parton Distribution Functions}
-
-
-
-
 \section{Yang-Mills Theories}
 \label{qft:sec:yang-mills}
 
@@ -421,11 +648,6 @@ This results in a kinetic term for the \(\mathcal{A}_\mu\)-field
 \end{equation}
 where \(T(R)\) is the Dynkin index of the representation \(R\) of the group defined by the relation \(\tr\{T^a T^b\} = T(R) \delta^{ab}\) when \(T^a\) are the generators of the group in that representation.
 
-
-
-
-\section{The Standard Model}
-\phpar[Introduce the \emph{relevant} fields of the Standard Model and its construction. Maybe mention the Higgs mechanism?]
 
 
 
@@ -544,5 +766,10 @@ The possible structures up to four-point loops are as following:
 \end{subequations}
 where all coefficients must be completely symmetric in \(i,j,k,l\).
 
+
+\ifSubfilesClassLoaded{%
+  \bibliography{references}{}
+  \bibliographystyle{style/JHEP}
+}{}
 
 \end{document}

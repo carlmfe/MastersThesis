@@ -1,0 +1,7 @@
+\begin{feynman}
+  \vertex[empty dot, label=left:\(x_1\)] (x1) {\contour{black}{}};
+  \vertex[empty dot, right=of x1, label=right:\(x_2\)] (x2) {\contour{black}{}};
+  \diagram*{
+    (x1) -- (x2)
+  };
+\end{feynman}

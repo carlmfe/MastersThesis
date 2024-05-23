@@ -5,6 +5,12 @@
 \label{app:chap:weyl_grassmann}
 
 
+\chapter{Loop Calculations}
+\section{Feynman Parametrisation}
+\label{app:sec:feynman_parametrisation}
+
+\section{Wick Rotation}
+
 \chapter{Takagi Factorisation Algorithm}
 \label{app:chap:takagi}
 % \section{Schur decomposition and singular-value decomposition}
@@ -67,8 +73,9 @@ must also be symmetric, and thus must have the form
 for a symmetric \(A_2 \in M_{n-1}(\mathbb{C})\).
 
 
-% \bibliography{references}{}
-% \bibliographystyle{style/JHEP}
-
+\ifSubfilesClassLoaded{%
+  \bibliography{references}{}
+  \bibliographystyle{style/JHEP}
+}{}
 
 \end{document}
