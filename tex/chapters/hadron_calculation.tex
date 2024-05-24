@@ -8,7 +8,7 @@
   \item Describe parton model.
 \end{TODO}
 
-\section{The Parton Model and pdf's}
+\section{The Parton Model and PDFs}
 So far, we have worked with the parton level cross-section, figuring out the contribution of the individual constituents of a proton to the cross-section for our final state.
 Now these do not individually result in any observable, as the partons are confined to the proton, and can therefore not be singled out in an experiment.
 To get an observable quantity comparable to experiment, we must sew the individual contributions together.
@@ -18,7 +18,7 @@ The low-energy regime dictates that partons each carry a fraction of the total m
 
 \subsection{Hadronic kinematics}
 Consider the scattering of two protons with momenta \(P_1^\mu\) and \(P_2^\mu\) respectively into a set of final state particles \(\chi, \chi^\prime, X\) where \(X\) is some collection of unlabelled particles.
-\cref{had:tab:had_kinematic_variables} lists the definitions of kinematic variables at the hadronic level and their relation of the partonic kinematic variables defined in \cref{chap:part:parton_calculation}.
+\cref{had:tab:had_kinematic_variables} lists the definitions of kinematic variables at the hadronic level and their relation of the partonic kinematic variables defined in \cref{pc:sec:NLO}.
 I define the centre-of-mass energy \(S \equiv (P_1 + P_2)^2\).
 The cross-section for a given process is then given in terms of the cross-section of two partons \(i, j\) with momenta \(k_i = x_1 P_1\) and \(k_j = x_2 P_2\) where \(x_1, x_2 \in [0, 1]\) are the respective fractions of the proton momenta the partons carry.
 The \emph{hadronic cross-section} differential in the squared mass \(Q^2\) of two final state particles \(\chi\) and \(\chi^\prime\) is then given by
@@ -48,14 +48,14 @@ The Heaviside function \(\theta\pclosed{\hat{s}-Q^2} = \theta\pclosed{x_1 x_2 - 
 
 
 
-\subsection{Integration over pdf's}
+\subsection{Integration over PDFs}
 Practically, the two-dimensional integration over the parton momentum fractions \(x_1, x_2\) can be alleviated by the fact that partonic cross-section contains terms proportional to either \(\delta(1-z)\) or plus distributions \(f_+(z)\) as we have seen in \cref{chap:part:parton_calculation}.
 Let us consider these types of integrals in some generality.
 Let \(g(x_1, x_2)\) be some function of \(x_1, x_2\), consider the integral
 \begin{equation}
   \int_{\tau/x_1}^1 \! \frac{\mathrm{d}x_2}{x_2} g(x_1, x_2) \delta(1-z).
 \end{equation}
-Switching variables to \(z = \frac{\tau}{x_1 x_2}\) and keeping \(x_1\) constant yields
+Switching variables to \(z = \frac{\tau}{x_1 x_2}\) while keeping \(x_1\) constant yields
 \begin{align}
   \int_{\tau/x_1}^1 \! \frac{\mathrm{d}z}{z}  g(x_1, \frac{\tau}{x_1 z}) \delta(1-z) = g(x_1, \frac{\tau}{x_1}).
 \end{align}
@@ -100,6 +100,101 @@ we can factor the \(x_1, x_2\) integrals into
   \d[Q^2]{\sigma}(Q^2) = \int_{\tau}^1 \! \frac{\mathrm{d}x_1}{x_1} f_i(x_1) \Bigg\{ f_j(\frac{\tau}{x_1})w^\text{soft}_{ij}(1) + \sum_f w^{f_+}_{ij}(1) F(x_1) \\
   + \int_{\tau/x_1}^1\!\frac{\mathrm{d}x_2}{x_2}\, \cclosed{f_j(x_2) w^\text{rad}_{ij}(\frac{\tau}{x_1 x_2}) +  \sum_f \pclosed{f_j(x_2) w^{f_+}_{ij}(\frac{\tau}{x_1 x_2}) - f_j(\frac{\tau}{x_1}) \frac{\tau}{x_1 x_2} w^{f_+}_{ij}(1)} f(\frac{\tau}{x_1 x_2})} \bigg\}
 \end{align}
+
+
+\subsection{Renormalised PDFs}
+As mentioned earlier in \cref{pc:subsec:real_emission}, there remain collinear divergences in the partonic cross-sections we have calculated thus far.
+These can be absorbed into the definition of the PDFs through a renormalisation procedure akin to that which is done when renormalising the fields and couplings.
+Renormalisation conditions can be imposed, defining the parton distributions in such a way as to produce a finite observable cross-section at a reference energy \(\mu_F\) called the factorisation scale.
+The trade-off is that the PDFs inherit scale-dependence as observables are computed at other energy levels.
+This scale dependence is encapsulated in the DGLAP equations, due to Docshitzer, Gribov, Liapov, Altarelli and Parisi~\cite{DGLAP-D,DGLAP-GL,Altarelli:1977zs}.
+Abbreviating the factorisation scale \(\mu_F \equiv \mu\), the DGLAP equations for the renormalised distribution PDFs of quarks/gluons \(f_{q/g}(x, \mu)\) read
+\begin{equation}
+  \label{had:eq:DGLAP}
+  \mu \d[\mu]\ \begin{pmatrix} f_q(x, \mu) \\ f_g(x, \mu) \end{pmatrix} = \frac{\alpha_s}{\pi} \sum_{q^\prime} \int_x^1 \! \frac{\mathrm{d}\xi}{\xi} \begin{bmatrix} P_{qq^\prime}(\frac{x}{\xi}) & P_{qg}(\frac{x}{\xi}) \\ P_{gq^\prime}(\frac{x}{\xi}) & P_{gg}(\frac{x}{\xi}) \end{bmatrix} \begin{pmatrix}
+    f_{q^\prime}(\xi, \mu) \\ f_g(\xi, \mu)
+  \end{pmatrix},
+\end{equation}
+where \(P_{ij}(z)\) are know as the DGLAP splitting functions, or sometimes just the splitting functions, and the sum goes over all quark flavours \(q^\prime\).
+A heuristic interpretation \(P_{ij}(\frac{x}{\xi})\) is that they function in \cref{had:eq:DGLAP} to encapsulate the probability of an incoming parton \(j\) with momentum fraction \(\xi\) to radiate of some energy, leaving parton \(i\) with momentum fraction \(x\) instead.
+To leading order, they are given by~\cite{Schwartz:2014sze}
+\begin{subequations}
+  \begin{align}
+    P_{qq}(z) = & C_F \bclosed{\frac{1+z^2}{\plusdist{1-z}} + \frac{3}{2} \delta(1-z)},                             \\
+    P_{qg}(z) = & T_F \bclosed{1 - 2z(1-z)},                                                                        \\
+    P_{gq}(z) = & C_F \bclosed{\frac{z^2 + 2(1-z)}{z}},                                                             \\
+    P_{gg}(z) = & 2C_A \bclosed{\frac{z}{\plusdist{1-z}} + \frac{1-z}{z} + z(1-z)} + \frac{\beta_0}{2} \delta(1-z),
+  \end{align}
+\end{subequations}
+where \(\beta_0 = \frac{11}{3}C_A + \frac{4}{3} T_F n_f\).
+Here, \(n_f\) is the number of light quark flavours, i.e. the quark flavours present in the hadron in question.
+\medskip
+
+Now, let us investigate concretely how the divergences are absorbed, and the scale dependence arises in the PDFs.
+The idea is that when naively calculating the partonic cross-section, divergences can appear as a consequence of defining the factorisation between the soft and hard processes as we have.
+The divergences in the hard scattering cross-section should cancel with soft effects in the hadron.
+In some sense, the partonic cross-section we have is a \emph{bare} cross-section, and so are the PDFs.
+Denoting the bare partonic cross-section for partons \(i, j\) as \(\d[Q^2]{\hat\sigma^\text{bare}_{ij}}\), we get the renormalised, finite cross-section \(\d[Q^2]{\hat\sigma^R_{ij}}\) by the rescaling
+\begin{equation}
+  \label{had:eq:renormalised_xsec}
+  \d[Q^2]{\hat\sigma^\text{bare}_{ij}}(\eta) =\sum_{kl} \integral[_0^1]{z_1} \integral[_0^1]{z_2} Z_{ik}(z_1) Z_{jl}(z_2) \d[Q^2]{\hat\sigma^R_{kl}}(\frac{\eta}{z_1 z_2}),
+\end{equation}
+where \(Z_{ij}(z)\) are transition functions that hold the singluar structure of \(\d[Q^2]{\hat\sigma^\text{bare}_{ij}}\) and work akin to the renormalisation constants \(Z\) used for the fields and couplings in \cref{qft:subsec:counterterms}.
+These transition functions also rescale the PDFs through a convolution, giving the renormalised PDFs as
+\begin{equation}
+  \label{had:eq:pdf_renormalised}
+  f_i^R(x) = \sum_{j} \integral[_0^1]{\xi \mathrm{d}z} \delta(x - \xi z) f_j^\text{bare}(\xi) Z_{ji}(z) = \sum_{j}\int_x^1 \! \frac{\mathrm{d}z}{z} f_j^\text{bare}(\frac{x}{z}) Z_{ji}(z).
+\end{equation}
+The non-singular hadronic cross-section is then given by the finite PDFs and cross-section as
+\begin{equation}
+  \label{had:eq:dsigma_dQ2_renormalised}
+  \d[Q^2]{\sigma}(\tau) = \sum_ {ij} \integral[_\tau^1]{x_1}\!\integral[_{\tau/x_1}^1]{x_2} f_i^R(x_1) f_j^R(x_2) \d[Q^2]{\hat\sigma^R_{ij}}(\frac{\tau}{x_1 x_2}).
+\end{equation}
+The relation to the bare quantites can be seen by inserting the renormalised PDF definition \cref{had:eq:pdf_renormalised} into \cref{had:eq:dsigma_dQ2_renormalised}:
+\begin{align}
+  \nonumber
+  \d[Q^2]{\sigma}(\tau) = & \sum_ {ij} \integral[_\tau^1]{x_1}\!\integral[_{\tau/x_1}^1]{x_2} \sum_{kl} \integral[_0^1]{\xi_1\mathrm{d}z_1} \delta(x_1 - \xi_1 z_1) Z_{ki}(z_1) f_k^\text{bare}(\xi_1)          \\
+  \nonumber
+                          & \times \integral[_0^1]{\xi_2\mathrm{d}z_2} \delta(x_2 - \xi_2 z_2) Z_{lj}(z_2) f_l^\text{bare}(\xi_2) \d[Q^2]{\hat\sigma^R_{ij}}(\frac{\tau}{x_1 x_2})                              \\
+  \nonumber
+  =                       & \sum_{ijkl} \integral[_0^1]{\xi_1 \mathrm{d}\xi_2 \mathrm{d}z_1 \mathrm{d}z_2} Z_{ki}(z_1) Z_{lj}(z_2) f_k^\text{bare}(\xi_1) f_l^\text{bare}(\xi_2)                                \\
+  \nonumber
+                          & \times \d[Q^2]{\hat\sigma_{ij}^R}(\frac{\tau}{z_1 z_2 \xi_1 \xi_2}) \theta(\xi_2 z_2 - \frac{\tau}{\xi_1 z_1}) \theta(\xi_1 z_1 - \tau)                                             \\
+  \nonumber
+  =                       & \sum_{kl} \integral[_\tau^1]{\xi_1} \integral[_{\tau/\xi_1}^1]{\xi_2} f_k^\text{bare}(\xi_1) f_l^\text{bare}(\xi_2)                                                                 \\
+  \nonumber
+                          & \times \integral[_{\tau/(\xi_1 \xi_2)}]{z_1} \integral[_{\tau/(z_1 \xi_1 \xi_2)}]{z_2} \sum_{ij} Z_{ki}(z_1) Z_{lj}(z_2) \d[Q^2]{\hat\sigma_{kl}^R}(z_1z_2 \xi_1\xi_2 S)            \\
+  =                       & \sum_{kl} \integral[_\tau^1]{\xi_1} \integral[_{\tau/\xi_1}^1]{\xi_2} f_k^\text{bare}(\xi_1) f_l^\text{bare}(\xi_2) \d[Q^2]{\hat\sigma^\text{bare}_{kl}}(\frac{\tau}{\xi_1 \xi_2}).
+\end{align}
+This shows that if we take the partonic cross-section we have worked with so far to be the bare cross-section integrated over bare PDFs in \cref{had:eq:dsigma_dQ2}, then the restatement \cref{had:eq:dsigma_dQ2_renormalised} with a finite cross-section and finite PDFs is equivalent.
+\medskip
+
+What remains is to find the insertion functions \(Z_{ij}\) to get the renormalised, finite quantities.
+Let us assume that we can expand the bare and renormalised cross-sections and the insertion functions as a power series in \(\frac{\alpha_s}{2\pi}\):
+\begin{subequations}
+  \begin{eqnarray}
+    \d[Q^2]{\hat\sigma^\text{bare}_{ij}}(z) = & \sigma^\text{LO}(z) + \frac{\alpha_s}{2\pi} \sigma^\text{NLO}(z) + \ldots, \\
+    \d[Q^2]{\hat\sigma^R_{ij}}(z) = & \bar\sigma^\text{LO}(z) + \frac{\alpha_s}{2\pi} \bar\sigma^\text{NLO}(z) + \ldots, \\
+    Z_{ij}(z) = & \delta_{ij} \delta(1-z) + \frac{\alpha_s}{2\pi} Z_{ij}^\text{NLO}(z) + \ldots
+  \end{eqnarray}
+\end{subequations}
+Expanding both sides of \cref{had:eq:renormalised_xsec} we have to NLO
+\begin{align}
+  \nonumber
+  \sigma^\text{LO}_{ij}(\eta)+ \frac{\alpha}{2\pi} \sigma^\text{NLO}_{ij}(\eta) = & \bar\sigma^\text{LO}_{ij}(\eta) + \frac{\alpha}{2\pi}                                                                                                                      \Bigl\{ \bar\sigma^\text{NLO}_{ij}(\eta) + \sum_{l}\integral[_0^1]{z_2} Z_{jl}^\text{NLO}(z_2) \bar\sigma^\text{LO}_{il}(z_2\eta) \\
+                                                                                  & + \sum_{k}\integral[_0^1]{z_1} Z_{ik}^\text{NLO}(z_1) \bar\sigma^\text{LO}_{kj}(z_1\eta) \Bigr\}.
+\end{align}
+As anticipated, we see that the renormalised partonic LO cross-section is the same as the bare one.
+However, the renormalised NLO cross-section is given by
+\begin{equation}
+  \bar\sigma^\text{NLO}_{ij}(\eta) = \sigma^\text{NLO}_{ij}(\eta) - \sum_{k} \integral[_0^1]{z} \cclosed{Z^\text{NLO}_{jk}(z) \bar\sigma^\text{LO}_{ik}(\frac{\eta}{z}) + Z^\text{NLO}_{ik}(z) \bar\sigma^\text{LO}_{kj}(\frac{\eta}{z})}
+\end{equation}
+
+
+\section{Total Hadronic Cross-Section Result}
+We can now put together the results from the previous section to get the full inclusive hadronic cross-section for neutralino pair production to NLO\@.
+
+
 
 \ifSubfilesClassLoaded{%
   \bibliography{references}{}

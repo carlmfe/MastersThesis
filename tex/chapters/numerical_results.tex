@@ -2,8 +2,20 @@
 
 \begin{document}
 \chapter{Numerical Results}
+In this chapter, I will go give an overview of the numerical implementation of the cross-sections from the earlier chapters.
+This is an entirely non-trivial process, and I use multiple external packages to do the calculations.
+Particularly, the numerical integration over the PDFs requires a good deal of finesse.
+The algorithm used for the integration is the VEGAS algorithm~\cite{Vegas1,Vegas2}, implemented in \verb|C++| in the GNU Scientific Library (GSL)~\cite{GSL}.
+The values for the PDFs at a given energy, along with values for \(\alpha_s\), are taken from the LHAPDF package~\cite{LHAPDF}.
+MSSM and CMSSM particle spectra are generated in SLHA file format using FlexibleSUSY~\cite{FlexibleSUSY1,FlexibleSUSY2}.
 
+\section{Setup and Execution}
 
+\section{Comparison}
+
+\section{Exploring CP-Violation}
+
+\section{Exploring Other Parameters}
 
 \ifSubfilesClassLoaded{%
   \bibliography{references}{}
