@@ -1,0 +1,11 @@
+\begin{feynman}
+  \vertex[] (a);
+  \vertex[right = of a] (v);
+  \vertex[above right = of v] (b);
+  \vertex[below right = of v] (c);
+  \diagram*{
+  (a) -- [scalar] (v),
+  (b) -- [scalar] (v)
+  -- [scalar] (c)
+  };
+\end{feynman}

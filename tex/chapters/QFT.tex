@@ -2,6 +2,14 @@
 
 \begin{document}
 \chapter{Quantum Field Theory}
+In this chapter, I will go through the basics of quantum field theory (QFT).
+I begin by formulating the perturbative approach to calculating correlation functions in interacting theories, and relate them to scattering cross-sections through the \(S\)-matrix.
+In doing so, I introduce Feynman diagrams and Feynman rules, and go into some detail on dealing with fermions.
+The Feynman rules will be a defining quality of the supersymmetric QFT model that I will go into in the next chapter.
+
+In the next section, I go through divergences in perturbative QFT, and outline the procedure of renormalisation to make the a theory finite.
+I then go through Yang-Mills thoery as a means for model building, which will be built on further in the next chapter.
+Lastly, I briefly go through Passarino-Veltman reduction for writing out general loop integrals that will crop up in the calculations in \cref{chap:part:parton_calculation}.
 
 
 
@@ -10,8 +18,7 @@
 \section{Perturbative Quantum Field Theory}
 In this thesis, I will use the Lagrangian framework to formulate QFT\@.
 Here I will introduce the basics of how to formulate a QFT in such a way using the path integral formalism.
-This leads to a perturbative formulation of scattering and computation of correlation functions, which is the basis for the calculations that will be made. \medskip
-
+This leads to a perturbative formulation of scattering and computation of correlation functions, which is the basis for the calculations that will be made later on.
 
 
 \subsection{The Path Integral}
@@ -69,12 +76,13 @@ To do this, let us consider a concrete theory, given by the Lagrangian
   \label{qft:eq:phi4}
   \L = \underbrace{\frac{1}{2}(\partial\^\mu \phi)(\partial\_\mu\phi) - \frac{1}{2}m^2 \phi^2}_{\L_0} - \lambda \underbrace{\phi^4}_{\L_\text{int}}.
 \end{equation}
-Furthermore, I will use the Schwinger-Dyson equations~\cite{Schwartz:2014sze} for the free-theory, which tell us that
+Furthermore, I will use the Schwinger-Dyson equations~\cite{Schwartz:2014sze} for the non-interacting theory, which relates different \(n\)-points correlators through
 \begin{equation}
   \label{qft:eq:Schwinger-Dyson_n-point}
   (\dA_x + m^2) D_0^{n+1}(x, 1, \ldots, n) = -i\sum_{i} \delta^4(x-x_i) D_0^{n-1}(1, \ldots, i-1, i+1, \ldots, n),
 \end{equation}
-from which it follows that
+where \(\dA = \partial\^\mu \partial\_\mu\) is the d'Alembertian operator.
+It follows that
 \begin{equation}
   \label{qft:eq:Schwinger-Dyson_2-point}
   (\dA_x + m^2) D^2_0(x,y) = -i \delta^4(x-y).
@@ -86,7 +94,7 @@ By \cref{qft:eq:n-point_interacting_correlator}, this is given to first order in
   \label{qft:eq:phi4_2-point_correlator}
   D_{\text{int}}^2(1,2) = D_0^2(1,2) - i\lambda \integral{^4y} \pclosed{D_0^6(1,2,y,y,y,y) - D_0^2(1,2)D_0^4(y,y,y,y)}.
 \end{equation}
-Using a cute trick to insert a Dirac delta-function, we can use \cref{qft:eq:Schwinger-Dyson_2-point} to rewrite to six-point correlator
+We can rewrite the six-point correlator to employ \cref{qft:eq:Schwinger-Dyson_2-point} and get
 \begin{align}
   \nonumber
   D_0^6(1,2,y,y,y,y) = & \integral{^4x} \delta^4(x-x_1) D_0^6(x,2,y,y,y,y)            \\
@@ -94,7 +102,7 @@ Using a cute trick to insert a Dirac delta-function, we can use \cref{qft:eq:Sch
   =                    & i\integral{^4x} (\dA_x + m^2) D^2_0(x,1) D_0^6(x,2,y,y,y,y)  \\
   =                    & i\integral{^4x} D^2_0(x,1) (\dA_x + m^2) D_0^6(x,2,y,y,y,y),
 \end{align}
-where \(\dA = \partial\^\mu \partial\_\mu\) is the d'Alembertian operator and in the last equality I have used partial integration twice.
+where in the last equality I have used partial integration twice.
 We can then use \cref{qft:eq:Schwinger-Dyson_n-point} to get
 \begin{align}
   \nonumber
@@ -136,7 +144,7 @@ This practice will not be kept for the remainder of the thesis.
 
 In summary, the following rules relate a Feynman diagram to the two-point correlators of the free theory:
 \begin{itemize}
-  \item [(I)] A factor of \(D_0^2(x, y)\) for every edge connecting two points \(x, y\).
+  \item [(I)] A factor of \(D_0^2(x, y)\) for every edge connecting two points \(x, y\). This factor is referred to as the \emph{propagator}
   \item [(II)] A factor of \(-i\lambda \integral{^4x}\) for every internal vertex point \(x\).
   \item [(III)] An overall numerical factor of \(S^{-1}\), where \(S\) is the symmetry factor. This is the total number of ways internal lines can be exchanged without changing the diagram.
 \end{itemize}
@@ -168,6 +176,7 @@ Given initial fields with momenta \(p_1, \ldots, p_k\) and final fields with mom
 
 Usually, we encapsulate the information of the \(S\)-matrix in \emph{matrix elements} \(\M\) by writing it on the form
 \begin{equation}
+  \label{qft:eq:S-matrix_expansion}
   S = \eye + i(2\pi)^4 \delta^4(\sum_{i=1}^k p_i - \sum_{i=k+1}^n p_i) \M,
 \end{equation}
 essentially dropping the trivial overlap between the in- and out-states and factoring out momentum conservation.
@@ -178,7 +187,7 @@ Let us now put this to use our scalar toy model, computing the transition for a 
   \nonumber
   \bra{p_2} S \ket{p_1} = & \pclosed{i\integral{^4x_1} \exp{-ip_1 \cdot x_1} (\dA_{x_1} + m^2)} \pclosed{ i \integral{^4x_2} \exp{+ip_2 \cdot x_2} (\dA_{x_2} + m^2)} \times D_{\text{int}}^2(1, 2) \\
   \nonumber
-  \simeq                  & -\integral{^4x_1} \exp{-ip_1 \cdot x_1} (\dA_{x_1} + m^2) \integral{^4x_2} \exp{+ip_2 \cdot x_2} (\dA_{x_2} + m^2)                                                      \\
+  =                       & -\integral{^4x_1} \exp{-ip_1 \cdot x_1} (\dA_{x_1} + m^2) \integral{^4x_2} \exp{+ip_2 \cdot x_2} (\dA_{x_2} + m^2)                                                      \\
   \nonumber
                           & \times \cclosed{D_0^2(1,2) - \frac{i\lambda}{2} \integral{^4y} D_0^2(1,y)D_0^2(y,y) D_0^2(y,2)}                                                                         \\
   \nonumber
@@ -196,11 +205,11 @@ to arrive at
   \bra{p_2} S \ket{p_1} = -i(2\pi)^4 \delta^4(p_1 - p_2) \frac{\lambda}{2} \loopintegral{k} \tilde{D}_0^2(k).
 \end{equation}
 
-We can relate this to the matrix element \(\M\), using the orthogonality relation of the momentum states \(\bra{p^\prime} \eye \ket{p} = (2\pi)^4 \delta^4(p-p^\prime)\), to find that
+We can relate this to the matrix element \(\M\), by assuming that the asymptotic in/out-states do not overlap, to find through the definition \cref{qft:eq:S-matrix_expansion}
 \begin{align}
   \nonumber
-  \bra{p_2} i(2\pi)^4 \delta^4(p_2-p_1) \M \ket{p_1} = \bra{p_2} S \ket{p_1} - (2\pi)^4 \delta^4(p_2-p_1) \\
-  \Rightarrow i\M = -1 - \frac{i \lambda}{2} \loopintegral{k} D_0^2(k).
+  \bra{p_2} i(2\pi)^4 \delta^4(p_2-p_1) \M \ket{p_1} = -i(2\pi)^4 \delta^4(p_1 - p_2) \frac{\lambda}{2} \loopintegral{k} \tilde{D}_0^2(k) \\
+  \Rightarrow i\M = - \frac{i \lambda}{2} \loopintegral{k} \tilde{D}_0^2(k).
 \end{align}
 
 This result can also be arrived at diagrammatically, leading us to define Feynman diagrams and Feynman rules in \emph{momentum space}.
@@ -209,7 +218,7 @@ Momentum flow can be indicated with arrows for clarity.
 The resulting Feynman rules are similar to before, but now give:
 \begin{itemize}
   \item [(I)] A factor of \(\tilde{D}_0^2(p)\) for every \emph{internal} line associated with a momentum \(p\).
-  \item [(II)] A factor if \(-i\lambda\) for every internal vertex point.
+  \item [(II)] A factor of \(-i\lambda\) for every internal vertex point.
   \item [(III)] External points are associated with a factor of \(1\).
   \item [(IV)] Momentum conservation should be enforced through every vertex point.
   \item [(V)] Any undetermined momentum \(k\) of internal lines must be integrated over with a factor \(\loopintegral{k}\).
@@ -318,12 +327,13 @@ I exemplify this use of arrows indicating particle number flow and fermion flow 
 
 \section{Renormalised Quantum Field Theory}
 \label{qft:sec:renormalisation}
-\phpar[Talk about loop integrals, divergences, regularisation and
-  renormalisation.]
+Now, we have seen how correlation functions in interacting theories can be calculated as perturbations to the free, non-interacting theory.
+In this section, I will go more into detail on the actual computation of the amplitudes, particularly touching on infinities that arise when computing higher order corrections naïvely.
+This leads to the procedure of regularisation to classify the infinites, and renormalisation to get rid of them.
+These methods will be necessary in the computation of higher order corrections in later chapters.
 
-\todo{Mention Wick rotation and evaluation of loop integrals?}
 
-
+\subsection{Loop Integrals and Divergences}
 Divergences appear in perturbative correlation functions in QFT, and can be
 categorised into \emph{ultraviolet} (UV) divergences and \emph{infrared} (IR)
 divergences. They are so named after which region of momentum space they
@@ -333,20 +343,36 @@ to deal with UV divergences through \emph{renormalisation}.
 \medskip
 
 Consider a loop like the one in \cref{qft:fig:example_loop}:
-If we consider a massless particle in the loop, and massless external particles \(p^2 = 0\), the loop integral will take the form\footnote{The first equality here is in fact somewhat subtle. One can see it by introducing Feynman parametrisation like in \cref{app:sec:feynman_parametrisation} and shifting the integration variable.}
+The propagator of a free scalar theory is given by~\cite{Schwartz:2014sze}
+\begin{equation}
+  \tilde{D}(p) = \frac{i}{p^2 - m^2 + i \epsilon},
+\end{equation}
+where the \(i\epsilon\) in gives a prescription for dealing with the poles that is taken to 0 in the end.
+The prescription used here is called the Feynman prescription, and it ensures that the two-point correlator \(D(x,y) = \loopintegral{p}\tilde{D}(p) \exp{-ip\cdot(x-y)}\) is a time-ordered correlator of \(x\) and \(y\).
+If we consider a massless particle in the loop, and massless external particles \(p^2 = 0\), the amplitude \cref{qft:fig:example_loop} will therefore take the form\footnote{The first equality here is in fact somewhat subtle. One can see it by introducing Feynman parametrisation like in \cref{app:sec:feynman_parametrisation} and shifting the integration variable.}
 \begin{equation}
   \label{qft:eq:example_loop}
-  \loopintegral[4]{q} \frac{1}{(q^2+i\epsilon)((q-p)^2+i\epsilon)} = \loopintegral[4]{q} \frac{1}{\pclosed{q^2 + i\epsilon}^2} =
-  \frac{i}{(2\pi)^4} \integral{\Omega_4} \integral[_0^\infty]{q_E}
-  \frac{1}{q_E},
+  \loopintegral[4]{q} \frac{1}{(q^2+i\epsilon)((q-p)^2+i\epsilon)} = \loopintegral[4]{q} \frac{1}{\pclosed{q^2 + i\epsilon}^2}.
 \end{equation}
-which diverges for both low and high momenta. \comment{Mention what went into
-this integral, i.e.\ Wick rotation and \(i\epsilon\).} Had the particle been
-massive, the momentum would have a non-zero lower limit, and the IR divergence
-would disappear.
+The Lorentz signature of the momenta, making \(q^2 = q_0^2 - |\vec{q}|^2\) makes integration somewhat cumbersome, so we will use a trick called \emph{Wick rotation}~\cite{Schwartz:2014sze}.
+This entails closing the integration contour over \(q_0\) in the complex plane along the real and imaginary axes, making sure not to enclose the poles.
+\\\todo{Make a diagram showing integration contour.}\\
+By Cauchy's integral theorem, the total integral vanishes then vanishes, and the contributions going form \(+\infty\) to \(+i\infty\) and from \(-i\infty\) to \(-\infty\) vanish by Jordan's lemma.
+This means that the integral contribution from \(+i\infty\) to \(-i\infty\) must be equal but opposite of the integral along the real axis.
+Therefore, we can rather choose to integrate along the imaginary axis, substituting \(q_0 = iq_0^E\).
+This will change the signature of the inner product such that
+\begin{equation}
+  q_0^2 - |\vec{q}|^2 = q^2 = -q_E^2 = -(q_0^E)^2 - |\vec{q}^E|^2 \equiv -|\vec{q}_E|^2,
+\end{equation}
+where I have defined \(\vec{q}^E = \vec{q}\) and \(\vec{q}_E = \pclosed{q_0^E, \vec{q}^E}\).
+The result is that the loop integral \cref{qft:eq:example_loop} turns into
+\begin{equation}
+  \loopintegral[4]{q} \frac{1}{\pclosed{q^2 + i\epsilon}^2} = i\loopintegral[4]{\vec{q}_E} \frac{1}{|\vec{q}_E|^4} = \frac{i\Omega_4}{(2\pi)^4} \integral[_0^\infty]{q_E} \frac{1}{q_E},
+\end{equation}
+where after Wick rotation I took the limit of \(\epsilon \to 0\), and I changed to four-dimensional spherical coordinates in the last equality where \(\Omega_4 = 2\pi^2\) is the surface are of a unit sphere in four dimensions.
+This diverges for both low and high momenta \(q_E\).
+Had the particle been massive, the momentum would have a non-zero lower limit, and the IR divergence from the low-momentum limit would disappear.
 However, the UV divergence must be handled differently.
-
-
 
 
 
@@ -370,10 +396,9 @@ which I choose a scalar Lagrangian
   \label{qft:eq:example_lagrangian}
   \L = \frac{1}{2} \pclosed{\partial_\mu\phi}^2 - \frac{1}{2}m_\phi^2 \phi^2 - \frac{\lambda}{3!} \phi^3.
 \end{equation}
-\comment{Perhaps introduce this model earlier?} Regularising the IR divergence
-in \cref{qft:eq:example_loop} by giving our scalar a mass \(m\), and the UV
-divergence with a momentum cap \(\Lambda\), we are left with
+Regularising the IR divergence in \cref{qft:eq:example_loop} by giving our scalar a mass \(m\) to the loop particle, and the UV divergence with a momentum cap \(\Lambda\), we are left with
 \begin{align}
+  \label{qft:eq:cut-off_loop_example}
   \nonumber
   \int_{\abs{q} < \Lambda}\! \frac{\mathrm{d}^4q}{(2\pi)^4}
   \frac{1}{\pclosed{(q^2-m^2)+i\epsilon}^2} = \frac{i}{(2\pi)^4}
@@ -386,6 +411,7 @@ divergence with a momentum cap \(\Lambda\), we are left with
 where now evidently the divergences manifest as a logarithm.
 \medskip
 
+\subsubsection*{Dimensional Regularisation}
 Another popular choice of regularisation, which I will use in this thesis, is
 \emph{dimensional regularisation}. It entails analytically continuing the
 number of space-time dimension from the ordinary 4 dimensions to \(d
@@ -393,6 +419,7 @@ number of space-time dimension from the ordinary 4 dimensions to \(d
 the intuition for what we are doing, but turns out to be computationally very
 efficient. Our loop integral \cref{qft:eq:example_loop} will then turn into
 \begin{align}
+  \label{qft:eq:dimreg_loop_example}
   \nonumber
   \loopintegral[d]{q} \frac{1}{\pclosed{q^2+i\epsilon}^2} = \frac{i
     2\pi^{\sfrac{d}{2}}}{(2\pi)^d} \frac{1}{\Gamma(\sfrac{d}{2})}
@@ -409,7 +436,21 @@ Here a trick was performed, as the low-energy part requires \(\epsilon < 0\) to 
 The two different divergences thus require different deformations of the theory to be finite, and should be handled separately, hence the subscripts.
 It is a general result that divergences coming from the low-energy parts of momentum integrals require \(\epsilon_{\text{IR}} < 0\), whereas high-energy divergences require \(\epsilon_{\text{UV}} > 0\), and this can be used to identify the source of divergences when using dimensional regularisation.
 In the end divergences when using dimensional regularisation come out as \(\frac{1}{\epsilon^p}\)-terms, for some power \(p\).
+\medskip
 
+To achieve dimensional regularisation, we must analytically continue the definition of our theory in a neighbourhood around \(d = 4\).
+The action will change accordingly to
+\begin{equation}
+  S = \integral{^d x} \L,
+\end{equation}
+and so the mass dimension of the Lagrangian in the deformed theory must therefore be \(\bclosed{\L} = \mu^d\), for some mass scale \(\mu\).
+From the kinetic term in our toy model \cref{qft:eq:example_lagrangian}, we can see we must require the field to have mass dimension \(\bclosed{\phi} = \mu^{\sfrac{(d-2)}{2}}\), which will imply mass dimension for the coupling \(\bclosed{\lambda} = \mu^{3-\sfrac{d}{2}}\).
+Thus, the coupling has changed from mass dimension \(\mu^1 \to \mu^{3-\sfrac{d}{2}}\) -- insisting on keeping the mass dimension of the coupling constant as the theory is deformed will lead to a parametrisation of the deformation by changing the coupling to
+\begin{equation}
+  \lambda \to \lambda \mu^{\sfrac{(4-d)}{2}}.
+\end{equation}
+The arbitrary mass scale \(\mu\) has been incorporating into the theory, and although it vanishes in the limit \(d \to 4\) in the above expression, dependence on it will not vanish completely when it is multiplied by poles in \(\epsilon\) such as those in \cref{qft:eq:dimreg_loop_example}.
+It has been argued that the scale \(\mu\) heuristically mimics the cut-off scale \(\Lambda\) introduced in \cref{qft:eq:cut-off_loop_example}~\cite{Collins:2011zzd}.\footnote{Generally, it will carry some proportionality to \(\Lambda\), however, in certain \emph{renormalisation schemes} we will discuss shortly (namely \MSbar{}), the proportionality is unity.}
 
 
 
@@ -418,7 +459,7 @@ In the end divergences when using dimensional regularisation come out as \(\frac
 \subsection{Counterterm Renormalisation}
 \label{qft:subsec:counterterms}
 To take care of UV divergences, we note that there is freedom in how we define the contents of our Lagrangian.
-We should be able to rescale our fields \(\phi_0 = \sqrt{Z_\phi} \phi\), and rescale our couplings like \(m_{\phi,0}^2 = Z_m m_\phi^2\) and \(\lambda_0 = Z_\lambda \lambda\).
+We should be able to rescale our fields \(\phi_0 = \sqrt{Z_\phi} \phi\), and rescale our couplings by \(m_{\phi,0}^2 = Z_m m_\phi^2\) and \(\lambda_0 = Z_\lambda \mu^{\sfrac{(4-d)}{2}} \lambda\).\footnote{The mass scale \(\mu\) included in the rescaling of the coupling is there to let the renormalised coupling have the same mass dimension as the undeformed theory in \(d = 4\) dimensions.}
 Although suggestively naming terms such as \emph{mass term} with mass \(m_\phi^0\) implies a connection to the mass of a particle, we have yet to define what that would mean experimentally.
 Thus, rescaling our parameters and fields parametrises the way in which we can tune our theory, allowing us freedom in choosing the way our theory connects to experiments.
 
@@ -435,8 +476,18 @@ To one-loop order, the self-energy of our scalar theory from \cref{qft:eq:exampl
 where the crossed dot represents an insertion of the \(\delta\) into the LO amplitude.
 Since the free theory is divergence free, the counterterms only needs to carry corrections from the first order in the coupling constant that loops arise.
 They are therefore understood to be of one-loop order, or NLO\@.
+\medskip
 
-
+This perturbative expansion can be done for any \(n\)-point correlator calculable in the theory, and the counterterm insertions can be determined from the vertices in the bare Lagrangian.
+Returning to our toy model in \cref{qft:eq:example_lagrangian}, we can expand the three-point vertex
+\begin{equation}
+  \lambda_0 \phi_0^3 = Z_\lambda Z_\phi^{\sfrac{3}{2}} \lambda \phi^3 = \lambda \phi^3 + (\delta_\lambda + \frac{3}{2} \delta_\phi) \lambda \phi^3 + \ldots,
+\end{equation}
+where the dots denote terms of higher order in \(\lambda\).
+Using the renormalised coupling \(\lambda\) for the vertex Feynman rules, we must add the vertex counterterm insertions
+\begin{equation}
+  \inputtikz[baseline=(v.base)]{phi3_renormalisation/vertex_ct} = -i \pclosed{\delta_\lambda + \frac{3}{2} \delta_\phi}.
+\end{equation}
 
 
 \subsection{On-Shell Renormalisation}
@@ -541,13 +592,68 @@ Expanding \(Z_{L/R} = 1 + \delta_{L/R}\) and writing the \(\Sigma(\slashed{p}) =
 
 
 
+\subsection{Running Couplings and Renormalisation Group}
+So far, we have concerned ourselves with renormalisation of the fields and mass terms, but the interaction couplings of a theory also demand renormalisation.
+Given an interaction term in the Lagrangian with a rescaled coupling \(\lambda_0 = Z_\lambda \mu^{\sfrac{(4-d)}{2}} \lambda\), the counterterm from expanding \(Z_\lambda = 1 + \delta_\lambda\) is used to cancel divergences arising from higher order corrections to the LO interaction vertex.
+Diagrammatically to NLO, we can have
+\begin{equation}
+  \label{qft:eq:vertex_counterterm_renormalisation}
+  \inputtikz[baseline=(v.base)]{phi3_renormalisation/vertex_LO} + \inputtikz[baseline=(v.base)]{phi3_renormalisation/vertex_loop} + \inputtikz[baseline=(v.base)]{phi3_renormalisation/vertex_ct},
+\end{equation}
+where loop diagram together with the counterterm is UV finite.
+However, as UV divergences are swallowed into the definition of the coupling, it will inherit dependence on the artificial scale \(\mu\).
+The bare, unrenormalised Lagrangian contains no dependence on the arbitrary mass scale, and as such, we should expect \(\d[\mu]\ \lambda_0 = 0\).
+This is the condition that leads to the \emph{renormalisation group equations} that govern the dependence of the coupling on the \emph{renormalisation scale} \(\mu\).
+In \(d = 4-2\epsilon\) dimensions, this condition gives us
+\begin{equation}
+  \label{qft:eq:RGE}
+  0 \stackrel{!}{=} \mu \d[\mu]\ \lambda_0 = \mu \d[\mu]\ \pclosed{\mu^{\epsilon} Z_\lambda \lambda} = \mu^\epsilon Z_\lambda \lambda \pclosed{\epsilon + \frac{\mu}{\lambda} \d[\mu]{\lambda} + \frac{\mu}{Z_\lambda}\d[\mu]{Z_\lambda}},
+\end{equation}
+which can be rearranged into
+\begin{equation}
+  \label{qft:eq:RGE_rearranged}
+  \d[\mu]{\lambda} = -\pclosed{\frac{\epsilon}{\mu} -\frac{1}{Z_\lambda} \d[\mu]{Z_\lambda}} \lambda.
+\end{equation}
+
+The running of the coupling therefore dependent on the conditions imposed to fix the rescaling \(Z_\lambda\).
+In other words, the running of the coupling is dependent on the \emph{renormalisation scheme}.
+In this thesis, I will employ a variation of the Minimal Subtraction (MS) scheme, known as \MSbar\@.
+As the name suggests, this entails subtracting the minimal amount necessary to make the theory UV finite.
+In practice, this means setting the counterterm to be the \(\frac{1}{\epsilon^p}\)-poles arising from calculating loop amplitudes such as the one in \cref{qft:eq:vertex_counterterm_renormalisation}.
+The \MSbar\ scheme additionally subtracts a factor which commonly arises together with the \(\frac{1}{\epsilon}\)-poles in dimensional regularisation, setting the counterterm proportional to\footnote{At least to first order of divergence.}
+\begin{equation}
+  \frac{1}{\bar\epsilon} = \frac{1}{\epsilon} - \gamma_E + \ln 4\pi,
+\end{equation}
+where \(\gamma_E\) is the Euler-Mascheroni constant.
+This fixes the counterterm, which in turn fixes the scale dependence of the renormalised coupling.
+\medskip
+
+Finally, the renormalised coupling is fixed through a renormalisation condition as before.
+This amounts to setting a boundary condition for which to solve \cref{qft:eq:RGE_rearranged}.
+A common procedure is to associate the LO vertex in \cref{qft:eq:vertex_counterterm_renormalisation} with a given experimental result.
+To LO the diagram only contributes \(\M = -i\lambda\), so the squared amplitude simply becomes \(\lambda^2\).
+If we could concoct an experiment that measures this three-point correlator at a given energy scale, we could then fix \(\lambda\) to be this value, in essence encapsulating the result to all orders at this energy.
+A natural way would be to measure the decay of particle, where the natural energy scale would be the particle mass.
+Seeing as the decay \(\Gamma \propto |\M|^2\)~\cite{Schwartz:2014sze}, the renormalisation condition would be
+\begin{equation}
+  \lambda^2(m) = C \Gamma,
+\end{equation}
+where \(C\) is some calculable kinematic constant.
+However, in our toy model with only one particle, such a decay is not kinematically possible, so the coupling would have to be fixed by looking at some other process, like the four-point correlator, where the kinematics are a bit more complicated.
+
+
 
 
 \section{Yang-Mills Theories}
 \label{qft:sec:yang-mills}
+Having gone through the basics of renormalised perturbative QFT, I will turn to the construction of a quantum field theory.
+Here I will outline imposing certain symmetries between the fields in a theory will naturally lead to an interacting theory of multiple fields.
+This is the basis for gauge theory, which are the foundations of modern QFTs such as the Standard Model (SM).
+This section does assume some background group theory.
+\medskip
 
 Gauge theory in QFT is based on imposing \emph{internal symmetries} on the Lagrangian.
-Internal symmetries are symmetries separate from \emph{external symmetries} in that they are not symmetries of coordinate transformations, but rather symmetries based on transformations of the fields.
+Internal symmetries are symmetries separate from \emph{external symmetries} in that they are not symmetries of coordinate transformations, but rather symmetries based on transformations of the fields in themselves.
 Typically, the field transformations under which the Lagrangian is invariant are Lie groups, and are referred to as the \emph{gauge group}.
 A collection of fields that transform into each other under a particular representation\footnote{More on this later.} is called a \emph{multiplet}.
 
@@ -582,7 +688,7 @@ The ordinary free Klein-Gordon Lagrangian
 \end{equation}
 is invariant.
 However, if we promote our gauge symmetry to be a local symmetry, i.e.\ let the
-parameters become spacetime-dependent \(\vec{\alpha} \to \vec{\alpha}(x)\),
+parameters become space-time-dependent \(\vec{\alpha} \to \vec{\alpha}(x)\),
 this is no longer the case.
 Since space-time coordinates are unchanged under gauge transformations, it
 follows that so too is the derivative \(\partial_\mu\).
@@ -608,8 +714,7 @@ To get the right transformation properties of the derivative term, we need a
 In order to create such a \(D_\mu\), we must require that it transforms as
 \(D_\mu \to g D_\mu g^{-1}\).
 This can be done by introducing the \emph{gauge field} \(\mathcal{A}_\mu(x)
-\equiv A_\mu^a(x) T^a\)\margincomment{Here it might be prudent to mention that
-  \(\mathcal{A}_\mu\) is a real-valued field somehow.} which transforms according to
+\equiv A_\mu^a(x) T^a\) which transforms according to
 \begin{equation}
   \mathcal{A}_\mu \to g \mathcal{A}_\mu g^{-1} - \frac{i}{q}
   \pclosed{\partial_\mu g} g^{-1}.
@@ -631,6 +736,7 @@ the interaction term
   \Phi^\dagger \mathcal{A}^\mu \mathcal{A}_\mu \Phi
 \end{equation}
 to the Klein-Gordon Lagrangian \(\L_{KG}\).
+Note that for the Lagrangian to be real-valued, we must require \(\mathcal{A}\_\mu\) to be hermitian, or equivalently, the components \(A_\mu^a\) must be real-valued seeing the generators \(T^a\) already are hermitian.
 
 Now, the Lagrangian is gauge invariant, but there still remains to add dynamics
 to the gauge field \(\mathcal{A}_\mu\) through a kinetic term.
@@ -659,29 +765,15 @@ where \(T(R)\) is the Dynkin index of the representation \(R\) of the group defi
 
 
 
+\section{Passarino-Veltman Loop Integrals}
+\label{qft:sec:pave}
+Lastly, I will go through a categorisation of loop integrals due to Passarino and Veltman~\cite{PaVe} known as Passarino-Veltman reduction.
+This provides a useful tool for doing symbolically handling loop integrals, by creating basis loop integral functions with which you can write arbitrary loop integrals.
+\medskip
 
-\section{Loop Integrals and Regularisation}
-\phpar[Introduce loop integrals, how to calculate them, where divergences appear and how to regularise them.]
-\begin{TODO}
-  \item Introduce \DRbar\ renormalisation scheme and talk about Yukawa counterterm in relation to SUSY breaking.
-  \item Perhaps figure out and use \verb|PackageX| or \verb|FeynCalc| normalisation for Passarino-Veltman functions.
-\end{TODO}
-
-
-
-\subsection{Dimensional Regularisation}
-
-
-
-
-\subsection{Passarino-Veltman Loop Integrals}
-\label{qft:subsec:pave}
-By Lorentz invariance, there are a limited set of forms that loop integrals
-can
-take.\needcite[Why is this?] These can be categorised according to the number
-of propagator terms they include, which corresponds to the number of externally
-connected points there are in the loop. A general scalar \(N\)-point loop
-integral takes the form
+By Lorentz invariance, there are a limited set of forms that loop integrals can take.
+These can be categorised according to the number of propagator terms they include, which corresponds to the number of externally connected points there are in the loop.
+A general scalar \(N\)-point loop integral takes the form in \(d\) space-time dimensions can be written as
 \begin{align}
   T^N_0\pclosed{p_i^2, (p_i-p_j)^2; m_0^2, m_i^2} & = \frac{\pclosed{2\pi
       \mu}^{4-d}}{i \pi^2} \integral{^d q} \mathcal{D}_0
@@ -690,6 +782,7 @@ integral takes the form
 \end{align}
 where \(\mathcal{D}_0 = \bclosed{q^2-m_0^2}^{-1}\) and \(\mathcal{D}_i =
 \bclosed{\pclosed{q+p_i}^2-m_i^2}^{-1}\).
+I note that the renormalisation scale \(\mu\) coming from the coupling constant has been swallowed into the definition of these loop integrals.
 The first 4 scalar loop integrals are named accordingly
 \begin{align}
   T^1_0 & \equiv A_0(m_0^2)

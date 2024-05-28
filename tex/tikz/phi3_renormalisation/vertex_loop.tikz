@@ -1,0 +1,20 @@
+\begin{feynman}
+  \vertex[] (a);
+  \vertex[right = of a] (v);
+  \vertex[left = 0.5cm of v] (v1);
+  \vertex[above right = 0.5cm of v] (v2);
+  \vertex[below right = 0.5cm of v] (v3);
+  \vertex[right = 1cm of v1] (vghost);
+  \vertex[above right = of v] (b);
+  \vertex[below right = of v] (c);
+  \diagram*{
+  (a) -- [scalar] (v1),
+  %   (v1) -- [scalar, in=45, out=45] (v2)
+  %   -- [scalar, half left] (v3)
+  %   -- [scalar, half left] (v1),
+  (v1) -- [scalar, half left] (vghost)
+  -- [scalar, half left] (v1),
+  (v2) -- [scalar] (b),
+  (v3) -- [scalar] (c)
+  };
+\end{feynman}

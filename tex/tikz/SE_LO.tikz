@@ -1,8 +1,8 @@
 \begin{feynman}
-    \vertex[] (in);
-    \vertex[right=of in] (out);
+  \vertex[label=left:\(p\)] (in);
+  \vertex[right=of in, label=right:\(p\)] (out);
 
-    \diagram*{
-    (in) -- [scalar] (out)
-    };
+  \diagram*{
+  (in) -- [scalar] (out)
+  };
 \end{feynman}
