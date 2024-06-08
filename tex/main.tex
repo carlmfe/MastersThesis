@@ -5,6 +5,9 @@
 \usepackage{style/commands}
 \usepackage{style/writingtools}
 
+\graphicspath{{../code/plotting/plots/}} % Compiling main
+% \graphicspath{{code/plotting/plots/}} % Compiling subfiles
+
 \begin{document}
 \uiomasterfp[author=Carl Martin Fevang,
   colour=green,
@@ -12,54 +15,98 @@
   dept=Department of Physics,
   fac=Faculty of Mathematics and Natural Sciences,
   long,
-  subtitle=With Subtitle,
+  subtitle=Cross-Sections for Electroweakino Pair Production in the Complex Minimal Supersymmetric Standard Model,
   supervisor=Are Raklev,
-  title=My Master's Thesis]
+  title=Supersymmetry in Proton--Proton Collisions]
 
-\begin{draft}
-  \tableofcontents
+\frontmatter\
 
-  %%%%%%%%%%%%%%%%%%%%
-  %%% Introduction %%%
-  %%%%%%%%%%%%%%%%%%%%
-  \chapter{Introduction}
-  \include{chapters/introduction}
+\begin{abstract}
+  To meaningfully scan the large parameter spaces beyond the Standard Model theories such as the Minimal Supersymmetric Standard Model (MSSM), accurate predictions are required for comparison to experimental data.
+  Particularly, in particle collider experiments, fast and accurate cross-section calculations are necessary.
+  In this thesis, I compute the leading order cross-sections for pair production of electroweakinos in proton--proton collisions at the Large Hadron Collider at CERN\@.
+  Furthermore, next-to-leading order corrections are computed for higgsino-like neutralinos, and all neutralino pair production processes are implemented numerically for arbitrary complex-valued MSSM parameters.
+  I explore physical scenarios derived from MSSM parameters, and present cross-section dependence with errors as the parameters are varied.
+  Particular emphasis is placed on cross-sections with charge-parity invariance violating complex phases in the MSSM parameters, for which no implementation is currently available at next-to-leading order in the literature.
+  I show that in at least one MSSM scenario, the effects of a complex phase is larger on leading order cross-sections than the addition of leading log resummation to next-to-leading order results.
+\end{abstract}
 
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  %%% Quantum Field Theory %%%
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \subfile{chapters/QFT}
+\chapter*{Acknowledgements}
+As I finish my Master's thesis, there are many who deserve a mention.
+First of all, I would like to thank my supervisor Are Raklev, for being a tremendous guide and dedicating so much time in my supervision.
+You have been an excellent teacher and a great source of inspiration, academically and beyond.
+Next, I must thank my mother, who has always been my greatest supporter.
+Your faith in me has never wavered, and I am eternally grateful for the understanding and support you have shown in my dedication to this academic pursuit.
+I would also like to take a moment to recognise my roommates, Håkon Olav, Ida and Johan.
+During my time writing this thesis, you have not only shown me patience, but you have always provided a consoling and entertaining atmosphere making every day better.
 
-  %%%%%%%%%%%%%%%%%%%%%
-  %%% Supersymmetry %%%
-  %%%%%%%%%%%%%%%%%%%%%
-  \subfile{chapters/SUSY}
-
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  %%% Electroweakino Pair Production at Parton Level %%%
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \subfile{chapters/parton_calculation}
-
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  %%% Electroweakino Pair Production at Hadron Level %%%
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \subfile{chapters/hadron_calculation}
-
-  %%%%%%%%%%%%%%%%%%%%%%%%%
-  %%% Numerical Results %%%
-  %%%%%%%%%%%%%%%%%%%%%%%%%
-  \subfile{chapters/numerical_results}
-
-  %%%%%%%%%%%%%%%%%%
-  %%% References %%%
-  %%%%%%%%%%%%%%%%%%
-  \bibliography{references}{}
-  \bibliographystyle{style/JHEP}
+Finally, I could not look back at my time here in the theory section without thinking of the people I have met along the way.
+From the people I only met in passing, to those I have seen every day -- you have enriched every day, providing so many thoughtful, fun and interesting discussions and debates, in lunch breaks, next to the coffee machine, or in the numerous social events we have had.
+Being surrounded by such smart, insightful and enjoyable people every day has made this experience unforgettable.
+In particular, I would like to thank my dear friends whom I have worked with.
+Your contributions are evident in this thesis.
 
 
-  \appendix
-  \subfile{chapters/appendix}
 
-\end{draft}
+\tableofcontents
+
+\listoffigures
+
+\listoftables
+
+\mainmatter\
+
+%%%%%%%%%%%%%%%%%%%%
+%%% Introduction %%%
+%%%%%%%%%%%%%%%%%%%%
+\chapter*{Introduction} \addcontentsline{toc}{chapter}{Introduction}
+\input{chapters/introduction}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Quantum Field Theory %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subfile{chapters/QFT}
+
+%%%%%%%%%%%%%%%%%%%%%
+%%% Supersymmetry %%%
+%%%%%%%%%%%%%%%%%%%%%
+\subfile{chapters/SUSY}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Electroweakino Pair Production at Parton Level %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subfile{chapters/parton_calculation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Electroweakino Pair Production at Hadron Level %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subfile{chapters/hadron_calculation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Numerical Results %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\subfile{chapters/numerical_results}
+
+
+\backmatter\
+%%%%%%%%%%%%%%%%%%
+%%% Conclusion %%%
+%%%%%%%%%%%%%%%%%%
+\chapter*{Conclusion} \addcontentsline{toc}{chapter}{Conclusion}
+\input{chapters/conclusion}
+
+%%%%%%%%%%%%%%%%%%
+%%% Appendices %%%
+%%%%%%%%%%%%%%%%%%
+\appendix
+\appendixpage\
+\subfile{chapters/appendix}
+
+%%%%%%%%%%%%%%%%%%
+%%% References %%%
+%%%%%%%%%%%%%%%%%%
+\bibliography{references}{}
+\bibliographystyle{style/JHEP}
+
 
 \end{document}

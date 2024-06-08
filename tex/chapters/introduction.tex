@@ -1,14 +1,61 @@
-This is where I introduce the master's thesis.
+Since its inception, quantum field theory (QFT) has pushed the boundaries of what we know, and has fostered undoubtedly one of the greatest triumphs of modern physics -- the Standard Model (SM). From a few principles, the SM has been able to make agreement between theory and experiment up to 12 significant digits, or one part in a trillion~\cite{g-2}.
+The predictions of the SM come from a set of matter-particles, the fermions, subjected to three internal gauge symmetries~\cite{Yang:1954ek} providing three fundamental forces, and a Higgs mechanism~\cite{Higgs:1964pj} providing masses to the particles.
+% The latter being a great triumph of theoretical and experimental physics -- it shows the change in the discovery process of new physics where the search was dictated by the proposal of a mechanism solving theoretical problems, rather than developing the theory to explain anomalous experimental data.
+
+However, there still remains theoretical, as well as experimental, discrepancies in the SM -- it does not explain gravity or cosmological observations such as dark matter or matter-antimatter imbalance, and its structure is somewhat \emph{ad hoc}, without a unifying principle.
+Particularly, there is a large discrepancy between the energy scale of the electroweak sector at \(\sim 100\) GeV, and the Planck scale around \(\sim 10^{18}\) GeV, where we know gravity to become relevant.
+Without a mechanism for cancellation, the Higgs boson should be sensitive to any physics between these scales, including the Planck scale itself.
+The SM provides no solution to how the Higgs mass is of the same order as the physics we have already observed, known as the hierarchy problem~\cite{hierchy1,hierchy2}.
+Furthermore, the matter-antimatter imbalance we see in the Universe today can only be explained by a violation of combined charge and parity (CP) invariance and baryon number~\cite{Sakharov:1967dj}, for which there is a mechanism in the SM~\cite{CKM1,CKM2}, insufficient~\cite{SMBaryogenesis}.
+In short, the Standard Model is not a complete theory, and the search for beyond the Standard Model (BSM) theories persists.
+\medskip
+
+Motivated by solving many of these discrepancies, supersymmetry remains one of the most intensely studied and developed theories addressing them.
+Of all the extensions to the Standard Model, its minimal supersymmetric extension, the Minimal Supersymmetric Standard Model (MSSM), provides one of the most explored models for BSM physics.
+In this framework, every SM particle receives a \emph{superpartner}, a particle with the same properties but opposite spin-statistics.
+That is, every fermion receives a bosonic counterpart and every boson receives a fermionic counterpart.
+These superpartners provide possible explanations for dark matter~\cite{susy_dark_matter} and suggest a `grand unification' of the gauge symmetries at some higher energy scale~\cite{susy_grand_unification}.
+Particularly, the MSSM, where the lightest supersymmetric particle is absolutely stable, provides a stable, weakly interacting massive particle (WIMP), which is a good candidate for cold dark matter~\cite{WIMP}.
+In many MSSM scenarios, the lightest supersymmetric particle will be the lightest \emph{neutralino}, a partner to the Higgs boson, photon and \(Z\)-boson of the SM\@.
+More broadly, the Higgs and electroweak boson superpartners are called electroweakinos, and will be the focus of this thesis.
+\medskip
+
+As supersymmetry must be broken at low energy scales, agnosticism to a breaking mechanism means that the parameter space of the MSSM becomes vast.
+In exploring this parameter space, the most unambiguous mode of discovery is direct production of the superpartners, as in particle collider experiments.
+Seeing as the extra particles of the MSSM are predicted to be in a mass range of \(\sim 10\) GeV to a few TeVs -- 10 to 1000 times that of the proton mass -- direct production will require great energies.
+This makes the proton--proton collisions at the Large Hadron Collider (LHC) at CERN a natural avenue for discovery.
+In this thesis, I will focus on the calculation of the production cross-sections for electroweakino pairs in the setting of proton--proton collisions at the LHC\@.
+
+Particularly, I will focus on the derivation of the electroweakino interactions from the most general MSSM model, and computing the cross-sections with general scenarios in mind.
+This means keeping complex and off-diagonal parameter values that allow for CP violating interactions and effects from quark flavour violation in the electroweakino sector.
+With general parameter dependence, MSSM scenarios explaining multiple issues such as insufficient CP violation and providing dark matter candidates simultaneously can be explored.
+To increase the sensitivity when comparing the theoretical results to experiment, higher order corrections from perturbative QFT are needed, which in the context of proton collisions means we must add corrections to the electroweakino pair production from quantum chromodynamics (QCD).
+However, higher order corrections lead to many problems in the perturbative framework we have.
+Specifically, divergences appear in the theory, leading to the necessity of reassessing the parameters and fields.
+This leads to the procedure of renormalisation, which ultimately renders finite observable values for the cross-sections.
+
+Another point of subtlety coming from the QCD nature of protons is also addressed.
+Due to the phenomena of colour confinement and asymptotic freedom~\cite{Gross:1973id}, the fundamental particles of QCD are confined to structures such as the proton, whereas interactions with the proton is described by interaction with the fundamental particles of QCD\@.
+This leads to the formulation of the parton model for proton scattering, where the structure of the constituents of the proton is captured by \emph{parton distribution functions}, allowing for the translation of scattering between fundamental QCD particles to the full proton scattering.
+
 
 
 \section*{Outline}
 This Master's thesis is roughly divided into three parts:
-First, I will outline the theoretical framework for this thesis in two chapters.
-This includes the perturbative quantum field theory (QFT) framework which I will use for the calculations, and building the supersymmetric model I will use in this framework.
-Next, I go through the theoretical calculation of electroweakino pair production cross-sections in high-energy proton-proton collisions.
-This includes perturbative leading order (LO) results for all possible electroweakino pairs, and next-to-leading order (NLO) results for neutralino pair production specifically.
+The first two chapters deal with the theoretical framework used in the calculations later on.
+The next two chapters tackle the calculation of cross-sections for electroweakino pairs in proton--proton collisions.
+Finally, the last chapter deals with numerical implementation of the cross-sections, getting concrete results from different combination of parameter values of the MSSM\@.
+The general outline of the thesis follows:
+% First, I will outline the theoretical framework for this thesis in two chapters.
+% This includes the perturbative quantum field theory framework which I will use for the calculations, and building the supersymmetric model I will use in this framework.
+% Next, I go through the theoretical calculation of electroweakino pair production cross-sections in high-energy proton-proton collisions.
+% This includes perturbative leading order (LO) results for all possible electroweakino pairs, and next-to-leading order (NLO) results for neutralino pair production specifically.
+% Finally, I implement the theoretical calculation numerically, and present a collection of results for a selection of MSSM scenarios.
 
-\ifSubfilesClassLoaded{%
-  \bibliography{references}{}
-  \bibliographystyle{style/JHEP}
-}{}
+\begin{itemize}
+  \item [\cref{chap:qft}:] To start, I outline the theoretical framework used for the calculations in this thesis. Quantum field theory is introduced, and methods for computing finite observables are presented.
+  \item [\cref{chap:susy}:] Next, I introduce supersymmetry, including tools for building manifestly supersymmetric quantum field theories. These are then put to use building the Minimal Supersymmetric Standard Model, and the Feynman rules for electroweakinos are derived from this.
+  \item [\cref{chap:part:parton_calculation}:] In this chapter, the calculations for electroweakino pair production from quarks and gluons are computed, up to next-to-leading order.
+  \item [\cref{had:chap:hadron_calculation}:] The calculations from the previous chapter are here sewn together to create finite, observable cross-sections for proton--proton collisions using the parton model. General forms for such cross-sections are presented to next-to-leading order.
+  \item [\cref{chap:results}:] Finally, numerical implementation of the cross-sections of the previous chapter is presented. Deriving a selection of physical scenarios from the MSSM parameters using external packages, general parameter dependence with error estimates are derived.
+\end{itemize}

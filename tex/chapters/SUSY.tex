@@ -2,6 +2,7 @@
 
 \begin{document}
 \chapter{Supersymmetry}
+\label{chap:susy}
 
 
 \section{Introduction to Supersymmetry}
@@ -443,7 +444,7 @@ analogously to \cref{qft:eq:Akin}.
 
 
 \subsection{Field Content}
-Here I give a very brief overview of the field content and naming scheme of the MSSM -- for a more comprehensive introduction I will refer to \needcite.
+Here I give a very brief overview of the field content and naming scheme of the MSSM -- for a more comprehensive introduction I will refer to~\cite{Martin:1997ns}.
 The basic idea is to embed every SM fermion into a chiral superfield, and the vector bosons into the vector superfields arising from local gauge invariance.
 Since the SM fermions are Dirac fermions, they require two different Weyl spinors, which means that two superfields are required to provide each fermion.
 
@@ -543,6 +544,7 @@ A mechanism for spontaneous symmetry breaking of supersymmetry would therefore b
 Constructing such a mechanism in a way as to not reintroduce the hierarchy problem leads to what we call \emph{soft} breaking of supersymmetry~\cite{Martin:1997ns}.
 Disregarding the high-energy completion of the theory, we can parametrise the terms that can arise in the low-energy MSSM superlagrangian up to gauge invariant and \(R\)-parity conserving terms, as
 \begin{align}
+  \label{susy:eq:LMSSM_soft}
   \nonumber
   \L_\text{soft}^\text{MSSM} = & (\theta\theta)(\theta\theta)^\dagger \bigg\{ -\frac{1}{4}M_1 B\^\alpha B\_\alpha - \frac{1}{2}M_2 \tr\{\mathcal{W}\^\alpha \mathcal{W}\_\alpha\} - \frac{1}{2}M_3 \tr\{\mathcal{C}\^\alpha \mathcal{C}\_\alpha\} + \cc \\
   \nonumber
@@ -555,7 +557,7 @@ Disregarding the high-energy completion of the theory, we can parametrise the te
 \end{align}
 All the parameters are potentially complex numbers, although all the mass terms \(m_{ij}^2\) must be hermitian in the that \(m_{ij}^2 = (m_{ji}^2)^\ast\), which leads to \(m_{ii}^2\) having to be real.
 This is the source of the great many parameters of the MSSM, as these soft-breaking parameters alone amount to 109 degrees of freedom!\footnote{A few of these can be eliminated through field redefinitions, however.}
-For this reason, most searches of the MSSM focus on various simplified models~\cite{ATLAS:2022osj,ATLAS:2023act,ATLAS:2024tqe}.
+For this reason, most searches of the MSSM focus on various simplified models~\cite{ATLAS:2023act,ATLAS:2024tqe}.
 These can be based on simplifications like assuming all parameters to be real or assuming no flavour-violation as in the phenomenological MSSM (pMSSM)~\cite{pMSSM}, or by making theoretical assumptions on the specific mechanism for symmetry breaking, as in minimal supergravity (mSUGRA)~\cite{mSUGRA}, or any combinations of these.
 In this thesis, I will not make any such assumptions and work with the general form of the MSSM, unless otherwise stated.
 The full MSSM superlagrangian is then
@@ -601,6 +603,7 @@ The full MSSM superlagrangian is then
 
 
 \section{Electroweakinos}
+\label{susy:sec:electroweakinos}
 The focus in this thesis we be on a particular set of superpartners, namely the \emph{electroweakinos}.
 These are fermion superpartners to the electroweak bosons, i.e.\ the photon, \(Z\) and \(W\) bosons and the Higgs bosons.
 These are subdivided into the vector boson superpartners, the \emph{gauginos}, and the Higgs boson partners, the \emph{higgsinos}.
@@ -621,19 +624,26 @@ Ignoring higher order corrections, the mass terms for the gauginos and higgsinos
 where \(\psi^0 = \pclosed{\bino, \wino, \hinod, \hinou}^T\), \(\psi^\pm = \pclosed{\psi^+, \psi^-}^T = \pclosed{\tilde{W}^+, \tilde{H}_u^+, \tilde{W}^-, \tilde{H}_d^-}^T\) and \(M_{\tilde\chi^0}\), \(M_{\tilde\chi^\pm}\) are the neutralino and chargino mass matrices respectively.
 They are given by
 \begin{align}
+  \label{susy:eq:neutralino_mixing_matrix}
   M_{\tilde\chi^0} =   & \begin{bmatrix}
                            M_1              & 0                & -m_Z c_\beta s_W & m_Z s_\beta s_W  \\
                            0                & M_2              & m_Z c_\beta c_W  & -m_Z s_\beta c_W \\
                            -m_Z c_\beta s_W & m_Z c_\beta c_W  & 0                & -\mu             \\
                            m_Z s_\beta s_W  & -m_Z s_\beta c_W & -\mu             & 0
                          \end{bmatrix},             \\
+  \label{susy:eq:chargino_mixing_matrix}
   M_{\tilde\chi^\pm} = & \begin{bmatrix}
                            0                   & 0                   & M_2                 & \sqrt{2}c_\beta m_W \\
                            0                   & 0                   & \sqrt{2}s_\beta m_W & \mu                 \\
                            M_2                 & \sqrt{2}s_\beta m_W & 0                   & 0                   \\
                            \sqrt{2}c_\beta m_W & \mu                 & 0                   & 0
-                         \end{bmatrix}.
+                         \end{bmatrix},
 \end{align}
+where \(s_\beta \equiv \sin\beta\), \(c_\beta = \equiv \cos\beta\) and \(\beta\) is defined from the relation
+\begin{eqnarray}
+  \tan\beta = \frac{v_u}{v_d},
+\end{eqnarray}
+where \(v_{u,d}\) are the vacuum expectation values of the \(H_{u/d}\) field after electroweak symmetry breaking.
 
 These mass matrices can be diagonalised to get the mass eigenstate \emph{neutralinos} \(\tilde\chi^0_i\) and \emph{charginos} \(\tilde\chi^\pm_i\), respectively.
 Both the matrices are symmetric, but we will diagonalise them slightly differently.
@@ -710,7 +720,7 @@ and the fermion fields \(\lambda \equiv \lambda^a T^a\) from vector superfields 
                                                      & + \sqrt{2} (\theta\psi_i)^\dagger (\theta\theta) (\theta\lambda_{ij})^\dagger A_j \bigg\}                                                                                                                                    \\
   =                                                  & q(\theta\theta)(\theta\theta)^\dagger \sum_{ij} \cclosed{ -\sqrt{2} A^\ast_i (\lambda_{ij}\psi_j) + (\psi_i \sigma\^\mu \pclosed{\mathcal{V}_\mu}_{ij} \psi^\dagger_j) - \sqrt{2} (\psi_i\lambda_{ij})^\dagger A_j },
 \end{align}
-where I have used \needcite[Weyl spinor relations].
+where I have used Weyl spinor relations listed in \cref{app:chap:weyl_grassmann}.
 \medskip
 
 There are also Yukawa terms coming from the superpotential terms of the form \(y_{ij} (\theta\theta)^\dagger \Phi_i \Phi \Phi_j + \cc\)
@@ -808,8 +818,8 @@ What this means for the interaction Lagrangian in \cref{susy:eq:nino_sf_f_int} i
 \subsubsection*{Higgsino Interactions}
 Higgsino interaction with the squarks comes from the Yukawa terms of the superpotential.
 As they are the mass-giving terms of for the quarks, they are proportional to the quark masses.
-Accordingly, at the center-of-mass energies at the LHC, for which the calculations of this thesis are intended, only the last generation of squarks will have non-negigible couplings.
-However, due low parton density for the bottom quark (and non-existant for the top quark), we can safely ignore these terms in the present derivation.
+Accordingly, at the center-of-mass energies at the LHC, for which the calculations of this thesis are intended, only the last generation of squarks will have non-negiglible couplings.
+However, due low parton density for the bottom quark (and non-existent for the top quark), we can safely ignore these terms in the present derivation.
 
 The remaining relevant interaction that remains then, is that with the \(Z\)-boson.
 This interaction again comes from the kinetic term, but this time for the neutral
@@ -822,7 +832,7 @@ Integrating over the Grassmann variables and using equation \cref{susy:eq:psi_ki
 \begin{equation}
   \integral{^4\theta} \L \stackrel{\tilde{H}_{u/d}^0, W^0_\mu, B^0_\mu}{=} \mp \frac{g}{2} (\tilde{H}_{u/d}^0 \sigma\^\mu (\tilde{H}_{u/d}^0)^\dagger) (W^0_\mu - t_W B_\mu^0).
 \end{equation}
-Switching to Dirac spinors, the mass eigenbasis for the neutralinos and the \(Z\) boson \(Z_\mu = c_W W^0_\mu - s_W B^0_\mu\), we end up with\margincomment{Mention Weyl/Dirac identities necessary for this.}
+Switching to Dirac spinors, the mass eigenbasis for the neutralinos and the \(Z\) boson \(Z_\mu = c_W W^0_\mu - s_W B^0_\mu\), we end up with\footnote{Here I have used some of the Weyl spinor identities from \cref{app:chap:weyl_grassmann}.}
 \begin{align}
   \label{susy:eq:Zneuneu-interaction-L}
   \nonumber
@@ -855,7 +865,7 @@ In summary, the Feynman rules for the interactions of neutralinos with the elect
       \pclosed{C_{\tilde{q}_A q_g \tilde{\chi}_i^0}^{R}}^{\!\ast} P_R }.
   \end{align}
 \end{subequations}
-In fact, the interactions of all electroweakinos  with \(W/Z\)-bosons and (s)quarks take the same form, and we can generalise by replacing \(O_{ij}^{\prime\prime X}\) or \(C_{\tilde{q}_A q_g \tilde\chi^0_i}^X\) with the appropriate definitions in \cref{susy:tab:variable_definitions}. \comment{Add citation for this.}
+In fact, the interactions of all electroweakinos  with \(W/Z\)-bosons and (s)quarks take the same form, and we can generalise by replacing \(O_{ij}^{\prime\prime X}\) or \(C_{\tilde{q}_A q_g \tilde\chi^0_i}^X\) with the appropriate definitions in \cref{susy:tab:variable_definitions}~\cite{HaberKane}.
 
 A couple of remarks these Feynman rules:
 The rule \cref{susy:eq:feynman_Z-neu-neu} is a factor of two greater than the corresponding Lagrangian term \cref{susy:eq:Zneuneu-interaction-L} due to the symmetry between \(i, j\) in \cref{susy:eq:Zneuneu-interaction-L}.
@@ -912,12 +922,12 @@ In this section, I will talk briefly about the diagonalisation procedure for com
 Furthermore, I will present an algorithm for finding the diagonalising matrix numerically for a given symmetric matrix.
 
 \subsection{Numerical Diagonalisation}
-Finding the diagonisation matrix \(U\) for some matrix \(A\) is not always entirely straight-forward when done numerically.
+Finding the diagonalisation matrix \(U\) for some matrix \(A\) is not always entirely straight-forward when done numerically.
 It often entails finding solutions to sets of linear equations like
 \begin{equation}
   M \vec{x} = \lambda \vec{y},
 \end{equation}
-for some matrix \(M\), vectors \(vec{x}, \vec{y}\) and number \(\lambda\).
+for some matrix \(M\), vectors \(\vec{x}, \vec{y}\) and number \(\lambda\).
 For vectors
 
 \subsection{Takagi Factorisation}
@@ -927,11 +937,11 @@ Takagi factorisation~\cite{Horn} tells us that there exists a unitary matrix \(U
   \label{susy:eq:takagi}
   A = U^T D U.
 \end{equation}
-I remark that \(U\) is potentially complex, so \(U^{-1} = U^\dagger \neq U^T\), which shoudl not be confused with the ordinary diagonalisation of a real matrix \(R = U^{-1} D U\) where \(U^{-1} = U^T\).
+I remark that \(U\) is potentially complex, so \(U^{-1} = U^\dagger \neq U^T\), so \cref{susy:eq:takagi} should not be confused with the ordinary diagonalisation of a real matrix \(R = U^{-1} D U\) where \(U^{-1} = U^T\).
 
 
 \subsubsection*{Factorisation Procedure}
-I would first like to outline a practical procedure for finding such a diagonalising matrix \(U\), and consqeuently \(D\).
+I would first like to outline a practical procedure for finding such a diagonalising matrix \(U\), and consequently \(D\).
 It will be based on finding vector \(\vec{v} \in  \mathbb{C}^n\) that satisfies
 \begin{equation}
   \label{susy:eq:takagi_vector}
@@ -942,7 +952,7 @@ A vector satisfying the modified eigenvalue relation \cref{susy:eq:takagi_vector
 Existence of these vectors for any matrix \(A\), where \(AA^\ast\) only has real, non-negative eigenvalues is detailed in \cref{app:chap:takagi}.\footnote{This is always true for a symmetric matrix, as \(AA^\ast = A^T A^\dagger = (AA^\ast)^\dagger\) must be hermitian.}
 
 To find \(U\) then, I outline a procedure based on the proof for Takagi factorisation in~\cite{Horn}.
-Given a Takagi vector \(\vec{v}\) of \(A\), and an orthonormal basis \(\cclosed{\vec{v}, \vec{v}_2, \ldots, \vec{v}_n}\) of \(\mathbb{C}^n\), I show that in \cref{app:chap:takagi} that we can make a diagonalisation step on \(A\), writing it as
+Given a Takagi vector \(\vec{v}\) of \(A\), and an orthonormal basis \(\cclosed{\vec{v}, \vec{v}_2, \ldots, \vec{v}_n}\) of \(\mathbb{C}^n\), I show in \cref{app:chap:takagi} that we can make a diagonalisation step on \(A\), writing it as
 \begin{equation}
   A = V \begin{bmatrix}
     \sigma         & \boldsymbol{0} \\
@@ -989,17 +999,17 @@ An algorithmic implementation of this procedure is shown in \cref{app:alg:takagi
     \State{\(\lambda, \vec{x}\) =  eigh(\(A A^\ast\))}
 
     \If{\(|(A\vec{x}^\ast) \cdot \vec{x}|^2 - |A\vec{x}^\ast|^2|\vec{x}|^2\) < \epsilon}
-    \State{\(\vec{v} \gets\ \frac{\vec{x}}{|\vec{x}|}\);}
+    \State{\(\vec{v} \gets\ \frac{\vec{x}}{|\vec{x}|}\)}
     \Else\
-    \State{\(\vec{v} \gets\ A \vec{x}^\ast + \sqrt{|\lambda[1]|}\vec{x}\);}
-    \State{\(\vec{v} \gets\ \frac{\vec{v}}{|\vec{v}|}\);}
+    \State{\(\vec{v} \gets\ A \vec{x}^\ast + \sqrt{|\lambda[1]|}\vec{x}\)}
+    \State{\(\vec{v} \gets\ \frac{\vec{v}}{|\vec{v}|}\)}
     \EndIf\
 
-    \State{\(\mu \gets\ \frac{\vec{v} \cdot \vec{x}}{|\vec{x}|^2}\);}
-    \State{\(\phi_\mu\) \gets\ atan2(imag(\(\mu\)), real(\(\mu\)));}
-    \State{\(\vec{v}\) \gets\ exp(\(i \phi_\mu/2\)) \(\vec{v}\);}
+    \State{\(\mu \gets\ \frac{\vec{v} \cdot \vec{x}}{|\vec{x}|^2}\)}
+    \State{\(\phi_\mu\) \gets\ atan2(imag(\(\mu\)), real(\(\mu\)))}
+    \State{\(\vec{v}\) \gets\ exp(\(i \phi_\mu/2\)) \(\vec{v}\)}
 
-    \State{\(I\) \gets\ diag(\(N\));}{\(i \gets\ 1\);}
+    \State{\(I\) \gets\ diag(\(N\))}{\(i \gets\ 1\)}
     \Repeat\
     \State{\(V\) \gets\ Matrix(cols=(\(\vec{v}\),deleteColumn(\(I\), \(i\))))}
     \State{\(i \gets\ i+1\)}
@@ -1008,8 +1018,10 @@ An algorithmic implementation of this procedure is shown in \cref{app:alg:takagi
     \State{\(V\) \gets\ GramSchmidt(\(V\))}
     \State{\(U \gets\ V^\ast\)}
   \end{algorithmic}
-  \caption{Diagonalisation step on an \(n\by n\) symmetric matrix \(A\) to find a matrix \(U\) s.t.\ \(A = U^T \begin{bmatrix} \sigma & \vec{0} \\ \vec{0} & A^\prime \end{bmatrix} U\), where \(\sigma = \sqrt{|\lambda|}\) for some eigenvector \(\lambda\) of \(AA^\ast\) and \(A^\prime\) is an \((n-1) \by (n-1)\) symmetric matrix.
-    The algorithm relies on a function eigh(\(M\)) to give an eigenvalue with its corresponding eigenvector of a hermitian matrix \(M\), and GramSchmidt(\(M\)) to orthogonalise a complex, invertible matrix \(M\). The algorithm relies on some machine precision parameter \(\epsilon\).}
+  \caption{Diagonalisation step on an \(n\by n\) symmetric matrix \(A\) to find a matrix \(U\) s.t.
+    \(A = U^T \begin{bmatrix} \sigma & \vec{0} \\ \vec{0} & A^\prime \end{bmatrix} U,\)
+    where \(\sigma = \sqrt{|\lambda|}\) for some eigenvalue \(\lambda\) of \(AA^\ast\) and \(A^\prime\) is an \((n-1) \by (n-1)\) symmetric matrix.
+    The algorithm relies on a function eigh(\(M\)) to give an eigenvalue with its corresponding eigenvector of a hermitian matrix \(M\), and GramSchmidt(\(M\)) to orthogonalise a complex, invertible matrix \(M\). The algorithm also relies on some machine precision parameter \(\epsilon\).}
   \label{app:alg:takagi}
 \end{algorithm}
 

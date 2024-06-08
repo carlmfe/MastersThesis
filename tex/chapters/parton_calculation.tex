@@ -4,7 +4,7 @@
 
 \chapter{Electroweakino Pair Production at Parton Level}
 \label{chap:part:parton_calculation}
-In this chapter, I will go through the details of the calculation of the leading order (LO) contributions to the cross-section of production of pairs of electroweakinos at the level of partons.
+In this chapter, I will go through the details of the calculation of the leading order (LO) contributions to the cross-section of production of pairs of electroweakinos at the level of partons, i.e.\ the fundamental particles of QCD\@.
 The next chapter will complete the calculations at hadron level for proton--proton collisions.
 The possible electroweakino pairs includes neutralino pair production \(\tilde\chi^0_i \tilde\chi^0_j\), a neutralino with a chargino \(\tilde\chi^0_i \tilde\chi^\pm_j\) or a chargino pair \(\tilde\chi^\pm_i \tilde\chi^\mp_j\).
 Furthermore, I will compute the next-to-leading order (NLO) QCD corrections to higgsino-like part of neutralino pair production.
@@ -24,7 +24,6 @@ choose to parametrise and subsequently integrate over the extra degrees of
 freedom can matter quite a bit.
 \medskip
 
-\todo{Quickly go over shorthand notation, and neutralino pair production etc.}
 Furthermore, I will use the shorthand \(m_{i,j}\) for the neutralino masses \(p_{i,j}^2\) and \(m_A\) for squark masses \(m_{\tilde{q}_A}\).
 
 To start out, let us count the degrees
@@ -177,6 +176,7 @@ It will also be useful to make a change of integration variable to \(Q^2\), leav
 \end{equation}
 I note that kinematically, \(Q\) is restricted by
 \begin{equation}
+  \label{pc:eq:Q2_limits}
   (m_i + m_j)^2 \leq Q^2 \leq s,
 \end{equation}
 which in turn will put a lower boundary on \(s\).
@@ -919,12 +919,6 @@ Lastly, I end with a summary of the effective couplings are summarised in \cref{
 
 \section{NLO Corrections}
 \label{pc:sec:NLO}
-
-\begin{TODO}
-  \item Write the leading order matrix element for \(q \bar{q} \to Z^\ast\).
-  \item Clarify how the NLO matrix elements contribute to the quark tensor, i.e. \(H_v^{\mu\nu} \propto \Re{\M_0 \M_v^\ast}\) and \(H_r^{\mu\nu} \propto |\M_r|^2\).
-\end{TODO}
-
 In this section, I will investigate at the NLO QCD corrections associated with the production of a pair of neutralinos.
 I will perform the computation of the NLO corrections to the higgsino cross-section, as this goes through an intermediate \(Z\)-boson state, making it kinematically simpler.
 This corresponds at LO to the \(\hat{s}\)-channel diagram \cref{pc:subfig:tree_level_s-channel}.
@@ -1165,7 +1159,7 @@ Working out the amplitude with \verb|FeynCalc|, we get
 \begin{align}
   \nonumber
   \M_{\tilde{g}} = & i2\delta_{ab} C_F \epsilon_\mu^\ast(q) \mu^{4-d} g_s^2 g \sum_{AB} (C_{qqZ}^L (R_{A1}^{\tilde{q}})^\ast R_{B1}^{\tilde{q}} + C_{qqZ}^R (R_{A2}^{\tilde{q}})^\ast R_{B2}^{\tilde{q}}) \\
-                   & \loopintegral[d]{\ell} \frac{\bar{v}_2 N_{AB} (2\ell-k_i+k_j)\^\mu u_1}{(\ell^2-m_{\tilde{g}}^2) ((\ell-k_i)^2 - m_A^2)((\ell+k_j)^2 - m_B^2)},
+                   & \times \loopintegral[d]{\ell} \frac{\bar{v}_2 N_{AB} (2\ell-k_i+k_j)\^\mu u_1}{(\ell^2-m_{\tilde{g}}^2) ((\ell-k_i)^2 - m_A^2)((\ell+k_j)^2 - m_B^2)},
 \end{align}
 where
 \begin{equation}
@@ -1185,7 +1179,9 @@ The total contribution to the cross-section is then
 \end{align}
 where
 \begin{align}
-  \tilde{V}^{\prime\prime}_Z = \frac{2}{(C_{qqZ}^L)^2 + (C_{qqZ}^R)^2}\sum_{AB} \pclosed{R^{\tilde{q}}_{A1}(R^{\tilde{q}}_{B1})^\ast C_{qqZ}^L + R^{\tilde{q}}_{A2}(R^{\tilde{q}}_{B2})^\ast C_{qqZ}^R}^2 \Re{C_{00}(0,0,\hat{s},m_A^2,m_{\tilde{g}}^2,m_B^2)}.
+  \nonumber
+  \tilde{V}^{\prime\prime}_Z = & \frac{2}{(C_{qqZ}^L)^2 + (C_{qqZ}^R)^2}\sum_{AB} \pclosed{R^{\tilde{q}}_{A1}(R^{\tilde{q}}_{B1})^\ast C_{qqZ}^L + R^{\tilde{q}}_{A2}(R^{\tilde{q}}_{B2})^\ast C_{qqZ}^R}^2 \\
+                               & \times\Re{C_{00}(0,0,\hat{s},m_A^2,m_{\tilde{g}}^2,m_B^2)}.
 \end{align}
 
 % For future reference, the total virtual contribution to the cross-section is
@@ -1196,6 +1192,7 @@ where
 
 
 \subsection{Counterterms}
+\label{pc:subsec:counterterms}
 \begin{figure}[ht!]
   \centering
   \begin{subfigure}{.49\textwidth}
@@ -1393,11 +1390,15 @@ where we have used the integral definition of the Euler-Beta function
 % Expanding
 % \[\frac{\Gamma(-\epsilon)}{\Gamma(1-\epsilon)\Gamma(\sfrac{3}{2}-\epsilon)} = -\frac{2}{\sqrt{\pi}}\pclosed{\frac{1}{\epsilon} + \psi^0(\sfrac{3}{2}) + O(\epsilon)},\]
 % we get
-Expanding \(z^{\epsilon} = 1 + \epsilon \ln z + O(\epsilon^2)\) and using the definition of the plus distribution \todo{ciiite!} to write
+We can \(z^{\epsilon} = 1 + \epsilon \ln z + O(\epsilon^2)\) and the \emph{plus distribution} to write
 \begin{equation}
-  (1-z)^{1-2\epsilon} = -\frac{1}{2\epsilon} \delta(1-z) + \plusdist{\frac{1}{1-z}} -2\epsilon \plusdist{\frac{\ln(1-z)}{1-z}} + O(\epsilon^2),
+  (1-z)^{1-2\epsilon} = -\frac{1}{2\epsilon} \delta(1-z) + \plusdist{\frac{1}{1-z}} -2\epsilon \plusdist{\frac{\ln(1-z)}{1-z}} + O(\epsilon^2).
 \end{equation}
-we can rewrite \cref{pc:eq:gluon_emission_phase_space_integral} as
+Plus distributions are defined such that for an arbitrary function \(g(z)\) and a plus distribution \(f_+(z)\)
+\begin{equation}
+  \plusdist{\frac{f(z)}{1-z}} \equiv \frac{f(z)}{1-z} - \delta(1 - z) \integral[_0^z]{y} \frac{f(y)}{1-y}
+\end{equation}
+Using this, we can rewrite \cref{pc:eq:gluon_emission_phase_space_integral} as
 \begin{align}
   \nonumber
   \integral{\Pi_H} \sum_{\substack{\text{spin} \\\text{colour}}} |\M_{r,g}|^2 = 16 \pi N_C C_F \alpha_s \alpha_W ((C_{qqZ}^L)^2 + (C_{qqZ}^R)^2) P(\epsilon) \\

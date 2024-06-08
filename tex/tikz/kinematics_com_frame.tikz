@@ -6,13 +6,13 @@
 % Origin and momenta nodes
 \node at (0, 0) (O) {};
 \node at (-2, 0) (k) {};
-\node at (-2, 0.25) (k_lbl) {$\vec{k}$};
+\node at (-2, 0.25) (k_lbl) {$\vec{k}^\ast$};
 \node at (2, 0) (kij) {};
-\node at (2, -0.25) (kij_lbl) {$\vec{k}_i + \vec{k}_j$};
+\node at (2, -0.25) (kij_lbl) {$\vec{k}_i^\ast + \vec{k}_j^\ast$};
 \node at (1.5, 1) (pi) {};
-\node at (1.6, 1.1) (pi_lbl) {$\vec{p}_i$};
+\node at (1.6, 1.1) (pi_lbl) {$\vec{p}_i^\ast$};
 \node at (-1.5, -1) (pj) {};
-\node at (-1.6, -1.1) (pj_lbl) {$\vec{p}_j$};
+\node at (-1.6, -1.1) (pj_lbl) {$\vec{p}_j^\ast$};
 % Helping nodes in drawing angular definitions
 \node at (-0.3, 1) (a) {};
 \node at (-0.3, -0.51) (b) {};
@@ -36,8 +36,8 @@
 \draw [dashed] (e.center) -- (a.center);
 \draw [->, dashed] (O.center) -- (a.center);
 \draw [->, dashed] (O.center) -- (c.center);
-\draw [bend right] (phi0.center) edge node [above, midway] {$\phi$} (phi1.center);
-\draw [bend right] (theta0.center) edge node [right, midway] {$\theta$} (theta1.center);
+\draw [bend right] (phi0.center) edge node [above, midway] {$\phi^\ast$} (phi1.center);
+\draw [bend right] (theta0.center) edge node [right, midway] {$\theta^\ast$} (theta1.center);
 % \draw [dashed] (k.center) -- (d.center) -- (e.center);
 % \draw [dashed] (O.center) -- (d.center);
 % \draw [bend right] (a.center) edge node [right, midway] {$\theta^\ast$} (c.center);

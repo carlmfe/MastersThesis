@@ -4,11 +4,11 @@
 
 \node at (0, 0) (O) {};
 \node at (2, 0) (kj) {};
-\node at (2, 0.25) (kj_lbl) {$\vec{k}_j$};
+\node at (2, 0.25) (kj_lbl) {$\vec{k}_j^\ast$};
 \node at (-2, 0) (ki) {};
-\node at (-2, 0.25) (ki_lbl) {$\vec{k}_i$};
+\node at (-2, 0.25) (ki_lbl) {$\vec{k}_i^\ast$};
 \node at (2, 1) (k) {$\vec{k}$};
-\node at (-2, -1) (pij) {$\vec{p}_i + \vec{p}_j$};
+\node at (-2, -1) (pij) {$\vec{p}_i^\ast + \vec{p}_j^\ast$};
 
 \node at (1, 0) (a) {};
 \node at (0.89, 0.45) (b) {};

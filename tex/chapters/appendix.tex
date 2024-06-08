@@ -3,13 +3,176 @@
 \begin{document}
 \chapter{Weyl Spinors \& Grassmann Calculus}
 \label{app:chap:weyl_grassmann}
+Here, I present some general properties of Weyl spinors, and define what is meant by derivatives and integration on Grassmann-valued spaces.
+These definitions were in \cref{chap:susy}, particularly in defining superspace and working out Feynman rules from the superlagrangian.
+
+\section{Weyl Spinors}
+Weyl spinors are two-component vectors in a representation space of \(SL(2,\mathbb{C})\).
+There are representations of \(SL(2,\mathbb{C})\) that form Weyl spinor spaces -- the self representation and its complex conjugate.
+Spinors in the self-representation space of \(SL(2, \mathbb{C})\) are referred to as \emph{left-handed} spinors, and spinors in the conjugate representation space as \emph{right-handed}.
+Each of these vector spaces has a dual-space, which we keep track of by raising and lowering indices.
+Given a Weyl spinor \(\psi\) with components \(\psi\_\alpha\) in the self-representation space, we can raise its indices using the antisymmetric tensor
+\begin{equation}
+  \epsilon\^{\alpha\beta} = \begin{pmatrix}
+    0 & 1 \\ -1 & 0
+  \end{pmatrix}.
+\end{equation}
+To lower the indices, we can use
+\begin{equation}
+  \epsilon\_{\alpha\beta} = \begin{pmatrix}
+    0 & -1 \\ 1 & 0
+  \end{pmatrix}.
+\end{equation}
+We can define a vector \(\psi^\dagger\) in the conjugate representation by taking the complex conjugate of a vector in the self-representation:
+\begin{equation}
+  \psi_{\dot\alpha}^\dagger = (\psi\_\alpha)^\dagger,
+\end{equation}
+where I use dotted indices to indicate components of a vector in the conjugate representation.
+Contractions of two Weyl spinors \(\psi\) and \(\phi\) is defined by
+\begin{subequations}
+  \begin{eqnarray}
+    (\psi\phi) &\equiv& \psi\^\alpha \phi\_\alpha = \epsilon\^{\alpha\beta} \psi\_\beta \phi\_\alpha = \psi\_2 \phi\_1 - \psi\_1 \phi\_2, \\
+    (\psi\phi)^\dagger &\equiv& \psi^\dagger_{\dot\alpha} \phi^{\dagger \dot \alpha} = \epsilon\^{\dot\alpha \dot\beta} \psi^\dagger_{\dot\alpha} \phi^\dagger_{\dot\beta} = \psi^\dagger_1 \phi^\dagger_2 - \psi^\dagger_2 \phi^\dagger_1.
+  \end{eqnarray}
+\end{subequations}
+\medskip
+
+For Grassmann-valued Weyl spinors, the components anti-commute.
+This implies
+\begin{equation}
+  \psi^2 \equiv (\psi\psi) = -\psi_{1}\psi_{2}.
+\end{equation}
+Some useful relations for Grassmann-valued Weyl spinors \(\psi, \eta, \phi\) are
+\begin{subequations}
+  \begin{eqnarray}
+    \eta\psi & = & \psi\eta, \\
+    \bar{\eta}\bar{\psi} & = & \bar{\psi}\bar{\eta}, \\
+    \pclosed{\eta\psi}^\dagger & = & \bar{\psi}\bar{\eta}, \\
+    \pclosed{\eta\psi}\pclosed{\eta\phi} & = & -\frac{1}{2} \pclosed{\eta\eta}\pclosed{\psi\phi}, \\
+    \eta\sigma^\mu\bar{\psi} & = & -\bar{\psi} \bar{\sigma}^\mu \eta, \\
+    (\sigma^\mu \bar{\eta})_{\alpha} (\eta\sigma^\nu\bar{\eta}) & = & \frac{1}{2} g^{\mu\nu} \eta_{\alpha} (\bar{\eta}\bar{\eta}), \\
+    (\eta\sigma^\mu\bar{\eta})(\eta\sigma^\nu\bar{\eta}) & = & \frac{1}{2} g^{\mu\nu} (\eta\eta)(\bar{\eta}\bar{\eta}), \\
+    (\eta\sigma^\mu \partial_\mu \bar{\psi}) (\eta\psi) & = & -\frac{1}{2} (\psi\sigma^\mu \partial_\mu \bar{\psi})(\eta\eta), \\
+    (\partial_\mu \sigma^\mu \bar{\eta}) (\bar{\eta}\bar{\psi}) &= & -\frac{1}{2} (\partial_\mu \psi \sigma^\mu \bar{\psi}) (\bar{\eta}\bar{\eta}), \\
+    (\bar\eta\bar\psi) (\eta\sigma^\mu\bar\eta) (\eta\psi) & = & \frac{1}{4} (\eta\eta) (\bar\eta\bar\eta) (\psi\sigma^\mu\bar\psi), \\
+    \eta \sigma^{\mu\nu} \psi & = & -\psi \sigma^{\mu\nu} \eta,
+  \end{eqnarray}
+\end{subequations}
+where \(\sigma\^\mu = \pclosed{\eye, \sigma\^i}\), \(\bar\sigma\^\mu = \pclosed{\eye,-\sigma\^i}\), \(\sigma\^{\mu\nu} = \frac{i}{4} \pclosed{\sigma\^\mu \bar\sigma\^\nu - \sigma\^\nu \bar\sigma\^\mu}\), and \(\sigma\^i\) are the Pauli matrices given by
+\begin{subequations}
+  \begin{eqnarray}
+    \sigma^1 &=& \begin{pmatrix}
+      0 & 1 \\ 1 & 0
+    \end{pmatrix}, \\
+    \sigma^2 &=& \begin{pmatrix}
+      0 & -i \\ i & 0
+    \end{pmatrix}, \\
+    \sigma^3 &=& \begin{pmatrix}
+      1 & 0 \\ 0 & -1
+    \end{pmatrix}.
+  \end{eqnarray}
+\end{subequations}
+
+\subsection*{Dirac Spinors}
+We can construct Dirac spinors from the Weyl spinors by stacking a left- and a right-handed Weyl spinor into a four-component spinor.
+Given a two left-handed Weyl-spinors \(\psi_L\) and \(\psi_R\), we can construct a Dirac spinor \(\Psi\) as
+\begin{equation}
+  \Psi = \begin{pmatrix}
+    \psi_L \\ \psi_R^\dagger
+  \end{pmatrix},
+\end{equation}
+with a conjugate spinor defined as
+\begin{equation}
+  \bar\Psi = \Psi^\dagger \gamma\^0 = \begin{pmatrix}
+    \psi_R \\ \psi_L^\dagger
+  \end{pmatrix}.
+\end{equation}
+Here I have used the zeroth gamma matrix.
+For reference, in the Weyl representation of Dirac spinors used here these are defined as
+\begin{equation}
+  \gamma\^\mu = \begin{pmatrix}
+    0 & \sigma\^\mu \\ \bar\sigma\^\mu & 0
+  \end{pmatrix}.
+\end{equation}
+\medskip
+
+A basis for operators on Dirac spinors space is
+\begin{equation}
+  \Gamma\^r = \cclosed{\eye, \gamma\^5, \gamma\^\mu, \gamma\^\mu\gamma\^5, \gamma\^{\mu\nu}},
+\end{equation}
+where \(\gamma\^5 = i\gamma\^0\gamma\^1\gamma\^2\gamma\^3\) and
+\begin{equation}
+  \gamma\^{\mu\nu} = \frac{i}{2} \pclosed{\gamma\^\mu \gamma\^\nu - \gamma\^\nu \gamma\^\mu}.
+\end{equation}
+I also give the charge conjugation matrices, defined with the properties
+\begin{subequations}
+  \begin{eqnarray}
+    C^{-1} &=& C^\dagger, \\
+    C^T &=& -C,
+  \end{eqnarray}
+\end{subequations}
+and work on an arbitrary operator on Dirac spinor space in the following way
+\begin{equation}
+  C \Gamma_r^T C^{-1} = \eta_r \Gamma_r, \qquad \eta_r = \begin{cases}
+    1  & \text{for }\eye, \gamma\^5, \gamma\_\mu \gamma\^5 \\
+    -1 & \text{for }\gamma\_\mu, \gamma\_{\mu\nu}
+  \end{cases}.
+\end{equation}
 
 
-\chapter{Loop Calculations}
-\section{Feynman Parametrisation}
-\label{app:sec:feynman_parametrisation}
+\section{Grassmann Calculus}
+Here I present the calculus of two-component Grassmann valued Weyl spinors \(\theta\_\alpha\).
+Grassmann number are defined such that they anticommute.
+For two Grassmann number \(\theta\) and \(\eta\) we have
+\begin{equation}
+  \theta \eta = -\eta \theta,
+\end{equation}
+implying \(\theta^2 = \eta^2 = 0\).
+This in turn means that a function \(f(\theta)\) can be expanded in full as
+\begin{equation}
+  f(\theta) = a_0 + a_1 \theta,
+\end{equation}
+for some coefficient real-valued (or potential complex-valued) coefficients \(a_0, a_1\).
+This is seen by a Taylor expansion of \(f\) around \(\theta = 0\).\footnote{0 is trivially a Grassmann number too.}
 
-\section{Wick Rotation}
+Integration is defined a kind of projection operator, defining
+\begin{equation}
+  \integral{\theta} \equiv 0, \qquad \integral{\theta} \theta \equiv 1,
+\end{equation}
+we have
+\begin{subequations}
+  \begin{eqnarray}
+    \integral{\theta} f(\theta) &=& a_1, \\
+    \integral{\theta} \theta f(\theta) &=& a_0.
+  \end{eqnarray}
+\end{subequations}
+If we define derivation with respect to a Grassmann variable \(\theta\) as
+\begin{equation}
+  \d[\theta]\eta \equiv 0,\qquad \d[\theta] \theta \equiv 1,
+\end{equation}
+we get that it will work similarly to integration in that
+\begin{equation}
+  \d[\theta]\ f(\theta) = a_1 = \integral{\theta} f(\theta).
+\end{equation}
+\medskip
+
+Expanding this to the four Grassmann variable in superspace, \(\theta\_\alpha, \theta^\dagger_{\dot\alpha}\), we define the integration measures
+\begin{subequations}
+  \begin{eqnarray}
+    \mathrm{d}^2\theta &\equiv& -\frac{1}{4} \mathrm{d}\theta\^\alpha \mathrm{d}\theta\_\alpha, \\
+    \mathrm{d}^2\theta^\dagger &\equiv& -\frac{1}{4} \mathrm{d}\theta^\dagger_{\dot\alpha} \mathrm{d}\theta^{\dagger \dot\alpha}, \\
+    \mathrm{d}^4\theta &\equiv& \mathrm{d}^2\theta \mathrm{d}^2\theta^\dagger,
+  \end{eqnarray}
+\end{subequations}
+such that we have
+\begin{subequations}
+  \begin{eqnarray}
+    \integral{^2\theta} (\theta\theta) &=& 1, \\
+    \integral{^2\theta^\dagger} (\theta\theta)^\dagger &=& 1, \\
+    \integral{^4\theta} (\theta\theta)(\theta\theta)^\dagger &=& 1.
+  \end{eqnarray}
+\end{subequations}
+
 
 \chapter{Takagi Factorisation Algorithm}
 \label{app:chap:takagi}
@@ -24,8 +187,10 @@
 %   \pclosed{U^\dagger \Delta U} = \pclosed{U^\dagger \Delta U}^T = U^T \Delta^T U^\ast
 % \]
 
-\section{Proof of Takagi Factorisation}
-Here, I go through the proofs necessary for the procedure defined in \cref{susy:sec:takagi} to find the Takagi diagonalising matrix \(U\) s.t. for a complex, symmetric matrix \(A = U^T A U\).
+Here, I go through the proofs necessary for the procedure defined in \cref{susy:sec:takagi} to find the Takagi diagonalising matrix \(U\) s.t. for a complex, symmetric matrix
+\begin{equation}
+  A = U^T A U.
+\end{equation}
 
 \section{Proofs}
 \paragraph{The Takagi vector.}
@@ -73,9 +238,9 @@ must also be symmetric, and thus must have the form
 for a symmetric \(A_2 \in M_{n-1}(\mathbb{C})\).
 
 
-\ifSubfilesClassLoaded{%
-  \bibliography{references}{}
-  \bibliographystyle{style/JHEP}
-}{}
+% \ifSubfilesClassLoaded{%
+%   \bibliography{references}{}
+%   \bibliographystyle{style/JHEP}
+% }{}
 
 \end{document}

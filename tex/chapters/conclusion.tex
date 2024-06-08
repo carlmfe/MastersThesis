@@ -1,0 +1,56 @@
+Finally, some concluding remarks on the concepts and results of the previous chapter.
+In this thesis, I have performed the calculation of pair production of electroweakinos in proton--proton collisions in the context of Large Hadron Collider experiments.
+Furthermore, next-to-leading order contributions from quantum chromodynamics to higgsino-like neutralino production has been calculated, and implemented numerically, with complete generality in the Minimal Supersymmetric Standard Model (MSSM) parameters of the theory, including charge-parity invariance (CP) violating and quark flavour violating effects from complex and off-diagonal values.
+This generality extends the current results found in the literature.
+\medskip
+
+A brief summary and outlook on the results are in order.
+To start, I went over some of the fundaments of quantum field theory as relevant to the calculations I performed.
+This was done largely by using simple examples, referencing the most important results along the way.
+Some time was spent developing the notion of the perturbation series and Feynman rules for deriving scattering interactions between particles.
+Particular detail was given to the interaction of fermions, including Majorana fermions.
+The foundation of the Standard Model interactions was introduced through Yang-Mills gauge theories, before reviewing the regularisation techniques and renormalisation procedures to be used in this thesis.
+
+Next, I reviewed the building of supersymmetric Quantum Field Theories, specifically detailing the elements used to construct the MSSM\@.
+This included introduction of the super-Poincaré group, developing superspace as a vehicle for Lagrangian formulation of manifestly supersymmetric theories.
+I then developed the Yang-Mills gauge theory in this context, formulating the MSSM as a manifestly supersymmetric mirror to the Standard Model.
+From there, I derived the Feynman interaction rules for the neutralinos, and generalised them to the chargino interactions.
+Lastly, I outlined the procedure of deriving the electroweakino particle spectrum from the MSSM Lagrangian parameters, presenting an algorithm for the numerical diagonalisation of the neutralino mass matrix that works for complex Lagrangian parameters.
+\medskip
+
+The parton-level calculation of the cross-sections were then performed symbolically, using self-written \verb|Mathematica| scripts.
+I started by going through the leading order calculation for neutralino pair production, before generalising the result to any electroweakino pair production process.
+Next, I showed how the \(Z\)-boson mediated higgsino-like contribution to the neutralino pair production can be factorised into two separate processes, simplifying the computation of next-to-leading order contributions from quantum chromodynamics.
+The calculation of these contributions to the inclusive cross-section of neutral higgsino pairs was then performed, including the effects of real emission of gluons and quarks.
+These analytic expressions were symbolically compared and verified using \verb|Mathematica| scripts with existing results in the literature.
+An assessment was then made of the remaining next-to-leading order contributions to the general neutralino pair production process, outlining the procedure used in Catani-Seymour dipole formalism.
+The generalisation of the next-to-leading order contributions to the other electroweakino processes was commented on.
+
+The hadron-level cross-section for proton--proton collisions was then calculated.
+I briefly outlined the parton model and factorisation of the cross-section into a soft part between the partons of a single hadron, and a hard part between the partons the colliding hadrons.
+The hadron level cross-section in the form of an integral over the parton distribution functions and parton-level cross-sections was then presented.
+Furthermore, I outlined the procedure of renormalising the parton distribution functions, handling the last remaining divergences in the parton-level cross-sections.
+The complete result for next-to-leading order neutralino pair production at hadron-level was then shown explicitly.
+\medskip
+
+Finally, I implemented the general hadron-level cross-section for neutralino pair production to next-to-leading order numerically.
+Generating particle spectra from MSSM parameters using \verb|FlexibleSUSY|, I presented two classes of scenarios, one as a complex, CP-violating extension of the SPS1a benchmark point, and another where we have a hierarchical split between light higgsino-like neutralinos and heavy gaugino-like neutralinos.
+
+Correct calculation and numerical implementation was verified by comparing the results with results computed with \verb|Resummino|.
+The results from this thesis improves upon \verb|Resummino| by allowing for more general parameter values, specifically complex parameters and more general mixing in the squark sector.
+Theoretical errors from scale dependence, and PDF errors from uncertainty in parton distribution functions were also explored and presented, creating accurate uncertainties for a potential scan of the parameter space.
+This included investigating the dependence on both the renormalisation and factorisation scales, showing that the two dependencies can cancel when varied together.
+In detail, I presented parameter dependence on the complex phase of the Higgs mass parameter \(\mu\), neutralino masses, squark masses and gluon mass, showing the potential for the calculations of this thesis to be used in a broader context of parameter scans of the MSSM\@.
+This complex phase is not implemented anywhere else in the literature, and I show that it has greater relative effect on leading order cross-sections than higher order corrections such as those from resummation of large logarithms in a Higgsino scenario.
+
+
+\section*{Outlook}
+Looking forward, there are many avenues are for future exploration possible.
+An obvious place to start would be to implement the calculations for other electroweakino pairs than the neutralinos numerically, generalising the code for neutralino pair production that is already implemented.
+Seeing as the next-to-leading order contributions were quite significant in the case of higgsino-like neutralino production, another point of interest would be to do the complete calculation of next-to-leading order contributions, for instance by using the Catani-Seymour formalism briefly presented in this thesis.
+This would allow for parameter scans where the higgsino-like states and gaugino-like states mix generally, and allow for the computation of the next-to-leading order cross-sections for light gaugino-like states, common in mSUGRA models for instance.
+\medskip
+
+A proper scan of the parameter space is perhaps the most enticing possibility from this thesis, making a statistical treatment of collision events simulated using the cross-sections from this thesis and comparing to event data from the ATLAS experiments.
+In doing so, cross-section values for many areas of the parameter space would be useful, and so using machine learning to perform regression on the parameter dependence of the cross-sections, as this can significantly improve the computational time necessary to get cross-section results for analysis.
+
