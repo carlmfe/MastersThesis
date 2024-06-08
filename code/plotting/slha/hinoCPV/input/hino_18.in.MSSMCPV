@@ -1,7 +1,6 @@
 Block MODSEL                 # Select model
      5     2   # CP violating SUSY breaking parameters
      6     1   # Flavour violating model
-#   12    1000                # DRbar parameter output scale (GeV)
 Block FlexibleSUSY
     0   1.000000000e-06      # precision goal
     1   0                    # max. iterations (0 = automatic)
@@ -15,7 +14,7 @@ Block FlexibleSUSY
     9   1                    # Higgs 2-loop corrections O(alpha_b alpha_s)
    10   1                    # Higgs 2-loop corrections O((alpha_t + alpha_b)^2)
    11   1                    # Higgs 2-loop corrections O(alpha_tau^2)
-   12   0                    # force output
+   12   1                    # force output
    13   1                    # Top pole mass QCD corrections (0 = 1L, 1 = 2L, 2 = 3L)
    14   1.000000000e-11      # beta-function zero threshold
    15   0                    # calculate all observables
@@ -56,50 +55,49 @@ Block SMINPUTS               # Standard Model inputs
 Block MINPAR                 # Input parameters
     3      10                 # TanBeta
 Block EXTPAR
-    0   2000                 # Ms
-    1   1e4                 # Re(M1(MSUSY))
-    2   1e4                 # Re(M2(MSUSY))
-    3   1e3                 # Re(M3(MSUSY))
+    0   1.00000000E+05       # Ms
+    1   1.00000000E+05       # Re(M1(MSUSY))
+    2   1.00000000E+05       # Re(M2(MSUSY))
+    3   2.00000000E+03       # Re(M3(MSUSY))
    23   53.582679497899655                 # Re(Mu(MSUSY))
-   24    4e6                 # mA^2(MSUSY)
-#  100   0.01                 # etaInput
+   24   2.00000000E+03       # mA^2(MSUSY)
 Block IMEXTPAR
     1    0                 # Im(M1(MSUSY))
     2    0                 # Im(M2(MSUSY))
     3    0                 # Im(M3(MSUSY))
    23    -84.43279255020151                 # Im(Mu(MSUSY))
 Block MSQ2IN
-  1  1     4.00000000E+06   # mq2(1,1)
-  2  2     4.00000000E+06   # mq2(2,2)
-  3  3     4.00000000E+06   # mq2(3,3)
+  1  1     2.00000000E+03   # mq2(1,1)
+  2  2     2.00000000E+03   # mq2(2,2)
+  3  3     2.00000000E+03   # mq2(3,3)
 Block MSE2IN
-  1  1     4.00000000E+06   # me2(1,1)
-  2  2     4.00000000E+06   # me2(2,2)
-  3  3     4.00000000E+06   # me2(3,3)
+  1  1     2.00000000E+03   # me2(1,1)
+  2  2     2.00000000E+03   # me2(2,2)
+  3  3     2.00000000E+03   # me2(3,3)
 Block MSL2IN
-  1  1     4.00000000E+06   # ml2(1,1)
-  2  2     4.00000000E+06   # ml2(2,2)
-  3  3     4.00000000E+06   # ml2(3,3)
+  1  1     2.00000000E+03   # ml2(1,1)
+  2  2     2.00000000E+03   # ml2(2,2)
+  3  3     2.00000000E+03   # ml2(3,3)
 Block MSU2IN
-  1  1     4.00000000E+06   # mu2(1,1)
-  2  2     4.00000000E+06   # mu2(2,2)
-  3  3     4.00000000E+06   # mu2(3,3)
+  1  1     2.00000000E+03   # mu2(1,1)
+  2  2     2.00000000E+03   # mu2(2,2)
+  3  3     2.00000000E+03   # mu2(3,3)
 Block MSD2IN
-  1  1     4.00000000E+06   # md2(1,1)
-  2  2     4.00000000E+06   # md2(2,2)
-  3  3     4.00000000E+06   # md2(3,3)
+  1  1     2.00000000E+03   # md2(1,1)
+  2  2     2.00000000E+03   # md2(2,2)
+  3  3     2.00000000E+03   # md2(3,3)
 Block AUIN
-  1  1     400   # Re(Au(1,1))
-  2  2     400   # Re(Au(2,2))
-  3  3     400   # Re(Au(3,3))
+  1  1     1.00000000E+03   # Re(Au(1,1))
+  2  2     1.00000000E+03   # Re(Au(2,2))
+  3  3     1.00000000E+03   # Re(Au(3,3))
 Block ADIN
-  1  1     1e4   # Re(Ad(1,1))
-  2  2     1e4   # Re(Ad(2,2))
-  3  3     1e4   # Re(Ad(3,3))
+  1  1     1.00000000E+03   # Re(Ad(1,1))
+  2  2     1.00000000E+03   # Re(Ad(2,2))
+  3  3     1.00000000E+03   # Re(Ad(3,3))
 Block AEIN
-  1  1     1e4   # Re(Ae(1,1))
-  2  2     1e4   # Re(Ae(2,2))
-  3  3     1e4   # Re(Ae(3,3))
+  1  1     1.00000000E+03   # Re(Ae(1,1))
+  2  2     1.00000000E+03   # Re(Ae(2,2))
+  3  3     1.00000000E+03   # Re(Ae(3,3))
 Block IMAUIN
   1  1       0   # Im(Au(1,1))
   2  2       0   # Im(Au(2,2))
@@ -113,7 +111,7 @@ Block IMAEIN
   2  2       0   # Im(Ae(2,2))
   3  3       0   # Im(Ae(3,3))
 Block FlexibleDecay
-   0   1                    # calculate decays (0 = no, 1 = yes)
+   0   0                    # calculate decays (0 = no, 1 = yes)
    1   1e-5                 # min br. to print
    2   4                    # include higher order corrections in decays (0 = LO, 1 = NLO, 2 = NNLO, 3 = N^3LO, 4 = N^4LO )
    3   1                    # use Thomson alpha instead of alpha(m) in decays to gamgam and gamZ
