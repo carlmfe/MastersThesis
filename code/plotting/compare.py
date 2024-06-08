@@ -33,7 +33,7 @@ def compare2prospino(slha_filepath, processes):
 
     results = {}
     results['smoking'] = {}
-    results['prospino'] = {}
+    # results['prospino'] = {}
     results['resummino'] = {}
 
     queue = []
@@ -63,9 +63,9 @@ def compare2prospino(slha_filepath, processes):
             print(subproc.stderr.read().decode(), end='')
 
 
-    prospino_results = sutils.read_prospino_result(slha_filepath)
-    smoking_results = sutils.read_results(tmpresfile_smoking)
-    resummino_results = sutils.read_results(tmpresfile_resummino)
+    # prospino_results = sutils.read_prospino_result(slha_filepath)
+    smoking_results = sutils.read_results(tmpresfile_smoking, order=0)
+    resummino_results = sutils.read_results(tmpresfile_resummino, order=0)
 
     # Clearing temporary .out files
     cleartmpfiles('.out')
@@ -76,9 +76,12 @@ def compare2prospino(slha_filepath, processes):
         proc_handle = str(pid1)[-2:] + '+' + str(pid2)[-2:]
         pid_handle = process2latex(proc)
 
+        print(smoking_results)
+        print(resummino_results)
+
         results['smoking'][pid_handle] = smoking_results[proc_handle]
         results['resummino'][pid_handle] = resummino_results[proc_handle]
-        results['prospino'][pid_handle] = prospino_results[proc_handle]
+        # results['prospino'][pid_handle] = prospino_results[proc_handle]
 
     return results
 
@@ -145,6 +148,11 @@ def compare2resummino(slha_filepath: str, proc: tuple[int], param_points: list[d
     results = {}
     results['smoking'] = {}
     results['resummino'] = {}
+    results['smoking']['LO'] = {}
+    results['resummino']['LO'] = {}
+    if NLO:
+        results['smoking']['NLO'] = {}
+        results['resummino']['NLO'] = {}
 
     tmpresfile_smoking = mktmpfile('.smoking') # temporary file to store smoking results
     tmpresfile_resummino = mktmpfile('.resummino') # temporary file to store resummino results
@@ -166,12 +174,12 @@ def compare2resummino(slha_filepath: str, proc: tuple[int], param_points: list[d
 
         # To make sure that the subprocesses do not write to the same temporary files, I give them temporary file stems that are different.
         # queue smoking job
-        queue.append(f'-c smoking --pid1 {pid1} --pid2 {pid2} -r {tmpslhafile} -o {tmpresfile_smoking} -l {param_label} --tempstem smkng{param_label}_ -P {sutils.PDF_SET} -S {sutils.S}')
+        queue.append(f'-c smoking --pid1 {pid1} --pid2 {pid2} -r {tmpslhafile} -o {tmpresfile_smoking} -l {param_label} --tempstem smkng{param_label}_ -P {sutils.PDF_SET} -S {sutils.S} --error scale')
         if sutils.VERBOSE: queue[-1] += ' -v'
         if NLO: queue[-1] += ' --nlo'
         if tnum: queue[-1] += ' --tnum'
         # queue resummino job
-        queue.append(f'-c resummino --pid1 {pid1} --pid2 {pid2} -r {tmpslhafile} -o {tmpresfile_resummino} -l {param_label} --tempstem rsmmn{param_label}_ -P {sutils.PDF_SET} -S {sutils.S}')
+        queue.append(f'-c resummino --pid1 {pid1} --pid2 {pid2} -r {tmpslhafile} -o {tmpresfile_resummino} -l {param_label} --tempstem rsmmn{param_label}_ -P {sutils.PDF_SET} -S {sutils.S} --error scale')
         if sutils.VERBOSE: queue[-1] += ' -v'
         if NLO: queue[-1] += ' --nlo'
 
@@ -191,9 +199,33 @@ def compare2resummino(slha_filepath: str, proc: tuple[int], param_points: list[d
     cleartmpfiles('.out')
 
     # Read all results and fill results dictionaries
-    for param_point in param_points:
-        results['smoking'] = sutils.read_results(tmpresfile_smoking)
-        results['resummino'] = sutils.read_results(tmpresfile_resummino)
+    central_res = sutils.read_results(tmpresfile_smoking, order=0, mu_f = 1.0, mu_r = 1.0)
+    upper_res = sutils.read_results(tmpresfile_smoking, order=0, mu_f = 2.0, mu_r = 2.0)
+    lower_res = sutils.read_results(tmpresfile_smoking, order=0, mu_f = 0.5, mu_r = 0.5)
+    for key in central_res:
+        results['smoking']['LO'][key] = (central_res[key], upper_res[key], lower_res[key])
+    central_res = sutils.read_results(tmpresfile_resummino, order=0, mu_f = 1.0, mu_r = 1.0)
+    upper_res = sutils.read_results(tmpresfile_resummino, order=0, mu_f = 2.0, mu_r = 2.0)
+    lower_res = sutils.read_results(tmpresfile_resummino, order=0, mu_f = 0.5, mu_r = 0.5)
+    for key in central_res:
+        results['resummino']['LO'][key] = (central_res[key], upper_res[key], lower_res[key])
+
+    if NLO:
+        central_res = sutils.read_results(tmpresfile_smoking, order=1, mu_f = 1.0, mu_r = 1.0)
+        upper_res = sutils.read_results(tmpresfile_smoking, order=1, mu_f = 2.0, mu_r = 2.0)
+        lower_res = sutils.read_results(tmpresfile_smoking, order=1, mu_f = 0.5, mu_r = 0.5)
+        for key in central_res:
+            results['smoking']['NLO'][key] = (central_res[key], upper_res[key], lower_res[key])
+        central_res = sutils.read_results(tmpresfile_resummino, order=1, mu_f = 1.0, mu_r = 1.0)
+        upper_res = sutils.read_results(tmpresfile_resummino, order=1, mu_f = 2.0, mu_r = 2.0)
+        lower_res = sutils.read_results(tmpresfile_resummino, order=1, mu_f = 0.5, mu_r = 0.5)
+        for key in central_res:
+            results['resummino']['NLO'][key] = (central_res[key], upper_res[key], lower_res[key])
+
+
+
+    # results['smoking'] = sutils.read_results(tmpresfile_smoking, order = 1 if NLO else 0, mu_f = 1.0, mu_r = 1.0)
+    # results['resummino'] = sutils.read_results(tmpresfile_resummino, order = 1 if NLO else 0, mu_f = 1.0, mu_r = 1.0)
 
     # Clearing temporary result files
     cleartmpfiles('.smoking')
@@ -308,7 +340,7 @@ def run4parameters(code: str, slha_filepath: str, proc: tuple[int], param_points
 
     return results
 
-def run4slha(code: str, slha_filepaths: list[str], proc: tuple[int], tnum: bool=False, cache: str=None, order: int=0) -> dict[str, dict[any, float]]:
+def run4slha(code: str, slha_filepaths: list[str], proc: tuple[int], tnum: bool=False, cache: str=None, order: int=0, error: str=None) -> dict[str, dict[any, float]]:
     '''Runs using specified code for given proc using slha files located at slha_filepath replacing
     any key in dict-elements of param_points in slha file with values of these dicts, and returns results in dictionary ordered
     as
@@ -338,6 +370,8 @@ def run4slha(code: str, slha_filepaths: list[str], proc: tuple[int], tnum: bool=
         if sutils.VERBOSE: queue[-1] += ' -v'
         if tnum: queue[-1] += ' --tnum'
         if order == 1: queue[-1] += ' --nlo'
+        if error is not None:
+            queue[-1] += f' --error {error}'
 
     # Now we can loop over all processes to be run
     # run_proc.py makes the correct smoking/resummino calls and writes results in common file format
@@ -351,7 +385,70 @@ def run4slha(code: str, slha_filepaths: list[str], proc: tuple[int], tnum: bool=
 
 
     # Read all results and fill results dictionaries
-    results = sutils.read_results(tmpresfile)
+    results = []
+    for o in range(order+1):
+        if error == 'scale':
+            res_central = sutils.read_results(tmpresfile, order=order, mu_f=1.0, mu_r=1.0)
+            res_upper = sutils.read_results(tmpresfile, order=order, mu_f=2.0, mu_r=2.0)
+            res_lower = sutils.read_results(tmpresfile, order=order, mu_f=0.5, mu_r=0.5)
+            results.append({key : (res_central[key], res_upper[key], res_lower[key]) for key in res_central})
+        else:
+            results.append(sutils.read_results(tmpresfile, order=order))
+    if cache is not None:
+        shutil.copy2(tmpresfile, cache)
+    # Clearing temporary result files
+    cleartmpfiles('.out')
+
+    return results
+
+def run4arguments(code: str, slha_filepath: str, proc: tuple[int], arguments: dict, tnum: bool=False, cache: str=None, order: int=0, error: str=None) -> dict[str, dict[any, float]]:
+    '''Runs using specified code for given proc using slha files located at slha_filepath replacing
+    any key in dict-elements of param_points in slha file with values of these dicts, and returns results in dictionary ordered
+    as
+    results[slha_filename] -> cross_section'''
+
+    # Unpack the outgoing particle PDG codes
+    pid1, pid2 = proc
+
+    # Set up results dictionary
+
+    tmpresfile = mktmpfile(extension='.out') # temporary file to store smoking results
+
+    # Setting up a simple parallelization using subprocess module.
+    # First, I will loop over all the run calls that will need to be made,
+    # and queue them in the queue variable.
+    # Then all the commands to be run are delegated to Popen
+    # instances for parallelization.
+    queue = [] # Holds all commands to be run
+
+    # One smoking call and one resummino call will be made for every parameter value
+    flag = list(arguments.keys())[0]
+    arg_list = list(arguments.values())[0]
+    for arg in arg_list:
+        arg_label = '_'.join(str(arg).split())
+        # To make sure that the subprocesses do not write to the same temporary files, I give them temporary file stems that are different.
+        # queue smoking job
+        queue.append(f'-c {code} --pid1 {pid1} --pid2 {pid2} -r {slha_filepath} -o {tmpresfile} -l {arg_label} --tempstem temp{arg_label}_ -P {sutils.PDF_SET} -S {sutils.S}')
+        queue[-1] += f' {flag} {arg}'
+        if sutils.VERBOSE: queue[-1] += ' -v'
+        if tnum: queue[-1] += ' --tnum'
+        if order == 1: queue[-1] += ' --nlo'
+        if error is not None:
+            queue[-1] += f' --error {error}'
+
+    # Now we can loop over all processes to be run
+    # run_proc.py makes the correct smoking/resummino calls and writes results in common file format
+    subprocs = [ Popen(('python run_proc.py ' + query).split(), stdout=PIPE, stderr=PIPE) for query in queue ]
+    for subproc in subprocs:
+        # This ensures all subprocesses are done before continuing
+        subproc.wait()
+        if sutils.VERBOSE:
+            print(subproc.stdout.read().decode(), end='')
+            print(subproc.stderr.read().decode(), end='')
+
+
+    # Read all results and fill results dictionaries
+    results = sutils.read_results(tmpresfile, order=order)
     if cache is not None:
         shutil.copy2(tmpresfile, cache)
     # Clearing temporary result files
@@ -381,7 +478,9 @@ INFO_HEADER = "###This file lists info to recreate plot '@f'.###\n"
 if __name__ == '__main__':
     import os
     import argparse
+    import pickle
     from math import atan2, pi
+    import pyslha
 
     from slha_utils import idxsort_masses, read_masses
     from smoking_utils import SMOKING_ROOT
@@ -398,6 +497,7 @@ if __name__ == '__main__':
     parser.add_argument('-S', '--center-of-mass-energy', dest='S', default=13600, type=float)
     parser.add_argument('-v', '--VERBOSE', dest='VERBOSE', action='store_true')
     parser.add_argument('--nlo', dest='NLO', action='store_true')
+    parser.add_argument('--cache', '-c', dest='cache', type=str, default=None)
 
     clargs = parser.parse_args()
     plot_info = clargs.__dict__
@@ -412,14 +512,114 @@ if __name__ == '__main__':
 
     '''
     '''
+
     # slha_filename = 'pure_scenarios/wino.slha'
-    slha_filename = 'pure_scenarios/hino.slha'
+    # slha_filename = 'pure_scenarios/hino.slha'
+    # cache_name = 'pure_scenarios/hinoMassCache.pkl'
+    # param_range = [n*100 for n in range(1, 16)]
+    # if os.path.isfile(PLOT_ROOT + cache_name):
+    #     with open(PLOT_ROOT + cache_name, 'rb') as cache:
+    #         res = pickle.load(cache)
+    #         print(f'Loading cache from {PLOT_ROOT + cache_name}')
+    # else:
+    #     res = compare2resummino(SLHA_ROOT+slha_filename, (pid1, pid2), [{'@a' : str(param_val)} for param_val in param_range], tnum=False, NLO=clargs.NLO)
+    #     with open(PLOT_ROOT + cache_name, 'wb') as cache:
+    #         pickle.dump(res, cache)
+    #         print(f'Caching results to {PLOT_ROOT + cache_name}')
+
+    # xlabel = r'$m_{\tilde{\chi}}$ [GeV]'
+    # plot_info['slha'] = slha_filename
+    # plot_info['param'] = 'Neutralino mass [GeV]'
+    # plot_info['param_range'] = param_range
+
+    # slha_filename = 'muCPV/generated/csps1a_26.slha'
+    # cache_name = 'muCPV/csps1aCache.pkl'
+    # param_range = [n*100 for n in range(1, 16)]
+    # if os.path.isfile(PLOT_ROOT + cache_name):
+    #     with open(PLOT_ROOT + cache_name, 'rb') as cache:
+    #         res = pickle.load(cache)
+    #         print(f'Loading cache from {PLOT_ROOT + cache_name}')
+    # else:
+    #     res = compare2resummino(SLHA_ROOT+slha_filename, (pid1, pid2), [{'@a' : str(param_val)} for param_val in param_range], tnum=False, NLO=clargs.NLO)
+    #     with open(PLOT_ROOT + cache_name, 'wb') as cache:
+    #         pickle.dump(res, cache)
+    #         print(f'Caching results to {PLOT_ROOT + cache_name}')
+
+    # xlabel = r'$m_{\tilde{\chi}}$ [GeV]'
+    # plot_info['slha'] = slha_filename
+    # plot_info['param'] = 'Neutralino mass [GeV]'
+    # plot_info['param_range'] = param_range
+
+    slha_filename = 'squarkGluinoMass/hino_unnatural/hino_1.slha'
+    cache_name = 'squarkGluinoResumminoTest.pkl'
     param_range = [n*100 for n in range(1, 16)]
-    res = compare2resummino(SLHA_ROOT+slha_filename, (pid1, pid2), [{'@a' : str(param_val)} for param_val in param_range], tnum=False, NLO=clargs.NLO)
-    xlabel = r'$\tilde{\chi}^0$ mass [GeV]'
+    if os.path.isfile(PLOT_ROOT + cache_name):
+        with open(PLOT_ROOT + cache_name, 'rb') as cache:
+            res = pickle.load(cache)
+            print(f'Loading cache from {PLOT_ROOT + cache_name}')
+    else:
+        res = compare2resummino(SLHA_ROOT+slha_filename, (pid1, pid2), [{'@a' : str(param_val)} for param_val in param_range], tnum=False, NLO=clargs.NLO)
+        with open(PLOT_ROOT + cache_name, 'wb') as cache:
+            pickle.dump(res, cache)
+            print(f'Caching results to {PLOT_ROOT + cache_name}')
+
+    xlabel = r'$m_{\tilde{\chi}}$ [GeV]'
     plot_info['slha'] = slha_filename
     plot_info['param'] = 'Neutralino mass [GeV]'
     plot_info['param_range'] = param_range
+
+
+    XSecWGroup_results = {
+        100 : 3673*1e-3,
+        200 : 276.1*1e-3,
+        300 : 58.07*1e-3,
+        400 : 17.94*1e-3,
+        500 : 6.805*1e-3,
+        600 : 2.932*1e-3,
+        700 : 1.378*1e-3,
+        800 : 0.6891*1e-3,
+        900 : 0.3613*1e-3,
+        1000 : 0.1966*1e-3,
+        1100 : 0.1101*1e-3,
+        1200 : 0.06318*1e-3,
+        1300 : 0.03699*1e-3,
+        1400 : 0.02204*1e-3,
+        1500 : 0.01333*1e-3
+    }
+    XSecWGroup_upper = {
+        100 : 3673*1e-3*1.022,
+        200 : 276.1*1e-3*1.011,
+        300 : 58.07*1e-3*1.007,
+        400 : 17.94*1e-3*1.005,
+        500 : 6.805*1e-3*1.004,
+        600 : 2.932*1e-3*1.004,
+        700 : 1.378*1e-3*1.004,
+        800 : 0.6891*1e-3*1.004,
+        900 : 0.3613*1e-3*1.003,
+        1000 : 0.1966*1e-3*1.003,
+        1100 : 0.1101*1e-3*1.003,
+        1200 : 0.06318*1e-3*1.003,
+        1300 : 0.03699*1e-3*1.003,
+        1400 : 0.02204*1e-3*1.003,
+        1500 : 0.01333*1e-3*1.002
+    }
+    XSecWGroup_lower = {
+        100 : 3673*1e-3*0.970,
+        200 : 276.1*1e-3*0.987,
+        300 : 58.07*1e-3*0.993,
+        400 : 17.94*1e-3*0.995,
+        500 : 6.805*1e-3*0.996,
+        600 : 2.932*1e-3*0.997,
+        700 : 1.378*1e-3*0.998,
+        800 : 0.6891*1e-3*0.998,
+        900 : 0.3613*1e-3*0.998,
+        1000 : 0.1966*1e-3*0.999,
+        1100 : 0.1101*1e-3*0.999,
+        1200 : 0.06318*1e-3*0.999,
+        1300 : 0.03699*1e-3*0.999,
+        1400 : 0.02204*1e-3*0.999,
+        1500 : 0.01333*1e-3*0.999
+    }
 
     # slha_filename = 'pure_scenarios/wino_sqmass.slha'
     # param_range = [1e3 + (1e5-1e3)*(n-1)/14 for n in range(1, 16)]
@@ -452,28 +652,53 @@ if __name__ == '__main__':
 
     # pdg_results = [3673,276.1,58.07,17.94,6.805,2.932,1.378,0.6891,0.3613,0.1966,0.1101,0.06318,0.03699,0.02204,0.01333]
 
-    smoking_keys_sorted = sorted(res['smoking'].keys())
-    smoking_results = {key : res['smoking'][key] for key in smoking_keys_sorted}
-    resummino_keys_sorted = sorted(res['resummino'].keys())
-    resummino_results = {key : res['resummino'][key] for key in resummino_keys_sorted}
+    # smoking_keys_sorted = sorted(res['smoking'].keys())
+    # smoking_results = {key : float(res['smoking']['NLO' if clargs.NLO else 'LO'][key]) for key in smoking_keys_sorted}
+    # resummino_keys_sorted = sorted(res['resummino'].keys())
+    # resummino_results = {key : float(res['resummino']['NLO' if clargs.NLO else 'LO'][key]) for key in resummino_keys_sorted}
 
 
-    fig, axes = plot_xsec_with_relerrs(smoking_results, resummino_results, labels = ['smoking', 'resummino'], scatter=False)
+    smoking_keys_sorted = sorted(res['smoking']['LO'])
+    smoking_results = {key : [(key / param_range[-1])**0 * xsec for xsec in res['smoking']['NLO' if clargs.NLO else 'LO'][key]] for key in smoking_keys_sorted}
+    smoking_central_results = {key : smoking_results[key][0] for key in smoking_results}
+
+    resummino_keys_sorted = sorted(res['resummino']['LO'])
+    resummino_results = {key : [(key / param_range[-1])**0 * xsec for xsec in res['resummino']['NLO' if clargs.NLO else 'LO'][key]] for key in smoking_keys_sorted}
+    resummino_central_results = {key : resummino_results[key][0] for key in resummino_results}
+
+    XSecWGroup_results = {key : (key / param_range[-1])**0 * val for key, val in XSecWGroup_results.items()}
+    XSecWGroup_upper = {key : (key / param_range[-1])**0 * val for key, val in XSecWGroup_upper.items()}
+    XSecWGroup_lower = {key : (key / param_range[-1])**0 * val for key, val in XSecWGroup_lower.items()}
+
+    # fig, axes = plot_xsec_with_relerrs(smoking_central_results, [resummino_central_results, XSecWGroup_results], labels = ['smoking', 'resummino', 'XSec Working Group'], scatter=False)
+    fig, axes = plot_xsec_with_relerrs(smoking_central_results, [resummino_central_results,], labels = ['smoking', 'resummino'], scatter=False)
+    axes[0].fill_between(smoking_keys_sorted, [res[2] for res in smoking_results.values()], [res[1] for res in smoking_results.values()], alpha=0.5)
+    axes[0].fill_between(resummino_keys_sorted, [res[2] for res in resummino_results.values()], [res[1] for res in resummino_results.values()], alpha=0.5)
+    axes[0].fill_between(XSecWGroup_results.keys(), XSecWGroup_lower.values(), XSecWGroup_upper.values(), alpha=0.5)
+
+    # if clargs.NLO:
+    #     axes[0].plot(smoking_keys_sorted, [res['smoking']['LO'][key][0] for key in smoking_keys_sorted], label='smoking LO', ls='--', c='gray')
+    #     axes[0].fill_between(
+    #         smoking_keys_sorted,
+    #         [res['smoking']['LO'][key][2] for key in smoking_keys_sorted],
+    #         [res['smoking']['LO'][key][1] for key in smoking_keys_sorted],
+    #         color='gray', alpha=0.5
+    #     )
 
     axes[0].set_ylabel(r'$\sigma$ [pb]')
-    axes[1].set_ylabel(r'relative error')
+    axes[1].set_ylabel(r'$\frac{\sigma_{\mathrm{smoking}} - \sigma_{\mathrm{other}}}{\sigma_{\mathrm{other}}}$')
     axes[1].set_xlabel(xlabel)
     axes[1].set_ylim(bottom=max([axes[1].get_ylim()[0], -1.0]), top=min([axes[1].get_ylim()[1], 1.0]))
     # axes[1].set_ylim(bottom=-1, top=1)
 
-    savefig_with_info(PLOT_ROOT+slha_filename.replace('.slha', '') + ('NLO' if clargs.NLO else ''), info=plot_info)
+    # savefig_with_info(PLOT_ROOT+slha_filename.replace('.slha', '') + ('NLO' if clargs.NLO else ''), info=plot_info)
     plt.show()
 
     '''
     # slha_filepath = SMOKING_ROOT + 'EW/1_1_15.slha'
-    slha_filepath = SMOKING_ROOT + 'EW/11_111_3.slha'
+    # slha_filepath = SMOKING_ROOT + 'EW/11_111_3.slha'
     # slha_filepath = SMOKING_ROOT + 'example/sps1a.slha'
-    # slha_filepath = 'slha/csps1a.slha'
+    slha_filepath = 'slha/benchmark/sps1a_mod.slha' # \phi_\mu = 0 in cSPS1a
 
     processes = []
     for i in range(4):
@@ -502,17 +727,24 @@ if __name__ == '__main__':
     plot_info['processes'] = processes
 
     proc_keys = [process2latex(proc) for proc in processes]
-    sort_idcs = idxsort_masses(read_masses(slha_filepath))
+
+    slha = pyslha.read(slha_filepath)
+    masses = [float(slha.blocks['MASS'][pid]) for pid in [1000022, 1000023, 1000025, 1000035]]
+
+
+    # sort_idcs = idxsort_masses(read_masses(slha_filepath))
+    sort_idcs = idxsort_masses(masses)
     proc_keys_sorted = [proc_keys[idx] for idx in sort_idcs]
 
     smoking_results = {key : res['smoking'][key] for key in proc_keys_sorted}
     resummino_results = {key : res['resummino'][key] for key in proc_keys_sorted}
-    prospino_results = {key : res['prospino'][key] for key in proc_keys_sorted}
+    # prospino_results = {key : res['prospino'][key] for key in proc_keys_sorted}
 
-    fig, axes = plot_xsec_with_relerrs(smoking_results, [resummino_results, prospino_results], labels = ['smoking', 'resummino', 'prospino'])
+    # fig, axes = plot_xsec_with_relerrs(smoking_results, [resummino_results, prospino_results], labels = ['smoking', 'resummino', 'prospino'])
+    fig, axes = plot_xsec_with_relerrs(smoking_results, [resummino_results], labels = ['smoking', 'resummino', 'prospino'])
     axes[1].set_ylim(bottom=max([axes[1].get_ylim()[0], -1.0]), top=min([axes[1].get_ylim()[1], 1.0]))
     axes[0].set_ylabel(r'$\sigma$ [pb]')
-    axes[1].set_ylabel('relative error')
+    axes[1].set_ylabel(r'$\frac{\sigma_s - \sigma_p}{\sigma_p}$')
     axes[1].set_xlabel('process')
     savefig_with_info(PLOT_ROOT+'compare_prospino_'+slha_filepath.rsplit('/', maxsplit=1)[-1].replace('.slha', ''), info=plot_info)
 

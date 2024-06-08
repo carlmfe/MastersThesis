@@ -28,8 +28,10 @@ parser.add_argument('-v', '--verbose', dest='verbose', action='store_true')
 parser.add_argument('-o', '--outifle', dest='outfile', default='__temp')
 parser.add_argument('-l', '--label', dest='label', default=None)
 parser.add_argument('--tempstem', dest='tempstem', default=None)
+parser.add_argument('--error', dest='error', type=str, default=None)
+parser.add_argument('--scale_scheme', dest='scale_scheme', type=int, default=None)
+parser.add_argument('--central_scale', dest='central_scale', nargs='+', type=float, default=None)
 clargs = parser.parse_args()
-
 
 pid1 = int(clargs.pid1)
 pid2 = int(clargs.pid2)
@@ -46,11 +48,45 @@ else:
 
 tmpresfile = mktmpfile(extension = '.out', stem = clargs.tempstem)
 if clargs.code == 'smoking':
-    run_cross_section(clargs.readfile, tmpresfile, pid1, pid2, clargs.tnum, clargs.NLO)
+    run_cross_section(clargs.readfile, tmpresfile, pid1, pid2, clargs.tnum, clargs.NLO, error=clargs.error, scale_scheme=clargs.scale_scheme, central_scale=clargs.central_scale)
 elif clargs.code == 'resummino':
-    run_resummino(clargs.readfile, (pid1, pid2), tmpresfile, clargs.tempstem, clargs.NLO)
+    if clargs.error == 'scale':
+        tmpresfile_upper = mktmpfile(extension = '.out', stem = clargs.tempstem)
+        tmpresfile_lower = mktmpfile(extension = '.out', stem = clargs.tempstem)
+        run_resummino(clargs.readfile, (pid1, pid2), tmpresfile, clargs.tempstem, clargs.NLO)
+        run_resummino(clargs.readfile, (pid1, pid2), tmpresfile_upper, clargs.tempstem, clargs.NLO, mu=2.0)
+        run_resummino(clargs.readfile, (pid1, pid2), tmpresfile_lower, clargs.tempstem, clargs.NLO, mu=0.5)
 
-write_results(tmpresfile, outfile, (pid1, pid2), clargs.label, order = 1 if clargs.NLO else 0)
-os.remove(tmpresfile)
+    else:
+        run_resummino(clargs.readfile, (pid1, pid2), tmpresfile, clargs.tempstem, clargs.NLO)
+
+
+if clargs.code == 'resummino' and clargs.error == 'scale':
+    write_results(
+        tmpresfile,
+        outfile,
+        (pid1, pid2),
+        clargs.label,
+        order = 1 if clargs.NLO else 0,
+        error=clargs.error,
+        uperrorfilename=tmpresfile_upper,
+        lwerrorfilename=tmpresfile_lower
+    )
+    os.remove(tmpresfile)
+    os.remove(tmpresfile_upper)
+    os.remove(tmpresfile_lower)
+
+else:
+    write_results(
+        tmpresfile,
+        outfile,
+        (pid1, pid2),
+        clargs.label,
+        order = 1 if clargs.NLO else 0,
+        error=clargs.error
+    )
+    os.remove(tmpresfile)
+
+
 
 set_pdf_set(original_pdf_set)

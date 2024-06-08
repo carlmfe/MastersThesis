@@ -69,16 +69,33 @@ def read_smoking_result(filepath, order = 0):
 
     with open(filepath, "r") as results_file:
         is_result = False
+        curr_results = {}
         for line in results_file.readlines():
-
+            split_line = line.split()
+            if len(split_line) == 0:
+                continue
             if is_result:
-                if int(line.split()[1]) == order:
-                    results[pid1+"+"+pid2] = float(line.split()[6])
+                if "smoking" in split_line:
+                    if int(split_line[1]) == order:
+                        curr_results[" ".join(split_line[:6])] = float(split_line[6])
+                else:
                     is_result = False
-            if line[:8] == "XSECTION":
-                pid1 = line.split()[5][-2:]
-                pid2 = line.split()[6][-2:]
+                    if len(curr_results.values()) == 1:
+                        results[pid1+"+"+pid2] = float(curr_results.values()[0])
+                    else:
+                        results[pid1+"+"+pid2] = curr_results
+                    curr_results = {}
+            if split_line[0] == "XSECTION":
+                pid1 = split_line[5][-2:]
+                pid2 = split_line[6][-2:]
                 is_result = True
+    # Write any remaining results.
+    if is_result:
+        if len(curr_results.values()) == 1:
+            results[pid1+"+"+pid2] = float(list(curr_results.values())[0])
+        else:
+            results[pid1+"+"+pid2] = curr_results
+        curr_results = {}
     return results
 
 def read_prospino_result(filepath):
@@ -120,7 +137,7 @@ def idxsort_masses(masses):
 
     for idx1 in range(4):
         for idx2 in range(idx1, 4):
-            avg_mass = 0.5 * (masses[idx1]+masses[idx2])
+            avg_mass = 0.5 * (abs(masses[idx1]) + abs(masses[idx2]))
             for mass_idx, mass in enumerate(avg_masses):
                 if avg_mass < mass:
                     avg_masses.insert(mass_idx, mass)
@@ -142,4 +159,14 @@ def copy_slha_with_replacement(slha_filepath, filename, rules):
                 line_replaced = line_replaced.replace(*rule)
             outfile.write(line_replaced)
 
-    outfile.close()
+def read_parameter_info(slha_dir):
+    # Find parameters defining each file in slha_dir
+    param_info = {}
+    for f in os.scandir(slha_dir):
+        if f.name[-4:] == 'info':
+            with open(slha_dir + f.name, 'r') as infofile:
+                for line in infofile.readlines():
+                    splitline = line.split(' ')
+                    param_info[splitline[0]] = eval(' '.join(splitline[2:]))
+
+    return param_info

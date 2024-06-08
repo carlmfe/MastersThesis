@@ -9,8 +9,8 @@ rc('text', usetex=True) # set plots to use latex rendering
 plt.style.use('seaborn-v0_8-darkgrid')
 
 
-MARKERS = ['o', 'D', 'v', '+']
-LINESTYLES = ['solid', 'dotted', 'dashed', 'dashdot']
+MARKERS = ['D', '+', 'o', 'v']
+LINESTYLES = ['solid', 'dashed', 'dotted', 'dashdot']
 COLORS = [
     sns.color_palette('husl')[-3],
     sns.color_palette('husl')[-2],
@@ -54,6 +54,15 @@ mass_squark_pid2sym = { # Translation for PDG code to symbol for squark mass eig
     2000006 : r"$\tilde{u}_6$"
 }
 
+neu_gauge_states = [
+    r"$\tilde{B}^0$",
+    r"$\tilde{W}^0$",
+    r"$\tilde{H}_d^0$",
+    r"$\tilde{H}_u^0$"
+]
+
+order_strings = ['LO', 'NLO']
+
 # Saving parameters
 plt.rcParams['savefig.dpi'] = 300
 
@@ -63,6 +72,7 @@ plt.rc('figure', autolayout=True)
 # Font sizes
 plt.rc('axes', titlesize=18, labelsize=16, prop_cycle=cycler('color', COLORS))
 plt.rc('legend', fontsize=14, shadow=True)
+plt.rc('font', **{'family': 'serif', 'serif': ['Computer Modern'], 'size' : 14})
 
 # Tick parameters
 _ticks_default_parameters = {
@@ -80,7 +90,7 @@ plt.rc('lines', linewidth=2)
 
 def process2latex(process):
     pid1, pid2 = process
-    return f"{pid2sym[pid1]}+{pid2sym[pid2]}"
+    return f"{pid2sym[pid1]}{pid2sym[pid2]}"
 
 def plot_xsec_with_relerrs(own_results, other_results, axes = None, labels = None, scatter = True):
 
