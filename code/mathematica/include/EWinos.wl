@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-BeginPackage["TreeLevel`"]
+BeginPackage["EWinos`"]
 
 
 Needs["FeynCalc`"]

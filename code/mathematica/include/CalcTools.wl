@@ -3,7 +3,7 @@
 BeginPackage["CalcTools`"]
 
 
-Needs["TreeLevel`"]
+Needs["EWinos`"]
 Needs["XSec`"]
 Needs["FeynCalc`"]
 

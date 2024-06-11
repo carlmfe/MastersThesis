@@ -1,0 +1,1 @@
+Times[Rational[1, 64], Power[Pi, -1], Power[s, -2], IdenticalPartFactor[i, j], Power[Plus[MA[0], MQ[0], MZ[0]], 2]]
